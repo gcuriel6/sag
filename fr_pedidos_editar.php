@@ -184,13 +184,14 @@
                 <tr>
                   <th scope="col">Nombre</th>
                   <th scope="col">Descripcion</th>
-                  <th scope="col">Cantidad</th>
                   <th scope="col">Costo</th>
+                  <th scope="col">Cantidad</th>
                   <th scope="col"></th>
                 </tr>
               </thead>
               <tbody></tbody>
             </table>
+            <button class="btn btn-primary" id="btnGuardarEditarCotizacion">Guardar Cambios</button>
           </div>
         </div>
       </div>
@@ -215,7 +216,7 @@
 
 <script>
 
-  var objProductos;
+  var objProductosPends, objProductosTotales;
 
   $(function () { $('[data-toggle="tooltip"]').tooltip() });
 
@@ -224,24 +225,143 @@
 
     $("#tableDetalleProductos tbody").html("");
     
-    let prodFilter = objProductos.filter(x => x.idCotiz == id);
+    let prodFilter = objProductosPends.filter(x => x.idCotiz == id);
 
     prodFilter.map((k,v, i)=>{
-      $("#tableDetalleProductos tbody").append(
-        `<tr alt="${k.idProd}">
-          <th scope="col">${k.nombre}</th>
-          <th scope="col">${k.descripcion}</th>
-          <th scope="col">${k.cantidad}</th>
-          <th scope="col">${k.costo}</th>
-          <th scope="col"><button class="btn btn-sm btn-danger btnQuitar"><i class="fas fa-trash-alt"></i></button></th>
-        </tr>`
-      );
+      agregarProductoTabla([k.nombre, k.descripcion, k.costo, "", k.cantidad, "", k.idProd]);
     });
 
     // console.log(prodFilter);
 
+    $("#btnGuardarEditarCotizacion").val(id);
     $("#modalDetalle").modal("toggle");
 
+  });
+
+  $("#btnAgregarProductoNuevo").on("click",()=>{
+    let nombre = $("#nombreProductoNuevo").val();
+    let descr = $("#descProductoNuevo").val();
+    let costo = $("#costoProductoNuevo").val();
+    let clave = $("#claveProductoNuevo").val();
+    let cantid = $("#cantidadProductoNuevo").val();
+    let image = $("#imagenProductoNuevo").val();
+
+    let img = image.substr(12,image.length);
+
+    if(isNaN($("#costoProductoNuevo").val()) || $("#costoProductoNuevo").val()==""){
+      $("#costoProductoNuevo").addClass("is-invalid");
+    }else{
+      $("#costoProductoNuevo").removeClass("is-invalid");
+
+      if(isNaN($("#cantidadProductoNuevo").val()) || $("#cantidadProductoNuevo").val() ==""){
+        $("#cantidadProductoNuevo").addClass("is-invalid");
+      }else{
+        $("#cantidadProductoNuevo").removeClass("is-invalid");
+
+        let arreglo = validarForm("#formNuevoProducto");
+
+        if(arreglo){
+          arreglo.pop();
+          arreglo.push(imagen);
+          guardarProducto(arreglo);
+        }else{
+          mandarMensaje("Faltan campos");
+        }
+      }
+    }
+    
+  });
+
+  $("#tableDetalleProductos").on("click",".btnQuitar",function(){
+    $( this ).closest( "tr" ).remove();
+  });
+
+  $("#btnAgregarProductoExistente").on("click",()=>{
+    let nombre = $('option:selected', "#nombreProductoExistente").attr('alt1');
+    let descr = $('option:selected', "#nombreProductoExistente").attr('alt3');
+
+    let idProd = $("#nombreProductoExistente").val();
+
+    if(idProd == null){
+      mandarMensaje("No hay producto seleccionado");
+    }else{
+      if(isNaN($("#cantidadProductoExistente").val()) || $("#cantidadProductoExistente").val()==""){
+        $("#cantidadProductoExistente").addClass("is-invalid");
+      }else{
+        $("#cantidadProductoExistente").removeClass("is-invalid");
+
+        if(isNaN($("#costoProductoExistente").val()) || $("#costoProductoExistente").val()==""){
+          $("#costoProductoExistente").addClass("is-invalid");          
+        }else{
+          $("#costoProductoExistente").removeClass("is-invalid");
+
+          let cantidad = $("#cantidadProductoExistente").val();
+          let costo = $("#costoProductoExistente").val();
+
+          agregarProductoTabla([nombre, descr, costo, "", cantidad,"", idProd]);
+          $("#nombreProductoExistente").val(0);
+          $("#cantidadProductoExistente").val("");
+          $("#costoProductoExistente").val("");
+        }
+        
+      }
+      
+    }
+    
+  });
+
+  $("#imagenProductoNuevo").on("change",function(){
+    let nombre = $(this).val();
+
+    if(nombre != ""){
+      const file = this.files[0];
+      const fileType = file['type'];
+      const validImageTypes = ['image/gif', 'image/jpeg', 'image/png'];
+      if (!validImageTypes.includes(fileType)) {
+          mandarMensaje("Archivo no es imagen");
+      }else{
+        var formData = new FormData();
+        formData.append("file", file);
+
+        var xhttp = new XMLHttpRequest();
+
+        // Set POST method and ajax file path
+        xhttp.open("POST", "php/vision_subir_imagenes.php", true);
+
+        // call on request changes state
+        xhttp.onreadystatechange = function() {
+          if (this.readyState == 4 && this.status == 200) {
+
+            var response = this.responseText;
+            if(response == 0){
+              mandarMensaje("Archivo no subido.");
+            }else{
+              mandarMensaje("Archivo subido correctamente.");
+              let object = JSON.parse(response);
+              imagen = object.imagen;
+            }
+          }
+        };
+
+        // Send request with data
+        xhttp.send(formData);
+      }
+    }
+  });
+
+  $("#btnGuardarEditarCotizacion").on("click",function(){
+    let productos = obtenerProductos();
+    let idCotiz = $(this).val();
+    // if(materias){
+      if(productos){
+        if (window.confirm("Guardar Cotización?")) {
+          editarCotizacion(idCotiz, productos);
+        }
+        
+      }else{
+        mandarMensaje("No hay productos agregados");
+      }
+    // }
   });
 
   let validarForm = form => {
@@ -282,15 +402,21 @@
                     dataType:"json"
                   });
 
-    $.when(prods, pendientes).done(function(p1, p2) {
-      // $("#nombreProductoExistente").html("<option value='0' selected disabled>...</option>");
+    let prods3 = $.ajax({
+                  type: 'POST',
+                  url: 'php/vision_traer_productos.php',
+                  dataType:"json"
+                });
+
+    $.when(prods, pendientes, prods3).done(function(p1, p2, p3) {
+      $("#nombreProductoExistente").html("<option value='0' selected disabled>...</option>");
       // $("#nombreMateriaExistente").html("<option value='0' selected disabled>...</option>");
       // $("#nombreClienteCotizacion").html("<option value='0' selected disabled>...</option>");
       // $("#tableListadoHistorial tbody").html("");
       // $("#tableListadoClientes tbody").html("");
       $("#tableCotizacionesPendientes tbody").html("");
 
-      objProductos = p1[0];
+      objProductosPends = p1[0];
 
       p2[0].map((k,v, i)=>{
 
@@ -302,6 +428,10 @@
                   </tr>`;
 
         $("#tableCotizacionesPendientes tbody").append(row);
+      });
+
+      p3[0].map((k,v, i)=>{
+        $("#nombreProductoExistente").append(`<option value="${k.idProducto}" alt1="${k.nombre}" alt3="${k.descr}">${k.nombre}</option>`);
       });
 
       $('#fondo_cargando').hide();
@@ -317,6 +447,90 @@
 
     $(primer).modal("toggle");
   }
+
+  let guardarProducto = arreglo => {
+
+    $.ajax({
+      type: 'POST',
+      url: 'php/vision_guardar_productos.php',
+      data: {arreglo},
+      dataType:"json"
+    }).done(function(data) {
+      if(data>0){
+
+        $("#nombreProductoNuevo").val("");
+        $("#descProductoNuevo").val("");
+        $("#costoProductoNuevo").val("");
+        $("#claveProductoNuevo").val("");
+        $("#cantidadProductoNuevo").val("");
+        $("#imagenProductoNuevo").val("");
+
+        traerProductos();
+        mandarMensaje("Producto agregado a la lista");
+        arreglo.push(data);
+        agregarProductoTabla(arreglo);
+      }
+    });
+  };
+
+  let agregarProductoTabla = arreglo =>{
+
+    let nombre = arreglo[0];
+    let descr = arreglo[1];
+    let costo = arreglo[2];
+    let cantidad = arreglo[4];
+    let id = arreglo[6];
+
+    let html = `<tr alt="${id}" alt2="${cantidad}" alt3="${costo}">
+              <th>${nombre}</th>
+              <td>${descr}</td>
+              <td>${costo}</td>
+              <td>${cantidad}</td>
+              <td><button class="btn btn-sm btn-danger btnQuitar"><i class="fas fa-trash-alt"></i></button></th>
+            </tr>`;
+
+    $("#tableDetalleProductos tbody").append(html);
+
+  }
+
+  let obtenerProductos = () => {
+    let productos = $("#tableDetalleProductos tbody tr");
+    let resultado = [];
+
+    if(productos.length > 0){
+      productos.map((k,v,i)=>{
+        let id = $(v).attr("alt");
+        let canti = $(v).attr("alt2");
+        let costo = $(v).attr("alt3");
+        resultado.push([id, canti, costo]);
+      });
+      return resultado;
+    }else{
+      return false;
+    }
+  }
+
+  let editarCotizacion = (idCotiz, productos) =>{
+    $('#fondo_cargando').show();
+
+    $.ajax({
+      type: 'POST',
+      url: 'php/vision_editar_cotizacion.php',
+      data: {idCotiz, productos},
+      dataType:"json"
+    }).done(function(data) {
+
+      $('#fondo_cargando').hide();
+      $("#modalDetalle").modal("toggle");
+      if(data==0){
+        mandarMensaje("Cambios no guardados");
+      }else{
+        mandarMensaje("Cambios guardados correctamente");
+
+        traerProductos();
+      }
+    });
+  };
 
   traerProductos();
 

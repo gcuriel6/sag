@@ -507,7 +507,10 @@
 
         // if(materias){
           if(productos){
-            guardarCotizacion(prospecto, materias, productos);
+            if (window.confirm("Guardar Cotización?")) {
+              guardarCotizacion(prospecto, materias, productos);
+            }
+            
           }
         // }
         // guardarCotizacion(prospecto)

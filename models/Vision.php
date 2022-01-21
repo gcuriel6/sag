@@ -261,6 +261,55 @@ class Vision
         return 0;
       }
     }
+
+    function editarVisionCotizacion($idCotiz, $productos){
+
+      $cotizTotal = 0;
+
+      $query="DELETE FROM vision_cotizacion_productos WHERE (fk_cotizacion = $idCotiz);";
+
+      $result=mysqli_query($this->link, $query)or die(mysqli_error());
+
+      if($result){
+
+        $cadenaProdcutos = "";
+
+        foreach ($productos as $valor) {
+          $prodId = $valor[0];
+          $prodCanti = $valor[1];
+          $prodCosto = $valor[2];
+
+          $cotizTotal += ($prodCanti * $prodCosto);
+
+          $cadenaProdcutos .= "($idCotiz, $prodId, $prodCanti, $prodCosto),";
+        }
+
+        $cadenaProductos = substr($cadenaProdcutos, 0, -1);
+
+        $query3 = "INSERT INTO vision_cotizacion_productos (fk_cotizacion, fk_productos, cantidad, costo)
+                  VALUES $cadenaProductos;";
+
+        $result3=mysqli_query($this->link, $query3)or die(mysqli_error());
+
+        if($result3){
+
+          $query2="UPDATE vision_cotizacion SET total = '$cotizTotal' WHERE (id = $idCotiz);";
+
+          $result2=mysqli_query($this->link, $query2)or die(mysqli_error());
+
+          if($result2){
+            return $idCotiz;
+          }else{
+            return 0;
+          }
+
+        }else{
+          return 0;
+        }
+      }else{
+        return 0;
+      }
+    }//- fin function guardar
     /** 
       * Cancela el registro de vale de casolina
       * @param int $idRegistro id del registro que se actualiza a cancelado (estatus=0)
@@ -460,7 +509,7 @@ class Vision
     // }//- fin function buscarValesGasolinaHoy
 
     function traerVisionProductos(){
-      $query = "SELECT id idProducto, nombre, clave
+      $query = "SELECT id idProducto, nombre, clave, descripcion descr
                 FROM vision_productos";
 
       $result = $this->link->query($query);
