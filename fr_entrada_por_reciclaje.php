@@ -820,7 +820,7 @@ session_start();
                         'idUnidad':idUnidad,
                         'idFamilia':0,
                         'idLinea':0,
-                        "filtro":"reciclaje"
+                        "filtro":"RECICLADA"
                     },
                     success: function(data)
                     {
