@@ -1,0 +1,78 @@
+<?xml version="1.0" encoding="utf-8"?>
+<cfdi:Comprobante xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:cfdi="http://www.sat.gob.mx/cfd/3" Version="3.3" Serie="SD1" Folio="161299" Fecha="2021-06-16T16:24:56" FormaPago="99" NoCertificado="00001000000506524957" CondicionesDePago="15 DIAS DE CREDITO" SubTotal="2630.17" Moneda="MXN" TipoCambio="1" Total="3051.00" TipoDeComprobante="I" MetodoPago="PPD" LugarExpedicion="31238" xsi:schemaLocation="http://www.sat.gob.mx/cfd/3 http://www.sat.gob.mx/sitio_internet/cfd/3/cfdv33.xsd" Sello="JTAs5LGlQcU5bV5ueAwc5+mmkT1sBKPvVWzY92C+n0woc7d6gOcAPFV3BxdEsbtCtpzOyg/RbSbpUys/REFzbfEmXvWvahaHmi9MoqSOUoIES+Aj8YozFa7tO+lXco5rzcpvShM6XuJrIqnCpGzmuywdK3TUFe21lJFAeiN4dnIr7A0rFqhWIrEqA9FUOPOdx1YSeV+dodZ76p4KS112wG2TGJMbgZOLjZvBqHzDlWI9lToe9Fz/pCQcrrFtX9t2RBO+eXnp2Eu+kYTwOON4An7MtTbvx0t4JKD/l1r6u+W7kl92sDJWbPx0+5ezOvg3CFsBSGD7EhUTJw25B7HAKg==" Certificado="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">
+	<cfdi:Emisor Rfc="TAU021029P94" Nombre="TOY AUTOMOTORES S.A. DE C.V." RegimenFiscal="601" />
+	<cfdi:Receptor Rfc="SPG0905078B1" Nombre="SEGURIDAD PRIVADA GINTHER DE OCCIDENTE S DE RL DE CV" UsoCFDI="G03" />
+	<cfdi:Conceptos>
+		<cfdi:Concepto ClaveProdServ="12181600" NoIdentificacion="126140" Cantidad="8" ClaveUnidad="H87" Unidad="PIEZA" Descripcion="MOBIL DELVAC 1300 SUP (15W-40)" ValorUnitario="129.4900" Importe="1035.9200">
+			<cfdi:Impuestos>
+				<cfdi:Traslados>
+					<cfdi:Traslado Base="1035.92" Impuesto="002" TipoFactor="Tasa" TasaOCuota="0.160000" Importe="165.75" />
+				</cfdi:Traslados>
+			</cfdi:Impuestos>
+		</cfdi:Concepto>
+		<cfdi:Concepto ClaveProdServ="40161505" NoIdentificacion="178010L040" Cantidad="1" ClaveUnidad="H87" Unidad="PIEZA" Descripcion="FILTRO DE AIRE MOTOR" ValorUnitario="526.5300" Importe="526.5300">
+			<cfdi:Impuestos>
+				<cfdi:Traslados>
+					<cfdi:Traslado Base="526.53" Impuesto="002" TipoFactor="Tasa" TasaOCuota="0.160000" Importe="84.24" />
+				</cfdi:Traslados>
+			</cfdi:Impuestos>
+		</cfdi:Concepto>
+		<cfdi:Concepto ClaveProdServ="25191700" NoIdentificacion="9043012031" Cantidad="1" ClaveUnidad="H87" Unidad="PIEZA" Descripcion="ARANDELA PARA TAPON CARTER" ValorUnitario="19.4000" Importe="19.4000">
+			<cfdi:Impuestos>
+				<cfdi:Traslados>
+					<cfdi:Traslado Base="19.40" Impuesto="002" TipoFactor="Tasa" TasaOCuota="0.160000" Importe="3.11" />
+				</cfdi:Traslados>
+			</cfdi:Impuestos>
+		</cfdi:Concepto>
+		<cfdi:Concepto ClaveProdServ="40161505" NoIdentificacion="90915YZZD3" Cantidad="1" ClaveUnidad="H87" Unidad="PIEZA" Descripcion="FILTRO ACEITE CMY 6CIL HLX 4RU LAN TAC HLX" ValorUnitario="93.0900" Importe="93.0900">
+			<cfdi:Impuestos>
+				<cfdi:Traslados>
+					<cfdi:Traslado Base="93.09" Impuesto="002" TipoFactor="Tasa" TasaOCuota="0.160000" Importe="14.89" />
+				</cfdi:Traslados>
+			</cfdi:Impuestos>
+		</cfdi:Concepto>
+		<cfdi:Concepto ClaveProdServ="15121500" NoIdentificacion="KITLQ06" Cantidad="1" ClaveUnidad="H87" Unidad="PIEZA" Descripcion="PAQUETE DIESEL ENERGY" ValorUnitario="217.7600" Importe="217.7600">
+			<cfdi:Impuestos>
+				<cfdi:Traslados>
+					<cfdi:Traslado Base="217.76" Impuesto="002" TipoFactor="Tasa" TasaOCuota="0.160000" Importe="34.84" />
+				</cfdi:Traslados>
+			</cfdi:Impuestos>
+		</cfdi:Concepto>
+		<cfdi:Concepto ClaveProdServ="78181500" NoIdentificacion="0101LIMP" Cantidad="1" ClaveUnidad="E48" Unidad="UNIDAD DE SERVICIO" Descripcion="LIMPIEZA Y AJUSTE FRENOS TRASEROS" ValorUnitario="426.7200" Importe="426.7200">
+			<cfdi:Impuestos>
+				<cfdi:Traslados>
+					<cfdi:Traslado Base="426.72" Impuesto="002" TipoFactor="Tasa" TasaOCuota="0.160000" Importe="68.28" />
+				</cfdi:Traslados>
+			</cfdi:Impuestos>
+		</cfdi:Concepto>
+		<cfdi:Concepto ClaveProdServ="78181500" NoIdentificacion="0B3A63" Cantidad="1" ClaveUnidad="E48" Unidad="UNIDAD DE SERVICIO" Descripcion="SERVICIO DE 10, 30, 50, 70 Y 90 MIL KM" ValorUnitario="141.2500" Importe="141.2500">
+			<cfdi:Impuestos>
+				<cfdi:Traslados>
+					<cfdi:Traslado Base="141.25" Impuesto="002" TipoFactor="Tasa" TasaOCuota="0.160000" Importe="22.60" />
+				</cfdi:Traslados>
+			</cfdi:Impuestos>
+		</cfdi:Concepto>
+		<cfdi:Concepto ClaveProdServ="78181500" NoIdentificacion="FILTROAI" Cantidad="0.2000" ClaveUnidad="E48" Unidad="UNIDAD DE SERVICIO" Descripcion="CAMBIO DE FILTRO DE AIRE DE MOTOR" ValorUnitario="427.7000" Importe="85.5400">
+			<cfdi:Impuestos>
+				<cfdi:Traslados>
+					<cfdi:Traslado Base="85.54" Impuesto="002" TipoFactor="Tasa" TasaOCuota="0.160000" Importe="13.68" />
+				</cfdi:Traslados>
+			</cfdi:Impuestos>
+		</cfdi:Concepto>
+		<cfdi:Concepto ClaveProdServ="78181500" NoIdentificacion="PALQML06" Cantidad="1" ClaveUnidad="E48" Unidad="UNIDAD DE SERVICIO" Descripcion="PAQUETE DIESEL ENERGY SUPER DIESEL" ValorUnitario="83.9600" Importe="83.9600">
+			<cfdi:Impuestos>
+				<cfdi:Traslados>
+					<cfdi:Traslado Base="83.96" Impuesto="002" TipoFactor="Tasa" TasaOCuota="0.160000" Importe="13.44" />
+				</cfdi:Traslados>
+			</cfdi:Impuestos>
+		</cfdi:Concepto>
+	</cfdi:Conceptos>
+	<cfdi:Impuestos TotalImpuestosTrasladados="420.83">
+		<cfdi:Traslados>
+			<cfdi:Traslado Impuesto="002" TipoFactor="Tasa" TasaOCuota="0.160000" Importe="420.83" />
+		</cfdi:Traslados>
+	</cfdi:Impuestos>
+	<cfdi:Complemento>
+		<tfd:TimbreFiscalDigital xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://www.sat.gob.mx/TimbreFiscalDigital http://www.sat.gob.mx/sitio_internet/cfd/TimbreFiscalDigital/TimbreFiscalDigitalv11.xsd" Version="1.1" RfcProvCertif="CCF1011111K9" SelloSAT="aRvdUIa7R9Tk+VrH41LAkitf7dczoq6qf56A6TPdp11eZbbiIGy0K5Jaa9bqWxIFCFX5zP0F6pJCS4fUxzvN9i5uCC7UI3KX3FAEiEhLxzBLT0kVNHKpzM6lUBA8CS2NTMMZbojim9iHbB4sb69P5vXXxlyMiNiQf8K/7h9hgMvQOQsHY7Xn0LneO6IrgZJivtqQ3cl82UQLDX6eZ8R/ICrq/9/9YfXeSW3op9+NtOC4gLrVE/By5fZa0k9fwrxGHm3nLIHtwbyzR5WXoLYRd4oQSiasmT6s7XRX1FCWFE6UndCULnWSRiyWyKAt4Z+oERcsfdFqR7ho1pwK8K5qxQ==" NoCertificadoSAT="00001000000407404815" FechaTimbrado="2021-06-16T17:25:58" UUID="A7AACEF1-36BC-4671-9F5A-3DB3B93B8D20" SelloCFD="JTAs5LGlQcU5bV5ueAwc5+mmkT1sBKPvVWzY92C+n0woc7d6gOcAPFV3BxdEsbtCtpzOyg/RbSbpUys/REFzbfEmXvWvahaHmi9MoqSOUoIES+Aj8YozFa7tO+lXco5rzcpvShM6XuJrIqnCpGzmuywdK3TUFe21lJFAeiN4dnIr7A0rFqhWIrEqA9FUOPOdx1YSeV+dodZ76p4KS112wG2TGJMbgZOLjZvBqHzDlWI9lToe9Fz/pCQcrrFtX9t2RBO+eXnp2Eu+kYTwOON4An7MtTbvx0t4JKD/l1r6u+W7kl92sDJWbPx0+5ezOvg3CFsBSGD7EhUTJw25B7HAKg==" xmlns:tfd="http://www.sat.gob.mx/TimbreFiscalDigital" />
+	</cfdi:Complemento>
+</cfdi:Comprobante>

@@ -1,0 +1,155 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<cfdi:Comprobante
+    Certificado="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"
+    CondicionesDePago="Contado" Descuento="1327.10"
+    Fecha="2021-01-25T11:12:50" Folio="36493" FormaPago="03"
+    LugarExpedicion="44920" MetodoPago="PUE" Moneda="MXN"
+    NoCertificado="00001000000406671191"
+    Sello="IOx7gpwJ4XCgtKOLdj+nXJiYxhd8xfdvDvR7Qkm4pB4mUuvgFqaDtEq5cXxQ/+LnuzcJvyvRtz6/W+7KOGz1jWoSlJOMKNgJJCMLay6bR4Cjvsh7D30cngjhY0cJOTUthgUdFkmskjSNOMs5Q1wsUhlqTuiBe4ou2fU9J6QxdsI46TgUMF4uHJP5Rlxl/V5WtDXqsaj4WWT6YUgAlNawRZpdlS6L8MgrnXuhtjZlMI0CArQakhd0KouyWbTRScHjbS3RIgisLhd1TAB1EUEKJ+v0R9LSfS+4i4o1uQdJy89ByS2EsKG/MqXXZrKoj65fJo8Tsr3LmW/Fhv/0NfboSw=="
+    Serie="OFAE" SubTotal="4127.10" TipoCambio="1" TipoDeComprobante="I"
+    Total="3248.00" Version="3.3"
+    xmlns:cfdi="http://www.sat.gob.mx/cfd/3"
+    xmlns:pago10="http://www.sat.gob.mx/Pagos"
+    xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://www.sat.gob.mx/cfd/3 http://www.sat.gob.mx/sitio_internet/cfd/3/cfdv33.xsd">
+    <cfdi:Emisor Nombre="RADIAL LLANTAS, S.A.P.I. DE C.V."
+        RegimenFiscal="601" Rfc="RLA8103252S2"/>
+    <cfdi:Receptor
+        Nombre="SEGURIDAD PRIVADA GINTHER DE OCCIDENTE S DE RL DE C.V."
+        Rfc="SPG0905078B1" UsoCFDI="G03"/>
+    <cfdi:Conceptos>
+        <cfdi:Concepto Cantidad="2.00" ClaveProdServ="25172504"
+            ClaveUnidad="H87"
+            Descripcion="LLANTA GDY 185/60R14 ASSURANCE MAXLIFE SL 82H PN (110529)"
+            Descuento="1326.00" Importe="4110.00"
+            NoIdentificacion="GDY110529" Unidad="PIEZA" ValorUnitario="2055.00">
+            <cfdi:Impuestos>
+                <cfdi:Traslados>
+                    <cfdi:Traslado Base="2784.00" Importe="445.44"
+                        Impuesto="002" TasaOCuota="0.160000" TipoFactor="Tasa"/>
+                </cfdi:Traslados>
+            </cfdi:Impuestos>
+        </cfdi:Concepto>
+        <cfdi:Concepto Cantidad="1.00" ClaveProdServ="78181500"
+            ClaveUnidad="E48"
+            Descripcion="MANEJO/RETIRO DESECHOS CONTAMINANTES"
+            Importe="16.00" NoIdentificacion="3003005"
+            Unidad="UNIDAD DE S" ValorUnitario="16.00">
+            <cfdi:Impuestos>
+                <cfdi:Traslados>
+                    <cfdi:Traslado Base="16.00" Importe="2.56"
+                        Impuesto="002" TasaOCuota="0.160000" TipoFactor="Tasa"/>
+                </cfdi:Traslados>
+            </cfdi:Impuestos>
+        </cfdi:Concepto>
+        <cfdi:Concepto Cantidad="2.00" ClaveProdServ="78181500"
+            ClaveUnidad="E48" Descripcion="BALANCEO AUTO Y CAMIONETA"
+            Descuento="0.20" Importe="0.20" NoIdentificacion="02201001"
+            Unidad="UNIDAD DE S" ValorUnitario="0.10"/>
+        <cfdi:Concepto Cantidad="2.00" ClaveProdServ="25171905"
+            ClaveUnidad="H87" Descripcion="VALVULA AUTO CTA TR 413"
+            Descuento="0.20" Importe="0.20" NoIdentificacion="025007"
+            Unidad="PIEZA" ValorUnitario="0.10"/>
+        <cfdi:Concepto Cantidad="2.00" ClaveProdServ="20121445"
+            ClaveUnidad="H87"
+            Descripcion="TAPON DE PLASTICO AZUL/ AMARILLO PARA VALVULA"
+            Descuento="0.20" Importe="0.20" NoIdentificacion="025273"
+            Unidad="PIEZA" ValorUnitario="0.10"/>
+        <cfdi:Concepto Cantidad="2.00" ClaveProdServ="78181500"
+            ClaveUnidad="E48" Descripcion="MONTAJES AUTO Y CAMIONETA"
+            Descuento="0.20" Importe="0.20" NoIdentificacion="03001002"
+            Unidad="UNIDAD DE S" ValorUnitario="0.10"/>
+        <cfdi:Concepto Cantidad="2.00" ClaveProdServ="78181500"
+            ClaveUnidad="E48" Descripcion="INFLADO CON NITROGENO AUTO"
+            Descuento="0.20" Importe="0.20" NoIdentificacion="03001009"
+            Unidad="UNIDAD DE S" ValorUnitario="0.10"/>
+        <cfdi:Concepto Cantidad="1.00" ClaveProdServ="80141601"
+            ClaveUnidad="E48" Descripcion="SEGURO TOTAL RADIAL LLANTAS"
+            Descuento="0.10" Importe="0.10" NoIdentificacion="3003008"
+            Unidad="UNIDAD DE S" ValorUnitario="0.10"/>
+    </cfdi:Conceptos>
+    <cfdi:Impuestos TotalImpuestosTrasladados="448.00">
+        <cfdi:Traslados>
+            <cfdi:Traslado Importe="448.00" Impuesto="002"
+                TasaOCuota="0.160000" TipoFactor="Tasa"/>
+        </cfdi:Traslados>
+    </cfdi:Impuestos>
+    <cfdi:Complemento>
+        <tfd:TimbreFiscalDigital FechaTimbrado="2021-01-25T11:13:10"
+            NoCertificadoSAT="00001000000412961981"
+            RfcProvCertif="FCG840618N51"
+            SelloCFD="IOx7gpwJ4XCgtKOLdj+nXJiYxhd8xfdvDvR7Qkm4pB4mUuvgFqaDtEq5cXxQ/+LnuzcJvyvRtz6/W+7KOGz1jWoSlJOMKNgJJCMLay6bR4Cjvsh7D30cngjhY0cJOTUthgUdFkmskjSNOMs5Q1wsUhlqTuiBe4ou2fU9J6QxdsI46TgUMF4uHJP5Rlxl/V5WtDXqsaj4WWT6YUgAlNawRZpdlS6L8MgrnXuhtjZlMI0CArQakhd0KouyWbTRScHjbS3RIgisLhd1TAB1EUEKJ+v0R9LSfS+4i4o1uQdJy89ByS2EsKG/MqXXZrKoj65fJo8Tsr3LmW/Fhv/0NfboSw=="
+            SelloSAT="pBGZtiruI5KryNTjB3e8w/sr1VnHnsleQMx8ouvyjQ02c2zcprV2f4CyiaxPOzXfNyC6/tIBT6umz8nNMR9AkfhIVzO/CLvbxO31mE6l4quowTuP5smPzN7Y88zgi6GO6NWhOFd/hR6Z0vugWaUFnlMPDwR0yHRTcAp5Q4UimSUzY8kNsC/Ejy/ISLurh6az+P3UY0sHuUnoAUaq6mzfNy3EwHZZ1t84DHdDEX6NyuRTdv2h/H5t8eC/HXRtOQil10Mfv+RodTkFaSta5HhTRzY1uSu0c+cuEzpTf4+OGZFZAcEIRLZXrIHI8Fid6iEd0Q8MdD8fNSQaoW+KuuWtFg=="
+            UUID="39496CC2-BAA7-4232-A739-A9083ADF5B6B" Version="1.1"
+            xmlns:tfd="http://www.sat.gob.mx/TimbreFiscalDigital"
+            xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://www.sat.gob.mx/TimbreFiscalDigital http://www.sat.gob.mx/sitio_internet/cfd/TimbreFiscalDigital/TimbreFiscalDigitalv11.xsd"/>
+    </cfdi:Complemento>
+    <cfdi:Addenda>
+        <radialLlantas:RADIAL_LLANTAS
+            cantidadLetra="(**TRES MIL DOSCIENTOS CUARENTA Y OCHO PESOS 00/100 MXN**)"
+            comentarios="** GRACIAS POR SU COMPRA **                                                                 NOMBRE Y FIRMA DEL SUSCRIPTOR:__________________________________________\nRecibí de conformidad los servicios y productos descritos, así como factura correspondiente. Y acepto que Radial Llantas SAPI de CV deseche y/o destruya de manera responsable las llantas y refacciones reemplazadas a mi vehículo depositadas en sus instalaciones.\nCFDI 3.3           TIPO DE COMPROBANTE: Ingreso\n"
+            email="ALVAREZ.JAFIA@GMAIL.COM; NOTIENEMAIL@RADIAL.COM.MX"
+            empleadoQueFactura="6049" fechaDeVencimiento="25/ene/2021"
+            formaDeEntrega="Patio" formaDeVenta="Patio"
+            idRadial="10029142" noCliente="100001"
+            noFormaDeVenta="OVAE33091" nombreImpresora="CARTA"
+            numCopiasAlmacen="1" numCopiasOriginal="1" placas="ENA9207"
+            status="1" subDocumento="Factura" subtotal="2800.00"
+            tasaDeInteres="&lt;10>" tazaIva="0.160000"
+            telefonoClienteOficina="6143439588" tipoDocto="1"
+            tipoDocumento="Factura" totalDePiezas="14.00"
+            totalIvaMX="448.00" totalMX="3248.00"
+            totalRetenciones="0.00"
+            xmlns:radialLlantas="http://www.formasdigitales.mx/cfd" xsi:schemaLocation="http://www.formasdigitales.mx/cfd http://www.formasdigitales.mx/cfd/radialLlantas.xsd">
+            <radialLlantas:EmisorAddenda calle="Av. Lázaro Cárdenas"
+                codigoPostal="44920" colonia="Col. Las Torres"
+                estado="Jalisco" localidad="Guadalajara"
+                lugarExpedicion="GALLO, CALZ. GONZALEZ GALLO NO. 1335 S.R., COL. ATLAS , GUADALAJARA, Jalisco, México, CP 44430"
+                municipio="Guadalajara" noExterior="2107" pais="México"/>
+            <radialLlantas:ReceptorAddenda calle="CERRADA BARROCA #6106"
+                codigoPostal="31215" colonia="PLAZA BARROCA"
+                estado="CHIHUAHUA" localidad="CHIHUAHUA"
+                municipio="CHIHUAHUA" pais="MÉXICO"/>
+            <radialLlantas:ConceptosAddenda>
+                <radialLlantas:ConceptoAddenda cod="04"
+                    descuentoPLPV="1326.00" empleado="2103"
+                    importePDF="2784.00" precioNeto="1392.00"
+                    promoDescuento="0.00" promoPorcentaje="0.00" tasaDescuento="32.26"/>
+                <radialLlantas:ConceptoAddenda cod="03"
+                    descuentoPLPV="0.00" empleado="6049"
+                    importePDF="16.00" precioNeto="16.00"
+                    promoDescuento="0.00" promoPorcentaje="0.00" tasaDescuento="0.00"/>
+                <radialLlantas:ConceptoAddenda cod="04"
+                    descuentoPLPV="0.00" empleado="2103"
+                    importePDF="0.00" precioNeto="0.10"
+                    promoDescuento="0.20" promoPorcentaje="100.00" tasaDescuento="0.00"/>
+                <radialLlantas:ConceptoAddenda cod="04"
+                    descuentoPLPV="0.00" empleado="2103"
+                    importePDF="0.00" precioNeto="0.10"
+                    promoDescuento="0.20" promoPorcentaje="100.00" tasaDescuento="0.00"/>
+                <radialLlantas:ConceptoAddenda cod="04"
+                    descuentoPLPV="0.00" empleado="2103"
+                    importePDF="0.00" precioNeto="0.10"
+                    promoDescuento="0.20" promoPorcentaje="100.00" tasaDescuento="0.00"/>
+                <radialLlantas:ConceptoAddenda cod="04"
+                    descuentoPLPV="0.00" empleado="2103"
+                    importePDF="0.00" precioNeto="0.10"
+                    promoDescuento="0.20" promoPorcentaje="100.00" tasaDescuento="0.00"/>
+                <radialLlantas:ConceptoAddenda cod="04"
+                    descuentoPLPV="0.00" empleado="2103"
+                    importePDF="0.00" precioNeto="0.10"
+                    promoDescuento="0.20" promoPorcentaje="100.00" tasaDescuento="0.00"/>
+                <radialLlantas:ConceptoAddenda cod="SC"
+                    descuentoPLPV="0.00" empleado="6049"
+                    importePDF="0.00" precioNeto="0.10"
+                    promoDescuento="0.10" promoPorcentaje="100.00" tasaDescuento="0.00"/>
+            </radialLlantas:ConceptosAddenda>
+            <radialLlantas:EntregadoEn/>
+            <radialLlantas:ExpedidoEn Tel1="(33) 3619-4102"
+                Tel2="(33) 3619-4303"
+                calle="CALZ. GONZALEZ GALLO NO. 1335 S.R."
+                codigoPostal="44430" colonia="COL. ATLAS"
+                estado="Jalisco" localidad="GUADALAJARA"
+                municipio="GUADALAJARA" nombre="GALLO" pais="México"/>
+        </radialLlantas:RADIAL_LLANTAS>
+    </cfdi:Addenda>
+</cfdi:Comprobante>

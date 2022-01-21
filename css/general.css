@@ -1,0 +1,137 @@
+/*  HOJA DE ESTILOS GENERALES PARA TODOS LOS MODULOS */
+
+/* button es para que por default se ponga el cursor pointer en todos los elementos de tipo button*/
+button{
+	cursor: pointer;
+    margin:5px 0px;
+}
+/* fin button*/
+
+/* .titulo_ban Es la etiqueta que muestra el titulo del modulo en el que estamos*/
+.titulo_ban{
+    background-color: #002699;
+    color:white;
+    padding: 5px 15px;
+    font-size: 18px;
+}
+/* fin de .titulo_ban */
+
+/* tablon estilos para la tablas que se muestran al buscar los registros */
+.tablon {
+    border: 1px solid #ccc;
+    border-collapse: collapse;
+    margin: 0;
+    padding: 0;
+    width: 100%;
+    font-size: 11px;
+    table-layout: fixed;
+}
+.tablon tr {
+    background: #f8f8f8;
+    border: 1px solid #ddd;
+    padding: .15em;
+}
+.tablon th,
+.tablon td {
+    padding: .225em;
+    text-align: center;
+}
+.tablon th {
+    font-size: .86em;
+    letter-spacing: .1em;
+    text-transform: uppercase;
+}
+/*MGFS se agrega el estilo zebra a las tablas*/
+.tablon tr:nth-child(even) {
+	background:#ffffff;
+}
+
+/*muestra fondo color miestras se termina de hacer un proceso*/
+#fondo_cargando {
+    position: absolute;
+    top: 0%;
+    background-color:black;
+    width: 100%;
+    bottom:0%;
+    border: 2px solid #6495ed;
+    opacity: .2;
+    filter:Alpha(opacity=10);
+    border-radius: 5px;
+    z-index:2;
+    display:none
+}
+
+.modal{
+    overflow-y: scroll !important;
+}
+
+@media screen and (max-width: 600px) {
+    .tablon {
+        border: 0;
+    }
+    .tablon caption {
+        font-size: 1.3em;
+    }
+    .tablon thead {
+        border: none;
+        clip: rect(0 0 0 0);
+        height: 1px;
+        margin: -1px;
+        overflow: hidden;
+        padding: 0;
+        position: absolute;
+        width: 1px;
+    }
+    .tablon tr {
+        border-bottom: 3px solid #ddd;
+        display: block;
+        margin-bottom: .625em;
+    }
+    .tablon  td {
+        border-bottom: 1px solid #ddd;
+        display: block;
+        font-size: .8em;
+        text-align: right;
+    }
+    .tablon  td:before {
+        content: attr(data-label);
+        float: left;
+        font-weight: bold;
+        text-transform: uppercase;
+    }
+    .tablon  td:last-child {
+        border-bottom: 0;
+    }
+}
+/* fin de tablon -------------------------*/
+/* indica que un campo es requerido */
+.requerido::before {
+      content: '*';
+      margin-right: 4px;
+      color: red;
+}
+.boton_modal_ayuda{
+    position:absolute;
+    z-index:150;
+    right:1.5%;
+    font-size:35px;
+    border:1px solid #002699;
+    padding:3px 5px;
+    border-radius:50px;
+    cursor:pointer;
+    top:0%;
+    background-color: #002699;
+    color:white;
+    box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2), 0 6px 20px 0 rgba(0, 0, 0, 0.19);
+}
+.boton_modal_ayuda:hover{
+    box-shadow: 0 0px 0px 0 rgba(238,238,238, 0.2), 0 6px 20px 0 rgba(238,238,238, 0.19);
+}
+
+.notaVerde{
+    color:#2DB67C;
+    font-size:13px;
+    vertical-align: middle;
+}
+
+

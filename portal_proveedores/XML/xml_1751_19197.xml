@@ -1,0 +1,280 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<cfdi:Comprobante xsi:schemaLocation="http://www.sat.gob.mx/cfd/3 http://www.sat.gob.mx/sitio_internet/cfd/3/cfdv33.xsd" Version="3.3" Serie="ST" Folio="20618" Fecha="2021-05-28T10:57:48" FormaPago="03" NoCertificado="00001000000503965672" Certificado="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" SubTotal="5862.07" Moneda="MXN" Total="6800.00" TipoDeComprobante="I" MetodoPago="PUE" LugarExpedicion="98613" xmlns:xs="http://www.w3.org/2001/XMLSchema" xmlns:cfdi="http://www.sat.gob.mx/cfd/3" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" Sello="QlLFjFeN7X2yFrGz+Ie74RN9NstQSEo0vYEi7qraDs874mK/Dqi4jewEfI9iX9XEx0WNREtB/PdPfKl4ycfd0lff168WW+Jop36tTPb5Zy4iG2+bHA+m8QeKpVZOdLiR6xVk0X7HVT4YIo8IifiVe4YSomA1CdRyuAc6KLBrGiJAWwbtDwaPgwB9NOeee6a2+V2B5291T23YyoPSG+eT9wiKkpz8uasJ1rY9Vyv05Qdm37XH9O3Cy57XkhWQxtitr5FUaTBXpIApID/8dcngA6y6Apybko4vclQrrEoh0Lt4jNxZAYS9hPeCqPjnQ84xszQCEFC3cjZaZNXiAqJxRQ=="><cfdi:Emisor Rfc="LLA860220497" Nombre="LLANTAS DE LAGO SA DE CV" RegimenFiscal="601"></cfdi:Emisor><cfdi:Receptor Rfc="SPG0905078B1" Nombre="SEGURIDAD PRIVADA GINTHER DE OCCIDENTE S DE RL DE CV" UsoCFDI="G03"></cfdi:Receptor><cfdi:Conceptos><cfdi:Concepto ClaveProdServ="25172000" NoIdentificacion="RE00015" Cantidad="1" ClaveUnidad="H87" Unidad="PIEZA" Descripcion="HORQUILLA INFERIOR DERECHA" ValorUnitario="1862.07" Importe="1862.07"><cfdi:Impuestos><cfdi:Traslados><cfdi:Traslado Base="1862.07" Impuesto="002" TipoFactor="Tasa" TasaOCuota="0.160000" Importe="297.9312"></cfdi:Traslado></cfdi:Traslados></cfdi:Impuestos></cfdi:Concepto><cfdi:Concepto ClaveProdServ="78181500" NoIdentificacion="SO01" Cantidad="1" ClaveUnidad="E48" Unidad="No aplica" Descripcion="MANO DE OBRA" ValorUnitario="241.39" Importe="241.39"><cfdi:Impuestos><cfdi:Traslados><cfdi:Traslado Base="241.39" Impuesto="002" TipoFactor="Tasa" TasaOCuota="0.160000" Importe="38.6224"></cfdi:Traslado></cfdi:Traslados></cfdi:Impuestos></cfdi:Concepto><cfdi:Concepto ClaveProdServ="25172000" NoIdentificacion="RE00133" Cantidad="1" ClaveUnidad="H87" Unidad="PIEZA" Descripcion="HORQUILLA INFERIOR IZQUIERDA" ValorUnitario="1862.07" Importe="1862.07"><cfdi:Impuestos><cfdi:Traslados><cfdi:Traslado Base="1862.07" Impuesto="002" TipoFactor="Tasa" TasaOCuota="0.160000" Importe="297.9312"></cfdi:Traslado></cfdi:Traslados></cfdi:Impuestos></cfdi:Concepto><cfdi:Concepto ClaveProdServ="78181500" NoIdentificacion="SO01" Cantidad="1" ClaveUnidad="E48" Unidad="No aplica" Descripcion="MANO DE OBRA" ValorUnitario="241.38" Importe="241.38"><cfdi:Impuestos><cfdi:Traslados><cfdi:Traslado Base="241.38" Impuesto="002" TipoFactor="Tasa" TasaOCuota="0.160000" Importe="38.6208"></cfdi:Traslado></cfdi:Traslados></cfdi:Impuestos></cfdi:Concepto><cfdi:Concepto ClaveProdServ="25172000" NoIdentificacion="RE00292" Cantidad="2" ClaveUnidad="H87" Unidad="PIEZA" Descripcion="BALERO DOBLE" ValorUnitario="586.21" Importe="1172.42"><cfdi:Impuestos><cfdi:Traslados><cfdi:Traslado Base="1172.42" Impuesto="002" TipoFactor="Tasa" TasaOCuota="0.160000" Importe="187.5872"></cfdi:Traslado></cfdi:Traslados></cfdi:Impuestos></cfdi:Concepto><cfdi:Concepto ClaveProdServ="78181500" NoIdentificacion="SO01" Cantidad="2" ClaveUnidad="E48" Unidad="No aplica" Descripcion="MANO DE OBRA" ValorUnitario="241.37" Importe="482.74"><cfdi:Impuestos><cfdi:Traslados><cfdi:Traslado Base="482.74" Impuesto="002" TipoFactor="Tasa" TasaOCuota="0.160000" Importe="77.2384"></cfdi:Traslado></cfdi:Traslados></cfdi:Impuestos></cfdi:Concepto></cfdi:Conceptos><cfdi:Impuestos TotalImpuestosTrasladados="937.93"><cfdi:Traslados><cfdi:Traslado Impuesto="002" TipoFactor="Tasa" TasaOCuota="0.160000" Importe="937.93"></cfdi:Traslado></cfdi:Traslados></cfdi:Impuestos><cfdi:Complemento><tfd:TimbreFiscalDigital RfcProvCertif="TSP080724QW6" Version="1.1" UUID="38C6D0F9-F296-4108-93E4-9BA8320BCF96" FechaTimbrado="2021-05-28T10:57:48" SelloCFD="QlLFjFeN7X2yFrGz+Ie74RN9NstQSEo0vYEi7qraDs874mK/Dqi4jewEfI9iX9XEx0WNREtB/PdPfKl4ycfd0lff168WW+Jop36tTPb5Zy4iG2+bHA+m8QeKpVZOdLiR6xVk0X7HVT4YIo8IifiVe4YSomA1CdRyuAc6KLBrGiJAWwbtDwaPgwB9NOeee6a2+V2B5291T23YyoPSG+eT9wiKkpz8uasJ1rY9Vyv05Qdm37XH9O3Cy57XkhWQxtitr5FUaTBXpIApID/8dcngA6y6Apybko4vclQrrEoh0Lt4jNxZAYS9hPeCqPjnQ84xszQCEFC3cjZaZNXiAqJxRQ==" NoCertificadoSAT="00001000000501960426" SelloSAT="artPoVZBEp9qxaH7DSU1gN638VlSAGa61lv+Sit/81KVY9HopvzsMTAMH4sNMcoSqBbbVQ5JGEBLU225q4MsQTRy0TB56gQ6UnRGprcUUoZnE1JOfD0RewLoJScxFUPGVvyr7A99AnDsNXzVl+ALQL2hgNM+/KrgOsDqmTL7N2Um7jB1eXZWwriBsnm2qI4lyRUk1Opv8U4bqz2XUiOqa5GdpvL3uff7p21ucCr3OG61bYqUwpZxyKABHRy47KYiTkJsaC8PE9Y2pbcXbKqzhiiE0nJpYNIrCDPQ6t8QjJgXwx+AoM5ZrjFOk8M8ODbbfPMeg8jQteF6AvhDZXsawg==" xsi:schemaLocation="http://www.sat.gob.mx/TimbreFiscalDigital http://www.sat.gob.mx/sitio_internet/cfd/timbrefiscaldigital/TimbreFiscalDigitalv11.xsd" xmlns:tfd="http://www.sat.gob.mx/TimbreFiscalDigital" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"/></cfdi:Complemento>
+<cfdi:Addenda>
+	<requestForPayment type="SimpleInvoiceType" contentVersion="1.3.1" documentStructureVersion="AMC7.1" documentStatus="ORIGINAL" DeliveryDate="2021-05-28">
+		<requestForPaymentIdentification>
+			<entityType>INVOICE</entityType>
+			<uniqueCreatorIdentification>ST20618</uniqueCreatorIdentification>
+		</requestForPaymentIdentification>
+		<specialInstruction code="AAB">
+			<text>PAGO A 0 DIAS</text>
+		</specialInstruction>
+		<specialInstruction code="PUR">
+			<text>PRONTO PAGO GENERA DESCUENTO</text>
+		</specialInstruction>
+		<specialInstruction code="ZZZ">
+			<text>SEIS MIL OCHOCIENTOS Pesos 00/100 M.N.</text>
+		</specialInstruction>
+		<AdditionalInformation>
+			<referenceIdentification type="IV">20618</referenceIdentification>
+			<referenceIdentification type="ATZ">0</referenceIdentification>
+		</AdditionalInformation>
+		<seller>
+			<alternatePartyIdentification type="SELLER_ASSIGNED_IDENTIFIER_FOR_A_PARTY">85987</alternatePartyIdentification>
+		</seller>
+		<InvoiceCreator>
+			<alternatePartyIdentification type="VA">LLA860220497</alternatePartyIdentification> 
+     				<nameAndAddress>
+				<name>LLANTAS DE LAGO SA DE CV</name>
+				<streetAddressOne>AV DE LA CONVENCION PTE. 105  FRACC. MODELO</streetAddressOne>
+				<city>AGUASCALIENTES</city>
+				<postalCode>20080</postalCode>
+			</nameAndAddress>
+		</InvoiceCreator>
+		<currency currencyISOCode="MXN">
+			<currencyFunction>BILLING_CURRENCY</currencyFunction>
+			<rateOfChange>1.000000</rateOfChange>
+		</currency>
+		<paymentTerms paymentTermsEvent="DATE_OF_INVOICE" PaymentTermsRelationTime="REFERENCE_AFTER">
+			<netPayment netPaymentTermsType="BASIC_NET">
+				<paymentTimePeriod>
+					<timePeriodDue timePeriod="DAYS">
+						<value>0</value>
+					</timePeriodDue>
+				</paymentTimePeriod>
+			</netPayment>
+		</paymentTerms>
+		<allowanceCharge settlementType="BILL_BACK" allowanceChargeType="ALLOWANCE_GLOBAL">
+		    <specialServicesType>AJ</specialServicesType>
+		    <monetaryAmountOrPercentage>
+			<rate base="INVOICE_VALUE">
+				<percentage>0.00</percentage>
+			</rate>
+		    </monetaryAmountOrPercentage>
+		</allowanceCharge>
+		<lineItem type="SimpleInvoiceLineItemType" number="1">
+			<tradeItemIdentification>
+				<gtin></gtin>
+			</tradeItemIdentification>
+			<tradeItemDescriptionInformation language="ES">
+				<longText>HORQUILLA INFERIOR DERECHA</longText>
+			</tradeItemDescriptionInformation>
+			<invoicedQuantity unitOfMeasure="CA">1</invoicedQuantity> 
+			<aditionalQuantity QuantityType="NUM_CONSUMER_UNITS">1.00</aditionalQuantity>
+			<grossPrice>
+				<Amount>1862.07</Amount>
+			</grossPrice>
+			<netPrice>
+				<Amount>2160.00</Amount>
+			</netPrice>
+			<AdditionalInformation>
+				<referenceIdentification type="ON"></referenceIdentification>
+			</AdditionalInformation>
+			<tradeItemTaxInformation>
+				<taxTypeDescription>VAT</taxTypeDescription> 
+				<tradeItemTaxAmount>
+					<taxPercentage>16.00</taxPercentage>
+					<taxAmount>297.93</taxAmount>
+				</tradeItemTaxAmount>
+				</tradeItemTaxInformation>
+			<totalLineAmount>
+				<grossAmount>
+					<Amount>1862.07</Amount>
+				</grossAmount>
+				<netAmount>
+					<Amount>2160.00</Amount>
+				</netAmount>
+			</totalLineAmount>
+		</lineItem>
+		<lineItem type="SimpleInvoiceLineItemType" number="2">
+			<tradeItemIdentification>
+				<gtin></gtin>
+			</tradeItemIdentification>
+			<tradeItemDescriptionInformation language="ES">
+				<longText>MANO DE OBRA</longText>
+			</tradeItemDescriptionInformation>
+			<invoicedQuantity unitOfMeasure="CA">0</invoicedQuantity> 
+			<aditionalQuantity QuantityType="NUM_CONSUMER_UNITS">1.00</aditionalQuantity>
+			<grossPrice>
+				<Amount>241.39</Amount>
+			</grossPrice>
+			<netPrice>
+				<Amount>280.01</Amount>
+			</netPrice>
+			<AdditionalInformation>
+				<referenceIdentification type="ON"></referenceIdentification>
+			</AdditionalInformation>
+			<tradeItemTaxInformation>
+				<taxTypeDescription>VAT</taxTypeDescription> 
+				<tradeItemTaxAmount>
+					<taxPercentage>16.00</taxPercentage>
+					<taxAmount>38.62</taxAmount>
+				</tradeItemTaxAmount>
+				</tradeItemTaxInformation>
+			<totalLineAmount>
+				<grossAmount>
+					<Amount>241.39</Amount>
+				</grossAmount>
+				<netAmount>
+					<Amount>280.01</Amount>
+				</netAmount>
+			</totalLineAmount>
+		</lineItem>
+		<lineItem type="SimpleInvoiceLineItemType" number="3">
+			<tradeItemIdentification>
+				<gtin></gtin>
+			</tradeItemIdentification>
+			<tradeItemDescriptionInformation language="ES">
+				<longText>HORQUILLA INFERIOR IZQUIERDA</longText>
+			</tradeItemDescriptionInformation>
+			<invoicedQuantity unitOfMeasure="CA">1</invoicedQuantity> 
+			<aditionalQuantity QuantityType="NUM_CONSUMER_UNITS">1.00</aditionalQuantity>
+			<grossPrice>
+				<Amount>1862.07</Amount>
+			</grossPrice>
+			<netPrice>
+				<Amount>2160.00</Amount>
+			</netPrice>
+			<AdditionalInformation>
+				<referenceIdentification type="ON"></referenceIdentification>
+			</AdditionalInformation>
+			<tradeItemTaxInformation>
+				<taxTypeDescription>VAT</taxTypeDescription> 
+				<tradeItemTaxAmount>
+					<taxPercentage>16.00</taxPercentage>
+					<taxAmount>297.93</taxAmount>
+				</tradeItemTaxAmount>
+				</tradeItemTaxInformation>
+			<totalLineAmount>
+				<grossAmount>
+					<Amount>1862.07</Amount>
+				</grossAmount>
+				<netAmount>
+					<Amount>2160.00</Amount>
+				</netAmount>
+			</totalLineAmount>
+		</lineItem>
+		<lineItem type="SimpleInvoiceLineItemType" number="4">
+			<tradeItemIdentification>
+				<gtin></gtin>
+			</tradeItemIdentification>
+			<tradeItemDescriptionInformation language="ES">
+				<longText>MANO DE OBRA</longText>
+			</tradeItemDescriptionInformation>
+			<invoicedQuantity unitOfMeasure="CA">0</invoicedQuantity> 
+			<aditionalQuantity QuantityType="NUM_CONSUMER_UNITS">1.00</aditionalQuantity>
+			<grossPrice>
+				<Amount>241.38</Amount>
+			</grossPrice>
+			<netPrice>
+				<Amount>280.00</Amount>
+			</netPrice>
+			<AdditionalInformation>
+				<referenceIdentification type="ON"></referenceIdentification>
+			</AdditionalInformation>
+			<tradeItemTaxInformation>
+				<taxTypeDescription>VAT</taxTypeDescription> 
+				<tradeItemTaxAmount>
+					<taxPercentage>16.00</taxPercentage>
+					<taxAmount>38.62</taxAmount>
+				</tradeItemTaxAmount>
+				</tradeItemTaxInformation>
+			<totalLineAmount>
+				<grossAmount>
+					<Amount>241.38</Amount>
+				</grossAmount>
+				<netAmount>
+					<Amount>280.00</Amount>
+				</netAmount>
+			</totalLineAmount>
+		</lineItem>
+		<lineItem type="SimpleInvoiceLineItemType" number="5">
+			<tradeItemIdentification>
+				<gtin></gtin>
+			</tradeItemIdentification>
+			<tradeItemDescriptionInformation language="ES">
+				<longText>BALERO DOBLE</longText>
+			</tradeItemDescriptionInformation>
+			<invoicedQuantity unitOfMeasure="CA">2</invoicedQuantity> 
+			<aditionalQuantity QuantityType="NUM_CONSUMER_UNITS">2.00</aditionalQuantity>
+			<grossPrice>
+				<Amount>586.21</Amount>
+			</grossPrice>
+			<netPrice>
+				<Amount>1360.01</Amount>
+			</netPrice>
+			<AdditionalInformation>
+				<referenceIdentification type="ON"></referenceIdentification>
+			</AdditionalInformation>
+			<tradeItemTaxInformation>
+				<taxTypeDescription>VAT</taxTypeDescription> 
+				<tradeItemTaxAmount>
+					<taxPercentage>16.00</taxPercentage>
+					<taxAmount>187.59</taxAmount>
+				</tradeItemTaxAmount>
+				</tradeItemTaxInformation>
+			<totalLineAmount>
+				<grossAmount>
+					<Amount>1172.42</Amount>
+				</grossAmount>
+				<netAmount>
+					<Amount>1360.01</Amount>
+				</netAmount>
+			</totalLineAmount>
+		</lineItem>
+		<lineItem type="SimpleInvoiceLineItemType" number="6">
+			<tradeItemIdentification>
+				<gtin></gtin>
+			</tradeItemIdentification>
+			<tradeItemDescriptionInformation language="ES">
+				<longText>MANO DE OBRA</longText>
+			</tradeItemDescriptionInformation>
+			<invoicedQuantity unitOfMeasure="CA">0</invoicedQuantity> 
+			<aditionalQuantity QuantityType="NUM_CONSUMER_UNITS">2.00</aditionalQuantity>
+			<grossPrice>
+				<Amount>241.37</Amount>
+			</grossPrice>
+			<netPrice>
+				<Amount>559.98</Amount>
+			</netPrice>
+			<AdditionalInformation>
+				<referenceIdentification type="ON"></referenceIdentification>
+			</AdditionalInformation>
+			<tradeItemTaxInformation>
+				<taxTypeDescription>VAT</taxTypeDescription> 
+				<tradeItemTaxAmount>
+					<taxPercentage>16.00</taxPercentage>
+					<taxAmount>77.24</taxAmount>
+				</tradeItemTaxAmount>
+				</tradeItemTaxInformation>
+			<totalLineAmount>
+				<grossAmount>
+					<Amount>482.74</Amount>
+				</grossAmount>
+				<netAmount>
+					<Amount>559.98</Amount>
+				</netAmount>
+			</totalLineAmount>
+		</lineItem>
+		<totalAmount>
+			<Amount>5862.07</Amount>
+		</totalAmount>
+		<baseAmount>
+			<Amount>5862.07</Amount>
+		</baseAmount>
+		<tax type="GST"> 
+			<taxPercentage>0.00</taxPercentage>
+			<taxAmount>0.00</taxAmount>
+			<taxCategory>TRANSFERIDO</taxCategory>
+		</tax>
+		<tax type="VAT"> 
+			<taxPercentage>16.00</taxPercentage>
+			<taxAmount>937.93</taxAmount>
+			<taxCategory>TRANSFERIDO</taxCategory>
+		</tax>
+		<payableAmount>
+			<Amount>6800.00</Amount>
+		</payableAmount>
+	</requestForPayment>
+</cfdi:Addenda>
+</cfdi:Comprobante>

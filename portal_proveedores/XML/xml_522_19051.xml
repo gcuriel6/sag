@@ -1,0 +1,41 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<cfdi:Comprobante xmlns:cfdi="http://www.sat.gob.mx/cfd/3" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" Version="3.3" Serie="SUN" Folio="93777" Fecha="2021-05-27T15:10:27" Sello="VFAoYuj6W+Vx5EIsho/kUD/NO8V+/wZAD1ltkjv9VUZWmcUbyuFXuc9VnhXavCEwEQxVVe+8Bm8e7e5t7G/SYYXdLAOBQAmjaEUJjYENsvnXVcGYP30AUTDw/BejiiWpLEW8mvpFQGumaY0Lc1DqltvE2nmbHBFi+enX/pBE4m3ducGuaVk0xh4dmoDcLH4tcyQGV3+BjUURczpOXSTL34LcTa3G8Yl31tLF/4iLmLqBOobHzKMkcByl7CtHZ/NdUsqgkhl0Lom0MmLWANeTb1vTByZrz6iwwZEGub6yznnsnst0O3cficI3K6PMOd8U7Va1jSBVz2QDixJb18UvWA==" FormaPago="99" NoCertificado="00001000000505996165" Certificado="MIIGGjCCBAKgAwIBAgIUMDAwMDEwMDAwMDA1MDU5OTYxNjUwDQYJKoZIhvcNAQELBQAwggGEMSAwHgYDVQQDDBdBVVRPUklEQUQgQ0VSVElGSUNBRE9SQTEuMCwGA1UECgwlU0VSVklDSU8gREUgQURNSU5JU1RSQUNJT04gVFJJQlVUQVJJQTEaMBgGA1UECwwRU0FULUlFUyBBdXRob3JpdHkxKjAoBgkqhkiG9w0BCQEWG2NvbnRhY3RvLnRlY25pY29Ac2F0LmdvYi5teDEmMCQGA1UECQwdQVYuIEhJREFMR08gNzcsIENPTC4gR1VFUlJFUk8xDjAMBgNVBBEMBTA2MzAwMQswCQYDVQQGEwJNWDEZMBcGA1UECAwQQ0lVREFEIERFIE1FWElDTzETMBEGA1UEBwwKQ1VBVUhURU1PQzEVMBMGA1UELRMMU0FUOTcwNzAxTk4zMVwwWgYJKoZIhvcNAQkCE01yZXNwb25zYWJsZTogQURNSU5JU1RSQUNJT04gQ0VOVFJBTCBERSBTRVJWSUNJT1MgVFJJQlVUQVJJT1MgQUwgQ09OVFJJQlVZRU5URTAeFw0yMDEyMTIwNDU2MjZaFw0yNDEyMTIwNDU2MjZaMIHoMS0wKwYDVQQDEyRUVSBNRUpPUiBBR0VOQ0lBIEFVVE9NT1RSSVogU0EgREUgQ1YxLTArBgNVBCkTJFRVIE1FSk9SIEFHRU5DSUEgQVVUT01PVFJJWiBTQSBERSBDVjEtMCsGA1UEChMkVFUgTUVKT1IgQUdFTkNJQSBBVVRPTU9UUklaIFNBIERFIENWMSUwIwYDVQQtExxUTUEwOTA5MThORDAgLyBNT0RKNjgwODI0VDMzMR4wHAYDVQQFExUgLyBNT0RKNjgwODI0SENITE1NMDMxEjAQBgNVBAsTCUNoaWh1YWh1YTCCASIwDQYJKoZIhvcNAQEBBQADggEPADCCAQoCggEBAKujW/g93OLvrA4Autu7ELSbVZwQz+NqYIgyxSBKtMfjklfFW03y3sBdlT8mfrLHTqKeUodR/DI0MjxbsJVnAJGqmvte99tNG8ha0TH2a6y7hqkTLlgzW8vKjS5ILzrCjoCND7dXzbqzwxPJJ7XDjURmOZY6/+QhU91GSUeWfFo3R5RtGPUecsd+iSFEoKZU+WMUDQlKtrYjT+crtrY89BX6v260M+LB/oaaH6yGJ+UEgbvMWUf4Uf/D084sFNkPlTSlBN5PH+1cgkpVqeH9XG3Xc+yxPm6PPBwvZkzxnSED5tmdqgiR5Wz2C+tfTj9oiriySIyGyRvmdAxkCnFpt7ECAwEAAaMdMBswDAYDVR0TAQH/BAIwADALBgNVHQ8EBAMCBsAwDQYJKoZIhvcNAQELBQADggIBAJO97QulRTyeWEkHRR8y8HSwcmlZt2gPBEfSqs6RiXWQA1C2PMRPHN6oVPD6s4NtgqbhVDgYiMSmViu2n258qcDSJ4/Qd9bFdbYjgcMfhRWdr/BTVthF02bGS1yxRddT0B8jFqy0at/w/MsrGbTGV340P+CjwHAVPeSbgnDY27M3PPevQau7gwO3tx3AIF6LCAm1GnZ0J3Hzw1uspmEJNxgEUR75DqxrzU0cf0geRVgVPRNXOngryABnm1LfIxOUdOUVJOF9JDEbiCCNXa6MWzI5Bb2yLL/FVOqitv7NGgul+vatXwIFmJg8iPk531eMgxDQj5gkijo1oiPa9TCucubjPTXr+d3WSg+BMtWa2IuAaz9XjWKhQyR9vveaReCxHEEhT1IkbP7AIaRbeYDF2PRC3tMCqzKPpe4Jb4jwbKV+wxZ045UPQwMgW8XrwN0ZUxYzzGNglZszi3LLrn5cDEef2JcefdqXKBJixLLVYwOgdM53jisPdwOA+6lPjYDiP6YbVUVgTwccgZUqHYW2dbtSGnt6E1QB/cNevxnPYkPucrP1cgeVOIC93Zg32HCUaRWHhcfr/3I1Jfmce85IrBfttxvYi1lvFru22z1aO+kIAdJa2uU+CIwEqY9Rmt7D5MZrtvkxC1at4+tGAfdOZ/+DOgq6VfbzEFEudCAD3tWD" CondicionesDePago="CREDITO" SubTotal="2458.76" Moneda="MXN" TipoCambio="1" Total="2852.16" TipoDeComprobante="I" MetodoPago="PPD" LugarExpedicion="31203" xsi:schemaLocation="http://www.sat.gob.mx/cfd/3 http://www.sat.gob.mx/sitio_internet/cfd/3/cfdv33.xsd">
+<cfdi:Emisor Rfc="TMA090918ND0" Nombre="TU MEJOR AGENCIA AUTOMOTRIZ SA DE CV" RegimenFiscal="601" />
+<cfdi:Receptor Rfc="SPG0905078B1" Nombre="SEGURIDAD PRIVADA GINTHER DE OCCIDENTE S DE RL DE CV" UsoCFDI="G03" />
+<cfdi:Conceptos>
+<cfdi:Concepto ClaveProdServ="78181500" NoIdentificacion="78181500" Cantidad="1.0000" ClaveUnidad="E48" Unidad="UNIDAD DE SERVICIO" Descripcion="REVISAR 25 PUNTOS DE SEGURIDAD" ValorUnitario="330.00" Importe="330.00">
+<cfdi:Impuestos>
+<cfdi:Traslados>
+<cfdi:Traslado Base="330.00" Impuesto="002" TipoFactor="Tasa" TasaOCuota="0.160000" Importe="52.800000" /></cfdi:Traslados></cfdi:Impuestos></cfdi:Concepto>
+<cfdi:Concepto ClaveProdServ="78181500" NoIdentificacion="78181500" Cantidad="1.0000" ClaveUnidad="E48" Unidad="Unidad de servicio" Descripcion="REEMPLAZO DEL FILTRO DE ACEITE" ValorUnitario="330.00" Importe="330.00">
+<cfdi:Impuestos>
+<cfdi:Traslados>
+<cfdi:Traslado Base="330.00" Impuesto="002" TipoFactor="Tasa" TasaOCuota="0.160000" Importe="52.800000" /></cfdi:Traslados></cfdi:Impuestos></cfdi:Concepto>
+<cfdi:Concepto ClaveProdServ="78181500" NoIdentificacion="78181500" Cantidad="0.5000" ClaveUnidad="E48" Unidad="Unidad de servicio" Descripcion="ROTACION DE RUEDAS" ValorUnitario="330.00" Importe="165.00">
+<cfdi:Impuestos>
+<cfdi:Traslados>
+<cfdi:Traslado Base="165.00" Impuesto="002" TipoFactor="Tasa" TasaOCuota="0.160000" Importe="26.400000" /></cfdi:Traslados></cfdi:Impuestos></cfdi:Concepto>
+<cfdi:Concepto ClaveProdServ="78181500" NoIdentificacion="78181500" Cantidad="1.2000" ClaveUnidad="E48" Unidad="Unidad de servicio" Descripcion="LIMPIEZA Y AJUSTE DE FRENOS" ValorUnitario="330.00" Importe="396.00">
+<cfdi:Impuestos>
+<cfdi:Traslados>
+<cfdi:Traslado Base="396.00" Impuesto="002" TipoFactor="Tasa" TasaOCuota="0.160000" Importe="63.360000" /></cfdi:Traslados></cfdi:Impuestos></cfdi:Concepto>
+<cfdi:Concepto ClaveProdServ="78181500" NoIdentificacion="SEG000" Cantidad="1.0000" ClaveUnidad="E48" Unidad="Unidad de servicio" Descripcion="SEGURO" ValorUnitario="93.92" Importe="93.92">
+<cfdi:Impuestos>
+<cfdi:Traslados>
+<cfdi:Traslado Base="93.92" Impuesto="002" TipoFactor="Tasa" TasaOCuota="0.160000" Importe="15.027200" /></cfdi:Traslados></cfdi:Impuestos></cfdi:Concepto>
+<cfdi:Concepto ClaveProdServ="25174800" NoIdentificacion="12707246" Cantidad="1.0000" ClaveUnidad="H87" Unidad="PIEZA" Descripcion="FILTRO,ACEITE" ValorUnitario="218.52" Importe="218.52">
+<cfdi:Impuestos>
+<cfdi:Traslados>
+<cfdi:Traslado Base="218.52" Impuesto="002" TipoFactor="Tasa" TasaOCuota="0.160000" Importe="34.963200" /></cfdi:Traslados></cfdi:Impuestos></cfdi:Concepto>
+<cfdi:Concepto ClaveProdServ="15121501" NoIdentificacion="19367501" Cantidad="7.0000" ClaveUnidad="LTR" Unidad="LITRO" Descripcion="ACEITE DEXOS GEN 2 TAMBO" ValorUnitario="116.34" Importe="814.38">
+<cfdi:Impuestos>
+<cfdi:Traslados>
+<cfdi:Traslado Base="814.38" Impuesto="002" TipoFactor="Tasa" TasaOCuota="0.160000" Importe="130.300800" /></cfdi:Traslados></cfdi:Impuestos></cfdi:Concepto>
+<cfdi:Concepto ClaveProdServ="25172100" NoIdentificacion="3536966" Cantidad="1.0000" ClaveUnidad="H87" Unidad="Pieza" Descripcion="SELLO TAPON CARTER" ValorUnitario="110.94" Importe="110.94">
+<cfdi:Impuestos>
+<cfdi:Traslados>
+<cfdi:Traslado Base="110.94" Impuesto="002" TipoFactor="Tasa" TasaOCuota="0.160000" Importe="17.750400" /></cfdi:Traslados></cfdi:Impuestos></cfdi:Concepto></cfdi:Conceptos>
+<cfdi:Impuestos TotalImpuestosTrasladados="393.40">
+<cfdi:Traslados>
+<cfdi:Traslado Impuesto="002" TipoFactor="Tasa" TasaOCuota="0.160000" Importe="393.40" /></cfdi:Traslados></cfdi:Impuestos>
+<cfdi:Complemento><tfd:TimbreFiscalDigital xmlns:tfd="http://www.sat.gob.mx/TimbreFiscalDigital" xsi:schemaLocation="http://www.sat.gob.mx/TimbreFiscalDigital http://www.sat.gob.mx/sitio_internet/cfd/TimbreFiscalDigital/TimbreFiscalDigitalv11.xsd" Version="1.1" UUID="5B14CFCD-278D-40AC-AB89-999CB43010E0" FechaTimbrado="2021-05-27T16:11:16" RfcProvCertif="SFE0807172W8" SelloCFD="VFAoYuj6W+Vx5EIsho/kUD/NO8V+/wZAD1ltkjv9VUZWmcUbyuFXuc9VnhXavCEwEQxVVe+8Bm8e7e5t7G/SYYXdLAOBQAmjaEUJjYENsvnXVcGYP30AUTDw/BejiiWpLEW8mvpFQGumaY0Lc1DqltvE2nmbHBFi+enX/pBE4m3ducGuaVk0xh4dmoDcLH4tcyQGV3+BjUURczpOXSTL34LcTa3G8Yl31tLF/4iLmLqBOobHzKMkcByl7CtHZ/NdUsqgkhl0Lom0MmLWANeTb1vTByZrz6iwwZEGub6yznnsnst0O3cficI3K6PMOd8U7Va1jSBVz2QDixJb18UvWA==" NoCertificadoSAT="00001000000505619865" SelloSAT="i22TPHJoBt6kQJkGVXjO0PVw/FLiHMO6md2b8go424cKWmF34X4YaZxKMBuYjoV8jA0AHhNZ/y5BZFUjI4Q/u5ZsW9z06s93cBiJpt+KupKpEydF+U0xs7GaKQ6tFaP1FkFqY8urWk+FCAjupO/W4Inw9qr0PTjuVibTy60m2EBE9A+Hmjo7PCRXxDYyKN30v1w7CuWcML1O71ZhuBCanGgdtcncqq+KKrJHg+UmvnJvvmkNlACoHhvNHKVms7Qw8KtDcQUM5RDjHy876zNx/RykiFr9MpBY6yGtqXt5MO+StYzyMyEAGKzzLoVRJAIqIdc1stR5WL+atm6A9msweQ==" /></cfdi:Complemento></cfdi:Comprobante>

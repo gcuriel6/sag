@@ -1,0 +1,40 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<cfdi:Comprobante xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://www.sat.gob.mx/cfd/3 http://www.sat.gob.mx/sitio_internet/cfd/3/cfdv33.xsd" xmlns:cfdi="http://www.sat.gob.mx/cfd/3" Version="3.3" Serie="FH" Folio="221" Fecha="2021-03-02T12:57:01" Sello="wnxtMfp52VBA3XyWxe3eTcYY0yclMvS/VkZtVBI/+O38QrFCowIyOxYjTcK/0S3WVTpGm84eERfqUqQtKwTlVN5rc1AGlYtuQDNkDC/dP6v499Q5e5VKBd2Ht8AgEdopsr1p0RqXRlHDD/rnIaMVImrT4NjlEcxBN0msrs0JvmqR1luj23uuBV6LXHZgDlQ+TdMv4FC9RhIvDr++g4nBU975BRIDYsR2eosZnds19hkpKhejtaASitzpsSoxKWa/5HoNKZVcr46YDByuxB+pVaMwH6BjFfi2uySHTQrh3wr682wxUiYXerR7GAjgX3DF0BdSr/A5lYlzMIdDWklDOQ==" FormaPago="03" NoCertificado="00001000000506331978" Certificado="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" CondicionesDePago="CONTADO" SubTotal="4163.04" Moneda="MXN" Total="4829.13" TipoDeComprobante="I" MetodoPago="PUE" LugarExpedicion="33700">
+	<cfdi:Emisor Rfc="CNT101216PU0" Nombre="COMERCIALIZADORA DE NEUMATICOS TARAHUMARA S.A. DE C.V." RegimenFiscal="601"/>
+	<cfdi:Receptor Rfc="SPG0905078B1" Nombre="SEGURIDAD PRIVADA GINTHER DE OCCIDENTE S  DE RL DE CV" UsoCFDI="G03"/>
+	<cfdi:Conceptos>
+		<cfdi:Concepto ClaveProdServ="25172504" NoIdentificacion="18560R14H724" Cantidad="4" ClaveUnidad="H87" Unidad="PIEZA" Descripcion="185/60-R14 HANKOOK H724" ValorUnitario="780.00" Importe="3120.00">
+			<cfdi:Impuestos>
+				<cfdi:Traslados>
+					<cfdi:Traslado Base="3120.00" Impuesto="002" TipoFactor="Tasa" TasaOCuota="0.160000" Importe="499.20"/>
+				</cfdi:Traslados>
+			</cfdi:Impuestos>
+		</cfdi:Concepto>
+		<cfdi:Concepto ClaveProdServ="78181500" NoIdentificacion="NITROGENO" Cantidad="4" ClaveUnidad="H87" Unidad="PIEZA" Descripcion="NITROGENO " ValorUnitario="25.86" Importe="103.44">
+			<cfdi:Impuestos>
+				<cfdi:Traslados>
+					<cfdi:Traslado Base="103.44" Impuesto="002" TipoFactor="Tasa" TasaOCuota="0.160000" Importe="16.5504"/>
+				</cfdi:Traslados>
+			</cfdi:Impuestos>
+		</cfdi:Concepto>
+		<cfdi:Concepto ClaveProdServ="78181500" NoIdentificacion="GARANTIA" Cantidad="4" ClaveUnidad="H87" Unidad="PIEZA" Descripcion="POLIZA DE GARANTIA" ValorUnitario="172.40" Importe="689.60">
+			<cfdi:Impuestos>
+				<cfdi:Traslados>
+					<cfdi:Traslado Base="689.60" Impuesto="002" TipoFactor="Tasa" TasaOCuota="0.160000" Importe="110.336"/>
+				</cfdi:Traslados>
+			</cfdi:Impuestos>
+		</cfdi:Concepto>
+		<cfdi:Concepto ClaveProdServ="78181500" NoIdentificacion="ALINEACION" Cantidad="1" ClaveUnidad="H87" Unidad="PIEZA" Descripcion="ALINEACION" ValorUnitario="250.00" Importe="250.00">
+			<cfdi:Impuestos>
+				<cfdi:Traslados>
+					<cfdi:Traslado Base="250.00" Impuesto="002" TipoFactor="Tasa" TasaOCuota="0.160000" Importe="40.00"/>
+				</cfdi:Traslados>
+			</cfdi:Impuestos>
+		</cfdi:Concepto>
+	</cfdi:Conceptos>
+	<cfdi:Impuestos TotalImpuestosTrasladados="666.09">
+		<cfdi:Traslados>
+			<cfdi:Traslado Impuesto="002" TipoFactor="Tasa" TasaOCuota="0.160000" Importe="666.09"/>
+		</cfdi:Traslados>
+	</cfdi:Impuestos>
+	<cfdi:Complemento><tfd:TimbreFiscalDigital xmlns:tfd="http://www.sat.gob.mx/TimbreFiscalDigital" xsi:schemaLocation="http://www.sat.gob.mx/TimbreFiscalDigital http://www.sat.gob.mx/sitio_internet/cfd/TimbreFiscalDigital/TimbreFiscalDigitalv11.xsd" SelloSAT="cEGPSddHBxXYZZtS4MGGljTbNk8CUX5pjhuV5wokjJDJPII2o1ZCCrJqCTsMLOKWiHCjIteciuG4XkUC+iojCDKcm4+ROvhlkhQ8+tC2bvmkQybiMGHgcXj9my1Q39y5pnGberMzWhX0ySHo24JAyDxUAkTiuXQxvxhdXJcMzx+fcoPJVFeomAO3pNzBIG7BTPgsk7x0SirORnRX/LuE9HU30PeAyzHH8QT6G6ROFMmfoSvEGyi/mHU7bLIk8NdVsJuKzTmeWZ2joYqSYR+qjjujzdDmDuEyMwNDCN97qQ+9uaS5bkg/2kvIJ2RPwwCCcumY8C8tFNSSy3eT8dUY9Q==" NoCertificadoSAT="00001000000502000436" SelloCFD="wnxtMfp52VBA3XyWxe3eTcYY0yclMvS/VkZtVBI/+O38QrFCowIyOxYjTcK/0S3WVTpGm84eERfqUqQtKwTlVN5rc1AGlYtuQDNkDC/dP6v499Q5e5VKBd2Ht8AgEdopsr1p0RqXRlHDD/rnIaMVImrT4NjlEcxBN0msrs0JvmqR1luj23uuBV6LXHZgDlQ+TdMv4FC9RhIvDr++g4nBU975BRIDYsR2eosZnds19hkpKhejtaASitzpsSoxKWa/5HoNKZVcr46YDByuxB+pVaMwH6BjFfi2uySHTQrh3wr682wxUiYXerR7GAjgX3DF0BdSr/A5lYlzMIdDWklDOQ==" RfcProvCertif="SCD110105654" FechaTimbrado="2021-03-02T14:07:42" UUID="AD8039F1-E5A9-434D-8B76-1FC257DC7F46" Version="1.1"/></cfdi:Complemento></cfdi:Comprobante>

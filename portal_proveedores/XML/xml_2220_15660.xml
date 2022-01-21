@@ -1,0 +1,68 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<cfdi:Comprobante xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://www.sat.gob.mx/cfd/3 http://www.sat.gob.mx/sitio_internet/cfd/3/cfdv33.xsd" xmlns:cfdi="http://www.sat.gob.mx/cfd/3" Version="3.3" Serie="SVF" Folio="753" Fecha="2021-03-10T15:15:26" Sello="EBNFNi3gTtvAv2qWVilP+zhVPchfhU5VvEHWWYEMSbi3p28GpjOo5Gm/DjAR9PxjPAyqLZt0bVZvJuT/qGapda/qvzMsATo0TuzMR7xe1iEM61SZ3v/PumiYP0ni5tYLYLkfxcftvY9U4KMmU+J9vdYHvEBDw1MhOXceDyGtpsjQlap43e/JaJKsuuxR7e00Su6tqLySxvd/ae14HH7OAuPGGUCSZGYMatebM59rHwk/Wq5QryC0MQHMkIiVl0FqyV+uhiVX2eJhgjGlAR9PXgAsNtYDujc6sf51xwZmswFxV7oxC49veH8nIBloKmORdfD81Q5GvI270YhhaUfX2Q==" FormaPago="03" NoCertificado="00001000000406747929" Certificado="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" CondicionesDePago="CONTADO" SubTotal="12164.00" Moneda="MXN" Total="14110.24" TipoDeComprobante="I" MetodoPago="PUE" LugarExpedicion="80200">
+	<cfdi:Emisor Rfc="MCO170503VA3" Nombre="MASTRONG COMERCIAL S.A. DE C.V." RegimenFiscal="601"/>
+	<cfdi:Receptor Rfc="SPG0905078B1" Nombre="SEGURIDAD PRIVADA GINTHER DE OCCIDENTE, S. DE R.L. DE C.V." UsoCFDI="G03"/>
+	<cfdi:Conceptos>
+		<cfdi:Concepto ClaveProdServ="78181507" NoIdentificacion="XXDISPECOL" Cantidad="1" ClaveUnidad="E48" Unidad="SERVICIO" Descripcion="LIMPIEZA Y DISPN ECOLOGICA RESIDUOS" ValorUnitario="147.00" Importe="147.00">
+			<cfdi:Impuestos>
+				<cfdi:Traslados>
+					<cfdi:Traslado Base="147.00" Impuesto="002" TipoFactor="Tasa" TasaOCuota="0.160000" Importe="23.52"/>
+				</cfdi:Traslados>
+			</cfdi:Impuestos>
+		</cfdi:Concepto>
+		<cfdi:Concepto ClaveProdServ="78181507" NoIdentificacion="MOGE001" Cantidad="1" ClaveUnidad="E48" Unidad="SERVICIO" Descripcion="MO GENERAL" ValorUnitario="2200.00" Importe="2200.00">
+			<cfdi:Impuestos>
+				<cfdi:Traslados>
+					<cfdi:Traslado Base="2200.00" Impuesto="002" TipoFactor="Tasa" TasaOCuota="0.160000" Importe="352.00"/>
+				</cfdi:Traslados>
+			</cfdi:Impuestos>
+		</cfdi:Concepto>
+		<cfdi:Concepto ClaveProdServ="15121807" NoIdentificacion="A4000" Cantidad="2" ClaveUnidad="H87" Unidad="PIEZA" Descripcion="ANTICONGELANTE A4000" ValorUnitario="95.00" Importe="190.00">
+			<cfdi:Impuestos>
+				<cfdi:Traslados>
+					<cfdi:Traslado Base="190.00" Impuesto="002" TipoFactor="Tasa" TasaOCuota="0.160000" Importe="30.40"/>
+				</cfdi:Traslados>
+			</cfdi:Impuestos>
+		</cfdi:Concepto>
+		<cfdi:Concepto ClaveProdServ="40151500" NoIdentificacion="E76ML" Cantidad="1" ClaveUnidad="H87" Unidad="PIEZA" Descripcion="BOMBA AGUA CON TERMOSTATO E76ML" ValorUnitario="5800.00" Importe="5800.00">
+			<cfdi:Impuestos>
+				<cfdi:Traslados>
+					<cfdi:Traslado Base="5800.00" Impuesto="002" TipoFactor="Tasa" TasaOCuota="0.160000" Importe="928.00"/>
+				</cfdi:Traslados>
+			</cfdi:Impuestos>
+		</cfdi:Concepto>
+		<cfdi:Concepto ClaveProdServ="25191700" NoIdentificacion="1SB121051" Cantidad="1" ClaveUnidad="H87" Unidad="PIEZA" Descripcion="MANGUERA 1SB121051" ValorUnitario="798.00" Importe="798.00">
+			<cfdi:Impuestos>
+				<cfdi:Traslados>
+					<cfdi:Traslado Base="798.00" Impuesto="002" TipoFactor="Tasa" TasaOCuota="0.160000" Importe="127.68"/>
+				</cfdi:Traslados>
+			</cfdi:Impuestos>
+		</cfdi:Concepto>
+		<cfdi:Concepto ClaveProdServ="25191700" NoIdentificacion="04E121605M" Cantidad="1" ClaveUnidad="H87" Unidad="PIEZA" Descripcion="BANDA 04E121605M" ValorUnitario="412.00" Importe="412.00">
+			<cfdi:Impuestos>
+				<cfdi:Traslados>
+					<cfdi:Traslado Base="412.00" Impuesto="002" TipoFactor="Tasa" TasaOCuota="0.160000" Importe="65.92"/>
+				</cfdi:Traslados>
+			</cfdi:Impuestos>
+		</cfdi:Concepto>
+		<cfdi:Concepto ClaveProdServ="31201632" NoIdentificacion="700BB" Cantidad="1" ClaveUnidad="H87" Unidad="PIEZA" Descripcion="SILICON FORMA JUNTEX 700BB" ValorUnitario="57.00" Importe="57.00">
+			<cfdi:Impuestos>
+				<cfdi:Traslados>
+					<cfdi:Traslado Base="57.00" Impuesto="002" TipoFactor="Tasa" TasaOCuota="0.160000" Importe="9.12"/>
+				</cfdi:Traslados>
+			</cfdi:Impuestos>
+		</cfdi:Concepto>
+		<cfdi:Concepto ClaveProdServ="78181507" NoIdentificacion="KNAFI4M" Cantidad="1" ClaveUnidad="E48" Unidad="SERVICIO" Descripcion="AFINACION DE MOTOR 4M" ValorUnitario="2560.00" Importe="2560.00">
+			<cfdi:Impuestos>
+				<cfdi:Traslados>
+					<cfdi:Traslado Base="2560.00" Impuesto="002" TipoFactor="Tasa" TasaOCuota="0.160000" Importe="409.60"/>
+				</cfdi:Traslados>
+			</cfdi:Impuestos>
+		</cfdi:Concepto>
+	</cfdi:Conceptos>
+	<cfdi:Impuestos TotalImpuestosTrasladados="1946.24">
+		<cfdi:Traslados>
+			<cfdi:Traslado Impuesto="002" TipoFactor="Tasa" TasaOCuota="0.160000" Importe="1946.24"/>
+		</cfdi:Traslados>
+	</cfdi:Impuestos>
+	<cfdi:Complemento><tfd:TimbreFiscalDigital xmlns:tfd="http://www.sat.gob.mx/TimbreFiscalDigital" xsi:schemaLocation="http://www.sat.gob.mx/TimbreFiscalDigital http://www.sat.gob.mx/sitio_internet/cfd/TimbreFiscalDigital/TimbreFiscalDigitalv11.xsd" SelloSAT="g1K+GZe9mbJBAzzaJ3JmxZOE4f8MF+NiOgaTDyTwW/oznWWKS2xF9MJN8BtoaFsaH2KOHGMFBL+A6kP0ywddrN/icnb2WJl/QBq7XQzAcUFNaDR4kt8OgiVqFJzdO/xAbBsrmwlPH8kaXFbWzYf4WmisM67T7XxjG7LJc3nB+Gvmj42WGBsfvIMvbJ1bqDg6kC6FjgpCPgrzTZm2UD4AigYC9T6yjYbrLV+Cz3xFEhSw8cGBc9IlpCM2BmuWAGERS80itNcTdX1LlMNCehjjS7yL1gurY+s/Z2ea8kxDRdIZbJEtOyHpqjF/jA70RLXaPLZ/HswgSt+WnItPNdE1/A==" NoCertificadoSAT="00001000000502000436" SelloCFD="EBNFNi3gTtvAv2qWVilP+zhVPchfhU5VvEHWWYEMSbi3p28GpjOo5Gm/DjAR9PxjPAyqLZt0bVZvJuT/qGapda/qvzMsATo0TuzMR7xe1iEM61SZ3v/PumiYP0ni5tYLYLkfxcftvY9U4KMmU+J9vdYHvEBDw1MhOXceDyGtpsjQlap43e/JaJKsuuxR7e00Su6tqLySxvd/ae14HH7OAuPGGUCSZGYMatebM59rHwk/Wq5QryC0MQHMkIiVl0FqyV+uhiVX2eJhgjGlAR9PXgAsNtYDujc6sf51xwZmswFxV7oxC49veH8nIBloKmORdfD81Q5GvI270YhhaUfX2Q==" RfcProvCertif="SCD110105654" FechaTimbrado="2021-03-10T17:16:03" UUID="6373EF02-D3DA-0A49-82E5-EA5AF4913056" Version="1.1"/></cfdi:Complemento></cfdi:Comprobante>

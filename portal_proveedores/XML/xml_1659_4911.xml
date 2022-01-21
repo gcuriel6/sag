@@ -1,0 +1,38 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<cfdi:Comprobante xmlns:cfdi="http://www.sat.gob.mx/cfd/3" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://www.sat.gob.mx/cfd/3 http://www.sat.gob.mx/sitio_internet/cfd/3/cfdv33.xsd" Version="3.3" Serie="FSES" Folio="216544" Fecha="2020-06-27T11:23:36" Sello="AZrzuVGRmtB7Gro/u9IX+KbY6eeme3jxXL/Sa9ZWVMueFhhxH9/hsfXuVjX8H4uVJmVG9zz1FE/3d+FLN6lyNWm31QCpESTICEQCYIUjUSPIefxlZxBOPoiG9m0AJ8myjsWTcW1ZxuTeB97wRgz3uIhF8hym+Ud0qKEodrg96Aef7/jb//HP5jfUJ3wM/7lqi2J4mwgKvmkEjQC/2Z/EZfmmeOWnDfhijwCw9I1Ol7qoQay6RUddmXLf/Mr9JyFifLbZ3cO8orGN1su23hPL/N+90j1lEqTminEHZQYuUJcUHvvb+IXKQq0ezjLemQKJLSaSsV4HkNwuMVHXog5DlQ==" FormaPago="03" NoCertificado="00001000000404182618" Certificado="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" CondicionesDePago="Contado" SubTotal="2186.00" Descuento="59.95" Moneda="MXN" Total="2466.22" TipoDeComprobante="I" MetodoPago="PUE" LugarExpedicion="44100">
+  <cfdi:Emisor Rfc="RAD8909307U0" Nombre="RADEC S.A. DE C.V." RegimenFiscal="601" />
+  <cfdi:Receptor Rfc="SPG0905078B1" Nombre="SEGURIDAD PRIVADA GINTHER DE OCCIDENTE S DE RL DECV" UsoCFDI="G03" />
+  <cfdi:Conceptos>
+    <cfdi:Concepto ClaveProdServ="25174004" NoIdentificacion="221999903" Cantidad="1" ClaveUnidad="H87" Unidad="PZA" Descripcion="ANTICONGELANTE QS CONCENT 33% 3.79 LTS" ValorUnitario="230.00" Importe="230.00">
+      <cfdi:Impuestos>
+        <cfdi:Traslados>
+          <cfdi:Traslado Base="230.00" Impuesto="002" TipoFactor="Tasa" TasaOCuota="0.160000" Importe="36.80" />
+        </cfdi:Traslados>
+      </cfdi:Impuestos>
+    </cfdi:Concepto>
+    <cfdi:Concepto ClaveProdServ="25172908" NoIdentificacion="017060412" Cantidad="1" ClaveUnidad="H87" Unidad="PZA" Descripcion="CALAV CV AVEO 12-18 4PTA LINEA ANT D" ValorUnitario="978.00" Importe="978.00" Descuento="59.95">
+      <cfdi:Impuestos>
+        <cfdi:Traslados>
+          <cfdi:Traslado Base="918.05" Impuesto="002" TipoFactor="Tasa" TasaOCuota="0.160000" Importe="146.89" />
+        </cfdi:Traslados>
+      </cfdi:Impuestos>
+      <cfdi:InformacionAduanera NumeroPedimento="18  48  3977  8014110" />
+    </cfdi:Concepto>
+    <cfdi:Concepto ClaveProdServ="25172602" NoIdentificacion="202060406" Cantidad="1" ClaveUnidad="H87" Unidad="PZA" Descripcion="SALP CV AVEO 12-18 D" ValorUnitario="978.00" Importe="978.00">
+      <cfdi:Impuestos>
+        <cfdi:Traslados>
+          <cfdi:Traslado Base="978.00" Impuesto="002" TipoFactor="Tasa" TasaOCuota="0.160000" Importe="156.48" />
+        </cfdi:Traslados>
+      </cfdi:Impuestos>
+      <cfdi:InformacionAduanera NumeroPedimento="18  48  3977  8011923" />
+    </cfdi:Concepto>
+  </cfdi:Conceptos>
+  <cfdi:Impuestos TotalImpuestosTrasladados="340.17">
+    <cfdi:Traslados>
+      <cfdi:Traslado Impuesto="002" TipoFactor="Tasa" TasaOCuota="0.160000" Importe="340.17" />
+    </cfdi:Traslados>
+  </cfdi:Impuestos>
+  <cfdi:Complemento>
+    <tfd:TimbreFiscalDigital xsi:schemaLocation="http://www.sat.gob.mx/TimbreFiscalDigital http://www.sat.gob.mx/sitio_internet/cfd/TimbreFiscalDigital/TimbreFiscalDigitalv11.xsd" Version="1.1" UUID="EF3E2154-7C12-4D13-B9B7-C6054E7AAC9A" FechaTimbrado="2020-06-27T11:27:46" RfcProvCertif="TCI100304LC4" SelloCFD="AZrzuVGRmtB7Gro/u9IX+KbY6eeme3jxXL/Sa9ZWVMueFhhxH9/hsfXuVjX8H4uVJmVG9zz1FE/3d+FLN6lyNWm31QCpESTICEQCYIUjUSPIefxlZxBOPoiG9m0AJ8myjsWTcW1ZxuTeB97wRgz3uIhF8hym+Ud0qKEodrg96Aef7/jb//HP5jfUJ3wM/7lqi2J4mwgKvmkEjQC/2Z/EZfmmeOWnDfhijwCw9I1Ol7qoQay6RUddmXLf/Mr9JyFifLbZ3cO8orGN1su23hPL/N+90j1lEqTminEHZQYuUJcUHvvb+IXKQq0ezjLemQKJLSaSsV4HkNwuMVHXog5DlQ==" NoCertificadoSAT="00001000000406928597" SelloSAT="dxgH9rLCRBIl+jZR8FRB5hmH8CYE+7pFcdKiP7MV2229cGD8MtBCVl0wM4oSHe2jXBB5x4gcQyOJHRNgPQOMZWiD0/gzNSd5+X/zYetxWnTaY3iINo9cTx/p/5TjOf7/xL7bByF8T59Xw0kACHMtakgPtZLUzTnZhWYpnKKBCUh335pEurs3kUNGYrre78pDoUegz8NKF1O7gZMbUXps9Hf+tD3n5joANBcFLkoT1DQFpPAwfy5/l3WXMpUtWYpYa/pIVXdTw+x7zEec8PDxAfu8NXQLjan0dqsPFq7iFrpsain9FX38HbVGA+OagXOgcz1ByOh6cpg32Z7J4WasAA==" xmlns:tfd="http://www.sat.gob.mx/TimbreFiscalDigital" />
+  </cfdi:Complemento>
+</cfdi:Comprobante>

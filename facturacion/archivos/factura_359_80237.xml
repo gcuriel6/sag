@@ -1,0 +1,567 @@
+<?xml version="1.0" encoding="utf-8"?><cfdi:Comprobante xmlns:cfdi="http://www.sat.gob.mx/cfd/3" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://www.sat.gob.mx/cfd/3 http://www.sat.gob.mx/sitio_internet/cfd/3/cfdv33.xsd" Version="3.3" Fecha="2021-06-23T14:28:03" Folio="359" FormaPago="99" Moneda="MXN" SubTotal="3555.00" Total="4123.80" MetodoPago="PPD" TipoDeComprobante="I" LugarExpedicion="31215" NoCertificado="00001000000506779953" Certificado="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" Sello="UZ81gF8cYr5/66fZJEHa2VT20v2Qki8vha/JxYNmrLRPO4lGhmZOpyhTWV10NseK42ACgKE0OKlcbaVfdvJDXi0sxfwOnv5ROpom+kwCZSSVgp/ZZw+5JnueKR7sJpxwihUzt08DntkImVgmFDQsSf++i4206rdYZG0t8YQfchzNMA1qpeIVUGeijgz0KmIt1+r8Nv9dSW8iWGqQb1RD3BL6L4I7QP455/BsT3h03Hi3bk76wt/mZWEDCpNAp8K1QtFA4IJz8y5QKfVAQslLD/XaQ04BhvJiKZvj741GPaCQo9Yr0VvltDnmEsw0Q9rcKEhBSaTbeNS7acAwfq6gsg==">
+  <cfdi:Emisor Rfc="SEY131211QS7" Nombre="SEYCOMVISION" RegimenFiscal="601" />
+  <cfdi:Receptor Rfc="CACD921103MW0" Nombre="DIANA CRISTINA CHAVIRA CASTILLO" UsoCFDI="G03" />
+  <cfdi:Conceptos>
+    <cfdi:Concepto Cantidad="1.00000" ClaveProdServ="92121701" ClaveUnidad="E48" Unidad="Unidad de servicio" Descripcion=" MONITOREO MENSUAL AMED DE CUENTA: 6000" ValorUnitario="45.00" Importe="45.00">
+      <cfdi:Impuestos>
+        <cfdi:Traslados>
+          <cfdi:Traslado Base="45" Impuesto="002" TipoFactor="Tasa" TasaOCuota="0.160000" Importe="7.200000" />
+        </cfdi:Traslados>
+      </cfdi:Impuestos>
+    </cfdi:Concepto>
+    <cfdi:Concepto Cantidad="1.00000" ClaveProdServ="92121701" ClaveUnidad="E48" Unidad="Unidad de servicio" Descripcion=" MONITOREO MENSUAL AMED DE CUENTA: 6001" ValorUnitario="45.00" Importe="45.00">
+      <cfdi:Impuestos>
+        <cfdi:Traslados>
+          <cfdi:Traslado Base="45" Impuesto="002" TipoFactor="Tasa" TasaOCuota="0.160000" Importe="7.200000" />
+        </cfdi:Traslados>
+      </cfdi:Impuestos>
+    </cfdi:Concepto>
+    <cfdi:Concepto Cantidad="1.00000" ClaveProdServ="92121701" ClaveUnidad="E48" Unidad="Unidad de servicio" Descripcion=" MONITOREO MENSUAL AMED DE CUENTA: 6002" ValorUnitario="45.00" Importe="45.00">
+      <cfdi:Impuestos>
+        <cfdi:Traslados>
+          <cfdi:Traslado Base="45" Impuesto="002" TipoFactor="Tasa" TasaOCuota="0.160000" Importe="7.200000" />
+        </cfdi:Traslados>
+      </cfdi:Impuestos>
+    </cfdi:Concepto>
+    <cfdi:Concepto Cantidad="1.00000" ClaveProdServ="92121701" ClaveUnidad="E48" Unidad="Unidad de servicio" Descripcion=" MONITOREO MENSUAL AMED DE CUENTA: 6003" ValorUnitario="45.00" Importe="45.00">
+      <cfdi:Impuestos>
+        <cfdi:Traslados>
+          <cfdi:Traslado Base="45" Impuesto="002" TipoFactor="Tasa" TasaOCuota="0.160000" Importe="7.200000" />
+        </cfdi:Traslados>
+      </cfdi:Impuestos>
+    </cfdi:Concepto>
+    <cfdi:Concepto Cantidad="1.00000" ClaveProdServ="92121701" ClaveUnidad="E48" Unidad="Unidad de servicio" Descripcion=" MONITOREO MENSUAL AMED DE CUENTA: 6004" ValorUnitario="45.00" Importe="45.00">
+      <cfdi:Impuestos>
+        <cfdi:Traslados>
+          <cfdi:Traslado Base="45" Impuesto="002" TipoFactor="Tasa" TasaOCuota="0.160000" Importe="7.200000" />
+        </cfdi:Traslados>
+      </cfdi:Impuestos>
+    </cfdi:Concepto>
+    <cfdi:Concepto Cantidad="1.00000" ClaveProdServ="92121701" ClaveUnidad="E48" Unidad="Unidad de servicio" Descripcion=" MONITOREO MENSUAL AMED DE CUENTA: 6005" ValorUnitario="45.00" Importe="45.00">
+      <cfdi:Impuestos>
+        <cfdi:Traslados>
+          <cfdi:Traslado Base="45" Impuesto="002" TipoFactor="Tasa" TasaOCuota="0.160000" Importe="7.200000" />
+        </cfdi:Traslados>
+      </cfdi:Impuestos>
+    </cfdi:Concepto>
+    <cfdi:Concepto Cantidad="1.00000" ClaveProdServ="92121701" ClaveUnidad="E48" Unidad="Unidad de servicio" Descripcion=" MONITOREO MENSUAL AMED DE CUENTA: 6007" ValorUnitario="45.00" Importe="45.00">
+      <cfdi:Impuestos>
+        <cfdi:Traslados>
+          <cfdi:Traslado Base="45" Impuesto="002" TipoFactor="Tasa" TasaOCuota="0.160000" Importe="7.200000" />
+        </cfdi:Traslados>
+      </cfdi:Impuestos>
+    </cfdi:Concepto>
+    <cfdi:Concepto Cantidad="1.00000" ClaveProdServ="92121701" ClaveUnidad="E48" Unidad="Unidad de servicio" Descripcion=" MONITOREO MENSUAL AMED DE CUENTA: 6010" ValorUnitario="45.00" Importe="45.00">
+      <cfdi:Impuestos>
+        <cfdi:Traslados>
+          <cfdi:Traslado Base="45" Impuesto="002" TipoFactor="Tasa" TasaOCuota="0.160000" Importe="7.200000" />
+        </cfdi:Traslados>
+      </cfdi:Impuestos>
+    </cfdi:Concepto>
+    <cfdi:Concepto Cantidad="1.00000" ClaveProdServ="92121701" ClaveUnidad="E48" Unidad="Unidad de servicio" Descripcion=" MONITOREO MENSUAL AMED DE CUENTA: 6011" ValorUnitario="45.00" Importe="45.00">
+      <cfdi:Impuestos>
+        <cfdi:Traslados>
+          <cfdi:Traslado Base="45" Impuesto="002" TipoFactor="Tasa" TasaOCuota="0.160000" Importe="7.200000" />
+        </cfdi:Traslados>
+      </cfdi:Impuestos>
+    </cfdi:Concepto>
+    <cfdi:Concepto Cantidad="1.00000" ClaveProdServ="92121701" ClaveUnidad="E48" Unidad="Unidad de servicio" Descripcion=" MONITOREO MENSUAL AMED DE CUENTA: 6014" ValorUnitario="45.00" Importe="45.00">
+      <cfdi:Impuestos>
+        <cfdi:Traslados>
+          <cfdi:Traslado Base="45" Impuesto="002" TipoFactor="Tasa" TasaOCuota="0.160000" Importe="7.200000" />
+        </cfdi:Traslados>
+      </cfdi:Impuestos>
+    </cfdi:Concepto>
+    <cfdi:Concepto Cantidad="1.00000" ClaveProdServ="92121701" ClaveUnidad="E48" Unidad="Unidad de servicio" Descripcion=" MONITOREO MENSUAL AMED DE CUENTA: 6015" ValorUnitario="45.00" Importe="45.00">
+      <cfdi:Impuestos>
+        <cfdi:Traslados>
+          <cfdi:Traslado Base="45" Impuesto="002" TipoFactor="Tasa" TasaOCuota="0.160000" Importe="7.200000" />
+        </cfdi:Traslados>
+      </cfdi:Impuestos>
+    </cfdi:Concepto>
+    <cfdi:Concepto Cantidad="1.00000" ClaveProdServ="92121701" ClaveUnidad="E48" Unidad="Unidad de servicio" Descripcion=" MONITOREO MENSUAL AMED DE CUENTA: 6017" ValorUnitario="45.00" Importe="45.00">
+      <cfdi:Impuestos>
+        <cfdi:Traslados>
+          <cfdi:Traslado Base="45" Impuesto="002" TipoFactor="Tasa" TasaOCuota="0.160000" Importe="7.200000" />
+        </cfdi:Traslados>
+      </cfdi:Impuestos>
+    </cfdi:Concepto>
+    <cfdi:Concepto Cantidad="1.00000" ClaveProdServ="92121701" ClaveUnidad="E48" Unidad="Unidad de servicio" Descripcion=" MONITOREO MENSUAL AMED DE CUENTA: 6021" ValorUnitario="45.00" Importe="45.00">
+      <cfdi:Impuestos>
+        <cfdi:Traslados>
+          <cfdi:Traslado Base="45" Impuesto="002" TipoFactor="Tasa" TasaOCuota="0.160000" Importe="7.200000" />
+        </cfdi:Traslados>
+      </cfdi:Impuestos>
+    </cfdi:Concepto>
+    <cfdi:Concepto Cantidad="1.00000" ClaveProdServ="92121701" ClaveUnidad="E48" Unidad="Unidad de servicio" Descripcion=" MONITOREO MENSUAL AMED DE CUENTA: 6022" ValorUnitario="45.00" Importe="45.00">
+      <cfdi:Impuestos>
+        <cfdi:Traslados>
+          <cfdi:Traslado Base="45" Impuesto="002" TipoFactor="Tasa" TasaOCuota="0.160000" Importe="7.200000" />
+        </cfdi:Traslados>
+      </cfdi:Impuestos>
+    </cfdi:Concepto>
+    <cfdi:Concepto Cantidad="1.00000" ClaveProdServ="92121701" ClaveUnidad="E48" Unidad="Unidad de servicio" Descripcion=" MONITOREO MENSUAL AMED DE CUENTA: 6025" ValorUnitario="45.00" Importe="45.00">
+      <cfdi:Impuestos>
+        <cfdi:Traslados>
+          <cfdi:Traslado Base="45" Impuesto="002" TipoFactor="Tasa" TasaOCuota="0.160000" Importe="7.200000" />
+        </cfdi:Traslados>
+      </cfdi:Impuestos>
+    </cfdi:Concepto>
+    <cfdi:Concepto Cantidad="1.00000" ClaveProdServ="92121701" ClaveUnidad="E48" Unidad="Unidad de servicio" Descripcion=" MONITOREO MENSUAL AMED DE CUENTA: 6028" ValorUnitario="45.00" Importe="45.00">
+      <cfdi:Impuestos>
+        <cfdi:Traslados>
+          <cfdi:Traslado Base="45" Impuesto="002" TipoFactor="Tasa" TasaOCuota="0.160000" Importe="7.200000" />
+        </cfdi:Traslados>
+      </cfdi:Impuestos>
+    </cfdi:Concepto>
+    <cfdi:Concepto Cantidad="1.00000" ClaveProdServ="92121701" ClaveUnidad="E48" Unidad="Unidad de servicio" Descripcion=" MONITOREO MENSUAL AMED DE CUENTA: 6032" ValorUnitario="45.00" Importe="45.00">
+      <cfdi:Impuestos>
+        <cfdi:Traslados>
+          <cfdi:Traslado Base="45" Impuesto="002" TipoFactor="Tasa" TasaOCuota="0.160000" Importe="7.200000" />
+        </cfdi:Traslados>
+      </cfdi:Impuestos>
+    </cfdi:Concepto>
+    <cfdi:Concepto Cantidad="1.00000" ClaveProdServ="92121701" ClaveUnidad="E48" Unidad="Unidad de servicio" Descripcion=" MONITOREO MENSUAL AMED DE CUENTA: 6033" ValorUnitario="45.00" Importe="45.00">
+      <cfdi:Impuestos>
+        <cfdi:Traslados>
+          <cfdi:Traslado Base="45" Impuesto="002" TipoFactor="Tasa" TasaOCuota="0.160000" Importe="7.200000" />
+        </cfdi:Traslados>
+      </cfdi:Impuestos>
+    </cfdi:Concepto>
+    <cfdi:Concepto Cantidad="1.00000" ClaveProdServ="92121701" ClaveUnidad="E48" Unidad="Unidad de servicio" Descripcion=" MONITOREO MENSUAL AMED DE CUENTA: 6036" ValorUnitario="45.00" Importe="45.00">
+      <cfdi:Impuestos>
+        <cfdi:Traslados>
+          <cfdi:Traslado Base="45" Impuesto="002" TipoFactor="Tasa" TasaOCuota="0.160000" Importe="7.200000" />
+        </cfdi:Traslados>
+      </cfdi:Impuestos>
+    </cfdi:Concepto>
+    <cfdi:Concepto Cantidad="1.00000" ClaveProdServ="92121701" ClaveUnidad="E48" Unidad="Unidad de servicio" Descripcion=" MONITOREO MENSUAL AMED DE CUENTA: 6039" ValorUnitario="45.00" Importe="45.00">
+      <cfdi:Impuestos>
+        <cfdi:Traslados>
+          <cfdi:Traslado Base="45" Impuesto="002" TipoFactor="Tasa" TasaOCuota="0.160000" Importe="7.200000" />
+        </cfdi:Traslados>
+      </cfdi:Impuestos>
+    </cfdi:Concepto>
+    <cfdi:Concepto Cantidad="1.00000" ClaveProdServ="92121701" ClaveUnidad="E48" Unidad="Unidad de servicio" Descripcion=" MONITOREO MENSUAL AMED DE CUENTA: 6040" ValorUnitario="45.00" Importe="45.00">
+      <cfdi:Impuestos>
+        <cfdi:Traslados>
+          <cfdi:Traslado Base="45" Impuesto="002" TipoFactor="Tasa" TasaOCuota="0.160000" Importe="7.200000" />
+        </cfdi:Traslados>
+      </cfdi:Impuestos>
+    </cfdi:Concepto>
+    <cfdi:Concepto Cantidad="1.00000" ClaveProdServ="92121701" ClaveUnidad="E48" Unidad="Unidad de servicio" Descripcion=" MONITOREO MENSUAL AMED DE CUENTA: 6041" ValorUnitario="45.00" Importe="45.00">
+      <cfdi:Impuestos>
+        <cfdi:Traslados>
+          <cfdi:Traslado Base="45" Impuesto="002" TipoFactor="Tasa" TasaOCuota="0.160000" Importe="7.200000" />
+        </cfdi:Traslados>
+      </cfdi:Impuestos>
+    </cfdi:Concepto>
+    <cfdi:Concepto Cantidad="1.00000" ClaveProdServ="92121701" ClaveUnidad="E48" Unidad="Unidad de servicio" Descripcion=" MONITOREO MENSUAL AMED DE CUENTA: 6042" ValorUnitario="45.00" Importe="45.00">
+      <cfdi:Impuestos>
+        <cfdi:Traslados>
+          <cfdi:Traslado Base="45" Impuesto="002" TipoFactor="Tasa" TasaOCuota="0.160000" Importe="7.200000" />
+        </cfdi:Traslados>
+      </cfdi:Impuestos>
+    </cfdi:Concepto>
+    <cfdi:Concepto Cantidad="1.00000" ClaveProdServ="92121701" ClaveUnidad="E48" Unidad="Unidad de servicio" Descripcion=" MONITOREO MENSUAL AMED DE CUENTA: 6045" ValorUnitario="45.00" Importe="45.00">
+      <cfdi:Impuestos>
+        <cfdi:Traslados>
+          <cfdi:Traslado Base="45" Impuesto="002" TipoFactor="Tasa" TasaOCuota="0.160000" Importe="7.200000" />
+        </cfdi:Traslados>
+      </cfdi:Impuestos>
+    </cfdi:Concepto>
+    <cfdi:Concepto Cantidad="1.00000" ClaveProdServ="92121701" ClaveUnidad="E48" Unidad="Unidad de servicio" Descripcion=" MONITOREO MENSUAL AMED DE CUENTA: 6046" ValorUnitario="45.00" Importe="45.00">
+      <cfdi:Impuestos>
+        <cfdi:Traslados>
+          <cfdi:Traslado Base="45" Impuesto="002" TipoFactor="Tasa" TasaOCuota="0.160000" Importe="7.200000" />
+        </cfdi:Traslados>
+      </cfdi:Impuestos>
+    </cfdi:Concepto>
+    <cfdi:Concepto Cantidad="1.00000" ClaveProdServ="92121701" ClaveUnidad="E48" Unidad="Unidad de servicio" Descripcion=" MONITOREO MENSUAL AMED DE CUENTA: 6047" ValorUnitario="45.00" Importe="45.00">
+      <cfdi:Impuestos>
+        <cfdi:Traslados>
+          <cfdi:Traslado Base="45" Impuesto="002" TipoFactor="Tasa" TasaOCuota="0.160000" Importe="7.200000" />
+        </cfdi:Traslados>
+      </cfdi:Impuestos>
+    </cfdi:Concepto>
+    <cfdi:Concepto Cantidad="1.00000" ClaveProdServ="92121701" ClaveUnidad="E48" Unidad="Unidad de servicio" Descripcion=" MONITOREO MENSUAL AMED DE CUENTA: 6049" ValorUnitario="45.00" Importe="45.00">
+      <cfdi:Impuestos>
+        <cfdi:Traslados>
+          <cfdi:Traslado Base="45" Impuesto="002" TipoFactor="Tasa" TasaOCuota="0.160000" Importe="7.200000" />
+        </cfdi:Traslados>
+      </cfdi:Impuestos>
+    </cfdi:Concepto>
+    <cfdi:Concepto Cantidad="1.00000" ClaveProdServ="92121701" ClaveUnidad="E48" Unidad="Unidad de servicio" Descripcion=" MONITOREO MENSUAL AMED DE CUENTA: 6051" ValorUnitario="45.00" Importe="45.00">
+      <cfdi:Impuestos>
+        <cfdi:Traslados>
+          <cfdi:Traslado Base="45" Impuesto="002" TipoFactor="Tasa" TasaOCuota="0.160000" Importe="7.200000" />
+        </cfdi:Traslados>
+      </cfdi:Impuestos>
+    </cfdi:Concepto>
+    <cfdi:Concepto Cantidad="1.00000" ClaveProdServ="92121701" ClaveUnidad="E48" Unidad="Unidad de servicio" Descripcion=" MONITOREO MENSUAL AMED DE CUENTA: 6052" ValorUnitario="45.00" Importe="45.00">
+      <cfdi:Impuestos>
+        <cfdi:Traslados>
+          <cfdi:Traslado Base="45" Impuesto="002" TipoFactor="Tasa" TasaOCuota="0.160000" Importe="7.200000" />
+        </cfdi:Traslados>
+      </cfdi:Impuestos>
+    </cfdi:Concepto>
+    <cfdi:Concepto Cantidad="1.00000" ClaveProdServ="92121701" ClaveUnidad="E48" Unidad="Unidad de servicio" Descripcion=" MONITOREO MENSUAL AMED DE CUENTA: 6053" ValorUnitario="45.00" Importe="45.00">
+      <cfdi:Impuestos>
+        <cfdi:Traslados>
+          <cfdi:Traslado Base="45" Impuesto="002" TipoFactor="Tasa" TasaOCuota="0.160000" Importe="7.200000" />
+        </cfdi:Traslados>
+      </cfdi:Impuestos>
+    </cfdi:Concepto>
+    <cfdi:Concepto Cantidad="1.00000" ClaveProdServ="92121701" ClaveUnidad="E48" Unidad="Unidad de servicio" Descripcion=" MONITOREO MENSUAL AMED DE CUENTA: 6054" ValorUnitario="45.00" Importe="45.00">
+      <cfdi:Impuestos>
+        <cfdi:Traslados>
+          <cfdi:Traslado Base="45" Impuesto="002" TipoFactor="Tasa" TasaOCuota="0.160000" Importe="7.200000" />
+        </cfdi:Traslados>
+      </cfdi:Impuestos>
+    </cfdi:Concepto>
+    <cfdi:Concepto Cantidad="1.00000" ClaveProdServ="92121701" ClaveUnidad="E48" Unidad="Unidad de servicio" Descripcion=" MONITOREO MENSUAL AMED DE CUENTA: 6055" ValorUnitario="45.00" Importe="45.00">
+      <cfdi:Impuestos>
+        <cfdi:Traslados>
+          <cfdi:Traslado Base="45" Impuesto="002" TipoFactor="Tasa" TasaOCuota="0.160000" Importe="7.200000" />
+        </cfdi:Traslados>
+      </cfdi:Impuestos>
+    </cfdi:Concepto>
+    <cfdi:Concepto Cantidad="1.00000" ClaveProdServ="92121701" ClaveUnidad="E48" Unidad="Unidad de servicio" Descripcion=" MONITOREO MENSUAL AMED DE CUENTA: 6057" ValorUnitario="45.00" Importe="45.00">
+      <cfdi:Impuestos>
+        <cfdi:Traslados>
+          <cfdi:Traslado Base="45" Impuesto="002" TipoFactor="Tasa" TasaOCuota="0.160000" Importe="7.200000" />
+        </cfdi:Traslados>
+      </cfdi:Impuestos>
+    </cfdi:Concepto>
+    <cfdi:Concepto Cantidad="1.00000" ClaveProdServ="92121701" ClaveUnidad="E48" Unidad="Unidad de servicio" Descripcion=" MONITOREO MENSUAL AMED DE CUENTA: 6059" ValorUnitario="45.00" Importe="45.00">
+      <cfdi:Impuestos>
+        <cfdi:Traslados>
+          <cfdi:Traslado Base="45" Impuesto="002" TipoFactor="Tasa" TasaOCuota="0.160000" Importe="7.200000" />
+        </cfdi:Traslados>
+      </cfdi:Impuestos>
+    </cfdi:Concepto>
+    <cfdi:Concepto Cantidad="1.00000" ClaveProdServ="92121701" ClaveUnidad="E48" Unidad="Unidad de servicio" Descripcion=" MONITOREO MENSUAL AMED DE CUENTA: 6060" ValorUnitario="45.00" Importe="45.00">
+      <cfdi:Impuestos>
+        <cfdi:Traslados>
+          <cfdi:Traslado Base="45" Impuesto="002" TipoFactor="Tasa" TasaOCuota="0.160000" Importe="7.200000" />
+        </cfdi:Traslados>
+      </cfdi:Impuestos>
+    </cfdi:Concepto>
+    <cfdi:Concepto Cantidad="1.00000" ClaveProdServ="92121701" ClaveUnidad="E48" Unidad="Unidad de servicio" Descripcion=" MONITOREO MENSUAL AMED DE CUENTA: 6061" ValorUnitario="45.00" Importe="45.00">
+      <cfdi:Impuestos>
+        <cfdi:Traslados>
+          <cfdi:Traslado Base="45" Impuesto="002" TipoFactor="Tasa" TasaOCuota="0.160000" Importe="7.200000" />
+        </cfdi:Traslados>
+      </cfdi:Impuestos>
+    </cfdi:Concepto>
+    <cfdi:Concepto Cantidad="1.00000" ClaveProdServ="92121701" ClaveUnidad="E48" Unidad="Unidad de servicio" Descripcion=" MONITOREO MENSUAL AMED DE CUENTA: 6062" ValorUnitario="45.00" Importe="45.00">
+      <cfdi:Impuestos>
+        <cfdi:Traslados>
+          <cfdi:Traslado Base="45" Impuesto="002" TipoFactor="Tasa" TasaOCuota="0.160000" Importe="7.200000" />
+        </cfdi:Traslados>
+      </cfdi:Impuestos>
+    </cfdi:Concepto>
+    <cfdi:Concepto Cantidad="1.00000" ClaveProdServ="92121701" ClaveUnidad="E48" Unidad="Unidad de servicio" Descripcion=" MONITOREO MENSUAL AMED DE CUENTA: 6064" ValorUnitario="45.00" Importe="45.00">
+      <cfdi:Impuestos>
+        <cfdi:Traslados>
+          <cfdi:Traslado Base="45" Impuesto="002" TipoFactor="Tasa" TasaOCuota="0.160000" Importe="7.200000" />
+        </cfdi:Traslados>
+      </cfdi:Impuestos>
+    </cfdi:Concepto>
+    <cfdi:Concepto Cantidad="1.00000" ClaveProdServ="92121701" ClaveUnidad="E48" Unidad="Unidad de servicio" Descripcion=" MONITOREO MENSUAL AMED DE CUENTA: 6065" ValorUnitario="45.00" Importe="45.00">
+      <cfdi:Impuestos>
+        <cfdi:Traslados>
+          <cfdi:Traslado Base="45" Impuesto="002" TipoFactor="Tasa" TasaOCuota="0.160000" Importe="7.200000" />
+        </cfdi:Traslados>
+      </cfdi:Impuestos>
+    </cfdi:Concepto>
+    <cfdi:Concepto Cantidad="1.00000" ClaveProdServ="92121701" ClaveUnidad="E48" Unidad="Unidad de servicio" Descripcion=" MONITOREO MENSUAL AMED DE CUENTA: 6069" ValorUnitario="45.00" Importe="45.00">
+      <cfdi:Impuestos>
+        <cfdi:Traslados>
+          <cfdi:Traslado Base="45" Impuesto="002" TipoFactor="Tasa" TasaOCuota="0.160000" Importe="7.200000" />
+        </cfdi:Traslados>
+      </cfdi:Impuestos>
+    </cfdi:Concepto>
+    <cfdi:Concepto Cantidad="1.00000" ClaveProdServ="92121701" ClaveUnidad="E48" Unidad="Unidad de servicio" Descripcion=" MONITOREO MENSUAL AMED DE CUENTA: 6075" ValorUnitario="45.00" Importe="45.00">
+      <cfdi:Impuestos>
+        <cfdi:Traslados>
+          <cfdi:Traslado Base="45" Impuesto="002" TipoFactor="Tasa" TasaOCuota="0.160000" Importe="7.200000" />
+        </cfdi:Traslados>
+      </cfdi:Impuestos>
+    </cfdi:Concepto>
+    <cfdi:Concepto Cantidad="1.00000" ClaveProdServ="92121701" ClaveUnidad="E48" Unidad="Unidad de servicio" Descripcion=" MONITOREO MENSUAL AMED DE CUENTA: 6077" ValorUnitario="45.00" Importe="45.00">
+      <cfdi:Impuestos>
+        <cfdi:Traslados>
+          <cfdi:Traslado Base="45" Impuesto="002" TipoFactor="Tasa" TasaOCuota="0.160000" Importe="7.200000" />
+        </cfdi:Traslados>
+      </cfdi:Impuestos>
+    </cfdi:Concepto>
+    <cfdi:Concepto Cantidad="1.00000" ClaveProdServ="92121701" ClaveUnidad="E48" Unidad="Unidad de servicio" Descripcion=" MONITOREO MENSUAL AMED DE CUENTA: 6078" ValorUnitario="45.00" Importe="45.00">
+      <cfdi:Impuestos>
+        <cfdi:Traslados>
+          <cfdi:Traslado Base="45" Impuesto="002" TipoFactor="Tasa" TasaOCuota="0.160000" Importe="7.200000" />
+        </cfdi:Traslados>
+      </cfdi:Impuestos>
+    </cfdi:Concepto>
+    <cfdi:Concepto Cantidad="1.00000" ClaveProdServ="92121701" ClaveUnidad="E48" Unidad="Unidad de servicio" Descripcion=" MONITOREO MENSUAL AMED DE CUENTA: 6080" ValorUnitario="45.00" Importe="45.00">
+      <cfdi:Impuestos>
+        <cfdi:Traslados>
+          <cfdi:Traslado Base="45" Impuesto="002" TipoFactor="Tasa" TasaOCuota="0.160000" Importe="7.200000" />
+        </cfdi:Traslados>
+      </cfdi:Impuestos>
+    </cfdi:Concepto>
+    <cfdi:Concepto Cantidad="1.00000" ClaveProdServ="92121701" ClaveUnidad="E48" Unidad="Unidad de servicio" Descripcion=" MONITOREO MENSUAL AMED DE CUENTA: 6081" ValorUnitario="45.00" Importe="45.00">
+      <cfdi:Impuestos>
+        <cfdi:Traslados>
+          <cfdi:Traslado Base="45" Impuesto="002" TipoFactor="Tasa" TasaOCuota="0.160000" Importe="7.200000" />
+        </cfdi:Traslados>
+      </cfdi:Impuestos>
+    </cfdi:Concepto>
+    <cfdi:Concepto Cantidad="1.00000" ClaveProdServ="92121701" ClaveUnidad="E48" Unidad="Unidad de servicio" Descripcion=" MONITOREO MENSUAL AMED DE CUENTA: 6083" ValorUnitario="45.00" Importe="45.00">
+      <cfdi:Impuestos>
+        <cfdi:Traslados>
+          <cfdi:Traslado Base="45" Impuesto="002" TipoFactor="Tasa" TasaOCuota="0.160000" Importe="7.200000" />
+        </cfdi:Traslados>
+      </cfdi:Impuestos>
+    </cfdi:Concepto>
+    <cfdi:Concepto Cantidad="1.00000" ClaveProdServ="92121701" ClaveUnidad="E48" Unidad="Unidad de servicio" Descripcion=" MONITOREO MENSUAL AMED DE CUENTA: 6084" ValorUnitario="45.00" Importe="45.00">
+      <cfdi:Impuestos>
+        <cfdi:Traslados>
+          <cfdi:Traslado Base="45" Impuesto="002" TipoFactor="Tasa" TasaOCuota="0.160000" Importe="7.200000" />
+        </cfdi:Traslados>
+      </cfdi:Impuestos>
+    </cfdi:Concepto>
+    <cfdi:Concepto Cantidad="1.00000" ClaveProdServ="92121701" ClaveUnidad="E48" Unidad="Unidad de servicio" Descripcion=" MONITOREO MENSUAL AMED DE CUENTA: 6085" ValorUnitario="45.00" Importe="45.00">
+      <cfdi:Impuestos>
+        <cfdi:Traslados>
+          <cfdi:Traslado Base="45" Impuesto="002" TipoFactor="Tasa" TasaOCuota="0.160000" Importe="7.200000" />
+        </cfdi:Traslados>
+      </cfdi:Impuestos>
+    </cfdi:Concepto>
+    <cfdi:Concepto Cantidad="1.00000" ClaveProdServ="92121701" ClaveUnidad="E48" Unidad="Unidad de servicio" Descripcion=" MONITOREO MENSUAL AMED DE CUENTA: 6086" ValorUnitario="45.00" Importe="45.00">
+      <cfdi:Impuestos>
+        <cfdi:Traslados>
+          <cfdi:Traslado Base="45" Impuesto="002" TipoFactor="Tasa" TasaOCuota="0.160000" Importe="7.200000" />
+        </cfdi:Traslados>
+      </cfdi:Impuestos>
+    </cfdi:Concepto>
+    <cfdi:Concepto Cantidad="1.00000" ClaveProdServ="92121701" ClaveUnidad="E48" Unidad="Unidad de servicio" Descripcion=" MONITOREO MENSUAL AMED DE CUENTA: 6088" ValorUnitario="45.00" Importe="45.00">
+      <cfdi:Impuestos>
+        <cfdi:Traslados>
+          <cfdi:Traslado Base="45" Impuesto="002" TipoFactor="Tasa" TasaOCuota="0.160000" Importe="7.200000" />
+        </cfdi:Traslados>
+      </cfdi:Impuestos>
+    </cfdi:Concepto>
+    <cfdi:Concepto Cantidad="1.00000" ClaveProdServ="92121701" ClaveUnidad="E48" Unidad="Unidad de servicio" Descripcion=" MONITOREO MENSUAL AMED DE CUENTA: 6089" ValorUnitario="45.00" Importe="45.00">
+      <cfdi:Impuestos>
+        <cfdi:Traslados>
+          <cfdi:Traslado Base="45" Impuesto="002" TipoFactor="Tasa" TasaOCuota="0.160000" Importe="7.200000" />
+        </cfdi:Traslados>
+      </cfdi:Impuestos>
+    </cfdi:Concepto>
+    <cfdi:Concepto Cantidad="1.00000" ClaveProdServ="92121701" ClaveUnidad="E48" Unidad="Unidad de servicio" Descripcion=" MONITOREO MENSUAL AMED DE CUENTA: 6092" ValorUnitario="45.00" Importe="45.00">
+      <cfdi:Impuestos>
+        <cfdi:Traslados>
+          <cfdi:Traslado Base="45" Impuesto="002" TipoFactor="Tasa" TasaOCuota="0.160000" Importe="7.200000" />
+        </cfdi:Traslados>
+      </cfdi:Impuestos>
+    </cfdi:Concepto>
+    <cfdi:Concepto Cantidad="1.00000" ClaveProdServ="92121701" ClaveUnidad="E48" Unidad="Unidad de servicio" Descripcion=" MONITOREO MENSUAL AMED DE CUENTA: 6100" ValorUnitario="45.00" Importe="45.00">
+      <cfdi:Impuestos>
+        <cfdi:Traslados>
+          <cfdi:Traslado Base="45" Impuesto="002" TipoFactor="Tasa" TasaOCuota="0.160000" Importe="7.200000" />
+        </cfdi:Traslados>
+      </cfdi:Impuestos>
+    </cfdi:Concepto>
+    <cfdi:Concepto Cantidad="1.00000" ClaveProdServ="92121701" ClaveUnidad="E48" Unidad="Unidad de servicio" Descripcion=" MONITOREO MENSUAL AMED DE CUENTA: 6105" ValorUnitario="45.00" Importe="45.00">
+      <cfdi:Impuestos>
+        <cfdi:Traslados>
+          <cfdi:Traslado Base="45" Impuesto="002" TipoFactor="Tasa" TasaOCuota="0.160000" Importe="7.200000" />
+        </cfdi:Traslados>
+      </cfdi:Impuestos>
+    </cfdi:Concepto>
+    <cfdi:Concepto Cantidad="1.00000" ClaveProdServ="92121701" ClaveUnidad="E48" Unidad="Unidad de servicio" Descripcion=" MONITOREO MENSUAL AMED DE CUENTA: 6110" ValorUnitario="45.00" Importe="45.00">
+      <cfdi:Impuestos>
+        <cfdi:Traslados>
+          <cfdi:Traslado Base="45" Impuesto="002" TipoFactor="Tasa" TasaOCuota="0.160000" Importe="7.200000" />
+        </cfdi:Traslados>
+      </cfdi:Impuestos>
+    </cfdi:Concepto>
+    <cfdi:Concepto Cantidad="1.00000" ClaveProdServ="92121701" ClaveUnidad="E48" Unidad="Unidad de servicio" Descripcion=" MONITOREO MENSUAL AMED DE CUENTA: 6111" ValorUnitario="45.00" Importe="45.00">
+      <cfdi:Impuestos>
+        <cfdi:Traslados>
+          <cfdi:Traslado Base="45" Impuesto="002" TipoFactor="Tasa" TasaOCuota="0.160000" Importe="7.200000" />
+        </cfdi:Traslados>
+      </cfdi:Impuestos>
+    </cfdi:Concepto>
+    <cfdi:Concepto Cantidad="1.00000" ClaveProdServ="92121701" ClaveUnidad="E48" Unidad="Unidad de servicio" Descripcion=" MONITOREO MENSUAL AMED DE CUENTA: 6112" ValorUnitario="45.00" Importe="45.00">
+      <cfdi:Impuestos>
+        <cfdi:Traslados>
+          <cfdi:Traslado Base="45" Impuesto="002" TipoFactor="Tasa" TasaOCuota="0.160000" Importe="7.200000" />
+        </cfdi:Traslados>
+      </cfdi:Impuestos>
+    </cfdi:Concepto>
+    <cfdi:Concepto Cantidad="1.00000" ClaveProdServ="92121701" ClaveUnidad="E48" Unidad="Unidad de servicio" Descripcion=" MONITOREO MENSUAL AMED DE CUENTA: 6113" ValorUnitario="45.00" Importe="45.00">
+      <cfdi:Impuestos>
+        <cfdi:Traslados>
+          <cfdi:Traslado Base="45" Impuesto="002" TipoFactor="Tasa" TasaOCuota="0.160000" Importe="7.200000" />
+        </cfdi:Traslados>
+      </cfdi:Impuestos>
+    </cfdi:Concepto>
+    <cfdi:Concepto Cantidad="1.00000" ClaveProdServ="92121701" ClaveUnidad="E48" Unidad="Unidad de servicio" Descripcion=" MONITOREO MENSUAL AMED DE CUENTA: 6114" ValorUnitario="45.00" Importe="45.00">
+      <cfdi:Impuestos>
+        <cfdi:Traslados>
+          <cfdi:Traslado Base="45" Impuesto="002" TipoFactor="Tasa" TasaOCuota="0.160000" Importe="7.200000" />
+        </cfdi:Traslados>
+      </cfdi:Impuestos>
+    </cfdi:Concepto>
+    <cfdi:Concepto Cantidad="1.00000" ClaveProdServ="92121701" ClaveUnidad="E48" Unidad="Unidad de servicio" Descripcion=" MONITOREO MENSUAL AMED DE CUENTA: 6115" ValorUnitario="45.00" Importe="45.00">
+      <cfdi:Impuestos>
+        <cfdi:Traslados>
+          <cfdi:Traslado Base="45" Impuesto="002" TipoFactor="Tasa" TasaOCuota="0.160000" Importe="7.200000" />
+        </cfdi:Traslados>
+      </cfdi:Impuestos>
+    </cfdi:Concepto>
+    <cfdi:Concepto Cantidad="1.00000" ClaveProdServ="92121701" ClaveUnidad="E48" Unidad="Unidad de servicio" Descripcion=" MONITOREO MENSUAL AMED DE CUENTA: 6117" ValorUnitario="45.00" Importe="45.00">
+      <cfdi:Impuestos>
+        <cfdi:Traslados>
+          <cfdi:Traslado Base="45" Impuesto="002" TipoFactor="Tasa" TasaOCuota="0.160000" Importe="7.200000" />
+        </cfdi:Traslados>
+      </cfdi:Impuestos>
+    </cfdi:Concepto>
+    <cfdi:Concepto Cantidad="1.00000" ClaveProdServ="92121701" ClaveUnidad="E48" Unidad="Unidad de servicio" Descripcion=" MONITOREO MENSUAL AMED DE CUENTA: 6118" ValorUnitario="45.00" Importe="45.00">
+      <cfdi:Impuestos>
+        <cfdi:Traslados>
+          <cfdi:Traslado Base="45" Impuesto="002" TipoFactor="Tasa" TasaOCuota="0.160000" Importe="7.200000" />
+        </cfdi:Traslados>
+      </cfdi:Impuestos>
+    </cfdi:Concepto>
+    <cfdi:Concepto Cantidad="1.00000" ClaveProdServ="92121701" ClaveUnidad="E48" Unidad="Unidad de servicio" Descripcion=" MONITOREO MENSUAL AMED DE CUENTA: 6119" ValorUnitario="45.00" Importe="45.00">
+      <cfdi:Impuestos>
+        <cfdi:Traslados>
+          <cfdi:Traslado Base="45" Impuesto="002" TipoFactor="Tasa" TasaOCuota="0.160000" Importe="7.200000" />
+        </cfdi:Traslados>
+      </cfdi:Impuestos>
+    </cfdi:Concepto>
+    <cfdi:Concepto Cantidad="1.00000" ClaveProdServ="92121701" ClaveUnidad="E48" Unidad="Unidad de servicio" Descripcion=" MONITOREO MENSUAL AMED DE CUENTA: 6120" ValorUnitario="45.00" Importe="45.00">
+      <cfdi:Impuestos>
+        <cfdi:Traslados>
+          <cfdi:Traslado Base="45" Impuesto="002" TipoFactor="Tasa" TasaOCuota="0.160000" Importe="7.200000" />
+        </cfdi:Traslados>
+      </cfdi:Impuestos>
+    </cfdi:Concepto>
+    <cfdi:Concepto Cantidad="1.00000" ClaveProdServ="92121701" ClaveUnidad="E48" Unidad="Unidad de servicio" Descripcion=" MONITOREO MENSUAL AMED DE CUENTA: 6122" ValorUnitario="45.00" Importe="45.00">
+      <cfdi:Impuestos>
+        <cfdi:Traslados>
+          <cfdi:Traslado Base="45" Impuesto="002" TipoFactor="Tasa" TasaOCuota="0.160000" Importe="7.200000" />
+        </cfdi:Traslados>
+      </cfdi:Impuestos>
+    </cfdi:Concepto>
+    <cfdi:Concepto Cantidad="1.00000" ClaveProdServ="92121701" ClaveUnidad="E48" Unidad="Unidad de servicio" Descripcion=" MONITOREO MENSUAL AMED DE CUENTA: 6123" ValorUnitario="45.00" Importe="45.00">
+      <cfdi:Impuestos>
+        <cfdi:Traslados>
+          <cfdi:Traslado Base="45" Impuesto="002" TipoFactor="Tasa" TasaOCuota="0.160000" Importe="7.200000" />
+        </cfdi:Traslados>
+      </cfdi:Impuestos>
+    </cfdi:Concepto>
+    <cfdi:Concepto Cantidad="1.00000" ClaveProdServ="92121701" ClaveUnidad="E48" Unidad="Unidad de servicio" Descripcion=" MONITOREO MENSUAL AMED DE CUENTA: 6124" ValorUnitario="45.00" Importe="45.00">
+      <cfdi:Impuestos>
+        <cfdi:Traslados>
+          <cfdi:Traslado Base="45" Impuesto="002" TipoFactor="Tasa" TasaOCuota="0.160000" Importe="7.200000" />
+        </cfdi:Traslados>
+      </cfdi:Impuestos>
+    </cfdi:Concepto>
+    <cfdi:Concepto Cantidad="1.00000" ClaveProdServ="92121701" ClaveUnidad="E48" Unidad="Unidad de servicio" Descripcion=" MONITOREO MENSUAL AMED DE CUENTA: 6126" ValorUnitario="45.00" Importe="45.00">
+      <cfdi:Impuestos>
+        <cfdi:Traslados>
+          <cfdi:Traslado Base="45" Impuesto="002" TipoFactor="Tasa" TasaOCuota="0.160000" Importe="7.200000" />
+        </cfdi:Traslados>
+      </cfdi:Impuestos>
+    </cfdi:Concepto>
+    <cfdi:Concepto Cantidad="1.00000" ClaveProdServ="92121701" ClaveUnidad="E48" Unidad="Unidad de servicio" Descripcion=" MONITOREO MENSUAL AMED DE CUENTA: 6127" ValorUnitario="45.00" Importe="45.00">
+      <cfdi:Impuestos>
+        <cfdi:Traslados>
+          <cfdi:Traslado Base="45" Impuesto="002" TipoFactor="Tasa" TasaOCuota="0.160000" Importe="7.200000" />
+        </cfdi:Traslados>
+      </cfdi:Impuestos>
+    </cfdi:Concepto>
+    <cfdi:Concepto Cantidad="1.00000" ClaveProdServ="92121701" ClaveUnidad="E48" Unidad="Unidad de servicio" Descripcion=" MONITOREO MENSUAL AMED DE CUENTA: 6128" ValorUnitario="45.00" Importe="45.00">
+      <cfdi:Impuestos>
+        <cfdi:Traslados>
+          <cfdi:Traslado Base="45" Impuesto="002" TipoFactor="Tasa" TasaOCuota="0.160000" Importe="7.200000" />
+        </cfdi:Traslados>
+      </cfdi:Impuestos>
+    </cfdi:Concepto>
+    <cfdi:Concepto Cantidad="1.00000" ClaveProdServ="92121701" ClaveUnidad="E48" Unidad="Unidad de servicio" Descripcion=" MONITOREO MENSUAL AMED DE CUENTA: 6129" ValorUnitario="45.00" Importe="45.00">
+      <cfdi:Impuestos>
+        <cfdi:Traslados>
+          <cfdi:Traslado Base="45" Impuesto="002" TipoFactor="Tasa" TasaOCuota="0.160000" Importe="7.200000" />
+        </cfdi:Traslados>
+      </cfdi:Impuestos>
+    </cfdi:Concepto>
+    <cfdi:Concepto Cantidad="1.00000" ClaveProdServ="92121701" ClaveUnidad="E48" Unidad="Unidad de servicio" Descripcion=" MONITOREO MENSUAL AMED DE CUENTA: 6132" ValorUnitario="45.00" Importe="45.00">
+      <cfdi:Impuestos>
+        <cfdi:Traslados>
+          <cfdi:Traslado Base="45" Impuesto="002" TipoFactor="Tasa" TasaOCuota="0.160000" Importe="7.200000" />
+        </cfdi:Traslados>
+      </cfdi:Impuestos>
+    </cfdi:Concepto>
+    <cfdi:Concepto Cantidad="1.00000" ClaveProdServ="92121701" ClaveUnidad="E48" Unidad="Unidad de servicio" Descripcion=" MONITOREO MENSUAL AMED DE CUENTA: 6133" ValorUnitario="45.00" Importe="45.00">
+      <cfdi:Impuestos>
+        <cfdi:Traslados>
+          <cfdi:Traslado Base="45" Impuesto="002" TipoFactor="Tasa" TasaOCuota="0.160000" Importe="7.200000" />
+        </cfdi:Traslados>
+      </cfdi:Impuestos>
+    </cfdi:Concepto>
+    <cfdi:Concepto Cantidad="1.00000" ClaveProdServ="92121701" ClaveUnidad="E48" Unidad="Unidad de servicio" Descripcion=" MONITOREO MENSUAL AMED DE CUENTA: 6135" ValorUnitario="45.00" Importe="45.00">
+      <cfdi:Impuestos>
+        <cfdi:Traslados>
+          <cfdi:Traslado Base="45" Impuesto="002" TipoFactor="Tasa" TasaOCuota="0.160000" Importe="7.200000" />
+        </cfdi:Traslados>
+      </cfdi:Impuestos>
+    </cfdi:Concepto>
+    <cfdi:Concepto Cantidad="1.00000" ClaveProdServ="92121701" ClaveUnidad="E48" Unidad="Unidad de servicio" Descripcion=" MONITOREO MENSUAL AMED DE CUENTA: 6136" ValorUnitario="45.00" Importe="45.00">
+      <cfdi:Impuestos>
+        <cfdi:Traslados>
+          <cfdi:Traslado Base="45" Impuesto="002" TipoFactor="Tasa" TasaOCuota="0.160000" Importe="7.200000" />
+        </cfdi:Traslados>
+      </cfdi:Impuestos>
+    </cfdi:Concepto>
+    <cfdi:Concepto Cantidad="1.00000" ClaveProdServ="92121701" ClaveUnidad="E48" Unidad="Unidad de servicio" Descripcion=" MONITOREO MENSUAL AMED DE CUENTA: 6138" ValorUnitario="45.00" Importe="45.00">
+      <cfdi:Impuestos>
+        <cfdi:Traslados>
+          <cfdi:Traslado Base="45" Impuesto="002" TipoFactor="Tasa" TasaOCuota="0.160000" Importe="7.200000" />
+        </cfdi:Traslados>
+      </cfdi:Impuestos>
+    </cfdi:Concepto>
+    <cfdi:Concepto Cantidad="1.00000" ClaveProdServ="92121701" ClaveUnidad="E48" Unidad="Unidad de servicio" Descripcion=" MONITOREO MENSUAL AMED DE CUENTA: 6139" ValorUnitario="45.00" Importe="45.00">
+      <cfdi:Impuestos>
+        <cfdi:Traslados>
+          <cfdi:Traslado Base="45" Impuesto="002" TipoFactor="Tasa" TasaOCuota="0.160000" Importe="7.200000" />
+        </cfdi:Traslados>
+      </cfdi:Impuestos>
+    </cfdi:Concepto>
+    <cfdi:Concepto Cantidad="1.00000" ClaveProdServ="92121701" ClaveUnidad="E48" Unidad="Unidad de servicio" Descripcion=" MONITOREO MENSUAL AMED DE CUENTA: 6141" ValorUnitario="45.00" Importe="45.00">
+      <cfdi:Impuestos>
+        <cfdi:Traslados>
+          <cfdi:Traslado Base="45" Impuesto="002" TipoFactor="Tasa" TasaOCuota="0.160000" Importe="7.200000" />
+        </cfdi:Traslados>
+      </cfdi:Impuestos>
+    </cfdi:Concepto>
+    <cfdi:Concepto Cantidad="1.00000" ClaveProdServ="92121701" ClaveUnidad="E48" Unidad="Unidad de servicio" Descripcion=" MONITOREO MENSUAL AMED DE CUENTA: 6142" ValorUnitario="45.00" Importe="45.00">
+      <cfdi:Impuestos>
+        <cfdi:Traslados>
+          <cfdi:Traslado Base="45" Impuesto="002" TipoFactor="Tasa" TasaOCuota="0.160000" Importe="7.200000" />
+        </cfdi:Traslados>
+      </cfdi:Impuestos>
+    </cfdi:Concepto>
+  </cfdi:Conceptos>
+  <cfdi:Impuestos TotalImpuestosTrasladados="568.80">
+    <cfdi:Traslados>
+      <cfdi:Traslado Impuesto="002" TipoFactor="Tasa" TasaOCuota="0.160000" Importe="568.80" />
+    </cfdi:Traslados>
+  </cfdi:Impuestos>
+  <cfdi:Complemento>
+    <tfd:TimbreFiscalDigital xmlns:tfd="http://www.sat.gob.mx/TimbreFiscalDigital" xsi:schemaLocation="http://www.sat.gob.mx/TimbreFiscalDigital http://www.sat.gob.mx/sitio_internet/cfd/TimbreFiscalDigital/TimbreFiscalDigitalv11.xsd" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" SelloCFD="UZ81gF8cYr5/66fZJEHa2VT20v2Qki8vha/JxYNmrLRPO4lGhmZOpyhTWV10NseK42ACgKE0OKlcbaVfdvJDXi0sxfwOnv5ROpom+kwCZSSVgp/ZZw+5JnueKR7sJpxwihUzt08DntkImVgmFDQsSf++i4206rdYZG0t8YQfchzNMA1qpeIVUGeijgz0KmIt1+r8Nv9dSW8iWGqQb1RD3BL6L4I7QP455/BsT3h03Hi3bk76wt/mZWEDCpNAp8K1QtFA4IJz8y5QKfVAQslLD/XaQ04BhvJiKZvj741GPaCQo9Yr0VvltDnmEsw0Q9rcKEhBSaTbeNS7acAwfq6gsg==" FechaTimbrado="2021-06-23T15:28:09" UUID="3716F6D9-55F9-4359-AB74-F9261B9C6D5B" NoCertificadoSAT="00001000000407759943" Version="1.1" SelloSAT="DqrR3mjMQCRIbPE/yjB2Fcmk+SNBIh9cXOcoUo0icK9kSYG/u1CtaE6BvoqIxg4tLlFUpjezkvAhmMTSqv8LgLOovUYYNzOtLMUQV8vEduZLTRF6Lq8+JVbKOZNvx1K9jxSNP3mo8wjeUDpfpkmhqsfhtN2SHSXxJRaWBUQeyMPo1XTKsStRFtVSYiFH/lE029MJIkdTMePCzrYkO0BvExoJXF5LK1u2e3LgOepedEH7M2ZQe0a+7Y9z0mcNImas7bMUZLBOCKqPfElRDLZdrI0kAfO8Igft8Aq7/T2v9/ccSfOkK/g3EQlDX3Lf6fWUTgD2xjKFpiOrLys52f0lcQ==" RfcProvCertif="ICA050422AA6" />
+  </cfdi:Complemento>
+</cfdi:Comprobante>

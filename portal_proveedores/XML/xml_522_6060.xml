@@ -1,0 +1,81 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<cfdi:Comprobante xmlns:cfdi="http://www.sat.gob.mx/cfd/3" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" Version="3.3" Serie="SUN" Folio="86854" Fecha="2020-07-24T18:33:46" Sello="VBHWg4Q0aJb0/TToBPxOCFelLednQnUIlZJY4D6Aiq2J1EhFi12tDhjEUVyOkXtlODrZUw/YcKtPRJXBoul3zwTH0tx6X18VFSPeboeMCYEJ5xrJ1Bmhfdhzwx57u0QQbVLfUnZmowrKq0sGeGtwfwRyTANffNvXUq2CyOoyZSvSbyrvkGvyrzT5g0WaxGqbm+p2AJV1F8qnlJN1qsckPGAjOAayraUHOTWqu67Ts+E7s/LP+sPjFtgMq/RxxjUXGsK/G7LSHr6dmXt671ZHve/+LAGlBuEEXOCkJi/70p6Ykyab9KIxMo9CN1DWymZISR3j3Pq0IWno0fPZky/UjA==" FormaPago="99" NoCertificado="00001000000404541776" Certificado="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" CondicionesDePago="CREDITO" SubTotal="5513.60" Descuento="791.06" Moneda="MXN" TipoCambio="1" Total="5478.15" TipoDeComprobante="I" MetodoPago="PPD" LugarExpedicion="31203" xsi:schemaLocation="http://www.sat.gob.mx/cfd/3 http://www.sat.gob.mx/sitio_internet/cfd/3/cfdv33.xsd">
+<cfdi:Emisor Rfc="TMA090918ND0" Nombre="TU MEJOR AGENCIA AUTOMOTRIZ SA DE CV" RegimenFiscal="601" />
+<cfdi:Receptor Rfc="SPG0905078B1" Nombre="SEGURIDAD PRIVADA GINTHER DE OCCIDENTE S DE RL DE CV" UsoCFDI="G03" />
+<cfdi:Conceptos>
+<cfdi:Concepto ClaveProdServ="78181500" NoIdentificacion="78181500" Cantidad="1.00" ClaveUnidad="E48" Unidad="Unidad de servicio" Descripcion="REEMP BUJA" ValorUnitario="330.00" Importe="330.00" Descuento="49.50">
+<cfdi:Impuestos>
+<cfdi:Traslados>
+<cfdi:Traslado Base="280.50" Impuesto="002" TipoFactor="Tasa" TasaOCuota="0.160000" Importe="44.880000" /></cfdi:Traslados></cfdi:Impuestos></cfdi:Concepto>
+<cfdi:Concepto ClaveProdServ="78181500" NoIdentificacion="78181500" Cantidad="0.50" ClaveUnidad="E48" Unidad="Unidad de servicio" Descripcion="REEMPLAZO DEL ENSAMBLE DEL DEPURADOR DE AIRE" ValorUnitario="330.00" Importe="165.00" Descuento="24.75">
+<cfdi:Impuestos>
+<cfdi:Traslados>
+<cfdi:Traslado Base="140.25" Impuesto="002" TipoFactor="Tasa" TasaOCuota="0.160000" Importe="22.440000" /></cfdi:Traslados></cfdi:Impuestos></cfdi:Concepto>
+<cfdi:Concepto ClaveProdServ="78181500" NoIdentificacion="78181500" Cantidad="1.00" ClaveUnidad="E48" Unidad="Unidad de servicio" Descripcion="REEMPLAZO DEL FILTRO DE ACEITE" ValorUnitario="287.50" Importe="287.50" Descuento="43.13">
+<cfdi:Impuestos>
+<cfdi:Traslados>
+<cfdi:Traslado Base="244.38" Impuesto="002" TipoFactor="Tasa" TasaOCuota="0.160000" Importe="39.100000" /></cfdi:Traslados></cfdi:Impuestos></cfdi:Concepto>
+<cfdi:Concepto ClaveProdServ="78181500" NoIdentificacion="78181500" Cantidad="0.20" ClaveUnidad="E48" Unidad="Unidad de servicio" Descripcion="ROTACIN DE LA LLANTA" ValorUnitario="330.00" Importe="66.00" Descuento="9.90">
+<cfdi:Impuestos>
+<cfdi:Traslados>
+<cfdi:Traslado Base="56.10" Impuesto="002" TipoFactor="Tasa" TasaOCuota="0.160000" Importe="8.976000" /></cfdi:Traslados></cfdi:Impuestos></cfdi:Concepto>
+<cfdi:Concepto ClaveProdServ="78181500" NoIdentificacion="78181500" Cantidad="1.30" ClaveUnidad="E48" Unidad="Unidad de servicio" Descripcion="REEMPLAZO DE LAS BALATAS DEL FRENO DE DISCO DELANTERO" ValorUnitario="330.00" Importe="429.00" Descuento="64.35">
+<cfdi:Impuestos>
+<cfdi:Traslados>
+<cfdi:Traslado Base="364.65" Impuesto="002" TipoFactor="Tasa" TasaOCuota="0.160000" Importe="58.344000" /></cfdi:Traslados></cfdi:Impuestos></cfdi:Concepto>
+<cfdi:Concepto ClaveProdServ="78181500" NoIdentificacion="78181500" Cantidad="0.70" ClaveUnidad="E48" Unidad="Unidad de servicio" Descripcion="TORNEADO DEL ROTOR DE LOS FRENOS DELANTEROS" ValorUnitario="330.00" Importe="231.00" Descuento="34.65">
+<cfdi:Impuestos>
+<cfdi:Traslados>
+<cfdi:Traslado Base="196.35" Impuesto="002" TipoFactor="Tasa" TasaOCuota="0.160000" Importe="31.416000" /></cfdi:Traslados></cfdi:Impuestos></cfdi:Concepto>
+<cfdi:Concepto ClaveProdServ="78181500" NoIdentificacion="78181500" Cantidad="0.50" ClaveUnidad="E48" Unidad="Unidad de servicio" Descripcion="REEMPLAZO FILTRODE POLEN" ValorUnitario="330.00" Importe="165.00" Descuento="24.75">
+<cfdi:Impuestos>
+<cfdi:Traslados>
+<cfdi:Traslado Base="140.25" Impuesto="002" TipoFactor="Tasa" TasaOCuota="0.160000" Importe="22.440000" /></cfdi:Traslados></cfdi:Impuestos></cfdi:Concepto>
+<cfdi:Concepto ClaveProdServ="78181500" NoIdentificacion="MATDIV" Cantidad="1.00" ClaveUnidad="E48" Unidad="Unidad de servicio" Descripcion="MANEJO DE RESIDUOS PELIGROSOS" ValorUnitario="120.00" Importe="120.00">
+<cfdi:Impuestos>
+<cfdi:Traslados>
+<cfdi:Traslado Base="120.00" Impuesto="002" TipoFactor="Tasa" TasaOCuota="0.160000" Importe="19.200000" /></cfdi:Traslados></cfdi:Impuestos></cfdi:Concepto>
+<cfdi:Concepto ClaveProdServ="78181500" NoIdentificacion="SEG000" Cantidad="1.00" ClaveUnidad="E48" Unidad="Unidad de servicio" Descripcion="SEGURO" ValorUnitario="120.00" Importe="120.00">
+<cfdi:Impuestos>
+<cfdi:Traslados>
+<cfdi:Traslado Base="120.00" Impuesto="002" TipoFactor="Tasa" TasaOCuota="0.160000" Importe="19.200000" /></cfdi:Traslados></cfdi:Impuestos></cfdi:Concepto>
+<cfdi:Concepto ClaveProdServ="25172100" NoIdentificacion="96985730" Cantidad="1.00" ClaveUnidad="H87" Unidad="Pieza" Descripcion="FILTRO ACEITE" ValorUnitario="180.38" Importe="180.38" Descuento="27.06">
+<cfdi:Impuestos>
+<cfdi:Traslados>
+<cfdi:Traslado Base="153.32" Impuesto="002" TipoFactor="Tasa" TasaOCuota="0.160000" Importe="24.531700" /></cfdi:Traslados></cfdi:Impuestos></cfdi:Concepto>
+<cfdi:Concepto ClaveProdServ="15121501" NoIdentificacion="19367501" Cantidad="5.00" ClaveUnidad="LTR" Unidad="LITRO" Descripcion="ACEITE DEXOS GEN 2 TAMBO" ValorUnitario="116.54" Importe="582.70" Descuento="87.41">
+<cfdi:Impuestos>
+<cfdi:Traslados>
+<cfdi:Traslado Base="495.30" Impuesto="002" TipoFactor="Tasa" TasaOCuota="0.160000" Importe="79.247200" /></cfdi:Traslados></cfdi:Impuestos></cfdi:Concepto>
+<cfdi:Concepto ClaveProdServ="25172100" NoIdentificacion="42390126" Cantidad="1.00" ClaveUnidad="H87" Unidad="PIEZA" Descripcion="FILTRO AIRE" ValorUnitario="337.84" Importe="337.84" Descuento="50.68">
+<cfdi:Impuestos>
+<cfdi:Traslados>
+<cfdi:Traslado Base="287.16" Impuesto="002" TipoFactor="Tasa" TasaOCuota="0.160000" Importe="45.946200" /></cfdi:Traslados></cfdi:Impuestos></cfdi:Concepto>
+<cfdi:Concepto ClaveProdServ="25172100" NoIdentificacion="96464000" Cantidad="4.00" ClaveUnidad="H87" Unidad="PIEZA" Descripcion="BUJIAS" ValorUnitario="97.05" Importe="388.20" Descuento="58.23">
+<cfdi:Impuestos>
+<cfdi:Traslados>
+<cfdi:Traslado Base="329.97" Impuesto="002" TipoFactor="Tasa" TasaOCuota="0.160000" Importe="52.795200" /></cfdi:Traslados></cfdi:Impuestos></cfdi:Concepto>
+<cfdi:Concepto ClaveProdServ="25172100" NoIdentificacion="19420476A" Cantidad="1.00" ClaveUnidad="H87" Unidad="PIEZA" Descripcion="LIMPIADOR DE INTERIORES" ValorUnitario="50.00" Importe="50.00" Descuento="7.50">
+<cfdi:Impuestos>
+<cfdi:Traslados>
+<cfdi:Traslado Base="42.50" Impuesto="002" TipoFactor="Tasa" TasaOCuota="0.160000" Importe="6.800000" /></cfdi:Traslados></cfdi:Impuestos></cfdi:Concepto>
+<cfdi:Concepto ClaveProdServ="25172100" NoIdentificacion="19322805" Cantidad="1.00" ClaveUnidad="H87" Unidad="PIEZA" Descripcion="BALATAS DELANTERAS AC" ValorUnitario="984.57" Importe="984.57" Descuento="147.69">
+<cfdi:Impuestos>
+<cfdi:Traslados>
+<cfdi:Traslado Base="836.88" Impuesto="002" TipoFactor="Tasa" TasaOCuota="0.160000" Importe="133.901500" /></cfdi:Traslados></cfdi:Impuestos></cfdi:Concepto>
+<cfdi:Concepto ClaveProdServ="25172100" NoIdentificacion="19369716" Cantidad="1.00" ClaveUnidad="H87" Unidad="PIEZA" Descripcion="LIMPIADOR-SISTEMA COMBUSTIBLE" ValorUnitario="358.60" Importe="358.60" Descuento="53.79">
+<cfdi:Impuestos>
+<cfdi:Traslados>
+<cfdi:Traslado Base="304.81" Impuesto="002" TipoFactor="Tasa" TasaOCuota="0.160000" Importe="48.769600" /></cfdi:Traslados></cfdi:Impuestos></cfdi:Concepto>
+<cfdi:Concepto ClaveProdServ="25172100" NoIdentificacion="95947238" Cantidad="1.00" ClaveUnidad="H87" Unidad="Pieza" Descripcion="FILTRO-AIRE COMPT PAS" ValorUnitario="598.27" Importe="598.27" Descuento="89.74">
+<cfdi:Impuestos>
+<cfdi:Traslados>
+<cfdi:Traslado Base="508.53" Impuesto="002" TipoFactor="Tasa" TasaOCuota="0.160000" Importe="81.364700" /></cfdi:Traslados></cfdi:Impuestos></cfdi:Concepto>
+<cfdi:Concepto ClaveProdServ="25172100" NoIdentificacion="H431260C" Cantidad="1.00" ClaveUnidad="H87" Unidad="PIEZA" Descripcion="FOCO" ValorUnitario="119.54" Importe="119.54" Descuento="17.93">
+<cfdi:Impuestos>
+<cfdi:Traslados>
+<cfdi:Traslado Base="101.61" Impuesto="002" TipoFactor="Tasa" TasaOCuota="0.160000" Importe="16.257400" /></cfdi:Traslados></cfdi:Impuestos></cfdi:Concepto></cfdi:Conceptos>
+<cfdi:Impuestos TotalImpuestosTrasladados="755.61">
+<cfdi:Traslados>
+<cfdi:Traslado Impuesto="002" TipoFactor="Tasa" TasaOCuota="0.160000" Importe="755.61" /></cfdi:Traslados></cfdi:Impuestos>
+<cfdi:Complemento><tfd:TimbreFiscalDigital xmlns:tfd="http://www.sat.gob.mx/TimbreFiscalDigital" xsi:schemaLocation="http://www.sat.gob.mx/TimbreFiscalDigital http://www.sat.gob.mx/sitio_internet/cfd/TimbreFiscalDigital/TimbreFiscalDigitalv11.xsd" Version="1.1" UUID="A603CEFC-2257-45CF-B0C4-44046F0257CB" FechaTimbrado="2020-07-24T19:36:49" RfcProvCertif="SFE0807172W8" SelloCFD="VBHWg4Q0aJb0/TToBPxOCFelLednQnUIlZJY4D6Aiq2J1EhFi12tDhjEUVyOkXtlODrZUw/YcKtPRJXBoul3zwTH0tx6X18VFSPeboeMCYEJ5xrJ1Bmhfdhzwx57u0QQbVLfUnZmowrKq0sGeGtwfwRyTANffNvXUq2CyOoyZSvSbyrvkGvyrzT5g0WaxGqbm+p2AJV1F8qnlJN1qsckPGAjOAayraUHOTWqu67Ts+E7s/LP+sPjFtgMq/RxxjUXGsK/G7LSHr6dmXt671ZHve/+LAGlBuEEXOCkJi/70p6Ykyab9KIxMo9CN1DWymZISR3j3Pq0IWno0fPZky/UjA==" NoCertificadoSAT="00001000000404594081" SelloSAT="KyvuWIfILSMm8m5cyRHNI7TerKtbJNLkTr+SulylOY1nVr4Od+u44MU6pvyomjXqWjvMucZD8z7OQDy9cLeH8boch6SJn6Ah/PPiWHqxSttu2c/goej0qMFdCJQ8+XXO4BDLF/w8hPUKG1CORwYG+kXle+vs5SF1VfabEkw4vbaSCddYEW8yPUELKRza9bMjUpzjkt9x3sRF0iX/o91qL8wmEddPBS6740gg+ciZwRQOrR9YP4ynsPCI/elScvUgcCN6kJ9aK+tnO3pOeqKjf1Hj0R9WSLdEo+RgeqawK97sAj7abzfDsa2Mib1eX4WeIcyHuHWpfqy2aHIuonFySQ==" /></cfdi:Complemento></cfdi:Comprobante>

@@ -1,0 +1,272 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<cfdi:Comprobante
+    Certificado="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"
+    CondicionesDePago="Contado" Descuento="2216.92"
+    Fecha="2021-05-19T16:42:14" Folio="11961" FormaPago="03"
+    LugarExpedicion="77712" MetodoPago="PUE" Moneda="MXN"
+    NoCertificado="00001000000406671191"
+    Sello="ephp0Se0U6yTmw2ElMhPFcS7TYNAJrN0giYVC/hJVTfggqBKZ/Qau+qMwCYmm1/5zTXQltlYJ/e2DulMuABi/ddXFupBUxz7PpfVEyBtFdtg1Pnn3XfLrvFurv4dqOxhyAGzM3gEglMl2YAPxolnKiBOMaehC19jdcr8F7HyI/HGMxFMH5jDHPzBP/SM2yYGDU3Uf/iyoIIDZkjN4/OMM4Xc0sy7U/3Y1i2gEO76sznouSKG1McKvOo0s5cBDT3d2NNNb5TKP3oo+3TCodSLp8Q30rXbe4tGQ5wjwiWlbj2uKpJI5KzcH3XzUf1L4VTVeLzpBU7HpKs5yTywAEfBQg=="
+    Serie="PFBC" SubTotal="16918.26" TipoCambio="1"
+    TipoDeComprobante="I" Total="17053.55" Version="3.3"
+    xmlns:cfdi="http://www.sat.gob.mx/cfd/3"
+    xmlns:pago10="http://www.sat.gob.mx/Pagos"
+    xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://www.sat.gob.mx/cfd/3 http://www.sat.gob.mx/sitio_internet/cfd/3/cfdv33.xsd">
+    <cfdi:Emisor Nombre="RADIAL LLANTAS, S.A.P.I. DE C.V."
+        RegimenFiscal="601" Rfc="RLA8103252S2"/>
+    <cfdi:Receptor
+        Nombre="SEGURIDAD PRIVADA GINTHER DE OCCIDENTE S. DE R.L. DE C.V."
+        Rfc="SPG0905078B1" UsoCFDI="G03"/>
+    <cfdi:Conceptos>
+        <cfdi:Concepto Cantidad="1.00" ClaveProdServ="78181500"
+            ClaveUnidad="E48"
+            Descripcion="MANEJO/RETIRO DESECHOS CONTAMINANTES"
+            Descuento="0.05" Importe="16.05" NoIdentificacion="3003005"
+            Unidad="UNIDAD DE S" ValorUnitario="16.05">
+            <cfdi:Impuestos>
+                <cfdi:Traslados>
+                    <cfdi:Traslado Base="16.00" Importe="2.56"
+                        Impuesto="002" TasaOCuota="0.160000" TipoFactor="Tasa"/>
+                </cfdi:Traslados>
+            </cfdi:Impuestos>
+        </cfdi:Concepto>
+        <cfdi:Concepto Cantidad="2.00" ClaveProdServ="25172000"
+            ClaveUnidad="H87" Descripcion="REF. TORNILLO ESTABILIZADOR"
+            Descuento="92.50" Importe="462.50" NoIdentificacion="99A"
+            Unidad="PIEZA" ValorUnitario="231.25">
+            <cfdi:Impuestos>
+                <cfdi:Traslados>
+                    <cfdi:Traslado Base="370.00" Importe="59.20"
+                        Impuesto="002" TasaOCuota="0.160000" TipoFactor="Tasa"/>
+                </cfdi:Traslados>
+            </cfdi:Impuestos>
+        </cfdi:Concepto>
+        <cfdi:Concepto Cantidad="2.00" ClaveProdServ="25172000"
+            ClaveUnidad="H87" Descripcion="REF. TERMINAL"
+            Descuento="122.84" Importe="614.20" NoIdentificacion="99A"
+            Unidad="PIEZA" ValorUnitario="307.10">
+            <cfdi:Impuestos>
+                <cfdi:Traslados>
+                    <cfdi:Traslado Base="491.36" Importe="78.62"
+                        Impuesto="002" TasaOCuota="0.160000" TipoFactor="Tasa"/>
+                </cfdi:Traslados>
+            </cfdi:Impuestos>
+        </cfdi:Concepto>
+        <cfdi:Concepto Cantidad="2.00" ClaveProdServ="25172000"
+            ClaveUnidad="H87" Descripcion="REF. BUJE DE HORQUILLA"
+            Descuento="276.02" Importe="1380.10" NoIdentificacion="99B"
+            Unidad="PIEZA" ValorUnitario="690.05">
+            <cfdi:Impuestos>
+                <cfdi:Traslados>
+                    <cfdi:Traslado Base="1104.08" Importe="176.65"
+                        Impuesto="002" TasaOCuota="0.160000" TipoFactor="Tasa"/>
+                </cfdi:Traslados>
+            </cfdi:Impuestos>
+        </cfdi:Concepto>
+        <cfdi:Concepto Cantidad="1.00" ClaveProdServ="25172000"
+            ClaveUnidad="H87" Descripcion="REF. CAJA DE DIRECCION"
+            Descuento="952.01" Importe="4760.05" NoIdentificacion="99D"
+            Unidad="PIEZA" ValorUnitario="4760.05">
+            <cfdi:Impuestos>
+                <cfdi:Traslados>
+                    <cfdi:Traslado Base="3808.04" Importe="609.29"
+                        Impuesto="002" TasaOCuota="0.160000" TipoFactor="Tasa"/>
+                </cfdi:Traslados>
+            </cfdi:Impuestos>
+        </cfdi:Concepto>
+        <cfdi:Concepto Cantidad="2.00" ClaveProdServ="25172000"
+            ClaveUnidad="H87" Descripcion="REF. BALERO DELANTERO"
+            Descuento="228.66" Importe="1143.30" NoIdentificacion="99B"
+            Unidad="PIEZA" ValorUnitario="571.65">
+            <cfdi:Impuestos>
+                <cfdi:Traslados>
+                    <cfdi:Traslado Base="914.64" Importe="146.34"
+                        Impuesto="002" TasaOCuota="0.160000" TipoFactor="Tasa"/>
+                </cfdi:Traslados>
+            </cfdi:Impuestos>
+        </cfdi:Concepto>
+        <cfdi:Concepto Cantidad="1.00" ClaveProdServ="78181500"
+            ClaveUnidad="E48" Descripcion="ALINEACION 1 EJE"
+            Descuento="52.99" Importe="381.99"
+            NoIdentificacion="02101001" Unidad="UNIDAD DE S" ValorUnitario="381.99">
+            <cfdi:Impuestos>
+                <cfdi:Traslados>
+                    <cfdi:Traslado Base="329.00" Importe="52.64"
+                        Impuesto="002" TasaOCuota="0.160000" TipoFactor="Tasa"/>
+                </cfdi:Traslados>
+            </cfdi:Impuestos>
+        </cfdi:Concepto>
+        <cfdi:Concepto Cantidad="1.00" ClaveProdServ="78181500"
+            ClaveUnidad="E48" Descripcion="MANO OBRA LADO DERECHO"
+            Importe="3050.00" NoIdentificacion="03001001"
+            Unidad="UNIDAD DE S" ValorUnitario="3050.00">
+            <cfdi:Impuestos>
+                <cfdi:Traslados>
+                    <cfdi:Traslado Base="3050.00" Importe="488.00"
+                        Impuesto="002" TasaOCuota="0.160000" TipoFactor="Tasa"/>
+                </cfdi:Traslados>
+            </cfdi:Impuestos>
+        </cfdi:Concepto>
+        <cfdi:Concepto Cantidad="1.00" ClaveProdServ="78181500"
+            ClaveUnidad="E48"
+            Descripcion="MANEJO/RETIRO DESECHOS CONTAMINANTES"
+            Descuento="0.05" Importe="16.05" NoIdentificacion="3003005"
+            Unidad="UNIDAD DE S" ValorUnitario="16.05">
+            <cfdi:Impuestos>
+                <cfdi:Traslados>
+                    <cfdi:Traslado Base="16.00" Importe="2.56"
+                        Impuesto="002" TasaOCuota="0.160000" TipoFactor="Tasa"/>
+                </cfdi:Traslados>
+            </cfdi:Impuestos>
+        </cfdi:Concepto>
+        <cfdi:Concepto Cantidad="1.00" ClaveProdServ="40161500"
+            ClaveUnidad="H87" Descripcion="FILTRO ACEITE FRAM"
+            Descuento="17.80" Importe="89.00" NoIdentificacion="025095"
+            Unidad="PIEZA" ValorUnitario="89.00">
+            <cfdi:Impuestos>
+                <cfdi:Traslados>
+                    <cfdi:Traslado Base="71.20" Importe="11.39"
+                        Impuesto="002" TasaOCuota="0.160000" TipoFactor="Tasa"/>
+                </cfdi:Traslados>
+            </cfdi:Impuestos>
+        </cfdi:Concepto>
+        <cfdi:Concepto Cantidad="1.00" ClaveProdServ="78181500"
+            ClaveUnidad="E48" Descripcion="MANO DE OBRA"
+            Importe="150.00" NoIdentificacion="03001001"
+            Unidad="UNIDAD DE S" ValorUnitario="150.00">
+            <cfdi:Impuestos>
+                <cfdi:Traslados>
+                    <cfdi:Traslado Base="150.00" Importe="24.00"
+                        Impuesto="002" TasaOCuota="0.160000" TipoFactor="Tasa"/>
+                </cfdi:Traslados>
+            </cfdi:Impuestos>
+        </cfdi:Concepto>
+        <cfdi:Concepto Cantidad="1.00" ClaveProdServ="12181600"
+            ClaveUnidad="H87"
+            Descripcion="ACEITE CASTROL SINTETICO EDGE 5W30 GARRAFA 4.73LT"
+            Descuento="474.00" Importe="1896.00"
+            NoIdentificacion="025304" Unidad="PIEZA" ValorUnitario="1896.00">
+            <cfdi:Impuestos>
+                <cfdi:Traslados>
+                    <cfdi:Traslado Base="1422.00" Importe="227.52"
+                        Impuesto="002" TasaOCuota="0.160000" TipoFactor="Tasa"/>
+                </cfdi:Traslados>
+            </cfdi:Impuestos>
+        </cfdi:Concepto>
+        <cfdi:Concepto Cantidad="1.00" ClaveProdServ="78181500"
+            ClaveUnidad="E48" Descripcion="MANO OBRA LADO IZQUIERDO"
+            Importe="2959.02" NoIdentificacion="03001001"
+            Unidad="UNIDAD DE S" ValorUnitario="2959.02">
+            <cfdi:Impuestos>
+                <cfdi:Traslados>
+                    <cfdi:Traslado Base="2959.02" Importe="473.44"
+                        Impuesto="002" TasaOCuota="0.160000" TipoFactor="Tasa"/>
+                </cfdi:Traslados>
+            </cfdi:Impuestos>
+        </cfdi:Concepto>
+    </cfdi:Conceptos>
+    <cfdi:Impuestos TotalImpuestosTrasladados="2352.21">
+        <cfdi:Traslados>
+            <cfdi:Traslado Importe="2352.21" Impuesto="002"
+                TasaOCuota="0.160000" TipoFactor="Tasa"/>
+        </cfdi:Traslados>
+    </cfdi:Impuestos>
+    <cfdi:Complemento>
+        <tfd:TimbreFiscalDigital FechaTimbrado="2021-05-19T16:44:41"
+            NoCertificadoSAT="00001000000412961981"
+            RfcProvCertif="FCG840618N51"
+            SelloCFD="ephp0Se0U6yTmw2ElMhPFcS7TYNAJrN0giYVC/hJVTfggqBKZ/Qau+qMwCYmm1/5zTXQltlYJ/e2DulMuABi/ddXFupBUxz7PpfVEyBtFdtg1Pnn3XfLrvFurv4dqOxhyAGzM3gEglMl2YAPxolnKiBOMaehC19jdcr8F7HyI/HGMxFMH5jDHPzBP/SM2yYGDU3Uf/iyoIIDZkjN4/OMM4Xc0sy7U/3Y1i2gEO76sznouSKG1McKvOo0s5cBDT3d2NNNb5TKP3oo+3TCodSLp8Q30rXbe4tGQ5wjwiWlbj2uKpJI5KzcH3XzUf1L4VTVeLzpBU7HpKs5yTywAEfBQg=="
+            SelloSAT="kBITtDsh2fsFKYCHWnno21jTrk1t1SHOdNVleySJMHv9Gj0UqOfBsG/EazazSGG9ZG8qDIGWtr48qEso5j6LRgduIi7HsklEhTgZP+ZCkb1Azh9MFVmnqh/7CKTkWhtZw8G3slg91pzx0sAC2eaXGVMe2poQaVPIslObIV6dvJWUv8iyDAYfjzygg5EShIksN7YoiL5Rteo4I3Vbi+sn5LC+iHWR6lt1i9/B7euEo9yt1Ljp5NeEDBh/ap2uECwmc5bE1r3ymC+jZCNaTU9nrWnwF2/eiUgLyAcd52Qr4IxpyICPjwDdEBqR3pmthuX54M+NUzy604o1bDWErYmlJQ=="
+            UUID="0FA26203-45F7-42D2-84AA-4146AA877FAC" Version="1.1"
+            xmlns:tfd="http://www.sat.gob.mx/TimbreFiscalDigital"
+            xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://www.sat.gob.mx/TimbreFiscalDigital http://www.sat.gob.mx/sitio_internet/cfd/TimbreFiscalDigital/TimbreFiscalDigitalv11.xsd"/>
+    </cfdi:Complemento>
+    <cfdi:Addenda>
+        <radialLlantas:RADIAL_LLANTAS
+            cantidadLetra="(**DIECISIETE MIL CINCUENTA Y TRES PESOS 55/100 MXN**)"
+            comentarios="** GRACIAS POR SU COMPRA **                                                                 NOMBRE Y FIRMA DEL SUSCRIPTOR:__________________________________________\nRecibí de conformidad los servicios y productos descritos, así como factura correspondiente. Y acepto que Radial Llantas SAPI de CV deseche y/o destruya de manera responsable las llantas y refacciones reemplazadas a mi vehículo depositadas en sus instalaciones.\nCFDI 3.3           TIPO DE COMPROBANTE: Ingreso\n"
+            email="ACTIVOFIJO@SECORP.MX; NOTIENEMAIL@RADIAL.COM.MX; NOTIENEMAIL@RADIAL.COM.MX"
+            empleadoQueFactura="7015" fechaDeVencimiento="19/may/2021"
+            formaDeEntrega="Patio" formaDeVenta="Patio"
+            idRadial="34016659" noCliente="500000"
+            noFormaDeVenta="PVBC11159"
+            nombreImpresora="HP LASERJET PRO MFP M225-M226 PCL 6"
+            numCopiasAlmacen="1" numCopiasOriginal="1" placas="ENL9460"
+            status="1" subDocumento="Factura" subtotal="14701.34"
+            tasaDeInteres="&lt;10>" tazaIva="0.160000" tipoDocto="1"
+            tipoDocumento="Factura" totalDePiezas="17.00"
+            totalIvaMX="2352.21" totalMX="17053.55"
+            totalRetenciones="0.00"
+            xmlns:radialLlantas="http://www.formasdigitales.mx/cfd" xsi:schemaLocation="http://www.formasdigitales.mx/cfd http://www.formasdigitales.mx/cfd/radialLlantas.xsd">
+            <radialLlantas:EmisorAddenda calle="Av. Lázaro Cárdenas"
+                codigoPostal="44920" colonia="Col. Las Torres"
+                estado="Jalisco" localidad="Guadalajara"
+                lugarExpedicion="PLAYA DEL CARMEN 2, CARRET. FED. CANCUN - TULUM MZ. 299 LT4 Y 5 ENTRE 29 SUR Y 41 SUR, EJIDO SUR, CANCUN, Quintana Roo, México, CP 77712"
+                municipio="Guadalajara" noExterior="2107" pais="México"/>
+            <radialLlantas:ReceptorAddenda
+                calle="CERRADA DE LA BARROCA #6106" codigoPostal="31215"
+                colonia="PLAZA BARROCA" estado="CHIHUAHUA"
+                localidad="CHIHUAHUA" municipio="CHIHUAHUA" pais="MÉXICO"/>
+            <radialLlantas:ConceptosAddenda>
+                <radialLlantas:ConceptoAddenda cod="03"
+                    descuentoPLPV="0.05" empleado="4466"
+                    importePDF="16.00" precioNeto="16.00"
+                    promoDescuento="0.00" promoPorcentaje="0.00" tasaDescuento="0.31"/>
+                <radialLlantas:ConceptoAddenda cod="03"
+                    descuentoPLPV="92.50" empleado="6088"
+                    importePDF="370.00" precioNeto="185.00"
+                    promoDescuento="0.00" promoPorcentaje="0.00" tasaDescuento="20.00"/>
+                <radialLlantas:ConceptoAddenda cod="03"
+                    descuentoPLPV="122.84" empleado="6088"
+                    importePDF="491.36" precioNeto="245.68"
+                    promoDescuento="0.00" promoPorcentaje="0.00" tasaDescuento="20.00"/>
+                <radialLlantas:ConceptoAddenda cod="03"
+                    descuentoPLPV="276.02" empleado="6088"
+                    importePDF="1104.08" precioNeto="552.04"
+                    promoDescuento="0.00" promoPorcentaje="0.00" tasaDescuento="20.00"/>
+                <radialLlantas:ConceptoAddenda cod="03"
+                    descuentoPLPV="952.01" empleado="6088"
+                    importePDF="3808.04" precioNeto="3808.04"
+                    promoDescuento="0.00" promoPorcentaje="0.00" tasaDescuento="20.00"/>
+                <radialLlantas:ConceptoAddenda cod="03"
+                    descuentoPLPV="228.66" empleado="6088"
+                    importePDF="914.64" precioNeto="457.32"
+                    promoDescuento="0.00" promoPorcentaje="0.00" tasaDescuento="20.00"/>
+                <radialLlantas:ConceptoAddenda cod="03"
+                    descuentoPLPV="52.99" empleado="3323"
+                    importePDF="329.00" precioNeto="329.00"
+                    promoDescuento="0.00" promoPorcentaje="0.00" tasaDescuento="13.87"/>
+                <radialLlantas:ConceptoAddenda cod="SP"
+                    descuentoPLPV="0.00" empleado="6088"
+                    importePDF="3050.00" precioNeto="3050.00"
+                    promoDescuento="0.00" promoPorcentaje="0.00" tasaDescuento="0.00"/>
+                <radialLlantas:ConceptoAddenda cod="03"
+                    descuentoPLPV="0.05" empleado="4466"
+                    importePDF="16.00" precioNeto="16.00"
+                    promoDescuento="0.00" promoPorcentaje="0.00" tasaDescuento="0.31"/>
+                <radialLlantas:ConceptoAddenda cod="03"
+                    descuentoPLPV="17.80" empleado="3323"
+                    importePDF="71.20" precioNeto="71.20"
+                    promoDescuento="0.00" promoPorcentaje="0.00" tasaDescuento="20.00"/>
+                <radialLlantas:ConceptoAddenda cod="SP"
+                    descuentoPLPV="0.00" empleado="3323"
+                    importePDF="150.00" precioNeto="150.00"
+                    promoDescuento="0.00" promoPorcentaje="0.00" tasaDescuento="0.00"/>
+                <radialLlantas:ConceptoAddenda cod="04"
+                    descuentoPLPV="474.00" empleado="3323"
+                    importePDF="1422.00" precioNeto="1422.00"
+                    promoDescuento="0.00" promoPorcentaje="0.00" tasaDescuento="25.00"/>
+                <radialLlantas:ConceptoAddenda cod="SP"
+                    descuentoPLPV="0.00" empleado="3323"
+                    importePDF="2959.02" precioNeto="2959.02"
+                    promoDescuento="0.00" promoPorcentaje="0.00" tasaDescuento="0.00"/>
+            </radialLlantas:ConceptosAddenda>
+            <radialLlantas:EntregadoEn/>
+            <radialLlantas:ExpedidoEn Tel1="(984) 2061-342"
+                Tel2="(984) 2061-097"
+                calle="CARRET. FED. CANCUN - TULUM MZ. 299 LT4 Y 5 ENTRE 29 SUR Y 41 SUR"
+                codigoPostal="77712" colonia="EJIDO SUR"
+                estado="Quintana Roo" localidad="CANCUN"
+                municipio="CANCUN" nombre="PLAYA DEL CARMEN 2" pais="México"/>
+        </radialLlantas:RADIAL_LLANTAS>
+    </cfdi:Addenda>
+</cfdi:Comprobante>

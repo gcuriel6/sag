@@ -1,0 +1,86 @@
+﻿<?xml version="1.0" encoding="UTF-8" ?><cfdi:Comprobante xmlns:cfdi="http://www.sat.gob.mx/cfd/3" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://www.sat.gob.mx/cfd/3 http://www.sat.gob.mx/sitio_internet/cfd/3/cfdv33.xsd" Version="3.3" Serie="G" Folio="52286" Fecha="2021-05-03T12:46:10" FormaPago="03" SubTotal="5170.00" Descuento="370.00" Moneda="MXN" TipoCambio="1" Total="5184.00" TipoDeComprobante="I" MetodoPago="PUE" LugarExpedicion="22640" NoCertificado="00001000000411391133" Certificado="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" Sello="LZuoxbMpUCkQPkjqXZAPrx9Jt8bfE6U8qRd+VwJSzi3WjFGRrv+k++zvAc2htzgJ8aIYUy7585LxynMKvY7n95cFk0szrYzEJEgCqODrq9MSWCmThUUNBaS0PEbgY7tHrvfrTQIu69kQhe6HdmSJGX6Cb7exVVzazZE9Hnw056QZqMwGdFrVM4J6OIj1SPx5FNahmSopbN8bvrYceYNKxdS4uhCq2rlzDGr2T8/VXOxQeMunEfhOCnZ2IeweJu26cvmfvC/LOMlrxzFcet0M4kcBrWjKyfzQbCdgKS4km4irlOtUMJFAIXllBBPywy6PZqdgTzYinp90JEcai7IlIQ==">
+	<cfdi:Emisor Rfc="LSF081027882" Nombre="LLANTAS Y SERVICIOS FALCRO S. DE R.L. DE C.V." RegimenFiscal="601"/>
+	<cfdi:Receptor Rfc="SPG0905078B1" Nombre="SEGURIDAD PRIVADA GINTHER DE OCCIDENTE S DE RL DE CV" UsoCFDI="G03"/>
+	<cfdi:Conceptos>
+		<cfdi:Concepto ClaveProdServ="25171708" NoIdentificacion="REF-001" Cantidad="1.000000" ClaveUnidad="H87" Unidad="H87-U" Descripcion="BALATAS DELANTERAS" ValorUnitario="550.000000" Importe="550.000000" Descuento="0.000000">
+			<cfdi:Impuestos>
+				<cfdi:Traslados>
+					<cfdi:Traslado Base="550.000000" Impuesto="002" TipoFactor="Tasa" TasaOCuota="0.080000" Importe="44.000000"/>
+				</cfdi:Traslados>
+			</cfdi:Impuestos>
+		</cfdi:Concepto>
+		<cfdi:Concepto ClaveProdServ="25171705" NoIdentificacion="REF-011" Cantidad="1.000000" ClaveUnidad="H87" Unidad="H87-U" Descripcion="DISCO DELANTERO DERECHO" ValorUnitario="500.000000" Importe="500.000000" Descuento="0.000000">
+			<cfdi:Impuestos>
+				<cfdi:Traslados>
+					<cfdi:Traslado Base="500.000000" Impuesto="002" TipoFactor="Tasa" TasaOCuota="0.080000" Importe="40.000000"/>
+				</cfdi:Traslados>
+			</cfdi:Impuestos>
+		</cfdi:Concepto>
+		<cfdi:Concepto ClaveProdServ="25171705" NoIdentificacion="REF-012" Cantidad="1.000000" ClaveUnidad="H87" Unidad="H87-U" Descripcion="DISCO DELANTERO IZQUIERDO" ValorUnitario="500.000000" Importe="500.000000" Descuento="0.000000">
+			<cfdi:Impuestos>
+				<cfdi:Traslados>
+					<cfdi:Traslado Base="500.000000" Impuesto="002" TipoFactor="Tasa" TasaOCuota="0.080000" Importe="40.000000"/>
+				</cfdi:Traslados>
+			</cfdi:Impuestos>
+		</cfdi:Concepto>
+		<cfdi:Concepto ClaveProdServ="25171700" NoIdentificacion="REF-289" Cantidad="1.000000" ClaveUnidad="H87" Unidad="H87-U" Descripcion="BALERO DOBLE DELANT. L/DERECHO" ValorUnitario="450.000000" Importe="450.000000" Descuento="0.000000">
+			<cfdi:Impuestos>
+				<cfdi:Traslados>
+					<cfdi:Traslado Base="450.000000" Impuesto="002" TipoFactor="Tasa" TasaOCuota="0.080000" Importe="36.000000"/>
+				</cfdi:Traslados>
+			</cfdi:Impuestos>
+		</cfdi:Concepto>
+		<cfdi:Concepto ClaveProdServ="25171700" NoIdentificacion="REF-250" Cantidad="1.000000" ClaveUnidad="H87" Unidad="H87-U" Descripcion="BALERO DOBLE TRASERO L/IZQ." ValorUnitario="450.000000" Importe="450.000000" Descuento="0.000000">
+			<cfdi:Impuestos>
+				<cfdi:Traslados>
+					<cfdi:Traslado Base="450.000000" Impuesto="002" TipoFactor="Tasa" TasaOCuota="0.080000" Importe="36.000000"/>
+				</cfdi:Traslados>
+			</cfdi:Impuestos>
+		</cfdi:Concepto>
+		<cfdi:Concepto ClaveProdServ="78181507" NoIdentificacion="FRE-01" Cantidad="1.000000" ClaveUnidad="E48" Unidad="E48-US" Descripcion="REPARACION DE FRENOS DELANTEROS AUTO" ValorUnitario="450.000000" Importe="450.000000" Descuento="0.000000">
+			<cfdi:Impuestos>
+				<cfdi:Traslados>
+					<cfdi:Traslado Base="450.000000" Impuesto="002" TipoFactor="Tasa" TasaOCuota="0.080000" Importe="36.000000"/>
+				</cfdi:Traslados>
+			</cfdi:Impuestos>
+		</cfdi:Concepto>
+		<cfdi:Concepto ClaveProdServ="78181500" NoIdentificacion="FRE-40" Cantidad="2.000000" ClaveUnidad="E48" Unidad="E48-US" Descripcion="REEMPLAZO DE DISCO AUTO" ValorUnitario="250.000000" Importe="500.000000" Descuento="0.000000">
+			<cfdi:Impuestos>
+				<cfdi:Traslados>
+					<cfdi:Traslado Base="500.000000" Impuesto="002" TipoFactor="Tasa" TasaOCuota="0.080000" Importe="40.000000"/>
+				</cfdi:Traslados>
+			</cfdi:Impuestos>
+		</cfdi:Concepto>
+		<cfdi:Concepto ClaveProdServ="78181500" NoIdentificacion="FRE-28" Cantidad="2.000000" ClaveUnidad="E48" Unidad="E48-US" Descripcion="REEMPLAZO BALERO DOBLE DEL/TRAS. CON PRENSA AUTO" ValorUnitario="475.000000" Importe="950.000000" Descuento="0.000000">
+			<cfdi:Impuestos>
+				<cfdi:Traslados>
+					<cfdi:Traslado Base="950.000000" Impuesto="002" TipoFactor="Tasa" TasaOCuota="0.080000" Importe="76.000000"/>
+				</cfdi:Traslados>
+			</cfdi:Impuestos>
+		</cfdi:Concepto>
+		<cfdi:Concepto ClaveProdServ="78181500" NoIdentificacion="FRE-17" Cantidad="1.000000" ClaveUnidad="E48" Unidad="E48-US" Descripcion="LIMPIEZA Y AJUSTE FRENOS TRASEROS AUTO" ValorUnitario="250.000000" Importe="250.000000" Descuento="0.000000">
+			<cfdi:Impuestos>
+				<cfdi:Traslados>
+					<cfdi:Traslado Base="250.000000" Impuesto="002" TipoFactor="Tasa" TasaOCuota="0.080000" Importe="20.000000"/>
+				</cfdi:Traslados>
+			</cfdi:Impuestos>
+		</cfdi:Concepto>
+		<cfdi:Concepto ClaveProdServ="78181507" NoIdentificacion="FRE-09" Cantidad="2.000000" ClaveUnidad="E48" Unidad="E48-US" Descripcion="TORNEADO TAMBOR AUTO" ValorUnitario="100.000000" Importe="200.000000" Descuento="0.000000">
+			<cfdi:Impuestos>
+				<cfdi:Traslados>
+					<cfdi:Traslado Base="200.000000" Impuesto="002" TipoFactor="Tasa" TasaOCuota="0.080000" Importe="16.000000"/>
+				</cfdi:Traslados>
+			</cfdi:Impuestos>
+		</cfdi:Concepto>
+		<cfdi:Concepto ClaveProdServ="78181507" NoIdentificacion="SER-12" Cantidad="2.000000" ClaveUnidad="E48" Unidad="E48-US" Descripcion="REPARACION LLANTA AUTO RIN 13-15" ValorUnitario="60.000000" Importe="120.000000" Descuento="120.000000"/>
+		<cfdi:Concepto ClaveProdServ="78181505" NoIdentificacion="SER-04" Cantidad="1.000000" ClaveUnidad="E48" Unidad="E48-US" Descripcion="REVISION BASICA FALCRO" ValorUnitario="250.000000" Importe="250.000000" Descuento="250.000000"/>
+	</cfdi:Conceptos>
+	<cfdi:Impuestos TotalImpuestosTrasladados="384.00">
+		<cfdi:Traslados>
+			<cfdi:Traslado Impuesto="002" TipoFactor="Tasa" TasaOCuota="0.080000" Importe="384.00"/>
+		</cfdi:Traslados>
+	</cfdi:Impuestos>
+	<cfdi:Complemento>
+		<tfd:TimbreFiscalDigital xmlns:tfd="http://www.sat.gob.mx/TimbreFiscalDigital" xsi:schemaLocation="http://www.sat.gob.mx/TimbreFiscalDigital http://www.sat.gob.mx/sitio_internet/cfd/TimbreFiscalDigital/TimbreFiscalDigitalv11.xsd" Version="1.1" UUID="901DA57B-3797-4EFE-AAA7-81C11DF8D2C3" FechaTimbrado="2021-05-03T14:47:55" RfcProvCertif="IAD121214B34" SelloCFD="LZuoxbMpUCkQPkjqXZAPrx9Jt8bfE6U8qRd+VwJSzi3WjFGRrv+k++zvAc2htzgJ8aIYUy7585LxynMKvY7n95cFk0szrYzEJEgCqODrq9MSWCmThUUNBaS0PEbgY7tHrvfrTQIu69kQhe6HdmSJGX6Cb7exVVzazZE9Hnw056QZqMwGdFrVM4J6OIj1SPx5FNahmSopbN8bvrYceYNKxdS4uhCq2rlzDGr2T8/VXOxQeMunEfhOCnZ2IeweJu26cvmfvC/LOMlrxzFcet0M4kcBrWjKyfzQbCdgKS4km4irlOtUMJFAIXllBBPywy6PZqdgTzYinp90JEcai7IlIQ==" NoCertificadoSAT="00001000000504587441" SelloSAT="SDKCj0yl9JavGMw6xi50vOFzgqubOPIMC2PuAv1rdCVTtvwrDPRxL6h39gLj9+XGicU+xPMizCvwy4z6rSFBr0cH3CEeo9wY7IGTI8hGDHa9ZqkFbXK5mGbdmqmeaNfsKoBkbUZoh+kItuh+eogPqKx5dQVpU/KCVpDvIN7UB6jqLJ2KXijUXBIYiNaXrWw/+FZ4AYe7d9jixo6cqYno9q5w/Ujz3IVubs6/+Plam249FReB2PFTmjEwk148OlO/EidzBEjMkE4jummlXahgQB/fYOK6PbwTFMSMGBjf0qclWKdWgG5iLmvC3DVbw4cdRxFMaGP6bpLAal7KEoNYxg=="/>
+	</cfdi:Complemento>
+</cfdi:Comprobante>

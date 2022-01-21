@@ -1,0 +1,36 @@
+﻿<?xml version="1.0" encoding="UTF-8" standalone="yes"?>
+<cfdi:Comprobante LugarExpedicion="44980" MetodoPago="PUE" TipoDeComprobante="I" Total="520.84" Moneda="MXN" SubTotal="449.00" Certificado="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" NoCertificado="00001000000406563390" FormaPago="03" Sello="G+QW9mXTY9SUo5e//p+umW3saLUpDlLsyJhuNkYfe8MGaR7Jo9RS/bUNqlzK105D8RWmA7B85YyKe4F7QRS5kI51IhOix1I3jvqr/FzglZryXWcYuk9kZx6rGsCIe7bUKb60CSm0Sig1qFyJxlthGx9rLhtgRpWMd3aRk3OF9pRfvKOjDKGJWJmY7CNXdJF8hjbeivf8JJIsEtLichDZMVAcq67/Xxb8Z7fNRtkOHA8ebogouOORLPPMF5j1kS8d6NpeXhy5v+D4BdJZ/QFUlq3kfIhsP2VAWg8Od8DsZoYw4TNrAgQk276bIyngOPef4uNChfe1lQ1przYJ6C106A==" Fecha="2020-04-28T15:27:33" Folio="173" Serie="A" Version="3.3" xsi:schemaLocation="http://www.sat.gob.mx/cfd/3 http://www.sat.gob.mx/sitio_internet/cfd/3/cfdv33.xsd" xmlns:cfdi="http://www.sat.gob.mx/cfd/3" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance">
+    <cfdi:Emisor RegimenFiscal="612" Nombre="ALEJANDRO VIDRIO CALDERON" Rfc="VICA8410244V1"/>
+    <cfdi:Receptor UsoCFDI="G03" Nombre="SEGURIDAD PRIVADA GINTHER DE OCCIDENTE S. DE R.L. DE C.V" Rfc="SPG0905078B1"/>
+    <cfdi:Conceptos>
+        <cfdi:Concepto Importe="50.00" ValorUnitario="50.00" Descripcion="Bujía D8EA NGK" Unidad="Pieza " ClaveUnidad="EA" Cantidad="1" NoIdentificacion="01" ClaveProdServ="01010101">
+            <cfdi:Impuestos>
+                <cfdi:Traslados>
+                    <cfdi:Traslado Importe="8.00" TasaOCuota="0.160000" TipoFactor="Tasa" Impuesto="002" Base="50.00"/>
+                </cfdi:Traslados>
+            </cfdi:Impuestos>
+        </cfdi:Concepto>
+        <cfdi:Concepto Importe="199.00" ValorUnitario="199.00" Descripcion="Aceite Motul 20W 50 Mineral" Unidad="Pieza " ClaveUnidad="EA" Cantidad="1" NoIdentificacion="01" ClaveProdServ="01010101">
+            <cfdi:Impuestos>
+                <cfdi:Traslados>
+                    <cfdi:Traslado Importe="31.84" TasaOCuota="0.160000" TipoFactor="Tasa" Impuesto="002" Base="199.00"/>
+                </cfdi:Traslados>
+            </cfdi:Impuestos>
+        </cfdi:Concepto>
+        <cfdi:Concepto Importe="200.00" ValorUnitario="200.00" Descripcion="Mano de Obra" Unidad="Pieza " ClaveUnidad="EA" Cantidad="1" NoIdentificacion="01" ClaveProdServ="01010101">
+            <cfdi:Impuestos>
+                <cfdi:Traslados>
+                    <cfdi:Traslado Importe="32.00" TasaOCuota="0.160000" TipoFactor="Tasa" Impuesto="002" Base="200.00"/>
+                </cfdi:Traslados>
+            </cfdi:Impuestos>
+        </cfdi:Concepto>
+    </cfdi:Conceptos>
+    <cfdi:Impuestos TotalImpuestosTrasladados="71.84">
+        <cfdi:Traslados>
+            <cfdi:Traslado Importe="71.84" TasaOCuota="0.160000" TipoFactor="Tasa" Impuesto="002"/>
+        </cfdi:Traslados>
+    </cfdi:Impuestos>
+    <cfdi:Complemento>
+        <tfd:TimbreFiscalDigital FechaTimbrado="2020-04-28T15:27:35" NoCertificadoSAT="00001000000406144089" RfcProvCertif="CAD100607RY8" SelloCFD="G+QW9mXTY9SUo5e//p+umW3saLUpDlLsyJhuNkYfe8MGaR7Jo9RS/bUNqlzK105D8RWmA7B85YyKe4F7QRS5kI51IhOix1I3jvqr/FzglZryXWcYuk9kZx6rGsCIe7bUKb60CSm0Sig1qFyJxlthGx9rLhtgRpWMd3aRk3OF9pRfvKOjDKGJWJmY7CNXdJF8hjbeivf8JJIsEtLichDZMVAcq67/Xxb8Z7fNRtkOHA8ebogouOORLPPMF5j1kS8d6NpeXhy5v+D4BdJZ/QFUlq3kfIhsP2VAWg8Od8DsZoYw4TNrAgQk276bIyngOPef4uNChfe1lQ1przYJ6C106A==" SelloSAT="KwNGDieSfL31YpmC92sS0I8++Dpwa/atPvOOnv/Ztqaaeeu9c67/DkXNj+fhqkwKS14bg8EZIqZ0pZ/2alBXvO+jKCGwe4cNNDIbLT8bk8cBGELxOvjf8wsmUFyngXe5t9d1BjjrRJoMIryR/0fCbvwU6NzIRzF5xHa7wkcVeDTvV/Q5ZPYF32yOSZhZK6dhcMHxXktaIbOBJO7sGDp4mLnECGv0jatCVYcPyLB8483R8Vy6vwRzneB3PIO2LVPWVXuJz/g+I2ELApAvluLi2KX4CbbENnGM7Z+HkpWcqlL9FSgbMr3LE1U/1vE0ve7maS2bmY4FgjttFh2dRZ8XUQ==" UUID="2353aab9-67bd-497f-a528-2b62de35d0b4" Version="1.1" xsi:schemaLocation="http://www.sat.gob.mx/TimbreFiscalDigital http://www.sat.gob.mx/sitio_internet/cfd/TimbreFiscalDigital/TimbreFiscalDigitalv11.xsd" xmlns:tfd="http://www.sat.gob.mx/TimbreFiscalDigital"/>
+    </cfdi:Complemento>
+</cfdi:Comprobante>

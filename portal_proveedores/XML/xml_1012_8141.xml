@@ -1,0 +1,47 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<cfdi:Comprobante xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://www.sat.gob.mx/cfd/3 http://www.sat.gob.mx/sitio_internet/cfd/3/cfdv33.xsd" xmlns:cfdi="http://www.sat.gob.mx/cfd/3" Version="3.3" Serie="LIB" Folio="3463" Fecha="2020-09-03T13:15:59" Sello="Yvgqz8/R9RvxgNqFR5P0Q/IDFTFMF6MjGU0DP7apR6WJcTBjp5JtGGTmtxwK5vBENZ71yJUirU7xWJ4fsd/Q7swq2r9Q8sOFV/w4aHKRpXloZkcMpv6tpWc/HYrIMeQTqFvTc11mXZ9b4BXWi8V89Yq5yQVlzu3rV+ldrWghjd77XXNWgl0EUsPSBLaGmO46O8cGkknKgFfSWCZr1n8jeT1bB4fRccTuvMvvCkZon5/hTYmLGQSwS7/ASNEG74pAmWrVIMGzYq0ppZpXOypTc55g+EyInvFDlEHHQYffJjZ3v+Ke+8GVCU2S+FbLWzIfTEfMa1/tkm2mHKDa7ozbTg==" FormaPago="03" NoCertificado="00001000000502472413" Certificado="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" CondicionesDePago="CONTADO" SubTotal="1077.16" Moneda="MXN" Total="1249.51" TipoDeComprobante="I" MetodoPago="PUE" LugarExpedicion="31000">
+	<cfdi:Emisor Rfc="BGA1510206C4" Nombre="Bordados Gardea SA de CV" RegimenFiscal="601"/>
+	<cfdi:Receptor Rfc="RSM1710278A8" Nombre="REAL SHINY DE MEXICO, S.A. DE C.V." UsoCFDI="P01"/>
+	<cfdi:Conceptos>
+		<cfdi:Concepto ClaveProdServ="53101604" NoIdentificacion="6000DLCELS" Cantidad="1" ClaveUnidad="H87" Unidad="Pieza" Descripcion="BLUSA PLAYERYTEES DL CELESTE S" ValorUnitario="217.50" Importe="217.50">
+			<cfdi:Impuestos>
+				<cfdi:Traslados>
+					<cfdi:Traslado Base="217.50" Impuesto="002" TipoFactor="Tasa" TasaOCuota="0.160000" Importe="34.80"/>
+				</cfdi:Traslados>
+			</cfdi:Impuestos>
+		</cfdi:Concepto>
+		<cfdi:Concepto ClaveProdServ="53101604" NoIdentificacion="6000DLROJS" Cantidad="1" ClaveUnidad="H87" Unidad="Pieza" Descripcion="BLUSA PLAYERYTEES DL ROJO S" ValorUnitario="217.50" Importe="217.50">
+			<cfdi:Impuestos>
+				<cfdi:Traslados>
+					<cfdi:Traslado Base="217.50" Impuesto="002" TipoFactor="Tasa" TasaOCuota="0.160000" Importe="34.80"/>
+				</cfdi:Traslados>
+			</cfdi:Impuestos>
+		</cfdi:Concepto>
+		<cfdi:Concepto ClaveProdServ="53101604" NoIdentificacion="6000DLNEGS" Cantidad="1" ClaveUnidad="H87" Unidad="Pieza" Descripcion="BLUSA PLAYERYTEES DL NEGRO S" ValorUnitario="217.50" Importe="217.50">
+			<cfdi:Impuestos>
+				<cfdi:Traslados>
+					<cfdi:Traslado Base="217.50" Impuesto="002" TipoFactor="Tasa" TasaOCuota="0.160000" Importe="34.80"/>
+				</cfdi:Traslados>
+			</cfdi:Impuestos>
+		</cfdi:Concepto>
+		<cfdi:Concepto ClaveProdServ="53101604" NoIdentificacion="6000DLCAQS" Cantidad="1" ClaveUnidad="H87" Unidad="Pieza" Descripcion="BLUSA PLAYERYTEES DL CAQUI S" ValorUnitario="217.50" Importe="217.50">
+			<cfdi:Impuestos>
+				<cfdi:Traslados>
+					<cfdi:Traslado Base="217.50" Impuesto="002" TipoFactor="Tasa" TasaOCuota="0.160000" Importe="34.80"/>
+				</cfdi:Traslados>
+			</cfdi:Impuestos>
+		</cfdi:Concepto>
+		<cfdi:Concepto ClaveProdServ="53101604" NoIdentificacion="6000DLBLAS" Cantidad="1" ClaveUnidad="H87" Unidad="Pieza" Descripcion="BLUSA PLAYERYTEES DL BLANCO S" ValorUnitario="207.16" Importe="207.16">
+			<cfdi:Impuestos>
+				<cfdi:Traslados>
+					<cfdi:Traslado Base="207.16" Impuesto="002" TipoFactor="Tasa" TasaOCuota="0.160000" Importe="33.1456"/>
+				</cfdi:Traslados>
+			</cfdi:Impuestos>
+		</cfdi:Concepto>
+	</cfdi:Conceptos>
+	<cfdi:Impuestos TotalImpuestosTrasladados="172.35">
+		<cfdi:Traslados>
+			<cfdi:Traslado Impuesto="002" TipoFactor="Tasa" TasaOCuota="0.160000" Importe="172.35"/>
+		</cfdi:Traslados>
+	</cfdi:Impuestos>
+	<cfdi:Complemento><tfd:TimbreFiscalDigital xmlns:tfd="http://www.sat.gob.mx/TimbreFiscalDigital" xsi:schemaLocation="http://www.sat.gob.mx/TimbreFiscalDigital http://www.sat.gob.mx/sitio_internet/cfd/TimbreFiscalDigital/TimbreFiscalDigitalv11.xsd" SelloSAT="W2ysrkzDXJMifXkBX8nPnUEV7uxM/HJ9JpJF18p1iUYU9sZalZSH2ueJ4b3tjmr9gUE9zulUnaMcbaKDiiVsoFuzAGDxrNuYfcQk4EZr3JKh5sCxsVidniAUNufloonb0MoKdhAsd8ZT7kXfOYUE3huaey5ySL5erUwMq4ZtrbdGWW0xD05Olp5MXYGV6ggjrx1jBaag+gkVl9S5bl4+BsiMd1WnsJLESuxQ76ATL5KXrk1n2UrPiPA+SPVTXUWOezIip8lJ9inmBZi7bEM++WGBMki1CNIjr/WnBT8R0K/tnV+BAaKFug6c6fGuJpSS042cX0o5X6fcj7xIm+Cwqg==" NoCertificadoSAT="00001000000502000436" SelloCFD="Yvgqz8/R9RvxgNqFR5P0Q/IDFTFMF6MjGU0DP7apR6WJcTBjp5JtGGTmtxwK5vBENZ71yJUirU7xWJ4fsd/Q7swq2r9Q8sOFV/w4aHKRpXloZkcMpv6tpWc/HYrIMeQTqFvTc11mXZ9b4BXWi8V89Yq5yQVlzu3rV+ldrWghjd77XXNWgl0EUsPSBLaGmO46O8cGkknKgFfSWCZr1n8jeT1bB4fRccTuvMvvCkZon5/hTYmLGQSwS7/ASNEG74pAmWrVIMGzYq0ppZpXOypTc55g+EyInvFDlEHHQYffJjZ3v+Ke+8GVCU2S+FbLWzIfTEfMa1/tkm2mHKDa7ozbTg==" RfcProvCertif="SCD110105654" FechaTimbrado="2020-09-03T14:26:36" UUID="352386A8-4D8A-5947-AB80-4811DBD12A72" Version="1.1"/></cfdi:Complemento></cfdi:Comprobante>

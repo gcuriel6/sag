@@ -1,0 +1,43 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<cfdi:Comprobante xmlns:cfdi="http://www.sat.gob.mx/cfd/3"
+ xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+ xsi:schemaLocation="http://www.sat.gob.mx/cfd/3 http://www.sat.gob.mx/sitio_internet/cfd/3/cfdv33.xsd"
+ Version="3.3"
+ Serie="SM"
+ Folio="14713"
+ Fecha="2021-01-23T11:49:01"
+ Sello="aLiPUjbIqdPbHS7m2yWYKWyQ1IJL1mpzK3TivXzZ5k7f2omDo4M8CygfSEC1m6K7mZeP4/u34XWWrCN/hRNSFamzsbqeW/DVI6blrCCyJ9Kxy9ScVDRSGFm5a62/V1qp/m8nXJdKsP/fYFp5MqXts2X8HB/txDdoJTEgf5Xbwy4F+Omnbm2jA07cmiE4V0N4d+4Tn0pUpOpXpSwnbtBpEsADDoRoqdqUALdF+spIl/a/4y1eCQONNtCQOWd1MGf9PJSS5c6yeazeVS+GRizMC2ues3P/D3lrDf/OA1dqDZ42eBnZ4BVLEWPJFOmUV3LQ9N9XWZlELB9qQc/GE+vayw=="
+ NoCertificado="00001000000506098217"
+ Certificado="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"
+ TipoDeComprobante="I"
+ FormaPago="03"
+ SubTotal="2102.59"
+ TipoCambio="1"
+ Moneda="MXN"
+ Total="2439.00"
+ MetodoPago="PUE"
+ LugarExpedicion="54070"
+>
+<cfdi:Emisor Rfc="SVD840214ME9" Nombre="SOL VALLE DORADO S.A.P.I. DE C.V." RegimenFiscal="601"/>
+<cfdi:Receptor  Rfc="SPG0905078B1" Nombre="SEGURIDAD PRIVADA GINTHER DE OCCIDENTES S DE RL DE CV" UsoCFDI="G03"/>
+<cfdi:Conceptos>
+<cfdi:Concepto Cantidad="1.00" Unidad="Unidad de servicio" Descripcion="SERVICIO DE 24,000 KM" ValorUnitario="2052.34" Importe="2052.34" ClaveProdServ="78181500" ClaveUnidad="E48">
+<cfdi:Impuestos> <cfdi:Traslados>  <cfdi:Traslado Importe="328.374400"    TasaOCuota="0.160000"    TipoFactor="Tasa"    Impuesto="002"    Base="2052.34"/> </cfdi:Traslados></cfdi:Impuestos>
+</cfdi:Concepto>
+<cfdi:Concepto Cantidad="0.25" Unidad="Unidad de servicio" Descripcion="LAVADO DE CARROCERIA (CORTESIA)" ValorUnitario="1.00" Importe="0.25" ClaveProdServ="78181500" ClaveUnidad="E48">
+<cfdi:Impuestos> <cfdi:Traslados>  <cfdi:Traslado Importe="0.040000"    TasaOCuota="0.160000"    TipoFactor="Tasa"    Impuesto="002"    Base="0.25"/> </cfdi:Traslados></cfdi:Impuestos>
+</cfdi:Concepto>
+<cfdi:Concepto Cantidad="1.00" Unidad="Unidad de servicio" Descripcion="Materiales Diversos" ValorUnitario="50.00" Importe="50.00" ClaveProdServ="78181500" ClaveUnidad="E48">
+<cfdi:Impuestos> <cfdi:Traslados>  <cfdi:Traslado Importe="8.000000"    TasaOCuota="0.160000"    TipoFactor="Tasa"    Impuesto="002"    Base="50.00"/> </cfdi:Traslados></cfdi:Impuestos>
+</cfdi:Concepto>
+</cfdi:Conceptos>
+<cfdi:Impuestos TotalImpuestosTrasladados="336.41">
+<cfdi:Traslados>
+<cfdi:Traslado Impuesto="002" TipoFactor="Tasa" TasaOCuota="0.160000" Importe="336.41"/>
+</cfdi:Traslados>
+</cfdi:Impuestos>
+<cfdi:Complemento>
+<tfd:TimbreFiscalDigital xmlns:tfd="http://www.sat.gob.mx/TimbreFiscalDigital" xsi:schemaLocation="http://www.sat.gob.mx/TimbreFiscalDigital http://www.sat.gob.mx/sitio_internet/cfd/TimbreFiscalDigital/TimbreFiscalDigitalv11.xsd" Version="1.1" RfcProvCertif="SVT110323827" SelloCFD="aLiPUjbIqdPbHS7m2yWYKWyQ1IJL1mpzK3TivXzZ5k7f2omDo4M8CygfSEC1m6K7mZeP4/u34XWWrCN/hRNSFamzsbqeW/DVI6blrCCyJ9Kxy9ScVDRSGFm5a62/V1qp/m8nXJdKsP/fYFp5MqXts2X8HB/txDdoJTEgf5Xbwy4F+Omnbm2jA07cmiE4V0N4d+4Tn0pUpOpXpSwnbtBpEsADDoRoqdqUALdF+spIl/a/4y1eCQONNtCQOWd1MGf9PJSS5c6yeazeVS+GRizMC2ues3P/D3lrDf/OA1dqDZ42eBnZ4BVLEWPJFOmUV3LQ9N9XWZlELB9qQc/GE+vayw==" FechaTimbrado="2021-01-23T12:02:36" UUID="D421CCBB-7790-48A7-AE26-211D0DA665BF" NoCertificadoSAT="00001000000413073350" SelloSAT="k41rCCkYRERtY2IIk5YRfSv9tiRHf/mrbfRUvYKOmwmkkefgulTnEd5gE3e+BUdBJLZu5RcHKHjpgJlsJLtGuwpD7BBriM6rcmKPJYNhpjgTbDwbNOtpLt0E04hqjmiosfv/xG7u0wOqXXVuR1FAxwC8U1R8oiowHK/Rl6f0iLKtpsTLepVQJh807elSTHxTb/rBfal557goJiYQcoPzIce3AcJ9FEtbVG05hWv/U0ydD1HSO3MKFbaTHZ3k3HG+7HOdjaSgNAlgmjgTpDZ0UfHp0Z4c4jOrcioO0JQkQ5mrHiL3T/vtygMF9HZBZ53UQfmRjpdG/QMloPNOKVMvxg=="/>
+</cfdi:Complemento>
+</cfdi:Comprobante>
+ 

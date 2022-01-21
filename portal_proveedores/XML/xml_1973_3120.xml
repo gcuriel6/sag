@@ -1,0 +1,54 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<cfdi:Comprobante xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://www.sat.gob.mx/cfd/3 http://www.sat.gob.mx/sitio_internet/cfd/3/cfdv33.xsd" xmlns:cfdi="http://www.sat.gob.mx/cfd/3" Version="3.3" Serie="A" Folio="79121" Fecha="2020-05-19T15:16:09" Sello="fUlC2dfukcROFHXS8C8D85dz7RAYgXtm7vNpjU8uAA+TCrSfr9vJwE/f4Zp8JVfwdxgV5F8mkE6/ylAwhgikmlOmeaHN6xWX99f4xythcpMc+V/aFmozSpWRm5UVo1GCdWjJR1V9kkpcXvj5/8bEZCJ8Uf2biPsvPzCRz47R4UqHo2A9rnjZsImN1MmFOf+0je3D6ljTC63tkuRw52W6nMikmRdQKCSVMBHa6fblXJTrn6bh6qITroGHGetF3jGaig3Su4IAy+qeHepaABYMTe4VZS6mVdpxcWIdjq2ZSEiORk7G5uzs3GVBUZ5oyUMEWvt3M5vJYuycIu5mIqMNYQ==" FormaPago="99" NoCertificado="00001000000404153818" Certificado="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" CondicionesDePago="30 DIAS" SubTotal="10740.00" Moneda="MXN" Total="12458.40" TipoDeComprobante="I" MetodoPago="PPD" LugarExpedicion="31217">
+	<cfdi:Emisor Rfc="ESI100531JD9" Nombre="EQUIPO Y SEÑALAMIENTO INDUSTRIAL DE CHIHUAHUA S.A. DE C.V." RegimenFiscal="601"/>
+	<cfdi:Receptor Rfc="SPG0905078B1" Nombre="SEGURIDAD PRIVADA GINTHER DE OCCIDENTE S DE RL DE CV" UsoCFDI="G03"/>
+	<cfdi:Conceptos>
+		<cfdi:Concepto ClaveProdServ="46181704" NoIdentificacion="10031488" Cantidad="30" ClaveUnidad="H87" Unidad="PIEZA" Descripcion="CASCO MSA VGARD VERDE ALA ANCHA SUSP. FASTRAC 10031488" ValorUnitario="193.00" Importe="5790.00">
+			<cfdi:Impuestos>
+				<cfdi:Traslados>
+					<cfdi:Traslado Base="5790.00" Impuesto="002" TipoFactor="Tasa" TasaOCuota="0.160000" Importe="926.40"/>
+				</cfdi:Traslados>
+			</cfdi:Impuestos>
+		</cfdi:Concepto>
+		<cfdi:Concepto ClaveProdServ="46181800" NoIdentificacion="BH111" Cantidad="100" ClaveUnidad="H87" Unidad="PIEZA" Descripcion="LENTE SAFE FIT CLARO" ValorUnitario="15.00" Importe="1500.00">
+			<cfdi:Impuestos>
+				<cfdi:Traslados>
+					<cfdi:Traslado Base="1500.00" Impuesto="002" TipoFactor="Tasa" TasaOCuota="0.160000" Importe="240.00"/>
+				</cfdi:Traslados>
+			</cfdi:Impuestos>
+		</cfdi:Concepto>
+		<cfdi:Concepto ClaveProdServ="46181800" NoIdentificacion="BH133" Cantidad="50" ClaveUnidad="H87" Unidad="PIEZA" Descripcion="LENTE SAFE FIT GRIS" ValorUnitario="15.00" Importe="750.00">
+			<cfdi:Impuestos>
+				<cfdi:Traslados>
+					<cfdi:Traslado Base="750.00" Impuesto="002" TipoFactor="Tasa" TasaOCuota="0.160000" Importe="120.00"/>
+				</cfdi:Traslados>
+			</cfdi:Impuestos>
+		</cfdi:Concepto>
+		<cfdi:Concepto ClaveProdServ="46181700" NoIdentificacion="M230564" Cantidad="50" ClaveUnidad="H87" Unidad="PIEZA" Descripcion="BARBIQUEJO  ELASTICO MSA" ValorUnitario="24.00" Importe="1200.00">
+			<cfdi:Impuestos>
+				<cfdi:Traslados>
+					<cfdi:Traslado Base="1200.00" Impuesto="002" TipoFactor="Tasa" TasaOCuota="0.160000" Importe="192.00"/>
+				</cfdi:Traslados>
+			</cfdi:Impuestos>
+		</cfdi:Concepto>
+		<cfdi:Concepto ClaveProdServ="46181504" NoIdentificacion="SF1339T8" Cantidad="50" ClaveUnidad="PR" Unidad="PAR" Descripcion="GUANTE NYLON NITRILO T8" ValorUnitario="15.00" Importe="750.00">
+			<cfdi:Impuestos>
+				<cfdi:Traslados>
+					<cfdi:Traslado Base="750.00" Impuesto="002" TipoFactor="Tasa" TasaOCuota="0.160000" Importe="120.00"/>
+				</cfdi:Traslados>
+			</cfdi:Impuestos>
+		</cfdi:Concepto>
+		<cfdi:Concepto ClaveProdServ="46181504" NoIdentificacion="SF1339T9" Cantidad="50" ClaveUnidad="PR" Unidad="PAR" Descripcion="GUANTE NYLON NITRILO T9" ValorUnitario="15.00" Importe="750.00">
+			<cfdi:Impuestos>
+				<cfdi:Traslados>
+					<cfdi:Traslado Base="750.00" Impuesto="002" TipoFactor="Tasa" TasaOCuota="0.160000" Importe="120.00"/>
+				</cfdi:Traslados>
+			</cfdi:Impuestos>
+		</cfdi:Concepto>
+	</cfdi:Conceptos>
+	<cfdi:Impuestos TotalImpuestosTrasladados="1718.40">
+		<cfdi:Traslados>
+			<cfdi:Traslado Impuesto="002" TipoFactor="Tasa" TasaOCuota="0.160000" Importe="1718.40"/>
+		</cfdi:Traslados>
+	</cfdi:Impuestos>
+	<cfdi:Complemento><tfd:TimbreFiscalDigital xmlns:tfd="http://www.sat.gob.mx/TimbreFiscalDigital" xsi:schemaLocation="http://www.sat.gob.mx/TimbreFiscalDigital http://www.sat.gob.mx/sitio_internet/cfd/TimbreFiscalDigital/TimbreFiscalDigitalv11.xsd" SelloSAT="RiPB3rliilwIPCFjAOkSrNCBO/XH2HNDMFg3DJb+C5R/K1bIl80z7aMdoNsEfXh/ciieU5zfU4TkebIyb+HfcJ2iDKv78WlaOcCOOygp3uK9dTsvdDIme3nPSFIDgvY+1pzDaghy0MQwJnyHltR5QZGp3jUdf8wsTg1X1MD+4nuKIYJyneiwazieqQmiLlqHWDaYLpCiqrnNJQ6OQ0riP16Dm59B1iVOLR/6ku28eAFr1CgkaUwciYOHvWYW+WXrV1HINmRL1Ky3G9GzaagsxmXux6P4DD/WcCuM3hkhVz95rZHp7Qi57pAqwKZmcnBRkuPbx3lOGe9MXjFxVzvGyw==" NoCertificadoSAT="00001000000502000436" SelloCFD="fUlC2dfukcROFHXS8C8D85dz7RAYgXtm7vNpjU8uAA+TCrSfr9vJwE/f4Zp8JVfwdxgV5F8mkE6/ylAwhgikmlOmeaHN6xWX99f4xythcpMc+V/aFmozSpWRm5UVo1GCdWjJR1V9kkpcXvj5/8bEZCJ8Uf2biPsvPzCRz47R4UqHo2A9rnjZsImN1MmFOf+0je3D6ljTC63tkuRw52W6nMikmRdQKCSVMBHa6fblXJTrn6bh6qITroGHGetF3jGaig3Su4IAy+qeHepaABYMTe4VZS6mVdpxcWIdjq2ZSEiORk7G5uzs3GVBUZ5oyUMEWvt3M5vJYuycIu5mIqMNYQ==" RfcProvCertif="SCD110105654" FechaTimbrado="2020-05-19T16:16:45" UUID="73C118DB-B330-654E-B0FD-3E2E4881231B" Version="1.1"/></cfdi:Complemento></cfdi:Comprobante>

@@ -1,0 +1,69 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<cfdi:Comprobante xsi:schemaLocation="http://www.sat.gob.mx/cfd/3 http://www.sat.gob.mx/sitio_internet/cfd/3/cfdv33.xsd" Version="3.3" Sello="L6A6n60KiBHfXTkM3x8jHkPYuwxl+YuPYlo6Hn31x0VsPauf/tfrCLRB/UNlKcE/z8aZpYp+nyjsJKWH2ICn038QsxxslEM16sS8XpgxRt2JC40BPeilXDQZ4pDCpWmkvESg7QOxu1ehJzEb2vpPNbgrIxD5XD3DY2rpIbotC/nJSPqviFC2G+32DmbCaPE6sMwH22QyHwLeR9so5Js95JsEMr4nbOVrioTqvFM4Lc94ieZ5yHGtBzwCcBDCj8TeW6txs9d/HIN2Pth63twMfpYsMGROwqQ+xQyaW84x3sskXw+M/Sx0b75EHNEE+X9dmp8ae+Gsf76YQ4bnN3Agsw==" NoCertificado="00001000000408764995" Certificado="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" Folio="0012782" Fecha="2020-01-27T18:31:54" FormaPago="03" SubTotal="2580.00" Moneda="MXN" TipoCambio="1" Total="2992.80" TipoDeComprobante="I" MetodoPago="PUE" LugarExpedicion="78390" xmlns:cfdi="http://www.sat.gob.mx/cfd/3" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance">
+	<cfdi:Emisor Rfc="ROMJ590624K82" Nombre="JUANA RODRIGUEZ MOTA" RegimenFiscal="612"/>
+	<cfdi:Receptor Rfc="SPG0905078B1" Nombre="SEGURIDAD PRIVADA GINTHER DE OCCIDENTE S. DE R.L DE C.V." UsoCFDI="G03"/>
+	<cfdi:Conceptos>
+		<cfdi:Concepto ClaveProdServ="25171718" NoIdentificacion="BAL01" Cantidad="1.00" ClaveUnidad="H87" Unidad="PIEZA" Descripcion="BALATAS DEL GRC" ValorUnitario="550.000000" Importe="550.000000">
+			<cfdi:Impuestos>
+				<cfdi:Traslados>
+					<cfdi:Traslado Base="550.000000" Impuesto="002" TipoFactor="Tasa" TasaOCuota="0.160000" Importe="88.000000"/>
+				</cfdi:Traslados>
+			</cfdi:Impuestos>
+		</cfdi:Concepto>
+		<cfdi:Concepto ClaveProdServ="76122405" NoIdentificacion="R01" Cantidad="1.00" ClaveUnidad="H87" Unidad="PIEZA" Descripcion="RECTIFICADO" ValorUnitario="50.000000" Importe="50.000000">
+			<cfdi:Impuestos>
+				<cfdi:Traslados>
+					<cfdi:Traslado Base="50.000000" Impuesto="002" TipoFactor="Tasa" TasaOCuota="0.160000" Importe="8.000000"/>
+				</cfdi:Traslados>
+			</cfdi:Impuestos>
+		</cfdi:Concepto>
+		<cfdi:Concepto ClaveProdServ="25171718" NoIdentificacion="DIS" Cantidad="1.00" ClaveUnidad="H87" Unidad="PIEZA" Descripcion="DISCO DE FRENO" ValorUnitario="550.000000" Importe="550.000000">
+			<cfdi:Impuestos>
+				<cfdi:Traslados>
+					<cfdi:Traslado Base="550.000000" Impuesto="002" TipoFactor="Tasa" TasaOCuota="0.160000" Importe="88.000000"/>
+				</cfdi:Traslados>
+			</cfdi:Impuestos>
+		</cfdi:Concepto>
+		<cfdi:Concepto ClaveProdServ="76122405" NoIdentificacion="MO12" Cantidad="1.00" ClaveUnidad="H87" Unidad="PIEZA" Descripcion="MANO DE OBRA" ValorUnitario="300.000000" Importe="300.000000">
+			<cfdi:Impuestos>
+				<cfdi:Traslados>
+					<cfdi:Traslado Base="300.000000" Impuesto="002" TipoFactor="Tasa" TasaOCuota="0.160000" Importe="48.000000"/>
+				</cfdi:Traslados>
+			</cfdi:Impuestos>
+		</cfdi:Concepto>
+		<cfdi:Concepto ClaveProdServ="76122405" NoIdentificacion="PAQFRE3" Cantidad="1.00" ClaveUnidad="H87" Unidad="PIEZA" Descripcion="BALATAS TRAS. 2 TAMB. RECT. MANO DE OBRA" ValorUnitario="650.000000" Importe="650.000000">
+			<cfdi:Impuestos>
+				<cfdi:Traslados>
+					<cfdi:Traslado Base="650.000000" Impuesto="002" TipoFactor="Tasa" TasaOCuota="0.160000" Importe="104.000000"/>
+				</cfdi:Traslados>
+			</cfdi:Impuestos>
+		</cfdi:Concepto>
+		<cfdi:Concepto ClaveProdServ="25172800" NoIdentificacion="CIL1" Cantidad="2.00" ClaveUnidad="H87" Unidad="PIEZA" Descripcion="CILINDRO RUEDA" ValorUnitario="200.000000" Importe="400.000000">
+			<cfdi:Impuestos>
+				<cfdi:Traslados>
+					<cfdi:Traslado Base="400.000000" Impuesto="002" TipoFactor="Tasa" TasaOCuota="0.160000" Importe="64.000000"/>
+				</cfdi:Traslados>
+			</cfdi:Impuestos>
+		</cfdi:Concepto>
+		<cfdi:Concepto ClaveProdServ="31161700" NoIdentificacion="13-008" Cantidad="2.00" ClaveUnidad="H87" Unidad="PIEZA" Descripcion="TUERCA" ValorUnitario="30.000000" Importe="60.000000">
+			<cfdi:Impuestos>
+				<cfdi:Traslados>
+					<cfdi:Traslado Base="60.000000" Impuesto="002" TipoFactor="Tasa" TasaOCuota="0.160000" Importe="9.600000"/>
+				</cfdi:Traslados>
+			</cfdi:Impuestos>
+		</cfdi:Concepto>
+		<cfdi:Concepto ClaveProdServ="31161500" NoIdentificacion="BR10-009" Cantidad="1.00" ClaveUnidad="H87" Unidad="PIEZA" Descripcion="BIRLO" ValorUnitario="20.000000" Importe="20.000000">
+			<cfdi:Impuestos>
+				<cfdi:Traslados>
+					<cfdi:Traslado Base="20.000000" Impuesto="002" TipoFactor="Tasa" TasaOCuota="0.160000" Importe="3.200000"/>
+				</cfdi:Traslados>
+			</cfdi:Impuestos>
+		</cfdi:Concepto>
+	</cfdi:Conceptos>
+	<cfdi:Impuestos TotalImpuestosTrasladados="412.80">
+		<cfdi:Traslados>
+			<cfdi:Traslado Impuesto="002" TipoFactor="Tasa" TasaOCuota="0.160000" Importe="412.80"/>
+		</cfdi:Traslados>
+	</cfdi:Impuestos>
+	<cfdi:Complemento><tfd:TimbreFiscalDigital xmlns:tfd="http://www.sat.gob.mx/TimbreFiscalDigital" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://www.sat.gob.mx/TimbreFiscalDigital http://www.sat.gob.mx/sitio_internet/cfd/TimbreFiscalDigital/TimbreFiscalDigitalv11.xsd" Version="1.1" UUID="B39A9E2F-D0FF-472A-B276-BE98FC638507" FechaTimbrado="2020-01-27T18:34:34" RfcProvCertif="SED1102088J7" SelloCFD="L6A6n60KiBHfXTkM3x8jHkPYuwxl+YuPYlo6Hn31x0VsPauf/tfrCLRB/UNlKcE/z8aZpYp+nyjsJKWH2ICn038QsxxslEM16sS8XpgxRt2JC40BPeilXDQZ4pDCpWmkvESg7QOxu1ehJzEb2vpPNbgrIxD5XD3DY2rpIbotC/nJSPqviFC2G+32DmbCaPE6sMwH22QyHwLeR9so5Js95JsEMr4nbOVrioTqvFM4Lc94ieZ5yHGtBzwCcBDCj8TeW6txs9d/HIN2Pth63twMfpYsMGROwqQ+xQyaW84x3sskXw+M/Sx0b75EHNEE+X9dmp8ae+Gsf76YQ4bnN3Agsw==" NoCertificadoSAT="00001000000402846635" SelloSAT="uD5RmrosFkE5Wb4lkzuNZfjVAUaMTY5X0ZaxKKTLc7YbgbptVxRXjqdI0XrMAyoFgIocODiD8mYlOlS9KaMYoKoUAB56sn1JE0edqvJglONOeSTYtNGBgqW5dM29wwUTjU736dtrcMH6vSUaripPvwYGZ7Yfshko5XpfYhwFOyrJQwnO1uG96i2gsEBHFQIM6xwnYtd2lNBEWtdtbsL91ltNkLNUUDM9uNzANY7M8Wglx9DO5CxQ66ZPlKkrAhdqtcwVe2aajPi+7MhZZkOeJf5fVYFz5Bkmfk/ymxRMhR11Vy3/JLLPDBbt+0wwPILJnziTawt4d2htm8DtyaJ64g=="/></cfdi:Complemento>
+</cfdi:Comprobante>

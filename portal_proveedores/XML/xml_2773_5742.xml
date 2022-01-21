@@ -1,0 +1,33 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<cfdi:Comprobante xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://www.sat.gob.mx/cfd/3 http://www.sat.gob.mx/sitio_internet/cfd/3/cfdv33.xsd" xmlns:cfdi="http://www.sat.gob.mx/cfd/3" Version="3.3" Serie="FL" Folio="10435" Fecha="2020-07-16T16:40:02" Sello="eTc/kbZ+AOuHrrIeweVZrU1uNBK7oapKV74WSNpAUOW0UwZBBuo51/V1gj1SMixWq0B1Oe8b8KlqFrHq8A9vUS92DyXGLmFZDIlHIYmlp0BDt3YsWMHSb+sWzB5uUUFUG/ZR/8yHRh9O7ZSb5X3YSaJdMrN8cT5CXXLTpo11/i4UUgv9RSA5S6gqxTEujEfA8SZg6pa4RzCFAj19Ko20F2LtFGG0lfwhP8XOL0WDqSpD9l8xKwsJBCkVZDxN8IpKg//U7kZ1tUqh3sbiZ9Pwu9ubAK1S9xcDrPDGCfoTT0LVc+3JdfT1Ow6ibtKmOT9OGOHtT4GLzu/cb2+Y+xyCkg==" FormaPago="03" NoCertificado="00001000000406165564" Certificado="MIIGZzCCBE+gAwIBAgIUMDAwMDEwMDAwMDA0MDYxNjU1NjQwDQYJKoZIhvcNAQELBQAwggGyMTgwNgYDVQQDDC9BLkMuIGRlbCBTZXJ2aWNpbyBkZSBBZG1pbmlzdHJhY2nDs24gVHJpYnV0YXJpYTEvMC0GA1UECgwmU2VydmljaW8gZGUgQWRtaW5pc3RyYWNpw7NuIFRyaWJ1dGFyaWExODA2BgNVBAsML0FkbWluaXN0cmFjacOzbiBkZSBTZWd1cmlkYWQgZGUgbGEgSW5mb3JtYWNpw7NuMR8wHQYJKoZIhvcNAQkBFhBhY29kc0BzYXQuZ29iLm14MSYwJAYDVQQJDB1Bdi4gSGlkYWxnbyA3NywgQ29sLiBHdWVycmVybzEOMAwGA1UEEQwFMDYzMDAxCzAJBgNVBAYTAk1YMRkwFwYDVQQIDBBEaXN0cml0byBGZWRlcmFsMRQwEgYDVQQHDAtDdWF1aHTDqW1vYzEVMBMGA1UELRMMU0FUOTcwNzAxTk4zMV0wWwYJKoZIhvcNAQkCDE5SZXNwb25zYWJsZTogQWRtaW5pc3RyYWNpw7NuIENlbnRyYWwgZGUgU2VydmljaW9zIFRyaWJ1dGFyaW9zIGFsIENvbnRyaWJ1eWVudGUwHhcNMTcwNTEyMjA1MzI5WhcNMjEwNTEyMjA1MzI5WjCCAQYxMDAuBgNVBAMTJ1VOSVZFUlNBTCBERSBMTEFOVEFTIERFIEpVQVJFWiBTQSBERSBDVjEwMC4GA1UEKRMnVU5JVkVSU0FMIERFIExMQU5UQVMgREUgSlVBUkVaIFNBIERFIENWMTAwLgYDVQQKEydVTklWRVJTQUwgREUgTExBTlRBUyBERSBKVUFSRVogU0EgREUgQ1YxJTAjBgNVBC0THFVMSjA4MDYyM0I5NSAvIEhFT1I3MTAxMTdQVTUxHjAcBgNVBAUTFSAvIEhFT1I3MTAxMTdIQ0hSUkwwNDEnMCUGA1UECxMeVU5JVkVSU0FMIERFIExMQU5UQVMgREUgSlVBUkVaMIIBIjANBgkqhkiG9w0BAQEFAAOCAQ8AMIIBCgKCAQEAovLokIom6lRXem4qey/l7vXp5jiKkypEGexh+QdBdMGg+eB6L4LHwVFv1brqtYlV5AUCky8gUwOAb3ZsdLxfli0gGcDdJmyvyTUe4UTYj4W/p4qNUHwmvtSVx5SfxkDiAmx0g5YpLEHQgW42LOLz2c9pq0DLGYJWBIS7Cf4bb7mbuyzDv9AulbFYnoPQiy7+vY6I4pd9MJ+gBkn6wWKAYGKmAY+FcgfqYONgziKYp14Pu5EgLzABRCGS/lcCEqiKe1GZusQL5v2Oi0YweioSwHohYb4tZL6yRufaTucfMxqBTDhovRIQgeDOnFjy4+rxnDpFVh8KbFSbmFx56Irn+wIDAQABox0wGzAMBgNVHRMBAf8EAjAAMAsGA1UdDwQEAwIGwDANBgkqhkiG9w0BAQsFAAOCAgEACK/Uf9Qm7RhSe8mbIFcd9YujQl3dPPjwGr6gUFojI/VkH2kdPb9kOV8CZHTIcHCbal+nSqhYL5E9MQyZwYD+Qpt9d11pnYpIIJ573wxHMtcIXpyji2RoYxxZtkxaxfq8xY/bNZZwMk3ufIHwhfwflMgD5SQnSxfNecQzGpvoqhD/RHXlVCb9PHAiMPSxC6ovz5ZTSjinwtKTEGn1OzVvUEmWhucHkv2Vz3968igncAHhJWMlDvIllfc+LyhoPmx4QL61axkext8FTjBzOnGs3CG0oumpknJK1G0R02IcNzGwnm1RLYfkvbok2vQ3/W3XGaj5ih/NgAInvREQMsEGbo72XYXxvTZV6C/hX3z1a5t0kGhG0l6XAFtJ9iEEhtccB7MW+9Pp1b2WptkO9vrT5zfmaxTZmwcrFWxcAu1ybNsbGKINTKF9aLypV/jprGdLM2+DOZ7gI5gD78lXcpT4OfvO0GIUoxTmPhPgzAOjZXHnM+5lSuQjY5Pmraq6JieHllfp+DN8pEk6o0vthajFyj1fOEVc/WJ6HbLWn1WwG/7nL5p2p+Ccbw4s2rW6zrcpCsONxGofAVT76qNdum5l9RCEjtz+v9/lidEiE+Ec0Kg7tMAhGaIUsgX4r9oy2aeY85S64aiwk37vUVhQcEplX2PR3zBZSE5KWNVFHpjf3Hc=" SubTotal="7534.48" Moneda="MXN" Total="8740.00" TipoDeComprobante="I" MetodoPago="PUE" LugarExpedicion="32575">
+	<cfdi:Emisor Rfc="ULJ080623B95" Nombre="UNIVERSAL DE LLANTAS DE JUAREZ S.A. DE C.V." RegimenFiscal="601"/>
+	<cfdi:Receptor Rfc="SPG0905078B1" Nombre="SEGURIDAD PRIVADA GINTHER DE OCCIDENTE S DE RL DE CV" UsoCFDI="G03"/>
+	<cfdi:Conceptos>
+		<cfdi:Concepto ClaveProdServ="25172504" NoIdentificacion="23560ZEEZT" Cantidad="4" ClaveUnidad="H87" Unidad="PZA" Descripcion="235/60R17 ZEETEX ZT1000 102H" ValorUnitario="1783.62069" Importe="7134.48">
+			<cfdi:Impuestos>
+				<cfdi:Traslados>
+					<cfdi:Traslado Base="7134.48" Impuesto="002" TipoFactor="Tasa" TasaOCuota="0.160000" Importe="1141.5168"/>
+				</cfdi:Traslados>
+			</cfdi:Impuestos>
+		</cfdi:Concepto>
+		<cfdi:Concepto ClaveProdServ="78181500" NoIdentificacion="352400" Cantidad="4" ClaveUnidad="H87" Unidad="PZAS" Descripcion="BALANCEO" ValorUnitario="50.00" Importe="200.00">
+			<cfdi:Impuestos>
+				<cfdi:Traslados>
+					<cfdi:Traslado Base="200.00" Impuesto="002" TipoFactor="Tasa" TasaOCuota="0.160000" Importe="32.00"/>
+				</cfdi:Traslados>
+			</cfdi:Impuestos>
+		</cfdi:Concepto>
+		<cfdi:Concepto ClaveProdServ="23153411" NoIdentificacion="NITRO" Cantidad="4" ClaveUnidad="H87" Unidad="PZAS" Descripcion="NITROGENO&#xA;Vc le atendio julian" ValorUnitario="50.00" Importe="200.00">
+			<cfdi:Impuestos>
+				<cfdi:Traslados>
+					<cfdi:Traslado Base="200.00" Impuesto="002" TipoFactor="Tasa" TasaOCuota="0.160000" Importe="32.00"/>
+				</cfdi:Traslados>
+			</cfdi:Impuestos>
+		</cfdi:Concepto>
+	</cfdi:Conceptos>
+	<cfdi:Impuestos TotalImpuestosTrasladados="1205.52">
+		<cfdi:Traslados>
+			<cfdi:Traslado Impuesto="002" TipoFactor="Tasa" TasaOCuota="0.160000" Importe="1205.52"/>
+		</cfdi:Traslados>
+	</cfdi:Impuestos>
+	<cfdi:Complemento><tfd:TimbreFiscalDigital xmlns:tfd="http://www.sat.gob.mx/TimbreFiscalDigital" xsi:schemaLocation="http://www.sat.gob.mx/TimbreFiscalDigital http://www.sat.gob.mx/sitio_internet/cfd/TimbreFiscalDigital/TimbreFiscalDigitalv11.xsd" SelloSAT="B4qzYLhMufz2Gb3dEuqufNVTK3BAdb78pJYFuN3ayWUw7zxtACiCapPRoyOX9QnaYVsKj+ZvbC2r6/6mAOOO8FQZbCx1eUqSElpbJQF5vkeKMM6I/q9Ls/9Xb/UvwM+BIkC6PHeqTBafKeHxgc77GYbns9Y1UXytavDGCN89iCJLCysnlvxgvM7jw5XM/bNQ9OyWBRY4gP/JfTVdo5bMB8rd6FC2oBehO3ByonwATrb8c6CvYzqv5cNgowSGwygk8FN5KgfTNMopGw0T4ct8jyommZ1COP2R5GSlqwZYriDsfjPk0q3ohqBSkpdDSvNeMhXQeYs/yduG1eBBpNRpKA==" NoCertificadoSAT="00001000000502000436" SelloCFD="eTc/kbZ+AOuHrrIeweVZrU1uNBK7oapKV74WSNpAUOW0UwZBBuo51/V1gj1SMixWq0B1Oe8b8KlqFrHq8A9vUS92DyXGLmFZDIlHIYmlp0BDt3YsWMHSb+sWzB5uUUFUG/ZR/8yHRh9O7ZSb5X3YSaJdMrN8cT5CXXLTpo11/i4UUgv9RSA5S6gqxTEujEfA8SZg6pa4RzCFAj19Ko20F2LtFGG0lfwhP8XOL0WDqSpD9l8xKwsJBCkVZDxN8IpKg//U7kZ1tUqh3sbiZ9Pwu9ubAK1S9xcDrPDGCfoTT0LVc+3JdfT1Ow6ibtKmOT9OGOHtT4GLzu/cb2+Y+xyCkg==" RfcProvCertif="SCD110105654" FechaTimbrado="2020-07-16T17:40:07" UUID="8BE79300-639F-4E44-908F-42910A9E1CBA" Version="1.1"/></cfdi:Complemento></cfdi:Comprobante>

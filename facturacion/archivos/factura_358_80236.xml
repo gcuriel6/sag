@@ -1,0 +1,637 @@
+<?xml version="1.0" encoding="utf-8"?><cfdi:Comprobante xmlns:cfdi="http://www.sat.gob.mx/cfd/3" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://www.sat.gob.mx/cfd/3 http://www.sat.gob.mx/sitio_internet/cfd/3/cfdv33.xsd" Version="3.3" Fecha="2021-06-23T14:16:31" Folio="358" FormaPago="99" Moneda="MXN" SubTotal="4005.00" Total="4645.80" MetodoPago="PPD" TipoDeComprobante="I" LugarExpedicion="31215" NoCertificado="00001000000506779953" Certificado="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" Sello="ZyhKsdlbAQ2RBZsJAesbxeA6VwbLRz5rWcaerre5fD+J3A7b6okbx35jocCKM05AjI9gZyhbS3AduC8Yi5aPEGJw6O6U7wDcfm+F4J1w2y6eyawzNaGtnXkkc4aVs5vROvMkj7C4oOcSTx157auelO33PSSalxyDbGcclnoJTdqXZeMqoKCrB6Ko15pqySdSDShRJ2yNfylDIMIYg+RdPN8CrRnsYGzUnyJ5E2oDN5aTox96TPEkWuPsVdiijFQ/HeNjYl1saComWa5noVFlmHl27qG/Itwh34ZpC6mHXbgxA1FELlDibTFDFHqFYDjc9kghfcqmV2m07Qamrzm1RQ==">
+  <cfdi:Emisor Rfc="SEY131211QS7" Nombre="SEYCOMVISION" RegimenFiscal="601" />
+  <cfdi:Receptor Rfc="MECE840303D89" Nombre="EDWIN HIRAM MEIXUEIRO CONTRERAS" UsoCFDI="G03" />
+  <cfdi:Conceptos>
+    <cfdi:Concepto Cantidad="1.00000" ClaveProdServ="92121701" ClaveUnidad="E48" Unidad="Unidad de servicio" Descripcion=" MONITOREO MENSUAL EDWIN DE CUENTA: 1124" ValorUnitario="45.00" Importe="45.00">
+      <cfdi:Impuestos>
+        <cfdi:Traslados>
+          <cfdi:Traslado Base="45" Impuesto="002" TipoFactor="Tasa" TasaOCuota="0.160000" Importe="7.200000" />
+        </cfdi:Traslados>
+      </cfdi:Impuestos>
+    </cfdi:Concepto>
+    <cfdi:Concepto Cantidad="1.00000" ClaveProdServ="92121701" ClaveUnidad="E48" Unidad="Unidad de servicio" Descripcion=" MONITOREO MENSUAL EDWIN DE CUENTA: 1131" ValorUnitario="45.00" Importe="45.00">
+      <cfdi:Impuestos>
+        <cfdi:Traslados>
+          <cfdi:Traslado Base="45" Impuesto="002" TipoFactor="Tasa" TasaOCuota="0.160000" Importe="7.200000" />
+        </cfdi:Traslados>
+      </cfdi:Impuestos>
+    </cfdi:Concepto>
+    <cfdi:Concepto Cantidad="1.00000" ClaveProdServ="92121701" ClaveUnidad="E48" Unidad="Unidad de servicio" Descripcion=" MONITOREO MENSUAL EDWIN DE CUENTA: 1134" ValorUnitario="45.00" Importe="45.00">
+      <cfdi:Impuestos>
+        <cfdi:Traslados>
+          <cfdi:Traslado Base="45" Impuesto="002" TipoFactor="Tasa" TasaOCuota="0.160000" Importe="7.200000" />
+        </cfdi:Traslados>
+      </cfdi:Impuestos>
+    </cfdi:Concepto>
+    <cfdi:Concepto Cantidad="1.00000" ClaveProdServ="92121701" ClaveUnidad="E48" Unidad="Unidad de servicio" Descripcion=" MONITOREO MENSUAL EDWIN DE CUENTA: 1144" ValorUnitario="45.00" Importe="45.00">
+      <cfdi:Impuestos>
+        <cfdi:Traslados>
+          <cfdi:Traslado Base="45" Impuesto="002" TipoFactor="Tasa" TasaOCuota="0.160000" Importe="7.200000" />
+        </cfdi:Traslados>
+      </cfdi:Impuestos>
+    </cfdi:Concepto>
+    <cfdi:Concepto Cantidad="1.00000" ClaveProdServ="92121701" ClaveUnidad="E48" Unidad="Unidad de servicio" Descripcion=" MONITOREO MENSUAL EDWIN DE CUENTA: 1151" ValorUnitario="45.00" Importe="45.00">
+      <cfdi:Impuestos>
+        <cfdi:Traslados>
+          <cfdi:Traslado Base="45" Impuesto="002" TipoFactor="Tasa" TasaOCuota="0.160000" Importe="7.200000" />
+        </cfdi:Traslados>
+      </cfdi:Impuestos>
+    </cfdi:Concepto>
+    <cfdi:Concepto Cantidad="1.00000" ClaveProdServ="92121701" ClaveUnidad="E48" Unidad="Unidad de servicio" Descripcion=" MONITOREO MENSUAL EDWIN DE CUENTA: 1154" ValorUnitario="45.00" Importe="45.00">
+      <cfdi:Impuestos>
+        <cfdi:Traslados>
+          <cfdi:Traslado Base="45" Impuesto="002" TipoFactor="Tasa" TasaOCuota="0.160000" Importe="7.200000" />
+        </cfdi:Traslados>
+      </cfdi:Impuestos>
+    </cfdi:Concepto>
+    <cfdi:Concepto Cantidad="1.00000" ClaveProdServ="92121701" ClaveUnidad="E48" Unidad="Unidad de servicio" Descripcion=" MONITOREO MENSUAL EDWIN DE CUENTA: 1157" ValorUnitario="45.00" Importe="45.00">
+      <cfdi:Impuestos>
+        <cfdi:Traslados>
+          <cfdi:Traslado Base="45" Impuesto="002" TipoFactor="Tasa" TasaOCuota="0.160000" Importe="7.200000" />
+        </cfdi:Traslados>
+      </cfdi:Impuestos>
+    </cfdi:Concepto>
+    <cfdi:Concepto Cantidad="1.00000" ClaveProdServ="92121701" ClaveUnidad="E48" Unidad="Unidad de servicio" Descripcion=" MONITOREO MENSUAL EDWIN DE CUENTA: 1159" ValorUnitario="45.00" Importe="45.00">
+      <cfdi:Impuestos>
+        <cfdi:Traslados>
+          <cfdi:Traslado Base="45" Impuesto="002" TipoFactor="Tasa" TasaOCuota="0.160000" Importe="7.200000" />
+        </cfdi:Traslados>
+      </cfdi:Impuestos>
+    </cfdi:Concepto>
+    <cfdi:Concepto Cantidad="1.00000" ClaveProdServ="92121701" ClaveUnidad="E48" Unidad="Unidad de servicio" Descripcion=" MONITOREO MENSUAL EDWIN DE CUENTA: 1161" ValorUnitario="45.00" Importe="45.00">
+      <cfdi:Impuestos>
+        <cfdi:Traslados>
+          <cfdi:Traslado Base="45" Impuesto="002" TipoFactor="Tasa" TasaOCuota="0.160000" Importe="7.200000" />
+        </cfdi:Traslados>
+      </cfdi:Impuestos>
+    </cfdi:Concepto>
+    <cfdi:Concepto Cantidad="1.00000" ClaveProdServ="92121701" ClaveUnidad="E48" Unidad="Unidad de servicio" Descripcion=" MONITOREO MENSUAL EDWIN DE CUENTA: 1165" ValorUnitario="45.00" Importe="45.00">
+      <cfdi:Impuestos>
+        <cfdi:Traslados>
+          <cfdi:Traslado Base="45" Impuesto="002" TipoFactor="Tasa" TasaOCuota="0.160000" Importe="7.200000" />
+        </cfdi:Traslados>
+      </cfdi:Impuestos>
+    </cfdi:Concepto>
+    <cfdi:Concepto Cantidad="1.00000" ClaveProdServ="92121701" ClaveUnidad="E48" Unidad="Unidad de servicio" Descripcion=" MONITOREO MENSUAL EDWIN DE CUENTA: 1172" ValorUnitario="45.00" Importe="45.00">
+      <cfdi:Impuestos>
+        <cfdi:Traslados>
+          <cfdi:Traslado Base="45" Impuesto="002" TipoFactor="Tasa" TasaOCuota="0.160000" Importe="7.200000" />
+        </cfdi:Traslados>
+      </cfdi:Impuestos>
+    </cfdi:Concepto>
+    <cfdi:Concepto Cantidad="1.00000" ClaveProdServ="92121701" ClaveUnidad="E48" Unidad="Unidad de servicio" Descripcion=" MONITOREO MENSUAL EDWIN DE CUENTA: 1176" ValorUnitario="45.00" Importe="45.00">
+      <cfdi:Impuestos>
+        <cfdi:Traslados>
+          <cfdi:Traslado Base="45" Impuesto="002" TipoFactor="Tasa" TasaOCuota="0.160000" Importe="7.200000" />
+        </cfdi:Traslados>
+      </cfdi:Impuestos>
+    </cfdi:Concepto>
+    <cfdi:Concepto Cantidad="1.00000" ClaveProdServ="92121701" ClaveUnidad="E48" Unidad="Unidad de servicio" Descripcion=" MONITOREO MENSUAL EDWIN DE CUENTA: 1179" ValorUnitario="45.00" Importe="45.00">
+      <cfdi:Impuestos>
+        <cfdi:Traslados>
+          <cfdi:Traslado Base="45" Impuesto="002" TipoFactor="Tasa" TasaOCuota="0.160000" Importe="7.200000" />
+        </cfdi:Traslados>
+      </cfdi:Impuestos>
+    </cfdi:Concepto>
+    <cfdi:Concepto Cantidad="1.00000" ClaveProdServ="92121701" ClaveUnidad="E48" Unidad="Unidad de servicio" Descripcion=" MONITOREO MENSUAL EDWIN DE CUENTA: 1183" ValorUnitario="45.00" Importe="45.00">
+      <cfdi:Impuestos>
+        <cfdi:Traslados>
+          <cfdi:Traslado Base="45" Impuesto="002" TipoFactor="Tasa" TasaOCuota="0.160000" Importe="7.200000" />
+        </cfdi:Traslados>
+      </cfdi:Impuestos>
+    </cfdi:Concepto>
+    <cfdi:Concepto Cantidad="1.00000" ClaveProdServ="92121701" ClaveUnidad="E48" Unidad="Unidad de servicio" Descripcion=" MONITOREO MENSUAL EDWIN DE CUENTA: 1185" ValorUnitario="45.00" Importe="45.00">
+      <cfdi:Impuestos>
+        <cfdi:Traslados>
+          <cfdi:Traslado Base="45" Impuesto="002" TipoFactor="Tasa" TasaOCuota="0.160000" Importe="7.200000" />
+        </cfdi:Traslados>
+      </cfdi:Impuestos>
+    </cfdi:Concepto>
+    <cfdi:Concepto Cantidad="1.00000" ClaveProdServ="92121701" ClaveUnidad="E48" Unidad="Unidad de servicio" Descripcion=" MONITOREO MENSUAL EDWIN DE CUENTA: 1192" ValorUnitario="45.00" Importe="45.00">
+      <cfdi:Impuestos>
+        <cfdi:Traslados>
+          <cfdi:Traslado Base="45" Impuesto="002" TipoFactor="Tasa" TasaOCuota="0.160000" Importe="7.200000" />
+        </cfdi:Traslados>
+      </cfdi:Impuestos>
+    </cfdi:Concepto>
+    <cfdi:Concepto Cantidad="1.00000" ClaveProdServ="92121701" ClaveUnidad="E48" Unidad="Unidad de servicio" Descripcion=" MONITOREO MENSUAL EDWIN DE CUENTA: 1201" ValorUnitario="45.00" Importe="45.00">
+      <cfdi:Impuestos>
+        <cfdi:Traslados>
+          <cfdi:Traslado Base="45" Impuesto="002" TipoFactor="Tasa" TasaOCuota="0.160000" Importe="7.200000" />
+        </cfdi:Traslados>
+      </cfdi:Impuestos>
+    </cfdi:Concepto>
+    <cfdi:Concepto Cantidad="1.00000" ClaveProdServ="92121701" ClaveUnidad="E48" Unidad="Unidad de servicio" Descripcion=" MONITOREO MENSUAL EDWIN DE CUENTA: 1209" ValorUnitario="45.00" Importe="45.00">
+      <cfdi:Impuestos>
+        <cfdi:Traslados>
+          <cfdi:Traslado Base="45" Impuesto="002" TipoFactor="Tasa" TasaOCuota="0.160000" Importe="7.200000" />
+        </cfdi:Traslados>
+      </cfdi:Impuestos>
+    </cfdi:Concepto>
+    <cfdi:Concepto Cantidad="1.00000" ClaveProdServ="92121701" ClaveUnidad="E48" Unidad="Unidad de servicio" Descripcion=" MONITOREO MENSUAL EDWIN DE CUENTA: 1211" ValorUnitario="45.00" Importe="45.00">
+      <cfdi:Impuestos>
+        <cfdi:Traslados>
+          <cfdi:Traslado Base="45" Impuesto="002" TipoFactor="Tasa" TasaOCuota="0.160000" Importe="7.200000" />
+        </cfdi:Traslados>
+      </cfdi:Impuestos>
+    </cfdi:Concepto>
+    <cfdi:Concepto Cantidad="1.00000" ClaveProdServ="92121701" ClaveUnidad="E48" Unidad="Unidad de servicio" Descripcion=" MONITOREO MENSUAL EDWIN DE CUENTA: 1224" ValorUnitario="45.00" Importe="45.00">
+      <cfdi:Impuestos>
+        <cfdi:Traslados>
+          <cfdi:Traslado Base="45" Impuesto="002" TipoFactor="Tasa" TasaOCuota="0.160000" Importe="7.200000" />
+        </cfdi:Traslados>
+      </cfdi:Impuestos>
+    </cfdi:Concepto>
+    <cfdi:Concepto Cantidad="1.00000" ClaveProdServ="92121701" ClaveUnidad="E48" Unidad="Unidad de servicio" Descripcion=" MONITOREO MENSUAL EDWIN DE CUENTA: 1227" ValorUnitario="45.00" Importe="45.00">
+      <cfdi:Impuestos>
+        <cfdi:Traslados>
+          <cfdi:Traslado Base="45" Impuesto="002" TipoFactor="Tasa" TasaOCuota="0.160000" Importe="7.200000" />
+        </cfdi:Traslados>
+      </cfdi:Impuestos>
+    </cfdi:Concepto>
+    <cfdi:Concepto Cantidad="1.00000" ClaveProdServ="92121701" ClaveUnidad="E48" Unidad="Unidad de servicio" Descripcion=" MONITOREO MENSUAL EDWIN DE CUENTA: 1234" ValorUnitario="45.00" Importe="45.00">
+      <cfdi:Impuestos>
+        <cfdi:Traslados>
+          <cfdi:Traslado Base="45" Impuesto="002" TipoFactor="Tasa" TasaOCuota="0.160000" Importe="7.200000" />
+        </cfdi:Traslados>
+      </cfdi:Impuestos>
+    </cfdi:Concepto>
+    <cfdi:Concepto Cantidad="1.00000" ClaveProdServ="92121701" ClaveUnidad="E48" Unidad="Unidad de servicio" Descripcion=" MONITOREO MENSUAL EDWIN DE CUENTA: 1237" ValorUnitario="45.00" Importe="45.00">
+      <cfdi:Impuestos>
+        <cfdi:Traslados>
+          <cfdi:Traslado Base="45" Impuesto="002" TipoFactor="Tasa" TasaOCuota="0.160000" Importe="7.200000" />
+        </cfdi:Traslados>
+      </cfdi:Impuestos>
+    </cfdi:Concepto>
+    <cfdi:Concepto Cantidad="1.00000" ClaveProdServ="92121701" ClaveUnidad="E48" Unidad="Unidad de servicio" Descripcion=" MONITOREO MENSUAL EDWIN DE CUENTA: 1245" ValorUnitario="45.00" Importe="45.00">
+      <cfdi:Impuestos>
+        <cfdi:Traslados>
+          <cfdi:Traslado Base="45" Impuesto="002" TipoFactor="Tasa" TasaOCuota="0.160000" Importe="7.200000" />
+        </cfdi:Traslados>
+      </cfdi:Impuestos>
+    </cfdi:Concepto>
+    <cfdi:Concepto Cantidad="1.00000" ClaveProdServ="92121701" ClaveUnidad="E48" Unidad="Unidad de servicio" Descripcion=" MONITOREO MENSUAL EDWIN DE CUENTA: 1254" ValorUnitario="45.00" Importe="45.00">
+      <cfdi:Impuestos>
+        <cfdi:Traslados>
+          <cfdi:Traslado Base="45" Impuesto="002" TipoFactor="Tasa" TasaOCuota="0.160000" Importe="7.200000" />
+        </cfdi:Traslados>
+      </cfdi:Impuestos>
+    </cfdi:Concepto>
+    <cfdi:Concepto Cantidad="1.00000" ClaveProdServ="92121701" ClaveUnidad="E48" Unidad="Unidad de servicio" Descripcion=" MONITOREO MENSUAL EDWIN DE CUENTA: 1266" ValorUnitario="45.00" Importe="45.00">
+      <cfdi:Impuestos>
+        <cfdi:Traslados>
+          <cfdi:Traslado Base="45" Impuesto="002" TipoFactor="Tasa" TasaOCuota="0.160000" Importe="7.200000" />
+        </cfdi:Traslados>
+      </cfdi:Impuestos>
+    </cfdi:Concepto>
+    <cfdi:Concepto Cantidad="1.00000" ClaveProdServ="92121701" ClaveUnidad="E48" Unidad="Unidad de servicio" Descripcion=" MONITOREO MENSUAL EDWIN DE CUENTA: 1267" ValorUnitario="45.00" Importe="45.00">
+      <cfdi:Impuestos>
+        <cfdi:Traslados>
+          <cfdi:Traslado Base="45" Impuesto="002" TipoFactor="Tasa" TasaOCuota="0.160000" Importe="7.200000" />
+        </cfdi:Traslados>
+      </cfdi:Impuestos>
+    </cfdi:Concepto>
+    <cfdi:Concepto Cantidad="1.00000" ClaveProdServ="92121701" ClaveUnidad="E48" Unidad="Unidad de servicio" Descripcion=" MONITOREO MENSUAL EDWIN DE CUENTA: 1269" ValorUnitario="45.00" Importe="45.00">
+      <cfdi:Impuestos>
+        <cfdi:Traslados>
+          <cfdi:Traslado Base="45" Impuesto="002" TipoFactor="Tasa" TasaOCuota="0.160000" Importe="7.200000" />
+        </cfdi:Traslados>
+      </cfdi:Impuestos>
+    </cfdi:Concepto>
+    <cfdi:Concepto Cantidad="1.00000" ClaveProdServ="92121701" ClaveUnidad="E48" Unidad="Unidad de servicio" Descripcion=" MONITOREO MENSUAL EDWIN DE CUENTA: 1279" ValorUnitario="45.00" Importe="45.00">
+      <cfdi:Impuestos>
+        <cfdi:Traslados>
+          <cfdi:Traslado Base="45" Impuesto="002" TipoFactor="Tasa" TasaOCuota="0.160000" Importe="7.200000" />
+        </cfdi:Traslados>
+      </cfdi:Impuestos>
+    </cfdi:Concepto>
+    <cfdi:Concepto Cantidad="1.00000" ClaveProdServ="92121701" ClaveUnidad="E48" Unidad="Unidad de servicio" Descripcion=" MONITOREO MENSUAL EDWIN DE CUENTA: 1280" ValorUnitario="45.00" Importe="45.00">
+      <cfdi:Impuestos>
+        <cfdi:Traslados>
+          <cfdi:Traslado Base="45" Impuesto="002" TipoFactor="Tasa" TasaOCuota="0.160000" Importe="7.200000" />
+        </cfdi:Traslados>
+      </cfdi:Impuestos>
+    </cfdi:Concepto>
+    <cfdi:Concepto Cantidad="1.00000" ClaveProdServ="92121701" ClaveUnidad="E48" Unidad="Unidad de servicio" Descripcion=" MONITOREO MENSUAL EDWIN DE CUENTA: 1281" ValorUnitario="45.00" Importe="45.00">
+      <cfdi:Impuestos>
+        <cfdi:Traslados>
+          <cfdi:Traslado Base="45" Impuesto="002" TipoFactor="Tasa" TasaOCuota="0.160000" Importe="7.200000" />
+        </cfdi:Traslados>
+      </cfdi:Impuestos>
+    </cfdi:Concepto>
+    <cfdi:Concepto Cantidad="1.00000" ClaveProdServ="92121701" ClaveUnidad="E48" Unidad="Unidad de servicio" Descripcion=" MONITOREO MENSUAL EDWIN DE CUENTA: 1287" ValorUnitario="45.00" Importe="45.00">
+      <cfdi:Impuestos>
+        <cfdi:Traslados>
+          <cfdi:Traslado Base="45" Impuesto="002" TipoFactor="Tasa" TasaOCuota="0.160000" Importe="7.200000" />
+        </cfdi:Traslados>
+      </cfdi:Impuestos>
+    </cfdi:Concepto>
+    <cfdi:Concepto Cantidad="1.00000" ClaveProdServ="92121701" ClaveUnidad="E48" Unidad="Unidad de servicio" Descripcion=" MONITOREO MENSUAL EDWIN DE CUENTA: 1291" ValorUnitario="45.00" Importe="45.00">
+      <cfdi:Impuestos>
+        <cfdi:Traslados>
+          <cfdi:Traslado Base="45" Impuesto="002" TipoFactor="Tasa" TasaOCuota="0.160000" Importe="7.200000" />
+        </cfdi:Traslados>
+      </cfdi:Impuestos>
+    </cfdi:Concepto>
+    <cfdi:Concepto Cantidad="1.00000" ClaveProdServ="92121701" ClaveUnidad="E48" Unidad="Unidad de servicio" Descripcion=" MONITOREO MENSUAL EDWIN DE CUENTA: 1295" ValorUnitario="45.00" Importe="45.00">
+      <cfdi:Impuestos>
+        <cfdi:Traslados>
+          <cfdi:Traslado Base="45" Impuesto="002" TipoFactor="Tasa" TasaOCuota="0.160000" Importe="7.200000" />
+        </cfdi:Traslados>
+      </cfdi:Impuestos>
+    </cfdi:Concepto>
+    <cfdi:Concepto Cantidad="1.00000" ClaveProdServ="92121701" ClaveUnidad="E48" Unidad="Unidad de servicio" Descripcion=" MONITOREO MENSUAL EDWIN DE CUENTA: 1297" ValorUnitario="45.00" Importe="45.00">
+      <cfdi:Impuestos>
+        <cfdi:Traslados>
+          <cfdi:Traslado Base="45" Impuesto="002" TipoFactor="Tasa" TasaOCuota="0.160000" Importe="7.200000" />
+        </cfdi:Traslados>
+      </cfdi:Impuestos>
+    </cfdi:Concepto>
+    <cfdi:Concepto Cantidad="1.00000" ClaveProdServ="92121701" ClaveUnidad="E48" Unidad="Unidad de servicio" Descripcion=" MONITOREO MENSUAL EDWIN DE CUENTA: 1299" ValorUnitario="45.00" Importe="45.00">
+      <cfdi:Impuestos>
+        <cfdi:Traslados>
+          <cfdi:Traslado Base="45" Impuesto="002" TipoFactor="Tasa" TasaOCuota="0.160000" Importe="7.200000" />
+        </cfdi:Traslados>
+      </cfdi:Impuestos>
+    </cfdi:Concepto>
+    <cfdi:Concepto Cantidad="1.00000" ClaveProdServ="92121701" ClaveUnidad="E48" Unidad="Unidad de servicio" Descripcion=" MONITOREO MENSUAL EDWIN DE CUENTA: 1300" ValorUnitario="45.00" Importe="45.00">
+      <cfdi:Impuestos>
+        <cfdi:Traslados>
+          <cfdi:Traslado Base="45" Impuesto="002" TipoFactor="Tasa" TasaOCuota="0.160000" Importe="7.200000" />
+        </cfdi:Traslados>
+      </cfdi:Impuestos>
+    </cfdi:Concepto>
+    <cfdi:Concepto Cantidad="1.00000" ClaveProdServ="92121701" ClaveUnidad="E48" Unidad="Unidad de servicio" Descripcion=" MONITOREO MENSUAL EDWIN DE CUENTA: 1303" ValorUnitario="45.00" Importe="45.00">
+      <cfdi:Impuestos>
+        <cfdi:Traslados>
+          <cfdi:Traslado Base="45" Impuesto="002" TipoFactor="Tasa" TasaOCuota="0.160000" Importe="7.200000" />
+        </cfdi:Traslados>
+      </cfdi:Impuestos>
+    </cfdi:Concepto>
+    <cfdi:Concepto Cantidad="1.00000" ClaveProdServ="92121701" ClaveUnidad="E48" Unidad="Unidad de servicio" Descripcion=" MONITOREO MENSUAL EDWIN DE CUENTA: 1304" ValorUnitario="45.00" Importe="45.00">
+      <cfdi:Impuestos>
+        <cfdi:Traslados>
+          <cfdi:Traslado Base="45" Impuesto="002" TipoFactor="Tasa" TasaOCuota="0.160000" Importe="7.200000" />
+        </cfdi:Traslados>
+      </cfdi:Impuestos>
+    </cfdi:Concepto>
+    <cfdi:Concepto Cantidad="1.00000" ClaveProdServ="92121701" ClaveUnidad="E48" Unidad="Unidad de servicio" Descripcion=" MONITOREO MENSUAL EDWIN DE CUENTA: 1307" ValorUnitario="45.00" Importe="45.00">
+      <cfdi:Impuestos>
+        <cfdi:Traslados>
+          <cfdi:Traslado Base="45" Impuesto="002" TipoFactor="Tasa" TasaOCuota="0.160000" Importe="7.200000" />
+        </cfdi:Traslados>
+      </cfdi:Impuestos>
+    </cfdi:Concepto>
+    <cfdi:Concepto Cantidad="1.00000" ClaveProdServ="92121701" ClaveUnidad="E48" Unidad="Unidad de servicio" Descripcion=" MONITOREO MENSUAL EDWIN DE CUENTA: 1308" ValorUnitario="45.00" Importe="45.00">
+      <cfdi:Impuestos>
+        <cfdi:Traslados>
+          <cfdi:Traslado Base="45" Impuesto="002" TipoFactor="Tasa" TasaOCuota="0.160000" Importe="7.200000" />
+        </cfdi:Traslados>
+      </cfdi:Impuestos>
+    </cfdi:Concepto>
+    <cfdi:Concepto Cantidad="1.00000" ClaveProdServ="92121701" ClaveUnidad="E48" Unidad="Unidad de servicio" Descripcion=" MONITOREO MENSUAL EDWIN DE CUENTA: 1310" ValorUnitario="45.00" Importe="45.00">
+      <cfdi:Impuestos>
+        <cfdi:Traslados>
+          <cfdi:Traslado Base="45" Impuesto="002" TipoFactor="Tasa" TasaOCuota="0.160000" Importe="7.200000" />
+        </cfdi:Traslados>
+      </cfdi:Impuestos>
+    </cfdi:Concepto>
+    <cfdi:Concepto Cantidad="1.00000" ClaveProdServ="92121701" ClaveUnidad="E48" Unidad="Unidad de servicio" Descripcion=" MONITOREO MENSUAL EDWIN DE CUENTA: 1314" ValorUnitario="45.00" Importe="45.00">
+      <cfdi:Impuestos>
+        <cfdi:Traslados>
+          <cfdi:Traslado Base="45" Impuesto="002" TipoFactor="Tasa" TasaOCuota="0.160000" Importe="7.200000" />
+        </cfdi:Traslados>
+      </cfdi:Impuestos>
+    </cfdi:Concepto>
+    <cfdi:Concepto Cantidad="1.00000" ClaveProdServ="92121701" ClaveUnidad="E48" Unidad="Unidad de servicio" Descripcion=" MONITOREO MENSUAL EDWIN DE CUENTA: 1316" ValorUnitario="45.00" Importe="45.00">
+      <cfdi:Impuestos>
+        <cfdi:Traslados>
+          <cfdi:Traslado Base="45" Impuesto="002" TipoFactor="Tasa" TasaOCuota="0.160000" Importe="7.200000" />
+        </cfdi:Traslados>
+      </cfdi:Impuestos>
+    </cfdi:Concepto>
+    <cfdi:Concepto Cantidad="1.00000" ClaveProdServ="92121701" ClaveUnidad="E48" Unidad="Unidad de servicio" Descripcion=" MONITOREO MENSUAL EDWIN DE CUENTA: 1327" ValorUnitario="45.00" Importe="45.00">
+      <cfdi:Impuestos>
+        <cfdi:Traslados>
+          <cfdi:Traslado Base="45" Impuesto="002" TipoFactor="Tasa" TasaOCuota="0.160000" Importe="7.200000" />
+        </cfdi:Traslados>
+      </cfdi:Impuestos>
+    </cfdi:Concepto>
+    <cfdi:Concepto Cantidad="1.00000" ClaveProdServ="92121701" ClaveUnidad="E48" Unidad="Unidad de servicio" Descripcion=" MONITOREO MENSUAL EDWIN DE CUENTA: 1329" ValorUnitario="45.00" Importe="45.00">
+      <cfdi:Impuestos>
+        <cfdi:Traslados>
+          <cfdi:Traslado Base="45" Impuesto="002" TipoFactor="Tasa" TasaOCuota="0.160000" Importe="7.200000" />
+        </cfdi:Traslados>
+      </cfdi:Impuestos>
+    </cfdi:Concepto>
+    <cfdi:Concepto Cantidad="1.00000" ClaveProdServ="92121701" ClaveUnidad="E48" Unidad="Unidad de servicio" Descripcion=" MONITOREO MENSUAL EDWIN DE CUENTA: 1333" ValorUnitario="45.00" Importe="45.00">
+      <cfdi:Impuestos>
+        <cfdi:Traslados>
+          <cfdi:Traslado Base="45" Impuesto="002" TipoFactor="Tasa" TasaOCuota="0.160000" Importe="7.200000" />
+        </cfdi:Traslados>
+      </cfdi:Impuestos>
+    </cfdi:Concepto>
+    <cfdi:Concepto Cantidad="1.00000" ClaveProdServ="92121701" ClaveUnidad="E48" Unidad="Unidad de servicio" Descripcion=" MONITOREO MENSUAL EDWIN DE CUENTA: 1330" ValorUnitario="45.00" Importe="45.00">
+      <cfdi:Impuestos>
+        <cfdi:Traslados>
+          <cfdi:Traslado Base="45" Impuesto="002" TipoFactor="Tasa" TasaOCuota="0.160000" Importe="7.200000" />
+        </cfdi:Traslados>
+      </cfdi:Impuestos>
+    </cfdi:Concepto>
+    <cfdi:Concepto Cantidad="1.00000" ClaveProdServ="92121701" ClaveUnidad="E48" Unidad="Unidad de servicio" Descripcion=" MONITOREO MENSUAL EDWIN DE CUENTA: 1347" ValorUnitario="45.00" Importe="45.00">
+      <cfdi:Impuestos>
+        <cfdi:Traslados>
+          <cfdi:Traslado Base="45" Impuesto="002" TipoFactor="Tasa" TasaOCuota="0.160000" Importe="7.200000" />
+        </cfdi:Traslados>
+      </cfdi:Impuestos>
+    </cfdi:Concepto>
+    <cfdi:Concepto Cantidad="1.00000" ClaveProdServ="92121701" ClaveUnidad="E48" Unidad="Unidad de servicio" Descripcion=" MONITOREO MENSUAL EDWIN DE CUENTA: 1348" ValorUnitario="45.00" Importe="45.00">
+      <cfdi:Impuestos>
+        <cfdi:Traslados>
+          <cfdi:Traslado Base="45" Impuesto="002" TipoFactor="Tasa" TasaOCuota="0.160000" Importe="7.200000" />
+        </cfdi:Traslados>
+      </cfdi:Impuestos>
+    </cfdi:Concepto>
+    <cfdi:Concepto Cantidad="1.00000" ClaveProdServ="92121701" ClaveUnidad="E48" Unidad="Unidad de servicio" Descripcion=" MONITOREO MENSUAL EDWIN DE CUENTA: 1349" ValorUnitario="45.00" Importe="45.00">
+      <cfdi:Impuestos>
+        <cfdi:Traslados>
+          <cfdi:Traslado Base="45" Impuesto="002" TipoFactor="Tasa" TasaOCuota="0.160000" Importe="7.200000" />
+        </cfdi:Traslados>
+      </cfdi:Impuestos>
+    </cfdi:Concepto>
+    <cfdi:Concepto Cantidad="1.00000" ClaveProdServ="92121701" ClaveUnidad="E48" Unidad="Unidad de servicio" Descripcion=" MONITOREO MENSUAL EDWIN DE CUENTA: 1352" ValorUnitario="45.00" Importe="45.00">
+      <cfdi:Impuestos>
+        <cfdi:Traslados>
+          <cfdi:Traslado Base="45" Impuesto="002" TipoFactor="Tasa" TasaOCuota="0.160000" Importe="7.200000" />
+        </cfdi:Traslados>
+      </cfdi:Impuestos>
+    </cfdi:Concepto>
+    <cfdi:Concepto Cantidad="1.00000" ClaveProdServ="92121701" ClaveUnidad="E48" Unidad="Unidad de servicio" Descripcion=" MONITOREO MENSUAL EDWIN DE CUENTA: 1357" ValorUnitario="45.00" Importe="45.00">
+      <cfdi:Impuestos>
+        <cfdi:Traslados>
+          <cfdi:Traslado Base="45" Impuesto="002" TipoFactor="Tasa" TasaOCuota="0.160000" Importe="7.200000" />
+        </cfdi:Traslados>
+      </cfdi:Impuestos>
+    </cfdi:Concepto>
+    <cfdi:Concepto Cantidad="1.00000" ClaveProdServ="92121701" ClaveUnidad="E48" Unidad="Unidad de servicio" Descripcion=" MONITOREO MENSUAL EDWIN DE CUENTA: 1363" ValorUnitario="45.00" Importe="45.00">
+      <cfdi:Impuestos>
+        <cfdi:Traslados>
+          <cfdi:Traslado Base="45" Impuesto="002" TipoFactor="Tasa" TasaOCuota="0.160000" Importe="7.200000" />
+        </cfdi:Traslados>
+      </cfdi:Impuestos>
+    </cfdi:Concepto>
+    <cfdi:Concepto Cantidad="1.00000" ClaveProdServ="92121701" ClaveUnidad="E48" Unidad="Unidad de servicio" Descripcion=" MONITOREO MENSUAL EDWIN DE CUENTA: 1364" ValorUnitario="45.00" Importe="45.00">
+      <cfdi:Impuestos>
+        <cfdi:Traslados>
+          <cfdi:Traslado Base="45" Impuesto="002" TipoFactor="Tasa" TasaOCuota="0.160000" Importe="7.200000" />
+        </cfdi:Traslados>
+      </cfdi:Impuestos>
+    </cfdi:Concepto>
+    <cfdi:Concepto Cantidad="1.00000" ClaveProdServ="92121701" ClaveUnidad="E48" Unidad="Unidad de servicio" Descripcion=" MONITOREO MENSUAL EDWIN DE CUENTA: 1367" ValorUnitario="45.00" Importe="45.00">
+      <cfdi:Impuestos>
+        <cfdi:Traslados>
+          <cfdi:Traslado Base="45" Impuesto="002" TipoFactor="Tasa" TasaOCuota="0.160000" Importe="7.200000" />
+        </cfdi:Traslados>
+      </cfdi:Impuestos>
+    </cfdi:Concepto>
+    <cfdi:Concepto Cantidad="1.00000" ClaveProdServ="92121701" ClaveUnidad="E48" Unidad="Unidad de servicio" Descripcion=" MONITOREO MENSUAL EDWIN DE CUENTA: 1373" ValorUnitario="45.00" Importe="45.00">
+      <cfdi:Impuestos>
+        <cfdi:Traslados>
+          <cfdi:Traslado Base="45" Impuesto="002" TipoFactor="Tasa" TasaOCuota="0.160000" Importe="7.200000" />
+        </cfdi:Traslados>
+      </cfdi:Impuestos>
+    </cfdi:Concepto>
+    <cfdi:Concepto Cantidad="1.00000" ClaveProdServ="92121701" ClaveUnidad="E48" Unidad="Unidad de servicio" Descripcion=" MONITOREO MENSUAL EDWIN DE CUENTA: 1379" ValorUnitario="45.00" Importe="45.00">
+      <cfdi:Impuestos>
+        <cfdi:Traslados>
+          <cfdi:Traslado Base="45" Impuesto="002" TipoFactor="Tasa" TasaOCuota="0.160000" Importe="7.200000" />
+        </cfdi:Traslados>
+      </cfdi:Impuestos>
+    </cfdi:Concepto>
+    <cfdi:Concepto Cantidad="1.00000" ClaveProdServ="92121701" ClaveUnidad="E48" Unidad="Unidad de servicio" Descripcion=" MONITOREO MENSUAL EDWIN DE CUENTA: 1381" ValorUnitario="45.00" Importe="45.00">
+      <cfdi:Impuestos>
+        <cfdi:Traslados>
+          <cfdi:Traslado Base="45" Impuesto="002" TipoFactor="Tasa" TasaOCuota="0.160000" Importe="7.200000" />
+        </cfdi:Traslados>
+      </cfdi:Impuestos>
+    </cfdi:Concepto>
+    <cfdi:Concepto Cantidad="1.00000" ClaveProdServ="92121701" ClaveUnidad="E48" Unidad="Unidad de servicio" Descripcion=" MONITOREO MENSUAL EDWIN DE CUENTA: 1382" ValorUnitario="45.00" Importe="45.00">
+      <cfdi:Impuestos>
+        <cfdi:Traslados>
+          <cfdi:Traslado Base="45" Impuesto="002" TipoFactor="Tasa" TasaOCuota="0.160000" Importe="7.200000" />
+        </cfdi:Traslados>
+      </cfdi:Impuestos>
+    </cfdi:Concepto>
+    <cfdi:Concepto Cantidad="1.00000" ClaveProdServ="92121701" ClaveUnidad="E48" Unidad="Unidad de servicio" Descripcion=" MONITOREO MENSUAL EDWIN DE CUENTA: 1386" ValorUnitario="45.00" Importe="45.00">
+      <cfdi:Impuestos>
+        <cfdi:Traslados>
+          <cfdi:Traslado Base="45" Impuesto="002" TipoFactor="Tasa" TasaOCuota="0.160000" Importe="7.200000" />
+        </cfdi:Traslados>
+      </cfdi:Impuestos>
+    </cfdi:Concepto>
+    <cfdi:Concepto Cantidad="1.00000" ClaveProdServ="92121701" ClaveUnidad="E48" Unidad="Unidad de servicio" Descripcion=" MONITOREO MENSUAL EDWIN DE CUENTA: 1387" ValorUnitario="45.00" Importe="45.00">
+      <cfdi:Impuestos>
+        <cfdi:Traslados>
+          <cfdi:Traslado Base="45" Impuesto="002" TipoFactor="Tasa" TasaOCuota="0.160000" Importe="7.200000" />
+        </cfdi:Traslados>
+      </cfdi:Impuestos>
+    </cfdi:Concepto>
+    <cfdi:Concepto Cantidad="1.00000" ClaveProdServ="92121701" ClaveUnidad="E48" Unidad="Unidad de servicio" Descripcion=" MONITOREO MENSUAL EDWIN DE CUENTA: 1390" ValorUnitario="45.00" Importe="45.00">
+      <cfdi:Impuestos>
+        <cfdi:Traslados>
+          <cfdi:Traslado Base="45" Impuesto="002" TipoFactor="Tasa" TasaOCuota="0.160000" Importe="7.200000" />
+        </cfdi:Traslados>
+      </cfdi:Impuestos>
+    </cfdi:Concepto>
+    <cfdi:Concepto Cantidad="1.00000" ClaveProdServ="92121701" ClaveUnidad="E48" Unidad="Unidad de servicio" Descripcion=" MONITOREO MENSUAL EDWIN DE CUENTA: 1399" ValorUnitario="45.00" Importe="45.00">
+      <cfdi:Impuestos>
+        <cfdi:Traslados>
+          <cfdi:Traslado Base="45" Impuesto="002" TipoFactor="Tasa" TasaOCuota="0.160000" Importe="7.200000" />
+        </cfdi:Traslados>
+      </cfdi:Impuestos>
+    </cfdi:Concepto>
+    <cfdi:Concepto Cantidad="1.00000" ClaveProdServ="92121701" ClaveUnidad="E48" Unidad="Unidad de servicio" Descripcion=" MONITOREO MENSUAL EDWIN DE CUENTA: 1400" ValorUnitario="45.00" Importe="45.00">
+      <cfdi:Impuestos>
+        <cfdi:Traslados>
+          <cfdi:Traslado Base="45" Impuesto="002" TipoFactor="Tasa" TasaOCuota="0.160000" Importe="7.200000" />
+        </cfdi:Traslados>
+      </cfdi:Impuestos>
+    </cfdi:Concepto>
+    <cfdi:Concepto Cantidad="1.00000" ClaveProdServ="92121701" ClaveUnidad="E48" Unidad="Unidad de servicio" Descripcion=" MONITOREO MENSUAL EDWIN DE CUENTA: 1404" ValorUnitario="45.00" Importe="45.00">
+      <cfdi:Impuestos>
+        <cfdi:Traslados>
+          <cfdi:Traslado Base="45" Impuesto="002" TipoFactor="Tasa" TasaOCuota="0.160000" Importe="7.200000" />
+        </cfdi:Traslados>
+      </cfdi:Impuestos>
+    </cfdi:Concepto>
+    <cfdi:Concepto Cantidad="1.00000" ClaveProdServ="92121701" ClaveUnidad="E48" Unidad="Unidad de servicio" Descripcion=" MONITOREO MENSUAL EDWIN DE CUENTA: 1405" ValorUnitario="45.00" Importe="45.00">
+      <cfdi:Impuestos>
+        <cfdi:Traslados>
+          <cfdi:Traslado Base="45" Impuesto="002" TipoFactor="Tasa" TasaOCuota="0.160000" Importe="7.200000" />
+        </cfdi:Traslados>
+      </cfdi:Impuestos>
+    </cfdi:Concepto>
+    <cfdi:Concepto Cantidad="1.00000" ClaveProdServ="92121701" ClaveUnidad="E48" Unidad="Unidad de servicio" Descripcion=" MONITOREO MENSUAL EDWIN DE CUENTA: 1406" ValorUnitario="45.00" Importe="45.00">
+      <cfdi:Impuestos>
+        <cfdi:Traslados>
+          <cfdi:Traslado Base="45" Impuesto="002" TipoFactor="Tasa" TasaOCuota="0.160000" Importe="7.200000" />
+        </cfdi:Traslados>
+      </cfdi:Impuestos>
+    </cfdi:Concepto>
+    <cfdi:Concepto Cantidad="1.00000" ClaveProdServ="92121701" ClaveUnidad="E48" Unidad="Unidad de servicio" Descripcion=" MONITOREO MENSUAL EDWIN DE CUENTA: 1407" ValorUnitario="45.00" Importe="45.00">
+      <cfdi:Impuestos>
+        <cfdi:Traslados>
+          <cfdi:Traslado Base="45" Impuesto="002" TipoFactor="Tasa" TasaOCuota="0.160000" Importe="7.200000" />
+        </cfdi:Traslados>
+      </cfdi:Impuestos>
+    </cfdi:Concepto>
+    <cfdi:Concepto Cantidad="1.00000" ClaveProdServ="92121701" ClaveUnidad="E48" Unidad="Unidad de servicio" Descripcion=" MONITOREO MENSUAL EDWIN DE CUENTA: 1408" ValorUnitario="45.00" Importe="45.00">
+      <cfdi:Impuestos>
+        <cfdi:Traslados>
+          <cfdi:Traslado Base="45" Impuesto="002" TipoFactor="Tasa" TasaOCuota="0.160000" Importe="7.200000" />
+        </cfdi:Traslados>
+      </cfdi:Impuestos>
+    </cfdi:Concepto>
+    <cfdi:Concepto Cantidad="1.00000" ClaveProdServ="92121701" ClaveUnidad="E48" Unidad="Unidad de servicio" Descripcion=" MONITOREO MENSUAL EDWIN DE CUENTA: 1409" ValorUnitario="45.00" Importe="45.00">
+      <cfdi:Impuestos>
+        <cfdi:Traslados>
+          <cfdi:Traslado Base="45" Impuesto="002" TipoFactor="Tasa" TasaOCuota="0.160000" Importe="7.200000" />
+        </cfdi:Traslados>
+      </cfdi:Impuestos>
+    </cfdi:Concepto>
+    <cfdi:Concepto Cantidad="1.00000" ClaveProdServ="92121701" ClaveUnidad="E48" Unidad="Unidad de servicio" Descripcion=" MONITOREO MENSUAL EDWIN DE CUENTA: 1411" ValorUnitario="45.00" Importe="45.00">
+      <cfdi:Impuestos>
+        <cfdi:Traslados>
+          <cfdi:Traslado Base="45" Impuesto="002" TipoFactor="Tasa" TasaOCuota="0.160000" Importe="7.200000" />
+        </cfdi:Traslados>
+      </cfdi:Impuestos>
+    </cfdi:Concepto>
+    <cfdi:Concepto Cantidad="1.00000" ClaveProdServ="92121701" ClaveUnidad="E48" Unidad="Unidad de servicio" Descripcion=" MONITOREO MENSUAL EDWIN DE CUENTA: 1412" ValorUnitario="45.00" Importe="45.00">
+      <cfdi:Impuestos>
+        <cfdi:Traslados>
+          <cfdi:Traslado Base="45" Impuesto="002" TipoFactor="Tasa" TasaOCuota="0.160000" Importe="7.200000" />
+        </cfdi:Traslados>
+      </cfdi:Impuestos>
+    </cfdi:Concepto>
+    <cfdi:Concepto Cantidad="1.00000" ClaveProdServ="92121701" ClaveUnidad="E48" Unidad="Unidad de servicio" Descripcion=" MONITOREO MENSUAL EDWIN DE CUENTA: 1413" ValorUnitario="45.00" Importe="45.00">
+      <cfdi:Impuestos>
+        <cfdi:Traslados>
+          <cfdi:Traslado Base="45" Impuesto="002" TipoFactor="Tasa" TasaOCuota="0.160000" Importe="7.200000" />
+        </cfdi:Traslados>
+      </cfdi:Impuestos>
+    </cfdi:Concepto>
+    <cfdi:Concepto Cantidad="1.00000" ClaveProdServ="92121701" ClaveUnidad="E48" Unidad="Unidad de servicio" Descripcion=" MONITOREO MENSUAL EDWIN DE CUENTA: 1415" ValorUnitario="45.00" Importe="45.00">
+      <cfdi:Impuestos>
+        <cfdi:Traslados>
+          <cfdi:Traslado Base="45" Impuesto="002" TipoFactor="Tasa" TasaOCuota="0.160000" Importe="7.200000" />
+        </cfdi:Traslados>
+      </cfdi:Impuestos>
+    </cfdi:Concepto>
+    <cfdi:Concepto Cantidad="1.00000" ClaveProdServ="92121701" ClaveUnidad="E48" Unidad="Unidad de servicio" Descripcion=" MONITOREO MENSUAL EDWIN DE CUENTA: 1417" ValorUnitario="45.00" Importe="45.00">
+      <cfdi:Impuestos>
+        <cfdi:Traslados>
+          <cfdi:Traslado Base="45" Impuesto="002" TipoFactor="Tasa" TasaOCuota="0.160000" Importe="7.200000" />
+        </cfdi:Traslados>
+      </cfdi:Impuestos>
+    </cfdi:Concepto>
+    <cfdi:Concepto Cantidad="1.00000" ClaveProdServ="92121701" ClaveUnidad="E48" Unidad="Unidad de servicio" Descripcion=" MONITOREO MENSUAL EDWIN DE CUENTA: 1419" ValorUnitario="45.00" Importe="45.00">
+      <cfdi:Impuestos>
+        <cfdi:Traslados>
+          <cfdi:Traslado Base="45" Impuesto="002" TipoFactor="Tasa" TasaOCuota="0.160000" Importe="7.200000" />
+        </cfdi:Traslados>
+      </cfdi:Impuestos>
+    </cfdi:Concepto>
+    <cfdi:Concepto Cantidad="1.00000" ClaveProdServ="92121701" ClaveUnidad="E48" Unidad="Unidad de servicio" Descripcion=" MONITOREO MENSUAL EDWIN DE CUENTA: 1420" ValorUnitario="45.00" Importe="45.00">
+      <cfdi:Impuestos>
+        <cfdi:Traslados>
+          <cfdi:Traslado Base="45" Impuesto="002" TipoFactor="Tasa" TasaOCuota="0.160000" Importe="7.200000" />
+        </cfdi:Traslados>
+      </cfdi:Impuestos>
+    </cfdi:Concepto>
+    <cfdi:Concepto Cantidad="1.00000" ClaveProdServ="92121701" ClaveUnidad="E48" Unidad="Unidad de servicio" Descripcion=" MONITOREO MENSUAL EDWIN DE CUENTA: 1421" ValorUnitario="45.00" Importe="45.00">
+      <cfdi:Impuestos>
+        <cfdi:Traslados>
+          <cfdi:Traslado Base="45" Impuesto="002" TipoFactor="Tasa" TasaOCuota="0.160000" Importe="7.200000" />
+        </cfdi:Traslados>
+      </cfdi:Impuestos>
+    </cfdi:Concepto>
+    <cfdi:Concepto Cantidad="1.00000" ClaveProdServ="92121701" ClaveUnidad="E48" Unidad="Unidad de servicio" Descripcion=" MONITOREO MENSUAL EDWIN DE CUENTA: 1422" ValorUnitario="45.00" Importe="45.00">
+      <cfdi:Impuestos>
+        <cfdi:Traslados>
+          <cfdi:Traslado Base="45" Impuesto="002" TipoFactor="Tasa" TasaOCuota="0.160000" Importe="7.200000" />
+        </cfdi:Traslados>
+      </cfdi:Impuestos>
+    </cfdi:Concepto>
+    <cfdi:Concepto Cantidad="1.00000" ClaveProdServ="92121701" ClaveUnidad="E48" Unidad="Unidad de servicio" Descripcion=" MONITOREO MENSUAL EDWIN DE CUENTA: 1423" ValorUnitario="45.00" Importe="45.00">
+      <cfdi:Impuestos>
+        <cfdi:Traslados>
+          <cfdi:Traslado Base="45" Impuesto="002" TipoFactor="Tasa" TasaOCuota="0.160000" Importe="7.200000" />
+        </cfdi:Traslados>
+      </cfdi:Impuestos>
+    </cfdi:Concepto>
+    <cfdi:Concepto Cantidad="1.00000" ClaveProdServ="92121701" ClaveUnidad="E48" Unidad="Unidad de servicio" Descripcion=" MONITOREO MENSUAL EDWIN DE CUENTA: 1426" ValorUnitario="45.00" Importe="45.00">
+      <cfdi:Impuestos>
+        <cfdi:Traslados>
+          <cfdi:Traslado Base="45" Impuesto="002" TipoFactor="Tasa" TasaOCuota="0.160000" Importe="7.200000" />
+        </cfdi:Traslados>
+      </cfdi:Impuestos>
+    </cfdi:Concepto>
+    <cfdi:Concepto Cantidad="1.00000" ClaveProdServ="92121701" ClaveUnidad="E48" Unidad="Unidad de servicio" Descripcion=" MONITOREO MENSUAL EDWIN DE CUENTA: 1427" ValorUnitario="45.00" Importe="45.00">
+      <cfdi:Impuestos>
+        <cfdi:Traslados>
+          <cfdi:Traslado Base="45" Impuesto="002" TipoFactor="Tasa" TasaOCuota="0.160000" Importe="7.200000" />
+        </cfdi:Traslados>
+      </cfdi:Impuestos>
+    </cfdi:Concepto>
+    <cfdi:Concepto Cantidad="1.00000" ClaveProdServ="92121701" ClaveUnidad="E48" Unidad="Unidad de servicio" Descripcion=" MONITOREO MENSUAL EDWIN DE CUENTA: 1428" ValorUnitario="45.00" Importe="45.00">
+      <cfdi:Impuestos>
+        <cfdi:Traslados>
+          <cfdi:Traslado Base="45" Impuesto="002" TipoFactor="Tasa" TasaOCuota="0.160000" Importe="7.200000" />
+        </cfdi:Traslados>
+      </cfdi:Impuestos>
+    </cfdi:Concepto>
+    <cfdi:Concepto Cantidad="1.00000" ClaveProdServ="92121701" ClaveUnidad="E48" Unidad="Unidad de servicio" Descripcion=" MONITOREO MENSUAL EDWIN DE CUENTA: 1431" ValorUnitario="45.00" Importe="45.00">
+      <cfdi:Impuestos>
+        <cfdi:Traslados>
+          <cfdi:Traslado Base="45" Impuesto="002" TipoFactor="Tasa" TasaOCuota="0.160000" Importe="7.200000" />
+        </cfdi:Traslados>
+      </cfdi:Impuestos>
+    </cfdi:Concepto>
+    <cfdi:Concepto Cantidad="1.00000" ClaveProdServ="92121701" ClaveUnidad="E48" Unidad="Unidad de servicio" Descripcion=" MONITOREO MENSUAL EDWIN DE CUENTA: 1434" ValorUnitario="45.00" Importe="45.00">
+      <cfdi:Impuestos>
+        <cfdi:Traslados>
+          <cfdi:Traslado Base="45" Impuesto="002" TipoFactor="Tasa" TasaOCuota="0.160000" Importe="7.200000" />
+        </cfdi:Traslados>
+      </cfdi:Impuestos>
+    </cfdi:Concepto>
+    <cfdi:Concepto Cantidad="1.00000" ClaveProdServ="92121701" ClaveUnidad="E48" Unidad="Unidad de servicio" Descripcion=" MONITOREO MENSUAL EDWIN DE CUENTA: 1435" ValorUnitario="45.00" Importe="45.00">
+      <cfdi:Impuestos>
+        <cfdi:Traslados>
+          <cfdi:Traslado Base="45" Impuesto="002" TipoFactor="Tasa" TasaOCuota="0.160000" Importe="7.200000" />
+        </cfdi:Traslados>
+      </cfdi:Impuestos>
+    </cfdi:Concepto>
+    <cfdi:Concepto Cantidad="1.00000" ClaveProdServ="92121701" ClaveUnidad="E48" Unidad="Unidad de servicio" Descripcion=" MONITOREO MENSUAL EDWIN DE CUENTA: 1437" ValorUnitario="45.00" Importe="45.00">
+      <cfdi:Impuestos>
+        <cfdi:Traslados>
+          <cfdi:Traslado Base="45" Impuesto="002" TipoFactor="Tasa" TasaOCuota="0.160000" Importe="7.200000" />
+        </cfdi:Traslados>
+      </cfdi:Impuestos>
+    </cfdi:Concepto>
+    <cfdi:Concepto Cantidad="1.00000" ClaveProdServ="92121701" ClaveUnidad="E48" Unidad="Unidad de servicio" Descripcion=" MONITOREO MENSUAL EDWIN DE CUENTA: 1438" ValorUnitario="45.00" Importe="45.00">
+      <cfdi:Impuestos>
+        <cfdi:Traslados>
+          <cfdi:Traslado Base="45" Impuesto="002" TipoFactor="Tasa" TasaOCuota="0.160000" Importe="7.200000" />
+        </cfdi:Traslados>
+      </cfdi:Impuestos>
+    </cfdi:Concepto>
+  </cfdi:Conceptos>
+  <cfdi:Impuestos TotalImpuestosTrasladados="640.80">
+    <cfdi:Traslados>
+      <cfdi:Traslado Impuesto="002" TipoFactor="Tasa" TasaOCuota="0.160000" Importe="640.80" />
+    </cfdi:Traslados>
+  </cfdi:Impuestos>
+  <cfdi:Complemento>
+    <tfd:TimbreFiscalDigital xmlns:tfd="http://www.sat.gob.mx/TimbreFiscalDigital" xsi:schemaLocation="http://www.sat.gob.mx/TimbreFiscalDigital http://www.sat.gob.mx/sitio_internet/cfd/TimbreFiscalDigital/TimbreFiscalDigitalv11.xsd" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" SelloCFD="ZyhKsdlbAQ2RBZsJAesbxeA6VwbLRz5rWcaerre5fD+J3A7b6okbx35jocCKM05AjI9gZyhbS3AduC8Yi5aPEGJw6O6U7wDcfm+F4J1w2y6eyawzNaGtnXkkc4aVs5vROvMkj7C4oOcSTx157auelO33PSSalxyDbGcclnoJTdqXZeMqoKCrB6Ko15pqySdSDShRJ2yNfylDIMIYg+RdPN8CrRnsYGzUnyJ5E2oDN5aTox96TPEkWuPsVdiijFQ/HeNjYl1saComWa5noVFlmHl27qG/Itwh34ZpC6mHXbgxA1FELlDibTFDFHqFYDjc9kghfcqmV2m07Qamrzm1RQ==" FechaTimbrado="2021-06-23T15:16:36" UUID="C6E560EE-D61F-4707-8EAC-6EE565F923A2" NoCertificadoSAT="00001000000407759943" Version="1.1" SelloSAT="ZSHCBY2hOfNbRAhQnFOi6r9i3Y/5L8wop6rOxJ7vLyWnbzI3BkUxgLMz5xswQE9kj9TAndbIDrON4LnWHhK9D99QMYeESOykEgFROfftJ5w+ndMSzJBWNWnQffujv+uRk9V6am1I99c1fROohb3cpEwztboFO4u0d8b2W7xl+dJbQYe7HATGL3AC4bzGzeX9PZB4Ejnr1PaFW/V9JWdmW6/GrEVnVeZXkPFFEGEouFGJYC83MEGms0PSdd4j8OHl1v0ICHU1vfRwAtTNoeacCLewUcdE1rTvegZGGJ+rzYJjQarGuEqJOjLHG3x/RG3ZATFHqqfcsP/Hi8auC+S7mw==" RfcProvCertif="ICA050422AA6" />
+  </cfdi:Complemento>
+</cfdi:Comprobante>

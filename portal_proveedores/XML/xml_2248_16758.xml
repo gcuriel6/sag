@@ -1,0 +1,37 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<cfdi:Comprobante xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:cfdi="http://www.sat.gob.mx/cfd/3" xsi:schemaLocation="http://www.sat.gob.mx/cfd/3 http://www.sat.gob.mx/sitio_internet/cfd/3/cfdv33.xsd " Version="3.3" Serie="AA" Folio="23002" Fecha="2021-04-05T16:19:54" MetodoPago="PUE" FormaPago="03" TipoDeComprobante="I" Moneda="MXN" TipoCambio="1" LugarExpedicion="07440" SubTotal="2150" Total="2494" Certificado="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" NoCertificado="00001000000408752664" Sello="UEMOfBQt1EgJadSWok3QQDh8vEpYm6Mi28RyoU+ZWBjTPN9t0N2DHYnACp7LskDM4+n7EVySk7dOVfA+FWO699E90O+oKre9SFtiNs5hYACpb2hVItE5GLg999rHMH6VJ7OaRZnQSEWiGPZDtzXWlpHIuMuPSkR534hCtxg4GE86ARY1Eu9Q14gVcwDzm0SZJOKA1vHWKzekARLiZkNLWCF0bNYJFhZzfCUvM2tf5SXa9iwBKI07bWVy272ADLW3c5Y7m1lfYodL2P6rlE2z/k/RXTUa96bJ5Whu8HotrU/GD25fYgNtP/PLkfqT2+zTD0/WZ+o553/MtLcR90wbww==">
+  <cfdi:Emisor Rfc="PALF820908RU7" Nombre="FERNANDO PATIÑO LOPEZ" RegimenFiscal="612"/>
+  <cfdi:Receptor Rfc="SPG0905078B1" Nombre="SEGURIDAD PRIVADA GINTHER DE OCCIDENTE S DE RL DE CV" UsoCFDI="G03"/>
+  <cfdi:Conceptos>
+    <cfdi:Concepto Cantidad="2" Unidad="PIEZAS" ClaveUnidad="H87" NoIdentificacion="0101059" ClaveProdServ="46181507" Descripcion="ESCOCIA ROJO GRIS ACERO M" ValorUnitario="430" Importe="860">
+      <cfdi:Impuestos>
+        <cfdi:Traslados>
+          <cfdi:Traslado Base="860" Impuesto="002" TipoFactor="Tasa" TasaOCuota="0.160000" Importe="137.6"/>
+        </cfdi:Traslados>
+      </cfdi:Impuestos>
+    </cfdi:Concepto>
+    <cfdi:Concepto Cantidad="1" Unidad="PIEZAS" ClaveUnidad="H87" NoIdentificacion="0101058" ClaveProdServ="46181507" Descripcion="ESCOCIA ROJO GRIS ACERO CH" ValorUnitario="430" Importe="430">
+      <cfdi:Impuestos>
+        <cfdi:Traslados>
+          <cfdi:Traslado Base="430" Impuesto="002" TipoFactor="Tasa" TasaOCuota="0.160000" Importe="68.8"/>
+        </cfdi:Traslados>
+      </cfdi:Impuestos>
+    </cfdi:Concepto>
+    <cfdi:Concepto Cantidad="2" Unidad="PIEZAS" ClaveUnidad="H87" NoIdentificacion="0101060" ClaveProdServ="46181507" Descripcion="ESCOCIA ROJO GRIS ACERO G" ValorUnitario="430" Importe="860">
+      <cfdi:Impuestos>
+        <cfdi:Traslados>
+          <cfdi:Traslado Base="860" Impuesto="002" TipoFactor="Tasa" TasaOCuota="0.160000" Importe="137.6"/>
+        </cfdi:Traslados>
+      </cfdi:Impuestos>
+    </cfdi:Concepto>
+  </cfdi:Conceptos>
+  <cfdi:Impuestos TotalImpuestosTrasladados="344">
+    <cfdi:Traslados>
+      <cfdi:Traslado Impuesto="002" TasaOCuota="0.160000" Importe="344" TipoFactor="Tasa"/>
+    </cfdi:Traslados>
+  </cfdi:Impuestos>
+  <cfdi:Complemento>
+    <tfd:TimbreFiscalDigital xmlns:tfd="http://www.sat.gob.mx/TimbreFiscalDigital" xsi:schemaLocation="http://www.sat.gob.mx/TimbreFiscalDigital http://www.sat.gob.mx/sitio_internet/cfd/TimbreFiscalDigital/TimbreFiscalDigitalv11.xsd" Version="1.1" UUID="1640eb99-14aa-414d-ac7b-e9d6deb1b28f" FechaTimbrado="2021-04-05T16:21:21" RfcProvCertif="LSO1306189R5" SelloCFD="UEMOfBQt1EgJadSWok3QQDh8vEpYm6Mi28RyoU+ZWBjTPN9t0N2DHYnACp7LskDM4+n7EVySk7dOVfA+FWO699E90O+oKre9SFtiNs5hYACpb2hVItE5GLg999rHMH6VJ7OaRZnQSEWiGPZDtzXWlpHIuMuPSkR534hCtxg4GE86ARY1Eu9Q14gVcwDzm0SZJOKA1vHWKzekARLiZkNLWCF0bNYJFhZzfCUvM2tf5SXa9iwBKI07bWVy272ADLW3c5Y7m1lfYodL2P6rlE2z/k/RXTUa96bJ5Whu8HotrU/GD25fYgNtP/PLkfqT2+zTD0/WZ+o553/MtLcR90wbww==" NoCertificadoSAT="00001000000408254801" SelloSAT="lWb6gqxKg4HgNXYQ4UauUbMgNE9m4bowHnniWr7LInq/lrTKIAa+H8Qu00ALi3iuQihEU3wAGmXZyvO8fiPHoCRAFDx/9ktE5odj00rWU1KoM4z/cMCaGol0rgkh91Tql2BWwfT3kkkS4b9igKGmmYSq09uXRJ138vwKgMm2y+RnoGkyBjei5Gz6Oafqod58A1SfJOj0TBMo2oxIfhgEnEufyrHF0n1btT+nEM03iWYo1fu1RCp23b9xZVBPRcQNsGwHl8VO7PsNXR6s/uRrjoCQ9aOxP+Dgj+IItAmYgMz5/ZJx45MX0d9YIgzxobvf35qjyDAYyhCqTXushjxZmA=="/>
+  </cfdi:Complemento>
+</cfdi:Comprobante>
+

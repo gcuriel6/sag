@@ -1,0 +1,61 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<cfdi:Comprobante xmlns:cfdi="http://www.sat.gob.mx/cfd/3" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" Total="985.00" Moneda="MXN" TipoDeComprobante="I" xsi:schemaLocation="http://www.sat.gob.mx/cfd/3 http://www.sat.gob.mx/sitio_internet/cfd/3/cfdv33.xsd" MetodoPago="PUE" LugarExpedicion="37295" SubTotal="849.14" Folio="155" Fecha="2020-05-11T12:41:57" Version="3.3" Serie="F" Sello="gklot/TA94YE7fQRKiEmt9frbAoxJZ+0nA02bnN4qHT4vwJtBDflEAAFisCNWS9Ra9qRRtVHLdex5+Vd+KNRurQW9vVp2uApSjpJaM6X9OHDuEc6vCyYEmh4E1cUz1xaHBaWJ5+1oZnJwznZaBBWmx8h8MdsOSFPXeLg2j+niwV3+tzkbhu2d9PLiRJec5OlYKR7OCAG4bTFuw28RCPiX2OFhEP80BV+wxJ4CsyYxJiR/yd+ZbMo5QAk+e24YIjRDY6M7/cv51eglDKxZ1uYaEZ6et3AzKYziF5OWw+hF1gAJ+L3avGD9wVMTqSm6mv97KpEysvawvxwNlaWtTwbyg==" Certificado="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" CondicionesDePago="CONTADO" FormaPago="03" NoCertificado="00001000000411991712">
+  <cfdi:Emisor Rfc="GAMJ740524DV9" Nombre="JOSE GARCIA MARTINEZ" RegimenFiscal="621" />
+  <cfdi:Receptor Rfc="SPG0905078B1" Nombre="SEGURIDAD PRIVADA GINTHER DE OCCIDENTE S. DE R.L. DE C.V." UsoCFDI="G03" />
+  <cfdi:Conceptos>
+    <cfdi:Concepto ValorUnitario="340.517241" Descripcion="CADENA 428 X 136 DID" Importe="340.517241" Unidad="Pieza" NoIdentificacion="CDDI85" ClaveProdServ="26111505" ClaveUnidad="H87" Cantidad="1.000000">
+      <cfdi:Impuestos>
+        <cfdi:Traslados>
+          <cfdi:Traslado Base="340.517241" Impuesto="002" TipoFactor="Tasa" TasaOCuota="0.160000" Importe="54.482759" />
+        </cfdi:Traslados>
+      </cfdi:Impuestos>
+    </cfdi:Concepto>
+    <cfdi:Concepto ValorUnitario="17.241379" Descripcion="FILTRO GAS PIEDRA" Importe="17.241379" Unidad="Pieza" NoIdentificacion="2152-1013" ClaveProdServ="40161513" ClaveUnidad="H87" Cantidad="1.000000">
+      <cfdi:Impuestos>
+        <cfdi:Traslados>
+          <cfdi:Traslado Base="17.241379" Impuesto="002" TipoFactor="Tasa" TasaOCuota="0.160000" Importe="2.758621" />
+        </cfdi:Traslados>
+      </cfdi:Impuestos>
+    </cfdi:Concepto>
+    <cfdi:Concepto ValorUnitario="34.482759" Descripcion="BALATA DISCO HONDA INVICTA" Importe="34.482759" Unidad="Pieza" NoIdentificacion="1314-1319" ClaveProdServ="25171713" ClaveUnidad="H87" Cantidad="1.000000">
+      <cfdi:Impuestos>
+        <cfdi:Traslados>
+          <cfdi:Traslado Base="34.482759" Impuesto="002" TipoFactor="Tasa" TasaOCuota="0.160000" Importe="5.517241" />
+        </cfdi:Traslados>
+      </cfdi:Impuestos>
+    </cfdi:Concepto>
+    <cfdi:Concepto ValorUnitario="77.586207" Descripcion="BALTA TAMBOR HONDA CARGO 125" Importe="77.586207" Unidad="Pieza" NoIdentificacion="42-8020-001" ClaveProdServ="25171712" ClaveUnidad="H87" Cantidad="1.000000">
+      <cfdi:Impuestos>
+        <cfdi:Traslados>
+          <cfdi:Traslado Base="77.586207" Impuesto="002" TipoFactor="Tasa" TasaOCuota="0.160000" Importe="12.413793" />
+        </cfdi:Traslados>
+      </cfdi:Impuestos>
+    </cfdi:Concepto>
+    <cfdi:Concepto ValorUnitario="30.172414" Descripcion="BUJIA DPR8EA-9 NGK" Importe="60.344828" Unidad="Pieza" NoIdentificacion="087295138946" ClaveProdServ="26101732" ClaveUnidad="H87" Cantidad="2.000000">
+      <cfdi:Impuestos>
+        <cfdi:Traslados>
+          <cfdi:Traslado Base="60.344828" Impuesto="002" TipoFactor="Tasa" TasaOCuota="0.160000" Importe="9.655172" />
+        </cfdi:Traslados>
+      </cfdi:Impuestos>
+    </cfdi:Concepto>
+    <cfdi:Concepto ValorUnitario="77.586207" Descripcion="VARILLA" Importe="77.586207" Unidad="Pieza" NoIdentificacion="VARILLA" ClaveProdServ="26101400" ClaveUnidad="H87" Cantidad="1.000000">
+      <cfdi:Impuestos>
+        <cfdi:Traslados>
+          <cfdi:Traslado Base="77.586207" Impuesto="002" TipoFactor="Tasa" TasaOCuota="0.160000" Importe="12.413793" />
+        </cfdi:Traslados>
+      </cfdi:Impuestos>
+    </cfdi:Concepto>
+    <cfdi:Concepto ValorUnitario="241.379310" Descripcion="MANO OBRA" Importe="241.379310" Unidad="Pieza" NoIdentificacion="M.O" ClaveProdServ="01010101" ClaveUnidad="H87" Cantidad="1.000000">
+      <cfdi:Impuestos>
+        <cfdi:Traslados>
+          <cfdi:Traslado Base="241.379310" Impuesto="002" TipoFactor="Tasa" TasaOCuota="0.160000" Importe="38.620690" />
+        </cfdi:Traslados>
+      </cfdi:Impuestos>
+    </cfdi:Concepto>
+  </cfdi:Conceptos>
+  <cfdi:Impuestos TotalImpuestosTrasladados="135.86">
+    <cfdi:Traslados>
+      <cfdi:Traslado Impuesto="002" TipoFactor="Tasa" TasaOCuota="0.160000" Importe="135.86" />
+    </cfdi:Traslados>
+  </cfdi:Impuestos>
+<cfdi:Complemento><tfd:TimbreFiscalDigital xmlns:tfd="http://www.sat.gob.mx/TimbreFiscalDigital" xsi:schemaLocation="http://www.sat.gob.mx/TimbreFiscalDigital http://www.sat.gob.mx/sitio_internet/cfd/TimbreFiscalDigital/TimbreFiscalDigitalv11.xsd" Version="1.1" UUID="C2B4F892-7870-4897-8DB1-B0C117F524B8" FechaTimbrado="2020-05-11T12:46:14" RfcProvCertif="SFE0807172W8" SelloCFD="gklot/TA94YE7fQRKiEmt9frbAoxJZ+0nA02bnN4qHT4vwJtBDflEAAFisCNWS9Ra9qRRtVHLdex5+Vd+KNRurQW9vVp2uApSjpJaM6X9OHDuEc6vCyYEmh4E1cUz1xaHBaWJ5+1oZnJwznZaBBWmx8h8MdsOSFPXeLg2j+niwV3+tzkbhu2d9PLiRJec5OlYKR7OCAG4bTFuw28RCPiX2OFhEP80BV+wxJ4CsyYxJiR/yd+ZbMo5QAk+e24YIjRDY6M7/cv51eglDKxZ1uYaEZ6et3AzKYziF5OWw+hF1gAJ+L3avGD9wVMTqSm6mv97KpEysvawvxwNlaWtTwbyg==" NoCertificadoSAT="00001000000404594081" SelloSAT="vEeEOrc8ztP8+ZdPYZxQMsL7G3QPq/sh8kGBf/2upc/RfXcR8mHT6bK+HCeiv377bUWA7v8ty/V/ZZw9fUaAE/aZG5cyzHln25+97ztuA/6Jlf5zWt9WLcijIA7N0AVqEGef1PBMYkySVw4GjdP7AyVQ/W2QXZn/xWad06EHQgW0OTk7JeE1EjmqOpyDY1GNC/2Z9IM4rEpRkOoxzpRiKGyvM121s4M7hyeWedMfyOr8umPrUzxG7u6vPDdSrG8eB2RqYAkXbhfOnZhsFnQ5PMoOqZU1vOyR6vo44HP6UXgl2C5Ihf8AgzhvnwCempS4NYWgysNysrAiGu7uPUyxwA==" /></cfdi:Complemento></cfdi:Comprobante>

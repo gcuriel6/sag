@@ -1,0 +1,98 @@
+<?xml version="1.0" encoding="UTF-8"?><cfdi:Comprobante xmlns:cfdi="http://www.sat.gob.mx/cfd/3" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://www.sat.gob.mx/cfd/3 http://www.sat.gob.mx/sitio_internet/cfd/3/cfdv33.xsd" Version="3.3" Serie="MAT" Folio="20044637" Fecha="2020-07-14T18:02:13" Sello="MCsZkXSolkpq6hDqBZHv/qhS7OQmPG2EMOafLxa/uRXHFhJgvffn9DF4bFs+G92tYstTmJsDGZz2F6OhHdKfQhtXFBZUvsrjjwgGBNas2WQyZx9WjuiVePhclBdTgCrxu6M1OL+3e34hoC0FW64ue0UNHlVvoMhbNfzcg6Rg7ZID4AyacOEt6w6Q6fitXJanJyaocY0eXZweNZ0mnQhpBZRsDKAblwbkNKx7Gv0dde65JJkEBRxa2XuuWKn1Cx2DIjmbM9XQuR/nnlVMAQ6VsCym/7LP3Qo3mnx/S/Mx7wQ086ttdfPeBh5QwS4QGcl6DFhny0ZJ7BreHVnZ3lZsdg==" FormaPago="03" NoCertificado="00001000000405898961" Certificado="MIIGLTCCBBWgAwIBAgIUMDAwMDEwMDAwMDA0MDU4OTg5NjEwDQYJKoZIhvcNAQELBQAwggGyMTgwNgYDVQQDDC9BLkMuIGRlbCBTZXJ2aWNpbyBkZSBBZG1pbmlzdHJhY2nDs24gVHJpYnV0YXJpYTEvMC0GA1UECgwmU2VydmljaW8gZGUgQWRtaW5pc3RyYWNpw7NuIFRyaWJ1dGFyaWExODA2BgNVBAsML0FkbWluaXN0cmFjacOzbiBkZSBTZWd1cmlkYWQgZGUgbGEgSW5mb3JtYWNpw7NuMR8wHQYJKoZIhvcNAQkBFhBhY29kc0BzYXQuZ29iLm14MSYwJAYDVQQJDB1Bdi4gSGlkYWxnbyA3NywgQ29sLiBHdWVycmVybzEOMAwGA1UEEQwFMDYzMDAxCzAJBgNVBAYTAk1YMRkwFwYDVQQIDBBEaXN0cml0byBGZWRlcmFsMRQwEgYDVQQHDAtDdWF1aHTDqW1vYzEVMBMGA1UELRMMU0FUOTcwNzAxTk4zMV0wWwYJKoZIhvcNAQkCDE5SZXNwb25zYWJsZTogQWRtaW5pc3RyYWNpw7NuIENlbnRyYWwgZGUgU2VydmljaW9zIFRyaWJ1dGFyaW9zIGFsIENvbnRyaWJ1eWVudGUwHhcNMTcwNDIwMjI1ODQ3WhcNMjEwNDIwMjI1ODQ3WjCBzTEkMCIGA1UEAxMbUFJPRFVDVE9TIE1FREVMTElOIFNBIERFIENWMSQwIgYDVQQpExtQUk9EVUNUT1MgTUVERUxMSU4gU0EgREUgQ1YxJDAiBgNVBAoTG1BST0RVQ1RPUyBNRURFTExJTiBTQSBERSBDVjElMCMGA1UELRMcUE1FODYxMjExVDIyIC8gTUVWVjY5MTIwM0lCNTEeMBwGA1UEBRMVIC8gTUVWVjY5MTIwM01TUERSUjA2MRIwEAYDVQQLEwlNQVRFSFVBTEEwggEiMA0GCSqGSIb3DQEBAQUAA4IBDwAwggEKAoIBAQCXSISKKmk9lsodDCnB+z6hdprzXVOgq/DZ4pl5dMFbJ4dplAYfnjmmhDWSpICUK7fSVdn2bgnQlK3JC6uDhZV61Y/y8KmFaaTDT+vr8eLGTvF/4ihhT6pSw6umeVFRVth9rEtN0+rCQMs2bWiZ2po+F72/ZFuOpdOOmqIK5dSuWNKJcePdCdkPDd3SmxUvmuKTr7G48DMjygX5NbAbXYxddpvu0Zz3NoP5EzyJ3ij8x+X25Tp/ekHasom9kUKhBfYNOiDro6iAJp8ymoV2Zy3tT9n8T58UxSRFgpBiWu8XF2szD8mcC+1iNKlWSDQWH7EexaC6Wbj3unLO9Yk0pVHrAgMBAAGjHTAbMAwGA1UdEwEB/wQCMAAwCwYDVR0PBAQDAgbAMA0GCSqGSIb3DQEBCwUAA4ICAQAxr8aEV4s8Via/z1Fvrx6xU/AXKWQcrL8BSh8z6dVIe7fQiLH9ubVrTKZTuDL78sg47T8Sq3/hL0+sb6TC0x8bAYvAXpT4Ykjvtzk3UMHMloQRoHjp1BmYY8XOglNE5Bs1SY4GFNFuImmB+SMqwlUwkWwGhrM4GJXIiTuUXmr0V+qiSFLOUtn2KMzn89U3c7dIS/3RKre8jRT8mLbeQsN/mDrXCzZjQEV7TjR5pq7chjoVDN3F9/3hE1ipsQJydC7zhhh31embJ2zYXqwv/kPv+gtqJoIOylVAU8ZKkR2HRzo11dkv0OeGLGyt6rEHzf9Hcy6HJWsySiX5EjXrbhQc2WAVTXigAGIMZvlTx8FaCr132POnd9Izld2WT7YOmYukV161YRYEzdbkqgh4mb2Uf+igjBwld6fXsBK0zYpUOLNQeq8XI+mxCy7o0BNqFlBMywAufEYyd3GZvtjIEU70LIZOCNu0R8GhxU9HXUD5bwXfMPxFqXQ/SeqQFhXv4YbWRBQKORCROAfNq6QaLCNqJGw3q1AYNVEf9ggCmmZ6I7F/+SHJv2/uj6laTsNAZ1bM73O8oSHN4juLpYbKlxXAlc510oGRO+uMxn+hEFFszG/FkZH1RfSMVhgY/FsC/WhSKnwwcAQUMI9ALTeewrEpCAAg4t0/n5Q90Ad3IRLtwA==" SubTotal="80189.20" Descuento="4009.46" Moneda="MXN" Total="76179.74" TipoDeComprobante="I" MetodoPago="PUE" LugarExpedicion="78700">
+        <cfdi:Emisor Rfc="PME861211T22" Nombre="PRODUCTOS MEDELLIN S.A DE C.V" RegimenFiscal="601"></cfdi:Emisor>
+        <cfdi:Receptor Rfc="DPD180622MH7" Nombre="DON PATRICIO DELICATESEN, SA DE CV" UsoCFDI="G01"></cfdi:Receptor>
+        <cfdi:Conceptos>
+          <cfdi:Concepto ClaveProdServ="50112004" Cantidad="12.000000" ClaveUnidad="XBX" Descripcion="BARBACOA DE RES EL GALLO GIRO 180 GR 1/15/180 GR" ValorUnitario="487.500000" Importe="5850.000000" Descuento="292.500000">
+            <cfdi:Impuestos>
+              <cfdi:Traslados>
+                <cfdi:Traslado Base="5557.500000" Impuesto="002" TipoFactor="Tasa" TasaOCuota="0.000000" Importe="0.000000"></cfdi:Traslado>
+              </cfdi:Traslados>
+            </cfdi:Impuestos>
+          </cfdi:Concepto>
+          <cfdi:Concepto ClaveProdServ="50112008" Cantidad="12.000000" ClaveUnidad="XBX" Descripcion="CHICHARRON EN SALSA VERDE EL GALLO GIRO 220 GR 1/15/220 GR" ValorUnitario="439.500000" Importe="5274.000000" Descuento="263.700000">
+            <cfdi:Impuestos>
+              <cfdi:Traslados>
+                <cfdi:Traslado Base="5010.300000" Impuesto="002" TipoFactor="Tasa" TasaOCuota="0.000000" Importe="0.000000"></cfdi:Traslado>
+              </cfdi:Traslados>
+            </cfdi:Impuestos>
+          </cfdi:Concepto>
+          <cfdi:Concepto ClaveProdServ="50112008" Cantidad="12.000000" ClaveUnidad="XBX" Descripcion="ASADO DE CERDO EL GALLO GIRO 220 GR 1/15/220 GR" ValorUnitario="439.500000" Importe="5274.000000" Descuento="263.700000">
+            <cfdi:Impuestos>
+              <cfdi:Traslados>
+                <cfdi:Traslado Base="5010.300000" Impuesto="002" TipoFactor="Tasa" TasaOCuota="0.000000" Importe="0.000000"></cfdi:Traslado>
+              </cfdi:Traslados>
+            </cfdi:Impuestos>
+          </cfdi:Concepto>
+          <cfdi:Concepto ClaveProdServ="50112008" Cantidad="12.000000" ClaveUnidad="XBX" Descripcion="CHILORIO DE CERDO EL GALLO GIRO 220 GR 1/15/220 GR" ValorUnitario="439.500000" Importe="5274.000000" Descuento="263.700000">
+            <cfdi:Impuestos>
+              <cfdi:Traslados>
+                <cfdi:Traslado Base="5010.300000" Impuesto="002" TipoFactor="Tasa" TasaOCuota="0.000000" Importe="0.000000"></cfdi:Traslado>
+              </cfdi:Traslados>
+            </cfdi:Impuestos>
+          </cfdi:Concepto>
+          <cfdi:Concepto ClaveProdServ="50112008" Cantidad="12.000000" ClaveUnidad="XBX" Descripcion="COCHINITA PIBIL EL GALLO GIRO 220 GR 1/15/220 GRAMOS" ValorUnitario="439.500000" Importe="5274.000000" Descuento="263.700000">
+            <cfdi:Impuestos>
+              <cfdi:Traslados>
+                <cfdi:Traslado Base="5010.300000" Impuesto="002" TipoFactor="Tasa" TasaOCuota="0.000000" Importe="0.000000"></cfdi:Traslado>
+              </cfdi:Traslados>
+            </cfdi:Impuestos>
+          </cfdi:Concepto>
+          <cfdi:Concepto ClaveProdServ="50112010" Cantidad="10.000000" ClaveUnidad="XBX" Descripcion="POLLO EN MOLE EL GALLO GIRO 220 GR 1/15/220 GR" ValorUnitario="439.500000" Importe="4395.000000" Descuento="219.750000">
+            <cfdi:Impuestos>
+              <cfdi:Traslados>
+                <cfdi:Traslado Base="4175.250000" Impuesto="002" TipoFactor="Tasa" TasaOCuota="0.000000" Importe="0.000000"></cfdi:Traslado>
+              </cfdi:Traslados>
+            </cfdi:Impuestos>
+          </cfdi:Concepto>
+          <cfdi:Concepto ClaveProdServ="50112022" Cantidad="65.000000" ClaveUnidad="XBX" Descripcion="PAQUETE CARNICOS SURTIDO VENTA ON LINE 2.56 KG" ValorUnitario="522.120000" Importe="33937.800000" Descuento="1696.890000">
+            <cfdi:Impuestos>
+              <cfdi:Traslados>
+                <cfdi:Traslado Base="32240.910000" Impuesto="002" TipoFactor="Tasa" TasaOCuota="0.000000" Importe="0.000000"></cfdi:Traslado>
+              </cfdi:Traslados>
+            </cfdi:Impuestos>
+          </cfdi:Concepto>
+          <cfdi:Concepto ClaveProdServ="50112004" Cantidad="20.000000" ClaveUnidad="XEC" Descripcion="BOLSA BARBACOA DE RES GALLO GIRO 1 KG" ValorUnitario="210.000000" Importe="4200.000000" Descuento="210.000000">
+            <cfdi:Impuestos>
+              <cfdi:Traslados>
+                <cfdi:Traslado Base="3990.000000" Impuesto="002" TipoFactor="Tasa" TasaOCuota="0.000000" Importe="0.000000"></cfdi:Traslado>
+              </cfdi:Traslados>
+            </cfdi:Impuestos>
+          </cfdi:Concepto>
+          <cfdi:Concepto ClaveProdServ="50112008" Cantidad="20.000000" ClaveUnidad="XEC" Descripcion="BOLSA CHICHARRON EN SALSA VERDE GALLO GIRO 1 KG" ValorUnitario="159.000000" Importe="3180.000000" Descuento="159.000000">
+            <cfdi:Impuestos>
+              <cfdi:Traslados>
+                <cfdi:Traslado Base="3021.000000" Impuesto="002" TipoFactor="Tasa" TasaOCuota="0.000000" Importe="0.000000"></cfdi:Traslado>
+              </cfdi:Traslados>
+            </cfdi:Impuestos>
+          </cfdi:Concepto>
+          <cfdi:Concepto ClaveProdServ="50112008" Cantidad="20.000000" ClaveUnidad="XEC" Descripcion="BOLSA ASADO DE CERDO GALLO GIRO 1 KG" ValorUnitario="134.000000" Importe="2680.000000" Descuento="134.000000">
+            <cfdi:Impuestos>
+              <cfdi:Traslados>
+                <cfdi:Traslado Base="2546.000000" Impuesto="002" TipoFactor="Tasa" TasaOCuota="0.000000" Importe="0.000000"></cfdi:Traslado>
+              </cfdi:Traslados>
+            </cfdi:Impuestos>
+          </cfdi:Concepto>
+          <cfdi:Concepto ClaveProdServ="50112008" Cantidad="20.000000" ClaveUnidad="XEC" Descripcion="BOLSA CHILORIO DE CERDO GALLO GIRO 1 KG" ValorUnitario="121.260000" Importe="2425.200000" Descuento="121.260000">
+            <cfdi:Impuestos>
+              <cfdi:Traslados>
+                <cfdi:Traslado Base="2303.940000" Impuesto="002" TipoFactor="Tasa" TasaOCuota="0.000000" Importe="0.000000"></cfdi:Traslado>
+              </cfdi:Traslados>
+            </cfdi:Impuestos>
+          </cfdi:Concepto>
+          <cfdi:Concepto ClaveProdServ="50112008" Cantidad="20.000000" ClaveUnidad="XEC" Descripcion="BOLSA COCHINITA PIBIL GALLO GIRO 1 KG" ValorUnitario="121.260000" Importe="2425.200000" Descuento="121.260000">
+            <cfdi:Impuestos>
+              <cfdi:Traslados>
+                <cfdi:Traslado Base="2303.940000" Impuesto="002" TipoFactor="Tasa" TasaOCuota="0.000000" Importe="0.000000"></cfdi:Traslado>
+              </cfdi:Traslados>
+            </cfdi:Impuestos>
+          </cfdi:Concepto>
+        </cfdi:Conceptos>
+        <cfdi:Impuestos TotalImpuestosTrasladados="0.00">
+          <cfdi:Traslados>
+            <cfdi:Traslado Impuesto="002" TipoFactor="Tasa" TasaOCuota="0.000000" Importe="0.00"></cfdi:Traslado>
+          </cfdi:Traslados>
+        </cfdi:Impuestos>
+        <cfdi:Complemento>
+          <tfd:TimbreFiscalDigital xmlns:tfd="http://www.sat.gob.mx/TimbreFiscalDigital" FechaTimbrado="2020-07-15T10:33:39" NoCertificadoSAT="00001000000404477432" RfcProvCertif="EME000602QR9" SelloCFD="MCsZkXSolkpq6hDqBZHv/qhS7OQmPG2EMOafLxa/uRXHFhJgvffn9DF4bFs+G92tYstTmJsDGZz2F6OhHdKfQhtXFBZUvsrjjwgGBNas2WQyZx9WjuiVePhclBdTgCrxu6M1OL+3e34hoC0FW64ue0UNHlVvoMhbNfzcg6Rg7ZID4AyacOEt6w6Q6fitXJanJyaocY0eXZweNZ0mnQhpBZRsDKAblwbkNKx7Gv0dde65JJkEBRxa2XuuWKn1Cx2DIjmbM9XQuR/nnlVMAQ6VsCym/7LP3Qo3mnx/S/Mx7wQ086ttdfPeBh5QwS4QGcl6DFhny0ZJ7BreHVnZ3lZsdg==" SelloSAT="HxtW4ZdwX5e3zy+4yiDIS1aJrlpLPVJpsxeXW1khRfRYOIo6qdukbRvndNZs8/qQwR0TFsXapz7qS28o/0Xwqin/3W1BGnJztk4k5AwOzBtMjFguHWXxlLYrsJLG/e1m1D/rdJ7nPaX3ujfb8LlKjHxn6fMj2bleJ4lEUWwqkfj2HwSZe/i7XJhqmJ4Ot8jlxLyy7CqkV+KzqDRA3GbNDp/bjZm41ie1h5CJJPlUNr3tmsDb8GrhsncUJ7tu+bIwZ3einDzkreHx27r4o3iPi4a3Q2oFgelsJTq/jBLGF6juPbYPAqyqvYZyfQlVIMp/GyrDb/DsYj/DLcAQqkfruA==" UUID="708DA3F3-D1B9-414C-8C6C-E7AA0899F10C" Version="1.1" xsi:schemaLocation="http://www.sat.gob.mx/TimbreFiscalDigital http://www.sat.gob.mx/sitio_internet/cfd/TimbreFiscalDigital/TimbreFiscalDigitalv11.xsd"></tfd:TimbreFiscalDigital>
+        </cfdi:Complemento>
+      </cfdi:Comprobante>

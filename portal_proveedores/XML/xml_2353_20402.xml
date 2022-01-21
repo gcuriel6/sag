@@ -1,0 +1,64 @@
+﻿<?xml version="1.0" encoding="UTF-8"?>
+<cfdi:Comprobante xmlns:cfdi="http://www.sat.gob.mx/cfd/3" xmlns:implocal="http://www.sat.gob.mx/implocal" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://www.sat.gob.mx/cfd/3 http://www.sat.gob.mx/sitio_internet/cfd/3/cfdv33.xsd http://www.sat.gob.mx/implocal http://www.sat.gob.mx/sitio_internet/cfd/implocal/implocal.xsd" Version="3.3" Serie="T" Folio="16954" Fecha="2021-06-03T01:44:47" Sello="abl6p/akDpNZTJG7MSeg1tlNsxIewaQyP/Q6t5o7uINZEoh1QSCXuZVTv/Ulkz98Xxq0NhjTsI4dGrffSuAvaJKwmrni39E233eEn0L4p5Gb7v5gFW8JeYcJLX+gB5a0QisYl1SttGFiI6Qqig1J94W9dNuJFsp5GYHztKdtyHQ277iUpQxaqR5Qis+uVinpmzuMkHK7nNRjfZbuRWmEu0klYXUN/CDqdLt4Y/m9h/UNsPY2V5kN3S8ecMC2MSvXOjQ1oMSdhBOaFN2242rqdeGeyK5/+MDNlTA/8Z58BRURnR/L4w7VUAX21MHTlcHg9xtNMJo7pFzH84jnY83BEg==" FormaPago="03" MetodoPago="PUE" LugarExpedicion="89260" NoCertificado="00001000000407082804" Certificado="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" CondicionesDePago="CONTADO" SubTotal="1880.20" Moneda="MXN" Total="2181.03" TipoDeComprobante="I">
+  <cfdi:Emisor Rfc="EIMJ650416TZ5" Nombre="JOSE ELIZONDO MORENO" RegimenFiscal="612" />
+  <cfdi:Receptor Rfc="SPG0905078B1" Nombre="SEGURIDAD PRIVADA GINTHER DE OCCIDENTE S DE RL DE CV" UsoCFDI="G03" />
+  <cfdi:Conceptos>
+    <cfdi:Concepto ClaveProdServ="40161504" ClaveUnidad="H87" Cantidad="1" Unidad="PIEZA" NoIdentificacion="11394" Descripcion="FILTRO DE ACEITE SPARK MATIZ BEAT" ValorUnitario="96.22" Importe="96.22">
+      <cfdi:Impuestos>
+        <cfdi:Traslados>
+          <cfdi:Traslado Impuesto="002" TipoFactor="Tasa" TasaOCuota="0.160000" Importe="15.3952" Base="96.2200" />
+        </cfdi:Traslados>
+      </cfdi:Impuestos>
+    </cfdi:Concepto>
+    <cfdi:Concepto ClaveProdServ="12181600" ClaveUnidad="LTR" Cantidad="4" Unidad="LITRO" NoIdentificacion="34422" Descripcion="ACEITE DE MOTOR 5W30 MINERAL MOTORCRAFT" ValorUnitario="123.53" Importe="494.12">
+      <cfdi:Impuestos>
+        <cfdi:Traslados>
+          <cfdi:Traslado Impuesto="002" TipoFactor="Tasa" TasaOCuota="0.160000" Importe="79.0592" Base="494.1200" />
+        </cfdi:Traslados>
+      </cfdi:Impuestos>
+    </cfdi:Concepto>
+    <cfdi:Concepto ClaveProdServ="26101732" ClaveUnidad="H87" Cantidad="4" Unidad="PIEZA" NoIdentificacion="17447" Descripcion="BUJIA SPARK ORIGINAL, AVANZA NACIONAL" ValorUnitario="37.59" Importe="150.36">
+      <cfdi:Impuestos>
+        <cfdi:Traslados>
+          <cfdi:Traslado Impuesto="002" TipoFactor="Tasa" TasaOCuota="0.160000" Importe="24.0576" Base="150.3600" />
+        </cfdi:Traslados>
+      </cfdi:Impuestos>
+    </cfdi:Concepto>
+    <cfdi:Concepto ClaveProdServ="40161505" ClaveUnidad="H87" Cantidad="1" Unidad="PIEZA" NoIdentificacion="7581" Descripcion="FILTRO DE AIRE SPARK F96A23" ValorUnitario="164.43" Importe="164.43">
+      <cfdi:Impuestos>
+        <cfdi:Traslados>
+          <cfdi:Traslado Impuesto="002" TipoFactor="Tasa" TasaOCuota="0.160000" Importe="26.3088" Base="164.4300" />
+        </cfdi:Traslados>
+      </cfdi:Impuestos>
+    </cfdi:Concepto>
+    <cfdi:Concepto ClaveProdServ="25191700" ClaveUnidad="H87" Cantidad="1" Unidad="PIEZA" NoIdentificacion="713" Descripcion="LIQUIDO DE INYECTORES PARA LAVAR" ValorUnitario="146.16" Importe="146.16">
+      <cfdi:Impuestos>
+        <cfdi:Traslados>
+          <cfdi:Traslado Impuesto="002" TipoFactor="Tasa" TasaOCuota="0.160000" Importe="23.3856" Base="146.1600" />
+        </cfdi:Traslados>
+      </cfdi:Impuestos>
+    </cfdi:Concepto>
+    <cfdi:Concepto ClaveProdServ="78181500" ClaveUnidad="E48" Cantidad="1" Unidad="UNIDAD DE SERVICIO" NoIdentificacion="5328" Descripcion="AFINACION F.I. DESARMAR ADMISION (MANO DE OBRA)" ValorUnitario="800.00" Importe="800.00">
+      <cfdi:Impuestos>
+        <cfdi:Traslados>
+          <cfdi:Traslado Impuesto="002" TipoFactor="Tasa" TasaOCuota="0.160000" Importe="128.0000" Base="800.0000" />
+        </cfdi:Traslados>
+      </cfdi:Impuestos>
+    </cfdi:Concepto>
+    <cfdi:Concepto ClaveProdServ="84131503" ClaveUnidad="E48" Cantidad="1" Unidad="UNIDAD DE SERVICIO" NoIdentificacion="96" Descripcion="SEGURO DE PROTECCION" ValorUnitario="28.91" Importe="28.91">
+      <cfdi:Impuestos>
+        <cfdi:Traslados>
+          <cfdi:Traslado Impuesto="002" TipoFactor="Tasa" TasaOCuota="0.160000" Importe="4.6256" Base="28.9100" />
+        </cfdi:Traslados>
+      </cfdi:Impuestos>
+    </cfdi:Concepto>
+  </cfdi:Conceptos>
+  <cfdi:Impuestos TotalImpuestosTrasladados="300.83">
+    <cfdi:Traslados>
+      <cfdi:Traslado Impuesto="002" TasaOCuota="0.160000" TipoFactor="Tasa" Importe="300.8320" />
+    </cfdi:Traslados>
+  </cfdi:Impuestos>
+  <cfdi:Complemento>
+    <tfd:TimbreFiscalDigital xmlns:tfd="http://www.sat.gob.mx/TimbreFiscalDigital" xsi:schemaLocation="http://www.sat.gob.mx/TimbreFiscalDigital http://www.sat.gob.mx/sitio_internet/cfd/TimbreFiscalDigital/TimbreFiscalDigitalv11.xsd" Version="1.1" SelloCFD="abl6p/akDpNZTJG7MSeg1tlNsxIewaQyP/Q6t5o7uINZEoh1QSCXuZVTv/Ulkz98Xxq0NhjTsI4dGrffSuAvaJKwmrni39E233eEn0L4p5Gb7v5gFW8JeYcJLX+gB5a0QisYl1SttGFiI6Qqig1J94W9dNuJFsp5GYHztKdtyHQ277iUpQxaqR5Qis+uVinpmzuMkHK7nNRjfZbuRWmEu0klYXUN/CDqdLt4Y/m9h/UNsPY2V5kN3S8ecMC2MSvXOjQ1oMSdhBOaFN2242rqdeGeyK5/+MDNlTA/8Z58BRURnR/L4w7VUAX21MHTlcHg9xtNMJo7pFzH84jnY83BEg==" NoCertificadoSAT="00001000000504204441" RfcProvCertif="CVD110412TF6" UUID="49CCDE55-E54F-477A-ADCD-152C4A9549E6" FechaTimbrado="2021-06-03T13:44:49" SelloSAT="JkcUkv+jnYsXuYRQns38emNH6vgP1RfRakijOAcr0SGc/nx/UYpG8COIcB++tdLOGW/tFKiRKebroHcfanEuwtIgxDxamUHfZ16eHVJCykgJ9VJvLoKYuvhegTxo9v+RmJMChQT1LHlikBFlSO5TL5sRsaeaAji4IeJBWKOtDVxq01iKmEy1tlngOQqcZxzvY4KTb5CJBxXz3onZVUs8FkSnT/Guzp80gh2OiwIFtUx8UiQx55/7QsIdArM97xvVi4F1y/nRz1v8dRHs3johvpfLd3zbLex3EYRG0fgWt4SsGVxqj9zWpC4df+DwrkyJOjisntCL75DlNYfI8n3EKg==" />
+  </cfdi:Complemento>
+</cfdi:Comprobante>

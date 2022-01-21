@@ -1,0 +1,99 @@
+	
+	@font-face {
+	font-family: Myriad;
+	src: url("myriad/MyriadPro-LightSemiExt.otf") format("opentype");
+	}
+	
+	@font-face {
+	font-family: Myriad;
+	font-weight: bold;
+	src: url("myriad/MyriadPro-SemiExt.otf") format("opentype");
+	}
+	
+	@font-face {
+	font-family: Vegur;
+	src: url("vegur/Vegur-L 0602.otf") format("opentype");
+	}
+	@font-face {
+	font-family: Vegur;
+	font-weight: bold;
+	src: url("vegur/Vegur-R 0.602.otf") format("opentype");
+	}
+	
+	@font-face {
+	font-family: Ubuntu;
+	src: url("ubuntu-font-family-0.80/Ubuntu-L.ttf") format("truetype");
+	}
+	@font-face {
+	font-family: Ubuntu;
+	font-weight: bold;
+	src: url("ubuntu-font-family-0.80/Ubuntu-R.ttf") format("truetype");
+	}
+	
+	
+	*{
+		font-family: Ubuntu;
+		
+	}
+
+	input,textarea,select,checkbox {
+		background-color: rgba(255,255,255,0.5);
+		border-bottom: none;
+		border-right: none;
+		border-top:solid 2px #dedede;
+		border-left:solid 1px #dedede;
+		border-radius:5px;
+		padding: 3px;
+	}
+	
+	td{
+		padding: 4px;
+	}
+	
+	.input_num{ width: 50px;}
+	.input_corta{ width: 100px;}
+	.input_mediana{ width: 200px;}
+	.input_larga{ width: 300px;}
+	.input_muy_larga{ width: 500px;}
+	
+	.td_num{ width: 50px;}
+	.td_corta{ width: 100px;}
+	.td_mediana{ width: 200px;}
+	.td_larga{ width: 300px;}
+	.td_muy_larga{ width: 500px;}
+	
+	.cen{text-align: center}
+	.der{text-align: right}
+	
+	.cuadro{
+		border-radius:10px;
+		background-color: rgba(255,255,255,0.90);
+		padding: 10px;
+	}
+
+	body{
+		background-color: #fefefe;
+	}
+	
+	.btn{
+			
+			border: none;
+			padding:2px 10px;
+		}
+		
+		.btn:hover{
+			
+			border: none;
+			
+		
+		.btn:focus, .btn:active{
+			
+			
+			border: none;
+			
+		}
+		
+		h5,h3,h4{
+			color: #97BB20;
+		}
+

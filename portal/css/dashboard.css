@@ -1,0 +1,44 @@
+/* CSS Document */
+.box{
+	position:absolute;
+	overflow:auto;
+	background-color: rgba(238,238,238,0.8);
+			border-radius: 10px;
+			-moz-box-shadow: rgba(80,91,101,0.2) 2px 2px 2px 2px;
+            box-shadow: rgba(80,91,101,0.2) 2px 2px 2px 2px;
+	
+}
+iframe {
+	position:absolute;
+	top:0px;
+	left:0px;
+	width:100%;
+	height:100%;
+	border:none;
+}
+#box1{
+	top:5%;
+	left:5%;
+	width:44%;
+	height:44%;
+}
+#box2{
+	top:5%;
+	right:5%;
+	width:45%;
+	height:44%;
+
+}
+#box3{
+	bottom:5%;
+	left:5%;
+	width:44%;
+	height:45%;
+}
+
+#box4{
+	bottom:5%;
+	right:5%;
+	width:45%;
+	height:45%;
+}

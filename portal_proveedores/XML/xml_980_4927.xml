@@ -1,0 +1,43 @@
+﻿<?xml version="1.0" encoding="UTF-8"?>
+<cfdi:Comprobante xmlns:cfdi="http://www.sat.gob.mx/cfd/3" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://www.sat.gob.mx/cfd/3 http://www.sat.gob.mx/sitio_internet/cfd/3/cfdv33.xsd" Version="3.3" Serie="R" Folio="671" Fecha="2020-06-25T13:54:39" Sello="Udo0To2kIu1bmPS0CVBtu+O7NporIXxYdBtPLrxX9TJFZobUgzFp8jSnsJ/hSJHuVVIaLATQUmz4Hof/dzZsmaDte/A3ahJ70WLuk95IwEmfLowujNu+xD+QWRyJl5a3TRX9Juh3jYGS0j/SVqCde+6Vw8q62wbyP/C8gl7pm4WElQ5W4eRnZd+uP8C9QDVHRX/sY0r+DqXe6jR2jw03oaUQnBwemrCWZ7j74vW+zr2I8bsICb2WwZZvpsTXGdP5P2AVIrEG3nL+wI88kGhu/eBoGjjH0j2qsTeJHgLBhUHGsbmIiw3HIp5etFpsOUsFmmloIWedHhWz+D8yL0HSmA==" FormaPago="03" NoCertificado="00001000000404288053" Certificado="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" CondicionesDePago="03 - Transferencia electrónica de fondos" SubTotal="3956.90" Descuento="331.03" Moneda="MXN" TipoCambio="1" Total="4206.01" TipoDeComprobante="I" MetodoPago="PUE" LugarExpedicion="83190">
+  <cfdi:Emisor Rfc="ESA990617N99" Nombre="ECONOLLANTAS  SERVICIOS Y ACCESORIOS SA DE CV" RegimenFiscal="601" />
+  <cfdi:Receptor Rfc="SPG0905078B1" Nombre="SEGURIDAD PRIVADA GINTHER DE OCCIDENTE SDE RL DECV" UsoCFDI="G03" />
+  <cfdi:Conceptos>
+    <cfdi:Concepto ClaveProdServ="25172500" NoIdentificacion="1756514YAES32" Cantidad="4.00" ClaveUnidad="H87" Unidad="Pza" Descripcion="175/65 R14 YOKOHAMA ES32 " ValorUnitario="827.59" Importe="3310.34" Descuento="331.03">
+      <cfdi:Impuestos>
+        <cfdi:Traslados>
+          <cfdi:Traslado Base="2979.31" Impuesto="002" TipoFactor="Tasa" TasaOCuota="0.160000" Importe="476.69" />
+        </cfdi:Traslados>
+      </cfdi:Impuestos>
+    </cfdi:Concepto>
+    <cfdi:Concepto ClaveProdServ="78181500" NoIdentificacion="PAQG1" Cantidad="4.00" ClaveUnidad="E48" Unidad="Serv" Descripcion="PAQUETE GEN. DE INSTALACIÓN " ValorUnitario="43.10" Importe="172.41">
+      <cfdi:Impuestos>
+        <cfdi:Traslados>
+          <cfdi:Traslado Base="172.41" Impuesto="002" TipoFactor="Tasa" TasaOCuota="0.160000" Importe="27.59" />
+        </cfdi:Traslados>
+      </cfdi:Impuestos>
+    </cfdi:Concepto>
+    <cfdi:Concepto ClaveProdServ="78181500" NoIdentificacion="ALIN" Cantidad="1.00" ClaveUnidad="E48" Unidad="Serv" Descripcion="Alineación Llantas Delanteras (GARANTIA 30 DIAS) " ValorUnitario="129.32" Importe="129.32">
+      <cfdi:Impuestos>
+        <cfdi:Traslados>
+          <cfdi:Traslado Base="129.32" Impuesto="002" TipoFactor="Tasa" TasaOCuota="0.160000" Importe="20.69" />
+        </cfdi:Traslados>
+      </cfdi:Impuestos>
+    </cfdi:Concepto>
+    <cfdi:Concepto ClaveProdServ="78181500" NoIdentificacion="POLIZA 100" Cantidad="4.00" ClaveUnidad="E48" Unidad="Serv" Descripcion="POLIZA 100 " ValorUnitario="86.21" Importe="344.83">
+      <cfdi:Impuestos>
+        <cfdi:Traslados>
+          <cfdi:Traslado Base="344.83" Impuesto="002" TipoFactor="Tasa" TasaOCuota="0.160000" Importe="55.17" />
+        </cfdi:Traslados>
+      </cfdi:Impuestos>
+    </cfdi:Concepto>
+  </cfdi:Conceptos>
+  <cfdi:Impuestos TotalImpuestosTrasladados="580.14">
+    <cfdi:Traslados>
+      <cfdi:Traslado Impuesto="002" TipoFactor="Tasa" TasaOCuota="0.160000" Importe="580.14" />
+    </cfdi:Traslados>
+  </cfdi:Impuestos>
+  <cfdi:Complemento>
+    <tfd:TimbreFiscalDigital xsi:schemaLocation="http://www.sat.gob.mx/TimbreFiscalDigital http://www.sat.gob.mx/sitio_internet/cfd/TimbreFiscalDigital/TimbreFiscalDigitalv11.xsd" Version="1.1" UUID="d121b542-2eaa-4e31-bab4-964a498b6415" FechaTimbrado="2020-06-25T15:54:47" RfcProvCertif="LSO1306189R5" SelloCFD="Udo0To2kIu1bmPS0CVBtu+O7NporIXxYdBtPLrxX9TJFZobUgzFp8jSnsJ/hSJHuVVIaLATQUmz4Hof/dzZsmaDte/A3ahJ70WLuk95IwEmfLowujNu+xD+QWRyJl5a3TRX9Juh3jYGS0j/SVqCde+6Vw8q62wbyP/C8gl7pm4WElQ5W4eRnZd+uP8C9QDVHRX/sY0r+DqXe6jR2jw03oaUQnBwemrCWZ7j74vW+zr2I8bsICb2WwZZvpsTXGdP5P2AVIrEG3nL+wI88kGhu/eBoGjjH0j2qsTeJHgLBhUHGsbmIiw3HIp5etFpsOUsFmmloIWedHhWz+D8yL0HSmA==" NoCertificadoSAT="00001000000408254801" SelloSAT="d9bzjihUiRZFH0w83FlX66ezDmCXI667Z7rfurLWPWFIskOnjiJ5RujG1EXktfwtvFhqBSvPVNU8mU5lhdTXCfSVAkVOni8v/lgT35R88iQl5l5GYA/huRvD2VgUhu6FTGw2XAYU8D6CRx445EpPvEOcc9kgBG5lFrE8hLzKqTc34fJocwnoelIu+eTAIppYUg0X4mdzXdPjqOqZNN0dgA/wQ4cpQmrE9gOzq26mnp2dfButz2w9UIf5x8scn9gXg1xAuMfUnUpI6rwO5koj6OlXA5vgyUBDZFh1Q4mKw84pN0/eWO2ZkLewY/PZyX/9939kAR/wrAfUQeNB0b4yVA==" xmlns:tfd="http://www.sat.gob.mx/TimbreFiscalDigital" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" />
+  </cfdi:Complemento>
+</cfdi:Comprobante>

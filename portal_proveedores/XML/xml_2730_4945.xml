@@ -1,0 +1,46 @@
+﻿<?xml version="1.0" encoding="UTF-8"?><cfdi:Comprobante xmlns:cfdi="http://www.sat.gob.mx/cfd/3" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" Certificado="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" Fecha="2020-06-20T13:20:42" Folio="87" FormaPago="03" LugarExpedicion="81000" MetodoPago="PUE" Moneda="MXN" NoCertificado="00001000000502090589" Sello="I/RIvf9r9grxnNCDYjBpSPeU1JE/92tt2Jg6F5hH8TkjamEMf25ZByHT8cxnsRYMU0XP34XQ0z/jDGzUiqtyQ1I+n1WA2eJ+/sY6df+us2lGk0VD4qtexrxGsYOyYcEw9XtZLgfE4DJDesfEj58XGxY0/yCSV3xc0+LhVwwdyTFWPS9Jl/jAvZtnwd1XoLEC8yglRcpo/fx69xwjyRxc05+b8h3JSmv1hVQSVIpND83LL67jGRN0C7Y+K1WeUQIqhH1KpDAWh9r4qpCe+XiC9aUykWmub/4YS6cyazzs7brywxAOUhJNcic3oh+o2OBLCuo5/FZ7yfehqHfpDSD+KQ==" SubTotal="1280.00" TipoCambio="1" TipoDeComprobante="I" Total="1484.80" Version="3.3" xsi:schemaLocation="http://www.sat.gob.mx/cfd/3 http://www.sat.gob.mx/sitio_internet/cfd/3/cfdv33.xsd">
+  <cfdi:Emisor Nombre="AUTO CALO SA DE CV" RegimenFiscal="601" Rfc="ACA1909141W9"/>
+  <cfdi:Receptor Nombre="SEGURIDAD PRIVADA GINTHER DE OCCIDENTE S.DE R.L. DE C.V." Rfc="SPG0905078B1" UsoCFDI="G03"/>
+  <cfdi:Conceptos>
+    <cfdi:Concepto Cantidad="1" ClaveProdServ="78181500" ClaveUnidad="E48" Descripcion="REEMPLAZO DE BALERO DELANTERO" Importe="250.00" NoIdentificacion="01" Unidad="N/A" ValorUnitario="250.00">
+      <cfdi:Impuestos>
+        <cfdi:Traslados>
+          <cfdi:Traslado Base="250.00" Importe="40.00" Impuesto="002" TasaOCuota="0.160000" TipoFactor="Tasa"/>
+        </cfdi:Traslados>
+      </cfdi:Impuestos>
+    </cfdi:Concepto>
+    <cfdi:Concepto Cantidad="1.00" ClaveProdServ="78181500" ClaveUnidad="E48" Descripcion="REEMPLAZAR MANGUERA PRINCIPAL DE GASOLINA" Importe="150.00" NoIdentificacion="01" Unidad="N/A" ValorUnitario="150.00">
+      <cfdi:Impuestos>
+        <cfdi:Traslados>
+          <cfdi:Traslado Base="150.00" Importe="24.00" Impuesto="002" TasaOCuota="0.160000" TipoFactor="Tasa"/>
+        </cfdi:Traslados>
+      </cfdi:Impuestos>
+    </cfdi:Concepto>
+    <cfdi:Concepto Cantidad="1.00" ClaveProdServ="78181500" ClaveUnidad="E48" Descripcion="BALERO DELANTERO" Importe="400.00" NoIdentificacion="02" Unidad="PZA" ValorUnitario="400.00">
+      <cfdi:Impuestos>
+        <cfdi:Traslados>
+          <cfdi:Traslado Base="400.00" Importe="64.00" Impuesto="002" TasaOCuota="0.160000" TipoFactor="Tasa"/>
+        </cfdi:Traslados>
+      </cfdi:Impuestos>
+    </cfdi:Concepto>
+    <cfdi:Concepto Cantidad="1.00" ClaveProdServ="78181500" ClaveUnidad="E48" Descripcion="MANGUERA PRINCIPAL DE GASOLINA" Importe="450.00" NoIdentificacion="02" Unidad="PZA" ValorUnitario="450.00">
+      <cfdi:Impuestos>
+        <cfdi:Traslados>
+          <cfdi:Traslado Base="450.00" Importe="72.00" Impuesto="002" TasaOCuota="0.160000" TipoFactor="Tasa"/>
+        </cfdi:Traslados>
+      </cfdi:Impuestos>
+    </cfdi:Concepto>
+    <cfdi:Concepto Cantidad="2" ClaveProdServ="78181500" ClaveUnidad="E48" Descripcion="ABRAZADERAS" Importe="30.00" NoIdentificacion="02" Unidad="PZAS" ValorUnitario="15.00">
+      <cfdi:Impuestos>
+        <cfdi:Traslados>
+          <cfdi:Traslado Base="30.00" Importe="4.80" Impuesto="002" TasaOCuota="0.160000" TipoFactor="Tasa"/>
+        </cfdi:Traslados>
+      </cfdi:Impuestos>
+    </cfdi:Concepto>
+  </cfdi:Conceptos>
+  <cfdi:Impuestos TotalImpuestosTrasladados="204.80">
+    <cfdi:Traslados>
+      <cfdi:Traslado Importe="204.8" Impuesto="002" TasaOCuota="0.160000" TipoFactor="Tasa"/>
+    </cfdi:Traslados>
+  </cfdi:Impuestos>
+<cfdi:Complemento><tfd:TimbreFiscalDigital xmlns:tfd="http://www.sat.gob.mx/TimbreFiscalDigital" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" FechaTimbrado="2020-06-20T14:20:42" NoCertificadoSAT="00001000000412961981" RfcProvCertif="FCG840618N51" SelloCFD="I/RIvf9r9grxnNCDYjBpSPeU1JE/92tt2Jg6F5hH8TkjamEMf25ZByHT8cxnsRYMU0XP34XQ0z/jDGzUiqtyQ1I+n1WA2eJ+/sY6df+us2lGk0VD4qtexrxGsYOyYcEw9XtZLgfE4DJDesfEj58XGxY0/yCSV3xc0+LhVwwdyTFWPS9Jl/jAvZtnwd1XoLEC8yglRcpo/fx69xwjyRxc05+b8h3JSmv1hVQSVIpND83LL67jGRN0C7Y+K1WeUQIqhH1KpDAWh9r4qpCe+XiC9aUykWmub/4YS6cyazzs7brywxAOUhJNcic3oh+o2OBLCuo5/FZ7yfehqHfpDSD+KQ==" SelloSAT="H1fq5eglP9LKIo39z5sE+9dzEY3uRxO8HVgYixdSLxobVgEBEiADevnoCFnPs5e2NXrhF3tyEB7QRTvtaTjRk0pVyOdFQYGO1vlKtQSvqhE8/UQLZuHSwr/DsWWxW7HyYI3bq1E5/PqmKfBWwuco6STRyLT5xtQJWhNNudmst1jbmOWT/0CqqL95Xw83HGIAe5vvyoQSQWPB7Dvi+qlD9+gTQ+seLjxjlXm9qXnBia2jiJhUnW/UwbU8jFPgPvO737+TAGIML6+Me67xvx3CV3v9hq1GuPHJ8e5eo4wMMm5wkRcQXY9BYUk35DguvSqAuYVgIWAgeAqESPFlCOrIew==" UUID="C4D38CC9-B55F-46CF-905B-AA5A12182B4F" Version="1.1" xsi:schemaLocation="http://www.sat.gob.mx/TimbreFiscalDigital http://www.sat.gob.mx/sitio_internet/cfd/timbrefiscaldigital/TimbreFiscalDigitalv11.xsd"/></cfdi:Complemento></cfdi:Comprobante>
