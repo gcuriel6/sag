@@ -122,9 +122,13 @@ session_start();
                                         316 - jessy limas
                                         404 - gabriel curiel
                                         4 - emanuel garcia
+                                        32 - paola barraza
+                                        237 - despacho contable
                                     */
 
-                                    if($_SESSION['id_usuario'] == 3 || $_SESSION['id_usuario'] == 316 || $_SESSION['id_usuario'] == 4 || $_SESSION['id_usuario'] == 404){
+                                    $permisos = array(3, 316, 404, 4, 32, 237);
+
+                                    if(in_array($_SESSION['id_usuario'], $permisos)){
                                         echo '<input type="checkbox" id="ch_todas" name="ch_todas" value=""> Mostrar todas';
                                     }
                                 ?>
