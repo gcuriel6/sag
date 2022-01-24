@@ -33,7 +33,7 @@ $estatus = $rowInfo['estatus'];
 $cliente = $rowInfo['cliente'];
 $total = $rowInfo['total'];
 
-$queryProductos = "SELECT vcp.cantidad, vp.nombre, vp.descripcion, vp.costo, vp.clave, vp.url_imagen imagen
+$queryProductos = "SELECT vcp.cantidad, vp.nombre, vp.descripcion, vcp.costo, vp.clave, vp.url_imagen imagen
                     FROM vision_cotizacion_productos vcp
                     INNER JOIN vision_productos vp ON vcp.fk_productos = vp.id
                     WHERE vcp.fk_cotizacion = $idCotiz;";
