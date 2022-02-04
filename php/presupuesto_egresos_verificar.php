@@ -122,8 +122,8 @@ $test = "** ";
 				}
 				else
 				{
-					$idUnidadNegocio = 16;//$presupuestoEgresos->buscaIdUnidad('COR
-					$idSucursal = 0;
+					$idUnidadNegocio = 13;//$presupuestoEgresos->buscaIdUnidad('COR
+					$idSucursal = 34;
 					$idFamilia = $presupuestoEgresos->buscarFamilias($familia);
 					$idConcepto = $concepto == '' ? 'null': $presupuestoEgresos->buscarConceptos($concepto,$idFamilia);	
 				}			
@@ -183,97 +183,97 @@ $test = "** ";
 					if($verificaInfo == false)
 					{
 						$datosRelacion = array();
-						if(strtoupper($unidadS) == 'GINTHERCORP')
-						{
+						// if(strtoupper($unidadS) == 'GINTHERCORP')
+						// {
 							
-							$contT=0;
+						// 	$contT=0;
 							
-							for($k=6; $k <= $numCol; $k++) // antes era 8
-							{
+						// 	for($k=6; $k <= $numCol; $k++) // antes era 8
+						// 	{
 							
-								$sucursal = $presupuestoEgresos->limpiarCadena($data->sheets[0]['cells'][$i][$k]);
+						// 		$sucursal = $presupuestoEgresos->limpiarCadena($data->sheets[0]['cells'][$i][$k]);
 								
-								if($sucursal != '')
-								{
-									$verificaInfo = false;
+						// 		if($sucursal != '')
+						// 		{
+						// 			$verificaInfo = false;
 
-									$pos = strpos($data->sheets[0]['cells'][2][$k], '-');
-									$idUnidadNegocioX = substr($data->sheets[0]['cells'][2][$k],0,$pos);
-									$unidadX = $data->sheets[0]['cells'][2][$k];
+						// 			$pos = strpos($data->sheets[0]['cells'][2][$k], '-');
+						// 			$idUnidadNegocioX = substr($data->sheets[0]['cells'][2][$k],0,$pos);
+						// 			$unidadX = $data->sheets[0]['cells'][2][$k];
 
-									//-->NJES December/08/2020 compara que la unidad a prorratear si sea igual a la unidad seleccionada en el combo
-									//es decir si mi unidad del combo selecconada no es corporativo, y viene un registro para prorrateo, verificar que la unidad a prorratear
-									//si sea la del combo, que en teoria deberia de ser porque la plantilla solo mostrará esa unidad para prorrateo
-									//echo $id_unidad_negocio_select .' !=  16  && '. $idUnidadNegocioX .' !== '. $id_unidad_negocio_select;
-									if($id_unidad_negocio_select != 16 && $idUnidadNegocioX !== $id_unidad_negocio_select)
-									{
-										//$warning .= '<li>No se encontró ningún registro correspondiente a la sucursal para unidad de negocio '.$unidadX.' del renglon ' . $i . '</li>';
-										$warning .='<li>La unidad a prorratear '.$unidadX.' en el renglon '.$i.' no corresponde a la unidad seleccionada en el combo </li>';
-										$verificaInfo  = true;
-										$verifica = true;
-									}
+						// 			//-->NJES December/08/2020 compara que la unidad a prorratear si sea igual a la unidad seleccionada en el combo
+						// 			//es decir si mi unidad del combo selecconada no es corporativo, y viene un registro para prorrateo, verificar que la unidad a prorratear
+						// 			//si sea la del combo, que en teoria deberia de ser porque la plantilla solo mostrará esa unidad para prorrateo
+						// 			//echo $id_unidad_negocio_select .' !=  16  && '. $idUnidadNegocioX .' !== '. $id_unidad_negocio_select;
+						// 			if($id_unidad_negocio_select != 16 && $idUnidadNegocioX !== $id_unidad_negocio_select)
+						// 			{
+						// 				//$warning .= '<li>No se encontró ningún registro correspondiente a la sucursal para unidad de negocio '.$unidadX.' del renglon ' . $i . '</li>';
+						// 				$warning .='<li>La unidad a prorratear '.$unidadX.' en el renglon '.$i.' no corresponde a la unidad seleccionada en el combo </li>';
+						// 				$verificaInfo  = true;
+						// 				$verifica = true;
+						// 			}
 
-									$sucursales='';
-									if($sucursal == 'X' || $sucursal == 'x')
-									{
-										$sucursales = explode(",",$presupuestoEgresos->buscarSucursalesUnidad($idUnidadNegocioX));
-									}else{
-										$sucursales = array_map('trim',explode(",",$sucursal));
-									}
+						// 			$sucursales='';
+						// 			if($sucursal == 'X' || $sucursal == 'x')
+						// 			{
+						// 				$sucursales = explode(",",$presupuestoEgresos->buscarSucursalesUnidad($idUnidadNegocioX));
+						// 			}else{
+						// 				$sucursales = array_map('trim',explode(",",$sucursal));
+						// 			}
 
-									//$verificaInfo = false;
+						// 			//$verificaInfo = false;
 
-									foreach($sucursales AS $m)
-									{
-										$contT++;
-										$idS = $m;
-										//echo '*'.$idS.'-'.$idUnidadNegocioX.'*';
-										$idSucursalX = $presupuestoEgresos->buscaIdSucursal($idS,$idUnidadNegocioX);
+						// 			foreach($sucursales AS $m)
+						// 			{
+						// 				$contT++;
+						// 				$idS = $m;
+						// 				//echo '*'.$idS.'-'.$idUnidadNegocioX.'*';
+						// 				$idSucursalX = $presupuestoEgresos->buscaIdSucursal($idS,$idUnidadNegocioX);
 									
-										if($idSucursalX === 0)
-										{
-											$warning .= '<li>No corresponde la sucursal ID '.$idS.' para unidad de negocio '.$unidadX.' del renglon ' . $i . '</li>';
-											$verificaInfo  = true;
-											$verifica = true;
-										}else{
-											$idFamiliaX = $presupuestoEgresos->buscarFamilias($familia);
-											$idConceptoX = $concepto == '' ? 'null': $presupuestoEgresos->buscarConceptos($concepto,$idFamiliaX);
+						// 				if($idSucursalX === 0)
+						// 				{
+						// 					$warning .= '<li>No corresponde la sucursal ID '.$idS.' para unidad de negocio '.$unidadX.' del renglon ' . $i . '</li>';
+						// 					$verificaInfo  = true;
+						// 					$verifica = true;
+						// 				}else{
+						// 					$idFamiliaX = $presupuestoEgresos->buscarFamilias($familia);
+						// 					$idConceptoX = $concepto == '' ? 'null': $presupuestoEgresos->buscarConceptos($concepto,$idFamiliaX);
 
-											if($idFamiliaX === 0)
-											{
-												$warning .= '<li>No se encontró ningún registro correspondiente a Familia con la descripción de la línea ' . $i . ' para la unidad '.$unidadX.'</li>';
-												$verificaInfo  = true;
-												$verifica = true;
-											}
+						// 					if($idFamiliaX === 0)
+						// 					{
+						// 						$warning .= '<li>No se encontró ningún registro correspondiente a Familia con la descripción de la línea ' . $i . ' para la unidad '.$unidadX.'</li>';
+						// 						$verificaInfo  = true;
+						// 						$verifica = true;
+						// 					}
 
-											if($idConceptoX === 0)
-											{
-												$warning .= '<li>No se encontró ningún registro correspondiente a Clasificación con la descripción de la línea ' . $i . ' para la unidad '.$unidadX.'</li>';
-												$verificaInfo  = true;
-												$verifica = true;
-											}
+						// 					if($idConceptoX === 0)
+						// 					{
+						// 						$warning .= '<li>No se encontró ningún registro correspondiente a Clasificación con la descripción de la línea ' . $i . ' para la unidad '.$unidadX.'</li>';
+						// 						$verificaInfo  = true;
+						// 						$verifica = true;
+						// 					}
 
-											if($verificaInfo == false)
-											{
-												array_push($datosRelacion, [
-													'id_unidad_negocio'=>$idUnidadNegocioX,
-													'id_sucursal'=>$idSucursalX,
-													'id_familia'=>$idFamiliaX,
-													'id_concepto'=>$idConceptoX,
-													'importe'=>$importe
-												]);
+						// 					if($verificaInfo == false)
+						// 					{
+						// 						array_push($datosRelacion, [
+						// 							'id_unidad_negocio'=>$idUnidadNegocioX,
+						// 							'id_sucursal'=>$idSucursalX,
+						// 							'id_familia'=>$idFamiliaX,
+						// 							'id_concepto'=>$idConceptoX,
+						// 							'importe'=>$importe
+						// 						]);
 
-											}
+						// 					}
 
-										}
-									}
+						// 				}
+						// 			}
 									
-								}
-							}
+						// 		}
+						// 	}
 								
-							if($contT < 2)
-								$unidadD++;
-						}
+						// 	if($contT < 2)
+						// 		$unidadD++;
+						// }
 
 						
 						//'id_area'=>$idArea,

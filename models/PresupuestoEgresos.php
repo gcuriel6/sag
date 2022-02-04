@@ -277,17 +277,18 @@ class PresupuestoEgresos
   
             if($result) 
             {
-                if(strtoupper($claveUnidad) == 'GINTHERCORP')
-                {
-                  $totalEmpleados = $this -> totalEmpleados($datosRelacion);
-                  $verifica = $this -> guardarProrrateo($id_unidad_negocio_select,$datosRelacion,$idPresupuesto,$totalEmpleados,$importe,$anio,$mes);
+                // if(strtoupper($claveUnidad) == 'GINTHERCORP')
+                // {
+                //   $totalEmpleados = $this -> totalEmpleados($datosRelacion);
+                //   $verifica = $this -> guardarProrrateo($id_unidad_negocio_select,$datosRelacion,$idPresupuesto,$totalEmpleados,$importe,$anio,$mes);
                 
-                  if($verifica == true)
-                    break;
+                //   if($verifica == true)
+                //     break;
 
 
-                }else
-                  $verifica = false;
+                // }else
+                //   $verifica = false;
+                $verifica = false;
                 
             }else{
               $verifica = true;

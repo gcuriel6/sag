@@ -452,7 +452,8 @@ if (isset($_SESSION['usuarioP']) && $_SESSION['usuarioP']!='') {
 		var checkSession;
 		var idUnidadActual=0;
 		$(function(){
-			checkSession = setInterval(checkForSession, 900000); //-->cada 15 minutos verifica session
+			checkSession = setInterval(checkForSession, 90000); //GCM se cambia sesion a menos tiempo
+			// checkSession = setInterval(checkForSession, 900000); //-->cada 15 minutos verifica session
 			//checkSession = setInterval(checkForSession, 60000);  
 			
 			if(idUnidadActual != 0)

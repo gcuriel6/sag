@@ -17,6 +17,10 @@ if (isset($_SESSION['usuario']) && $_SESSION['usuario']!='') {
 	{
 		$id_usuario=$_SESSION['id_usuario'];
 	}
+	if(!isset($_SESSION['id_unidad_actual'])){
+		$_SESSION['id_unidad_actual'] = 0;
+	}
+
 	if($_SESSION['id_unidad_actual']==0){
 		$home = "home.php";
 		$aux = 0;
@@ -494,7 +498,7 @@ if (isset($_SESSION['usuario']) && $_SESSION['usuario']!='') {
 <body>
 		<!-- Mascara para contenido principal -->
 		<form id="form_portal" method="post" action="portal_proveedores/fr_buscar_proveedor.php" target="the_form">
-		<input type="hidden" name="id_unidad_neg" value="<?php echo $_SESSION['id_unidad_actual']; ?>" />
+		<input type="hidden" name="id_unidad_neg" value="<?php echo isset($_SESSION['id_unidad_actual']) ? $_SESSION['id_unidad_actual'] : "0"; ?>" />
 		</form>
 		<div id="sistema_mascara">
 			<!-- Header -->
@@ -573,7 +577,8 @@ if (isset($_SESSION['usuario']) && $_SESSION['usuario']!='') {
 		var checkSession;
 		$(function(){
 			
-			checkSession = setInterval(checkForSession, 900000); //-->cada 15 minutos verifica session  
+			checkSession = setInterval(checkForSession, 90000); //GCM se cambia sesion a menos tiempo
+			// checkSession = setInterval(checkForSession, 900000); //-->cada 15 minutos verifica session  
 			//checkSession = setInterval(checkForSession, 120000);
 
 			if(idUnidadActual != 0)
