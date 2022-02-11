@@ -562,16 +562,18 @@ class CargarDatos
     function validaEntradaRepetida($folioEntrada, $folioOC)
     {
 
+      $idProv = $_SESSION["idProveedor"];
+
       $verifica = 0;
 
       $buscaRegistro = "SELECT *
                         FROM cxp cxp
                         WHERE cxp.id_entrada_compra IN (SELECT id
                                                         FROM almacen_e
-                                                        WHERE folio = '$folioEntrada,'
+                                                        WHERE folio = '$folioEntrada' AND id_proveedor = $idProv 
                                                         AND id_oc IN (SELECT id
                                                                       FROM orden_compra
-                                                                      WHERE folio = '$folioOC' AND tipo NOT IN(0,3)
+                                                                      WHERE folio = '$folioOC' AND id_proveedor = $idProv AND tipo NOT IN(0,3)
                                                                       )
                                                           );";
 

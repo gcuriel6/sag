@@ -5,7 +5,8 @@
     $idFamilia=$_REQUEST['idFamilia'];
     $idUnidad=$_REQUEST['idUnidad'];
     $idSucursal=$_REQUEST['idSucursal'];
-    //-->NJES June/16/2020 DEN18-2769 Modificar la validación de presupuesto en el modulo de requisiciones
+    $idClas=$_REQUEST['idClas'];
+    //-->NJES June/16/2020 DEN18-2769 Modificar la validaciï¿½n de presupuesto en el modulo de requisiciones
     //$idArea=$_REQUEST['idArea'];
     //$idDepto=$_REQUEST['idDepto'];
 
@@ -13,7 +14,7 @@
 
     if (isset($_SESSION['usuario'])){
 
-          echo $resultado = $modeloRequisiciones->buscarRequisicionesPresupuesto($idFamilia,$idUnidad,$idSucursal);
+          echo $resultado = $modeloRequisiciones->buscarRequisicionesPresupuesto($idFamilia,$idUnidad,$idSucursal,$idClas);
     }else{
         echo json_encode("sesion");
     }

@@ -938,7 +938,7 @@ ORDER BY unidades.nombre,sucursales.descr ASC");
     FROM cuentas_bancos a
     LEFT JOIN bancos b ON a.id_banco=b.id
     LEFT JOIN caja_chica c ON a.id_sucursal=c.id_sucursal
-    LEFT JOIN movimientos_bancos d ON a.id = d.id
+    LEFT JOIN movimientos_bancos d ON a.id = d.id_cuenta_banco
     WHERE a.activa=1 $cuenta $cond $condicionUnidades
     GROUP BY a.id
     ORDER BY b.clave ASC");
@@ -1073,23 +1073,26 @@ ORDER BY unidades.nombre,sucursales.descr ASC");
       $cond='';
     }
 
-    
+    $query = "SELECT 
+                a.id,
+                a.id_banco,
+                a.descripcion AS cuenta,
+                a.tipo,
+                a.id_sucursal,
+                IF(a.tipo=1,(IFNULL(SUM(IF(c.clave_concepto IN('C01','D01'),c.importe,c.importe*(-1))),0)),
+                (IFNULL((SUM(IF(d.tipo='A',monto,0))+SUM(IF(d.tipo='I',d.monto,0))+SUM(IF(d.tipo='T' && d.transferencia >0,d.monto,0)))-(SUM(IF(d.tipo='C',d.monto,0))+SUM(IF(d.tipo='T' && d.transferencia = 0,d.monto,0))),0))) AS saldo_disponible
+              FROM cuentas_bancos a
+              LEFT JOIN bancos b ON a.id_banco=b.id
+              LEFT JOIN caja_chica c ON a.id_sucursal=c.id_sucursal
+              LEFT JOIN movimientos_bancos d ON a.id = d.id_cuenta_banco
+              WHERE a.activa=1 $cuenta $cond  $condicionUnidades 
+              GROUP BY a.id
+              ORDER BY b.clave ASC";
+
+    // echo $query;
+    // exit();
     //-->NJES Se unifica para que en todos los casos se muestre la descripción de la cuenta_banco Dic/19/2019<--//
-    $result = $this->link->query("SELECT 
-      a.id,
-      a.id_banco,
-      a.descripcion AS cuenta,
-      a.tipo,
-      a.id_sucursal,
-      IF(a.tipo=1,(IFNULL(SUM(IF(c.clave_concepto IN('C01','D01'),c.importe,c.importe*(-1))),0)),
-      (IFNULL((SUM(IF(d.tipo='A',monto,0))+SUM(IF(d.tipo='I',d.monto,0))+SUM(IF(d.tipo='T' && d.transferencia >0,d.monto,0)))-(SUM(IF(d.tipo='C',d.monto,0))+SUM(IF(d.tipo='T' && d.transferencia = 0,d.monto,0))),0))) AS saldo_disponible
-    FROM cuentas_bancos a
-    LEFT JOIN bancos b ON a.id_banco=b.id
-    LEFT JOIN caja_chica c ON a.id_sucursal=c.id_sucursal
-    LEFT JOIN movimientos_bancos d ON a.id = d.id
-    WHERE a.activa=1 $cuenta $cond  $condicionUnidades 
-    GROUP BY a.id
-    ORDER BY b.clave ASC");
+    $result = $this->link->query($query);
 
     return query2json($result);
   }//-- fin function buscaCuentasBancosSaldos

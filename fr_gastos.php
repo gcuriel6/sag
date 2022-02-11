@@ -1033,7 +1033,7 @@
        muestraAreasAcceso('s_id_area');
        muestraSelectFamiliaGastos('s_familia_gastos');
        //--MGFS 13-02-2020 Se modifica la busqueda de cuentas por unidad  y que tenga permiso
-       muestraCuentasBancos('s_cuenta',0,0,idUnidadActual);
+       muestraCuentasBancosSaldos('s_cuenta',0,0,idUnidadActual);
        muestraTiposGasto('s_tipo_gasto');
        $('#b_cancelar').prop("disabled", true);
        $("#div_principal").css({left : "0%"});
@@ -1081,7 +1081,7 @@
             $('.img-flag').css({'width':'50px','height':'20px'});
             muestraSucursalesPermiso('s_id_sucursal', idUnidadNegocio, modulo,idUsuario);
             //--MGFS 13-02-2020 Se modifica la busqueda de cuentas por unidad  y que tenga permiso
-            muestraCuentasBancos('s_cuenta',0,0,idUnidadNegocio);
+            muestraCuentasBancosSaldos('s_cuenta',0,0,idUnidadNegocio);
         });
 
        $('#s_id_sucursal').change(function(){
@@ -1109,7 +1109,7 @@
 
         $('#ch_deudores').on('change',function(){
             //--MGFS 13-02-2020 Se modifica la busqueda de cuentas por unidad  y que tenga permiso
-            muestraCuentasBancos('s_cuenta',0,0,$('#s_id_unidad').val());
+            muestraCuentasBancosSaldos('s_cuenta',0,0,$('#s_id_unidad').val());
 
             //-->NJES Jan/20/2020 verificar que si selecciona como deudor diverso  quitar clases requerido, sino agregarlas
             if($('#ch_deudores').is(':checked'))
@@ -1140,9 +1140,9 @@
                 //familia gasto CAJA CHICA no pueda hacerlo con cuentas de tipo caja chica
                 /*if($('#s_familia_gastos option:selected').text() == 'CAJA CHICA')
                 {
-                        muestraCuentasBancos('s_cuenta',0,1,$('#s_id_unidad').val());
+                        muestraCuentasBancosSaldos('s_cuenta',0,1,$('#s_id_unidad').val());
                 }else*/
-                        muestraCuentasBancos('s_cuenta',0,0,$('#s_id_unidad').val());
+                        muestraCuentasBancosSaldos('s_cuenta',0,0,$('#s_id_unidad').val());
                 
            }
            
@@ -1548,7 +1548,7 @@
             muestraSelectFamiliaGastos('s_familia_gastos');
             $('#s_clasificacion_gastos').prop('disabled',true);
             //--MGFS 13-02-2020 Se modifica la busqueda de cuentas por unidad  y que tenga permiso
-            muestraCuentasBancos('s_cuenta',0,0,idUnidadActual);
+            muestraCuentasBancosSaldos('s_cuenta',0,0,idUnidadActual);
             muestraTiposGasto('s_tipo_gasto');
 
             $('#i_fecha').val(hoy);
@@ -1755,9 +1755,9 @@
                             $('#s_clasificacion_gastos').prop('disabled',true);
 
                             /*if(gasto.familia_gasto == 'CAJA CHICA')
-                                muestraCuentasBancos('s_cuenta',0,1,idUnidad);
+                                muestraCuentasBancosSaldos('s_cuenta',0,1,idUnidad);
                             else
-                                muestraCuentasBancos('s_cuenta',0,0,idUnidad);*/
+                                muestraCuentasBancosSaldos('s_cuenta',0,0,idUnidad);*/
 
                             $('#div_requis_diferentes_fg').show();
 
@@ -2721,9 +2721,9 @@
                             //--> NJES October/28/2020 a petición de mabel se solicita que se quite validacion de que cuando se requiere un gasto para
                             //familia gasto CAJA CHICA no pueda hacerlo con cuentas de tipo caja chica
                             /*if(requisicion.familia_gasto == 'CAJA CHICA')
-                                muestraCuentasBancos('s_cuenta',0,1,idUnidad);
+                                muestraCuentasBancosSaldos('s_cuenta',0,1,idUnidad);
                             else*/
-                                muestraCuentasBancos('s_cuenta',0,0,idUnidad);
+                                muestraCuentasBancosSaldos('s_cuenta',0,0,idUnidad);
 
                             $('#div_requis_diferentes_fg').show();
 
@@ -2741,12 +2741,20 @@
                                 //familia gasto CAJA CHICA no pueda hacerlo con cuentas de tipo caja chica
                                 /*if(requisicion.familia_gasto == 'CAJA CHICA')
                                 {
-                                        muestraCuentasBancos('s_cuenta',0,1,idUnidad);
+                                        muestraCuentasBancosSaldos('s_cuenta',0,1,idUnidad);
                                 }else*/
-                                        muestraCuentasBancos('s_cuenta',0,0,idUnidad);
+                                        muestraCuentasBancosSaldos('s_cuenta',0,0,idUnidad);
                                 
                             }else
                                 $('#s_familia_gastos').prop('disabled',false);
+
+                            if(requisicion.contadorClas != 0){
+                                let clas = requisicion.contadorClas;
+                                setTimeout(function() {
+                                    $("#s_clasificacion_gastos").prop("disabled", true);
+                                    $("#s_clasificacion_gastos").val(clas).trigger('change');
+                                }, 2000);
+                            }
                         }
 
                         $("#s_id_unidad").prop("disabled", true);
@@ -2778,7 +2786,9 @@
         });
 
         function muestraPartidasRequisicion(idRequi){
-            $('#t_partidas_requis tbody').empty();   
+            $('#t_partidas_requis tbody').empty();
+            var contadorClasifs = 0;
+            var anteriorClasif = 0;
 
             $.ajax({
                 type: 'POST',
@@ -2791,8 +2801,9 @@
                 {
                     for(var i=0; data.length>i; i++){
                         var detalle = data[i];
+                        let nombreSelect = "s_id_clasificacion_"+detalle.id;
                         
-                        var selectClasificacion='<select id="s_id_clasificacion_'+detalle.id+'" name="s_id_clasificacion_'+detalle.id+'" class="form-control form-control-sm s_clasificacion_p validate[required]" autocomplete="off" style="width:100%;"></select>';
+                        var selectClasificacion='<select id="'+nombreSelect+'" name="'+nombreSelect+'" class="form-control form-control-sm s_clasificacion_p validate[required]" autocomplete="off" style="width:100%;"></select>';
                         muestraSelectClasificacionGastos('s_id_clasificacion_'+detalle.id,detalle.id_familia_gasto);
                         var total = (parseFloat(detalle.costo_unitario) * parseFloat(detalle.cantidad)) + parseFloat(detalle.iva);
                         var html = "<tr class='renglon_requi' alt='"+detalle.id+"' id_familia_gasto='"+detalle.id_familia_gasto+"' id_requi_d='"+detalle.id+"' total='"+total+"'>";
@@ -2806,7 +2817,25 @@
                         html += "<td align='right'>" + formatearNumero(total) + "</td>";
                         html += "</tr>";
 
-                        $('#t_partidas_requis tbody').append(html);                    
+                        $('#t_partidas_requis tbody').append(html);
+
+                        let idClas = detalle.id_clas;
+                        
+                        setTimeout(function(){
+                            if(idClas != null && idClas != 0){
+                                $("#"+nombreSelect).val(idClas);
+
+                                if(idClas != anteriorClasif){
+                                    anteriorClasif = idClas;
+                                    contadorClasifs++;
+                                }
+                            }
+                        }, 1000);                      
+                    }
+
+                    if(contadorClasifs == 1){
+                        $("#s_clasificacion_gastos").val(anteriorClasif);
+                        console.log("holi, tenemos diferentes clasifs: ",anteriorClasif);
                     }
                 },
                 error: function (xhr)

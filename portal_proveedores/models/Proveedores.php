@@ -207,6 +207,9 @@ class Proveedores
     function buscarProveedoresUnidad($idUnidad)
     {
 
+      // print_r($_SESSION);
+      // exit();
+
       $query = "SELECT proveedores.id AS id, proveedores.nombre, proveedores.rfc 
                 FROM proveedores
                 INNER JOIN proveedores_unidades ON proveedores.id = proveedores_unidades.id_proveedor

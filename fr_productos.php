@@ -106,7 +106,7 @@ if(isset($_GET['idProducto'])!=0 && $_GET['regresar']==1){
                                 </div>
                             </div>
                             <div class="form-group row">
-                            <label for="i_linea" class="col-2 col-md-2 col-form-label requerido">Línea </label><br>
+                                <label for="i_linea" class="col-2 col-md-2 col-form-label requerido">Línea </label><br>
                                
                                 <div class="col-sm-12 col-md-6">
                                     <div class="row">
@@ -115,6 +115,23 @@ if(isset($_GET['idProducto'])!=0 && $_GET['regresar']==1){
                                             <input type="text" id="i_linea" name="i_linea" class="form-control validate[required]" readonly autocomplete="off">
                                             <div class="input-group-btn">
                                                 <button class="btn btn-primary" type="button" id="b_buscar_lineas" style="margin:0px;">
+                                                    <i class="fa fa-search" aria-hidden="true"></i>
+                                                </button>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="form-group row">
+                                <label for="i_clasif" class="col-2 col-md-2 col-form-label requerido">Clasificación </label><br>
+                               
+                                <div class="col-sm-12 col-md-6">
+                                    <div class="row">
+                                    
+                                        <div class="input-group col-sm-12 col-md-9">
+                                            <input type="text" id="i_clasif" name="i_clasif" class="form-control validate[required]" readonly autocomplete="off">
+                                            <div class="input-group-btn">
+                                                <button class="btn btn-primary" type="button" id="b_buscar_clasifs" style="margin:0px;">
                                                     <i class="fa fa-search" aria-hidden="true"></i>
                                                 </button>
                                             </div>
@@ -347,6 +364,43 @@ if(isset($_GET['idProducto'])!=0 && $_GET['regresar']==1){
   </div>
 </div>
 
+<div id="dialog_buscar_clasifs" class="modal fade bd-example-modal-lg" tabindex="-1" role="dialog" aria-labelledby="myLargeModalLabel" aria-hidden="true">
+  <div class="modal-dialog modal-lg">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h5 class="modal-title">Búsqueda de Clasificaciones</h5>
+        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+          <span aria-hidden="true">&times;</span>
+        </button>
+      </div>
+      <div class="modal-body">
+            <div class="row">
+                <div class="col-sm-12 col-md-6"><input type="text" name="i_filtro_clasifs" id="i_filtro_clasifs" class="form-control filtrar_renglones" alt="renglon_clasifs" placeholder="Filtrar" autocomplete="off"></div>
+            </div>    
+            <br>
+            <div class="row">
+                <div class="col-sm-12 col-md-12">
+                    <table class="tablon"  id="t_clasifs">
+                      <thead>
+                        <tr class="renglon">
+                          <th scope="col">Clave</th>
+                          <th scope="col">Descripción</th>
+                        </tr>
+                      </thead>
+                      <tbody>
+                        
+                      </tbody>
+                    </table>  
+                </div>
+            </div>
+      </div>
+      <div class="modal-footer">
+        <button type="button" class="btn btn-dark btn-sm" data-dismiss="modal">Cerrar</button>
+      </div>
+    </div>
+  </div>
+</div>
+
 <div id="dialog_equivalente_usado" class="modal fade bd-example-modal-lg" tabindex="-1" role="dialog" aria-labelledby="myLargeModalLabel" aria-hidden="true">
   <div class="modal-dialog">
     <div class="modal-content">
@@ -431,6 +485,7 @@ if(isset($_GET['idProducto'])!=0 && $_GET['regresar']==1){
         });
 
         $('#b_buscar_lineas').prop('disabled',true);
+        $('#b_buscar_clasifs').prop('disabled',true);
         $('#b_buscar_lineas_filtro').prop('disabled',true);
 
         function buscaFamilias(boton){
@@ -448,7 +503,7 @@ if(isset($_GET['idProducto'])!=0 && $_GET['regresar']==1){
                 
                 if(data.length != 0){
 
-                        $('.renglon_familias').remove();
+                        // $('.renglon_familias').remove();
                 
                         for(var i=0;data.length>i;i++){
 
@@ -462,7 +517,7 @@ if(isset($_GET['idProducto'])!=0 && $_GET['regresar']==1){
                                 inactivo='Activa';
                             }
 
-                            var html='<tr class="renglon_familias" alt="'+data[i].id+'" alt2="'+data[i].descripcion+'" boton="'+boton+'">\
+                            var html='<tr class="renglon_familias" alt="'+data[i].id+'" alt2="'+data[i].descripcion+'" boton="'+boton+'" alt3="'+data[i].id_familia_gasto+'">\
                                         <td data-label="ID">' + data[i].id+ '</td>\
                                         <td data-label="Clave">' + data[i].clave+ '</td>\
                                         <td data-label="Descripción">' + data[i].descripcion+ '</td>\
@@ -471,9 +526,10 @@ if(isset($_GET['idProducto'])!=0 && $_GET['regresar']==1){
                                         <td data-label="Estatus">' + inactivo+ '</td>\
                                     </tr>';
                             ///agrega la tabla creada al div 
-                            $('#t_familias tbody').append(html);   
-                            $('#dialog_buscar_familias').modal('show');   
+                            $('#t_familias tbody').append(html);    
                         }
+
+                        $('#dialog_buscar_familias').modal('show');  
                 }else{
 
                         mandarMensaje('No se encontró información');
@@ -489,14 +545,17 @@ if(isset($_GET['idProducto'])!=0 && $_GET['regresar']==1){
 
         $('#t_familias').on('click', '.renglon_familias', function() {
             var boton = $(this).attr('boton');
-            var  idFamilia = $(this).attr('alt');
-            var  familia = $(this).attr('alt2');
+            var idFamilia = $(this).attr('alt');
+            var familia = $(this).attr('alt2');
+            var famGasto = $(this).attr('alt3');
             if(boton==1){
-                $('#i_familia').attr('alt',idFamilia).val(familia);
+                $('#i_familia').attr('alt',idFamilia).attr('alt2',famGasto).val(familia);
                 $('#b_buscar_lineas').prop('disabled',false);
+                $("#b_buscar_clasifs").prop("disabled", false);
             }else{
-                $('#i_familia_filtro').attr('alt',idFamilia).val(familia);
-                $('#b_buscar_lineas_filtro').prop('disabled',false);
+                $('#i_familia_filtro').attr('alt',idFamilia).attr('alt2',famGasto).val(familia);
+                $('#b_buscar_lineas_filtro').prop('disabled',false);                
+                $("#b_buscar_clasifs").prop("disabled", false);
                 buscarProductos();
             }
 
@@ -537,36 +596,37 @@ if(isset($_GET['idProducto'])!=0 && $_GET['regresar']==1){
 
                     success: function(data) {
                   
-                    if(data.length != 0){
+                        if(data.length != 0){
 
-                            $('.renglon_lineas').remove();
-                    
-                            for(var i=0;data.length>i;i++){
+                                $('.renglon_lineas').remove();
+                        
+                                for(var i=0;data.length>i;i++){
 
-                                ///llena la tabla con renglones de registros
-                                var inactiva='';
-                                
-                                if(parseInt(data[i].inactiva) == 1){
+                                    ///llena la tabla con renglones de registros
+                                    var inactiva='';
+                                    
+                                    if(parseInt(data[i].inactiva) == 1){
 
-                                    inactiva='Inactiva';
-                                }else{
-                                    inactiva='Activa';
+                                        inactiva='Inactiva';
+                                    }else{
+                                        inactiva='Activa';
+                                    }
+
+                                    var html='<tr class="renglon_lineas" alt="'+data[i].id+'" alt2="' + data[i].descripcion+ '" boton="'+boton+'">\
+                                                <td data-label="Clave">' + data[i].clave+ '</td>\
+                                                <td data-label="Descripción">' + data[i].descripcion+ '</td>\
+                                                <td data-label="Familia">' + data[i].familia+ '</td>\
+                                                <td data-label="Estatus">' + inactiva+ '</td>\
+                                            </tr>';
+                                    ///agrega la tabla creada al div 
+                                    $('#t_lineas tbody').append(html);   
                                 }
+                                 
+                                $('#dialog_buscar_lineas').modal('show');  
+                        }else{
 
-                                var html='<tr class="renglon_lineas" alt="'+data[i].id+'" alt2="' + data[i].descripcion+ '" boton="'+boton+'">\
-                                            <td data-label="Clave">' + data[i].clave+ '</td>\
-                                            <td data-label="Descripción">' + data[i].descripcion+ '</td>\
-                                            <td data-label="Familia">' + data[i].familia+ '</td>\
-                                            <td data-label="Estatus">' + inactiva+ '</td>\
-                                        </tr>';
-                                ///agrega la tabla creada al div 
-                                $('#t_lineas tbody').append(html);   
-                                $('#dialog_buscar_lineas').modal('show');   
-                            }
-                    }else{
-
-                            mandarMensaje('No se encontró información');
-                    }
+                                mandarMensaje('No se encontró información');
+                        }
 
                     },
                     error: function (xhr) {
@@ -574,26 +634,99 @@ if(isset($_GET['idProducto'])!=0 && $_GET['regresar']==1){
                         mandarMensaje('* Error en el sistema');
                     }
                 });
+        }
+
+        $('#t_lineas').on('click', '.renglon_lineas', function() {
+            var boton = $(this).attr('boton');
+            var idLinea = $(this).attr('alt');
+            var linea = $(this).attr('alt2');
+
+            if(boton==1){
+                $('#i_linea').val(linea).attr('alt',idLinea);
+            }else{
+                $('#i_linea_filtro').val(linea).attr('alt',idLinea);
+                buscarProductos();
             }
 
-            $('#t_lineas').on('click', '.renglon_lineas', function() {
-                var boton = $(this).attr('boton');
-                var idLinea = $(this).attr('alt');
-                var linea = $(this).attr('alt2');
+            
 
-                if(boton==1){
-                    $('#i_linea').val(linea).attr('alt',idLinea);
-                }else{
-                    $('#i_linea_filtro').val(linea).attr('alt',idLinea);
-                    buscarProductos();
+            $('#dialog_buscar_lineas').modal('hide');
+
+
+        });
+
+        $('#t_clasifs').on('click', '.renglon_clasifs', function() {
+            var boton = $(this).attr('boton');
+            var idClasif = $(this).attr('alt');
+            var clasif = $(this).attr('alt2');
+
+            if(boton==1){
+                $('#i_clasif').val(clasif).attr('alt',idClasif);
+            }else{
+                // $('#i_linea_filtro').val(linea).attr('alt',idLinea);
+                // buscarProductos();
+            }
+
+            
+
+            $('#dialog_buscar_clasifs').modal('hide');
+
+
+        });
+        
+        $('#b_buscar_clasifs').on('click',function(){
+           $('#i_clasif').validationEngine('hide');
+           buscaClasifs(1);
+        });
+
+        function buscaClasifs(boton){
+
+            if(boton==1){
+                var  idFamilia = $('#i_familia').attr('alt2');
+            }else{
+                var  idFamilia = $('#i_familia_filtro').attr('alt2');
+            }
+
+            $('#i_filtro_clasifs').val('');
+            $('.renglon_clasifs').remove();
+
+            $.ajax({
+
+                type: 'POST',
+                url: 'php/clasifs_buscar_idFamilia.php',
+                dataType:"json", 
+                data:{'idFamilia':idFamilia},
+
+                success: function(data) {
+            
+                    if(data.length != 0){
+
+                            // $('.renglon_lineas').remove();
+                    
+                            for(var i=0;data.length>i;i++){
+
+                                ///llena la tabla con renglones de registros
+                                
+                                var html='<tr class="renglon_clasifs" alt="'+data[i].id+'" alt2="' + data[i].descripcion+ '" boton="'+boton+'">\
+                                            <td data-label="Clave">' + data[i].clave+ '</td>\
+                                            <td data-label="Descripción">' + data[i].descripcion+ '</td>\
+                                        </tr>';
+                                ///agrega la tabla creada al div 
+                                $('#t_clasifs tbody').append(html);   
+                                $('#dialog_buscar_clasifs').modal('show');   
+                            }
+                    }else{
+
+                            mandarMensaje('No se encontró información');
+                    }
+
+                },
+                error: function (xhr) {
+                    console.log('php/clasifs_buscar_idFamilia.php-->'+JSON.stringify(xhr));
+                    mandarMensaje('* Error en el sistema');
                 }
-
-                
-
-                $('#dialog_buscar_lineas').modal('hide');
-
-
             });
+        }
 
         $('#i_iva').on('change',function(){
             if($(this).validationEngine('validate')==false) {
@@ -609,10 +742,7 @@ if(isset($_GET['idProducto'])!=0 && $_GET['regresar']==1){
             }else{
                 $('#i_iva').val(16);
             }
-        });        
-
-
-
+        });
 
         $('#b_buscar').on('click',function(){
             $('#forma').validationEngine('hide');
@@ -622,7 +752,6 @@ if(isset($_GET['idProducto'])!=0 && $_GET['regresar']==1){
             $('#i_linea_filtro').val('').attr('alt',0);
             $('#dialog_buscar_productos').modal('show'); 
         });
-
 
         function buscarProductos(){
             $('#t_productos tbody').empty();
@@ -636,7 +765,7 @@ if(isset($_GET['idProducto'])!=0 && $_GET['regresar']==1){
                       'idLinea':$('#i_linea_filtro').attr('alt')
                 },
                 success: function(data) {
-                    console.log('php/productos_buscar.php-->'+JSON.stringify(data));
+                    console.log('php/productos_buscar_filtros.php-->'+JSON.stringify(data));
                    if(data.length != 0){
 
                         $('.renglon_producto').remove();
@@ -709,8 +838,9 @@ if(isset($_GET['idProducto'])!=0 && $_GET['regresar']==1){
                     productoOriginal=data[0].clave;
                     $('#i_id_producto').val(idProducto);
                     $('#i_clave').val(data[0].clave);
-                    $('#i_familia').val(data[0].familia).attr('alt',data[0].id_familia);
+                    $('#i_familia').val(data[0].familia).attr('alt',data[0].id_familia).attr('alt2',data[0].id_familia_gasto);
                     $('#i_linea').val(data[0].linea).attr('alt',data[0].id_linea);
+                    $('#i_clasif').val(data[0].descr_clasif).attr('alt',data[0].id_clasif);
                     $('#i_concepto').val(data[0].concepto);
 
                     if (data[0].servicio == 0) {
@@ -827,6 +957,7 @@ if(isset($_GET['idProducto'])!=0 && $_GET['regresar']==1){
                         //-->NJES April/28/2020 si es un producto para la familia uniformes generar su equivalente usado
                         var idFamilia = $('#i_familia').attr('alt');
                         var idLinea = $('#i_linea').attr('alt');
+                        var idClasif = $('#i_clasif').attr('alt');
                         if(idFamilia == 1)
                         {
                             //--> verificar si la linea seleccionada tiene linea usada
@@ -878,14 +1009,11 @@ if(isset($_GET['idProducto'])!=0 && $_GET['regresar']==1){
                 type: 'POST',
                 url: 'php/productos_guardar.php', 
                 //dataType:"json", 
-                data: {
-                        'datos':obtenerDatos()
-
-                },
+                data: { 'datos':obtenerDatos() },
                 //una vez finalizado correctamente
                 success: function(data){
                     console.log('data: '+data);
-                  console.log(JSON.stringify(data));
+                    console.log(JSON.stringify(data));
                     if (data > 0 ) {
                         if (tipo_mov == 0){
                             
@@ -927,6 +1055,7 @@ if(isset($_GET['idProducto'])!=0 && $_GET['regresar']==1){
                     'clave' : $('#i_clave').val(),
                     'idFamilia':$('#i_familia').attr('alt'),
                     'idLinea':$('#i_linea').attr('alt'),
+                    'idClasif':$('#i_clasif').attr('alt'),
                     'concepto' : $('#i_concepto').val(),
                     'servicio' : $("#ch_servicio").is(':checked') ? 1 : 0,
                     'codigoBarras' : $('#i_codigo_barras').val(),

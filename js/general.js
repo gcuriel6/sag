@@ -4009,8 +4009,18 @@ function actualizarDatosCFDIPagos(id, idCFDI)
 $(document).on('mousedown','.btn,.menu_clic',function(e){
 
     var id= $(this).attr('id');
+
+    let btnPermitidos = ['b_regresar_portal',
+                        'b_detalle_proveedor_portal',
+                        'b_buscar_proveedor_portal',
+                        'b_login',
+                        'b_cerrar_modal_d_p_portal',
+                        'b_aceptar',
+                        'b_iniciar_session',
+                        'b_buscar_razon_social_emisora',
+                        'btnCumples'];
     
-    if(id != 'b_regresar_portal' && id != 'b_detalle_proveedor_portal' && id != 'b_buscar_proveedor_portal' && id != 'b_login' && id != 'b_cerrar_modal_d_p_portal' && id != 'b_aceptar' && id != 'b_iniciar_session' && id != 'b_buscar_razon_social_emisora')
+    if(!btnPermitidos.includes(id))
     {
         
         //var id_personal=window.parent.document.getElementById('#i_id_personal');

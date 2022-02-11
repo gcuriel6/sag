@@ -432,6 +432,7 @@
                                                     <thead>
                                                         <tr class="renglon">
                                                             <th scope="col">Familia Gasto</th>
+                                                            <th scope="col">Clasificacion</th>
                                                             <th scope="col">Familia</ths>
                                                             <th scope="col">Línea</th>
                                                             <th scope="col">Concepto</th>
@@ -451,7 +452,7 @@
                                                     </tbody>
                                                     <tfoot>
                                                         <tr class="tr_totales">
-                                                            <th colspan="11">
+                                                            <th colspan="12">
                                                                 <label for="i_descuento_total" class="col-sm-2 col-md-2 col-form-label ">Descuento </label>
                                                             </th>
                                                             <th>
@@ -460,7 +461,7 @@
                                                             <th colspan="2"></th>
                                                         </tr>
                                                         <tr class="tr_totales">
-                                                            <th colspan="11">
+                                                            <th colspan="12">
                                                                 <label for="i_subtotal" class="col-sm-2 col-md-2 col-form-label ">Subtotal </label>
                                                             </th>
                                                             <th>
@@ -469,7 +470,7 @@
                                                             <th colspan="2"></th>
                                                         </tr>
                                                         <tr class="tr_totales">
-                                                            <th colspan="11">
+                                                            <th colspan="12">
                                                                 <label for="i_total_iva" class="col-sm-2 col-md-1 col-form-label ">IVA </label>
                                                             </th>
                                                             <th>
@@ -478,7 +479,7 @@
                                                             <th colspan="2"></th>  
                                                         </tr>
                                                         <tr class="tr_totales">
-                                                            <th  colspan="11">
+                                                            <th  colspan="12">
                                                                 <label for="i_total" class="col-sm-2 col-md-1 col-form-label ">Total </label>
                                                             </th>
                                                             <th>
@@ -945,6 +946,7 @@
                       <thead>
                         <tr class="renglon">
                             <th scope="col">Familia Gasto</th>
+                            <th scope="col">Clasificacion</th>
                             <th scope="col">Familia</th>
                             <th scope="col">Línea</th>
                             <th scope="col">Concepto</th>
@@ -1361,8 +1363,9 @@
                         //---MGFS 23-10-2019 se cambia precio por costo ya que el costo del producto siempre se va actualizar o del catalogo o entrada por cmpra
                         //-->NJES Jan/17/2020 se obtiene id_familia_gasto del producto
                         //-->NJES July/30/2020 se cambia para se tome el ultimo precio de compra del producto por unidad
-                        var html = "<tr class='producto-partida' id_familia_gasto='"+producto.id_familia_gasto+"' familia_gasto='"+producto.familia_gasto+"' alt='" + producto.id + "' alt2='" + producto.concepto+ "' alt3='" + producto.id_familia + "' alt4='" + producto.familia + "' alt5='" + producto.id_linea + "' alt6='" + producto.linea + "' alt7='" + producto.precio + "' alt8='" + producto.verifica_talla + "' alt9='" + producto.descripcion + "'>";
+                        var html = "<tr class='producto-partida' id_familia_gasto='"+producto.id_familia_gasto+"' familia_gasto='"+producto.familia_gasto+"' alt='" + producto.id + "' alt2='" + producto.concepto+ "' alt3='" + producto.id_familia + "' alt4='" + producto.familia + "' alt5='" + producto.id_linea + "' alt6='" + producto.linea + "' alt7='" + producto.precio + "' alt8='" + producto.verifica_talla + "' alt9='" + producto.descripcion + "' alt10='"+producto.id_clas+"' alt11='"+producto.clasificacion+"'>";
                         html += "<td>" + producto.familia_gasto + "</td>";
+                        html += "<td>" + producto.clasificacion + "</td>";
                         html += "<td>" + producto.familia + "</td>";
                         html += "<td>" + producto.linea + "</td>";
                         html += "<td>" + producto.concepto + "</td>";
@@ -1441,6 +1444,8 @@
             var precio = $(this).attr('alt7');
             var verificaT = $(this).attr('alt8');
             var descripcion = $(this).attr('alt9');
+            var idClas = $(this).attr('alt10');
+            var clasif = $(this).attr('alt11');
             //-->NJES Jan/17/2020 se obtiene id_familia_gasto del producto
             var idFamiliaGasto = $(this).attr('id_familia_gasto');
             var familiaGasto = $(this).attr('familia_gasto');
@@ -1465,7 +1470,7 @@
                     mandarMensaje('No se permiten mezclar familias de gastos diferentes cuando ya hay una de GASOLINA');
                 else{
                     //-->NJES Jan/17/2020 se asigna id familia gasto como atributo al input i_id_producto
-                    $('#i_id_producto').val(idProducto).attr({'id_familia_gasto':idFamiliaGasto,'familia_gasto':familiaGasto});
+                    $('#i_id_producto').val(idProducto).attr({'id_familia_gasto':idFamiliaGasto,'familia_gasto':familiaGasto,'id_clas':idClas,'clasif':clasif});
                     $('#i_id_linea').val(idLinea);
                     $('#i_linea').val(linea);  
                     $('#i_id_familia').val(idFamilia);
@@ -1539,6 +1544,8 @@
                         //-->NJES Jan/17/2020 se obtiene id familia gasto del atributo del input i_id_producto
                         var idFamiliaGasto = $('#i_id_producto').attr('id_familia_gasto');
                         var familiaGasto = $('#i_id_producto').attr('familia_gasto');
+                        var idClas = $('#i_id_producto').attr('id_clas');
+                        var clasif = $('#i_id_producto').attr('clasif');
 
                         var idLinea = $('#i_id_linea').val();
                         var linea = $('#i_linea').val();
@@ -1572,8 +1579,9 @@
                         var precioAct = parseFloat(quitaComa(precio))-parseFloat(quitaComa(descuento));
                         var descuentoTotal = parseFloat(quitaComa(cantidad))*parseFloat(quitaComa(descuento));
 
-                        var html = "<tr class='partida-requisicion' id_familia_gasto='"+idFamiliaGasto+"' familia_gasto='"+familiaGasto+"' alt='" + totalPartidas +  "' producto='" + idProducto + "' concepto='" + concepto+ "' id_familia='" + idFamilia + "' familia='" + familia + "' id_linea='" + idLinea + "' linea='" + linea + "' precio='" + quitaComa(precioAct) + "'  descuento='"+quitaComa(descuento)+"' descuento_total='"+descuentoTotal+"' cantidad='" +  cantidad + "' costo='" + quitaComa(costo) + "' descripcion='" + descripcion + "' justificacion='" + justificacion + "' iva='" + iva + "' verifica_talla='" + verificaT + "' >";
+                        var html = "<tr class='partida-requisicion' id_familia_gasto='"+idFamiliaGasto+"' familia_gasto='"+familiaGasto+"' alt='" + totalPartidas +  "' producto='" + idProducto + "' concepto='" + concepto+ "' id_familia='" + idFamilia + "' familia='" + familia + "' id_linea='" + idLinea + "' linea='" + linea + "' precio='" + quitaComa(precioAct) + "'  descuento='"+quitaComa(descuento)+"' descuento_total='"+descuentoTotal+"' cantidad='" +  cantidad + "' costo='" + quitaComa(costo) + "' descripcion='" + descripcion + "' justificacion='" + justificacion + "' iva='" + iva + "' verifica_talla='" + verificaT + "' id_clas='"+idClas+"' clasif='"+clasif+"'>";
                         html += "<td>" + familiaGasto + "</td>";
+                        html += "<td>" + clasif + "</td>";
                         html += "<td>" + familia + "</td>";
                         html += "<td>" + linea + "</td>";
                         html += "<td>" + concepto + "</td>";
@@ -1637,60 +1645,161 @@
         });
 
 
+        // function verificarPresupuesto(){
+
+        //     var verificaP = false;
+
+        //     $("#t_partidas tbody tr").each(function()
+        //     { 
+        //         var idFamiliaT = $(this).attr('id_familia');
+        //         var idClas = $(this).attr('id_clas');
+        //         //TODO Recorrer cada row y sumar los de misma clasificacion y meterlos en arreglo, y por cada elemento en mi arreglo hacer un each y verificar presupuesto
+
+        //         console.log("holi",idClas);
+        //         //---- verifico el presupesto para este producto 
+
+
+        //             //-->NJES June/16/2020 DEN18-2769 Modificar la validación de presupuesto en el modulo de requisiciones
+        //             //'idArea' : $('#s_id_area').val(),
+        //             //'idDepto' : $('#s_id_departamento').val()
+        //         $.ajax({
+        //                 type: 'POST',
+        //                 url: 'php/requisiciones_verifica_presupuesto.php',
+                    
+        //                 data:{
+        //                     'idFamilia' : idFamiliaT,
+        //                     'idUnidad' :  $('#s_id_unidad').val(),
+        //                     'idSucursal' : $('#s_id_sucursal').val(),
+        //                     'idClas': idClas
+        //                 },
+        //                 async: false,
+        //                 success: function(data)
+        //                 {
+        //                     var costoTotal = 0; 
+
+        //                     $("#t_partidas tbody tr").each(function()
+        //                     { 
+        //                         var idFamilia = $(this).attr('id_familia');
+        //                         var costo = $(this).attr('costo');
+
+        //                         if(parseInt(idFamiliaT) == parseInt(idFamilia)){
+        //                             $(this).removeClass('excede');
+        //                             $(this).removeAttr('excedePresupuesto');
+
+        //                             costoTotal = costoTotal+ parseFloat(costo);
+                            
+        //                         }else{
+        //                             costoTotal = costoTotal+ parseFloat(0);
+        //                         }
+
+        //                         if(parseFloat(costoTotal)<= parseFloat(data))
+        //                         {
+        //                             $(this).attr('excedePresupuesto',0);
+        //                             verificaP = verificaP;
+        //                         }else{
+        //                             verificaP = true;
+        //                             $(this).attr('excedePresupuesto',1);
+        //                             $(this).addClass('excede');
+        //                         }
+
+
+        //                     });
+                                
+                               
+                            
+        //                 },
+        //                 error: function (xhr)
+        //                 {
+        //                     console.log('php/verifica_presupuesto_producto.php --->'+ JSON.stringify(xhr));
+        //                     mandarMensaje('* Ocurrio un error al verificar el presupuesto');//xhr.responseText
+        //                 }
+        //         });
+               
+        //     });
+           
+        //         return verificaP;
+                
+        // }
+
         function verificarPresupuesto(){
 
             var verificaP = false;
+            let idUnidad = $('#s_id_unidad').val();
+            let idSucursal = $('#s_id_sucursal').val();            
+            let datosRows = [];
+            let clasifsSumadas = [];
 
+            //obtenemos todos los rows con su respectiva informacion
             $("#t_partidas tbody tr").each(function()
             { 
                 var idFamiliaT = $(this).attr('id_familia');
-                //---- verifico el presupesto para este producto 
+                var idClas = $(this).attr('id_clas');
+                var costo = $(this).attr('costo');
+                //TODO Recorrer cada row y sumar los de misma clasificacion y meterlos en arreglo, y por cada elemento en mi arreglo hacer un each y verificar presupuesto
+                datosRows.push({costo, idFamiliaT, idClas});
+                
+            });
+
+            //ordenamos el arreglo en orden ascendiente para poder sumar las id_clasificacion
+            datosRows.sort((a, b) => {
+                return a.idClas - b.idClas;
+            });
+
+            let idClasAnterior = 0;
+            let idFamAnterior = 0;
+            let costoTotalClasif = parseFloat(0);
+
+            datosRows.forEach((e) => {
+                if(e.idClas != idClasAnterior){
+                    if(idClasAnterior != 0){
+                        clasifsSumadas.push({"idFam":idFamAnterior, "idClas":idClasAnterior, "costo":costoTotalClasif});
+                    }
+                    idClasAnterior = e.idClas;
+                    idFamAnterior = e.idFamiliaT;
+                    costoTotalClasif = parseFloat(e.costo);
+                }else{
+                    costoTotalClasif+= parseFloat(e.costo);
+                }
+            });
+            clasifsSumadas.push({"idFam":idFamAnterior, "idClas":idClasAnterior, "costo":costoTotalClasif});
+
+            let arregloPresupuestoVerificado = []
+
+            clasifsSumadas.forEach((e) => {
                 $.ajax({
                         type: 'POST',
                         url: 'php/requisiciones_verifica_presupuesto.php',
                     
                         data:{
-                            'idFamilia' : idFamiliaT,
-                            'idUnidad' :  $('#s_id_unidad').val(),
-                            'idSucursal' : $('#s_id_sucursal').val()
-                            //-->NJES June/16/2020 DEN18-2769 Modificar la validación de presupuesto en el modulo de requisiciones
-                            //'idArea' : $('#s_id_area').val(),
-                            //'idDepto' : $('#s_id_departamento').val()
+                            'idFamilia' : e.idFam,
+                            'idUnidad' :  idUnidad,
+                            'idSucursal' : idSucursal,
+                            'idClas': e.idClas
                         },
                         async: false,
                         success: function(data)
                         {
-                            var costoTotal = 0; 
+                            
 
                             $("#t_partidas tbody tr").each(function()
                             { 
-                                var idFamilia = $(this).attr('id_familia');
-                                var costo = $(this).attr('costo');
+                                var idClas = $(this).attr('id_clas');
 
-                                if(parseInt(idFamiliaT) == parseInt(idFamilia)){
+                                if(idClas == e.idClas){
                                     $(this).removeClass('excede');
                                     $(this).removeAttr('excedePresupuesto');
 
-                                    costoTotal = costoTotal+ parseFloat(costo);
-                            
-                                }else{
-                                    costoTotal = costoTotal+ parseFloat(0);
+                                    if(parseFloat(e.costo)<= parseFloat(data)){
+                                        $(this).attr('excedePresupuesto',0);
+                                        verificaP = verificaP;
+                                    }else{
+                                        verificaP = true;
+                                        $(this).attr('excedePresupuesto',1);
+                                        $(this).addClass('excede');
+                                    }
                                 }
-
-                                if(parseFloat(costoTotal)<= parseFloat(data))
-                                {
-                                    $(this).attr('excedePresupuesto',0);
-                                    verificaP = verificaP;
-                                }else{
-                                    verificaP = true;
-                                    $(this).attr('excedePresupuesto',1);
-                                    $(this).addClass('excede');
-                                }
-
 
                             });
-                                
-                               
                             
                         },
                         error: function (xhr)
@@ -1699,10 +1808,9 @@
                             mandarMensaje('* Ocurrio un error al verificar el presupuesto');//xhr.responseText
                         }
                 });
-               
             });
-           
-                return verificaP;
+
+            return verificaP;
                 
         }
 
@@ -2923,8 +3031,9 @@
                                         classExcede='excede';
                                     }
 
-                                    var html = "<tr class='partida-requisicion "+classExcede+"' excedePresupuesto='"+detalle.excede_presupuesto+"' id_familia_gasto='"+detalle.id_familia_gasto+"' familia_gasto='"+detalle.familia_gasto+"' alt='" + totalPartidas +  "' producto='" + detalle.id_producto + "' concepto='" + detalle.concepto+ "' id_familia='" + detalle.id_familia + "' familia='" + detalle.familia + "' id_linea='" + detalle.id_linea + "' linea='" + detalle.linea + "' precio='" + detalle.costo_unitario + "' descuento='"+detalle.descuento_unitario+"' descuento_total='"+detalle.descuento_total+"' cantidad='" +  detalle.cantidad + "' costo='" + redondear(parseFloat(detalle.costo_unitario) * parseFloat(detalle.cantidad)) + "' descripcion='" + detalle.descripcion + "' justificacion='" + detalle.justificacion + "' iva='" + detalle.porcentaje_iva + "' >";
+                                    var html = "<tr class='partida-requisicion "+classExcede+"' excedePresupuesto='"+detalle.excede_presupuesto+"' id_familia_gasto='"+detalle.id_familia_gasto+"' familia_gasto='"+detalle.familia_gasto+"' alt='" + totalPartidas +  "' producto='" + detalle.id_producto + "' concepto='" + detalle.concepto+ "' id_familia='" + detalle.id_familia + "' familia='" + detalle.familia + "' id_linea='" + detalle.id_linea + "' linea='" + detalle.linea + "' precio='" + detalle.costo_unitario + "' descuento='"+detalle.descuento_unitario+"' descuento_total='"+detalle.descuento_total+"' cantidad='" +  detalle.cantidad + "' costo='" + redondear(parseFloat(detalle.costo_unitario) * parseFloat(detalle.cantidad)) + "' descripcion='" + detalle.descripcion + "' justificacion='" + detalle.justificacion + "' iva='" + detalle.porcentaje_iva + "' id_clas='"+detalle.id_clas+"' clasif='"+detalle.clasificacion+"'>";
                                     html += "<td>" + detalle.familia_gasto + "</td>";
+                                    html += "<td>" + detalle.clasificacion + "</td>";
                                     html += "<td>" + detalle.familia + "</td>";
                                     html += "<td>" + detalle.linea + "</td>";
                                     html += "<td>" + detalle.concepto + "</td>";
@@ -3131,7 +3240,7 @@
 
         $("#t_partidas").on('dblclick',".partida-requisicion",function()
         {  
-            $('#i_id_producto').val($(this).attr('producto')).attr({'id_familia_gasto':$(this).attr('id_familia_gasto'),'familia_gasto':$(this).attr('familia_gasto')});;
+            $('#i_id_producto').val($(this).attr('producto')).attr({'id_familia_gasto':$(this).attr('id_familia_gasto'),'familia_gasto':$(this).attr('familia_gasto'),'id_clas':$(this).attr('id_clas'),'clasif':$(this).attr('clasif')});;
             $('#i_id_linea').val($(this).attr('id_linea'));
             $('#i_linea').val($(this).attr('linea'));
             $('#i_id_familia').val($(this).attr('id_familia'));
@@ -3455,7 +3564,9 @@
                                                 classExcede='excede';
                                             }
 
-                                            var html = "<tr class='partida-requisicion "+classExcede+"' excedePresupuesto='"+detalle.excede_presupuesto+"' alt='" + totalPartidas +  "' producto='" + detalle.id_producto + "' concepto='" + detalle.concepto+ "' id_familia_gasto='"+detalle.id_familia_gasto+"' id_familia='" + detalle.id_familia + "' familia='" + detalle.familia + "' id_linea='" + detalle.id_linea + "' linea='" + detalle.linea + "' precio='" + detalle.costo_unitario + "' descuento='"+detalle.descuento_unitario+"' descuento_total='"+detalle.descuento_total+"' cantidad='" +  detalle.cantidad + "' costo='" + redondear(parseFloat(detalle.costo_unitario) * parseFloat(detalle.cantidad)) + "' descripcion='" + detalle.descripcion + "' justificacion='" + detalle.justificacion + "' iva='" + detalle.porcentaje_iva + "' >";
+                                            var html = "<tr class='partida-requisicion "+classExcede+"' excedePresupuesto='"+detalle.excede_presupuesto+"' alt='" + totalPartidas +  "' producto='" + detalle.id_producto + "' concepto='" + detalle.concepto+ "' id_familia_gasto='"+detalle.id_familia_gasto+"' id_familia='" + detalle.id_familia + "' familia='" + detalle.familia + "' id_linea='" + detalle.id_linea + "' linea='" + detalle.linea + "' precio='" + detalle.costo_unitario + "' descuento='"+detalle.descuento_unitario+"' descuento_total='"+detalle.descuento_total+"' cantidad='" +  detalle.cantidad + "' costo='" + redondear(parseFloat(detalle.costo_unitario) * parseFloat(detalle.cantidad)) + "' descripcion='" + detalle.descripcion + "' justificacion='" + detalle.justificacion + "' iva='" + detalle.porcentaje_iva + "' id_clas='"+detalle.id_clas+"' clasif='"+detalle.clasificacion+"'>";
+                                            html += "<td>" + detalle.familia_gasto + "</td>";
+                                            html += "<td>" + detalle.clasificacion + "</td>";
                                             html += "<td>" + detalle.familia + "</td>";
                                             html += "<td>" + detalle.linea + "</td>";
                                             html += "<td>" + detalle.concepto + "</td>";

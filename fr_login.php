@@ -1,3 +1,18 @@
+<?php
+require_once('php/conectar.php');
+
+$link = Conectarse();
+
+$query="SELECT CONCAT(nombre, ' ', apellido_p, ' ', apellido_m) nombreCompleto, dia_n, cve_nom
+        FROM trabajadores
+        WHERE mes_n = MONTH(NOW()) AND fecha_baja = '0000-00-00' AND administrativo = 2
+        ORDER BY dia_n ASC";
+
+$result = mysqli_query($link,$query);
+$numRows = mysqli_num_rows($result);
+
+?>
+
 <!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
 <html xmlns="http://www.w3.org/1999/xhtml">
 <head>
@@ -179,9 +194,10 @@
       <div class="row" style="height: 100vh">
         <div class="my-auto">
           <div class="col-md-4 mx-auto">
-            <div class="row">
-              <div class="card bg-transparent border-0">
-                <div class="card-body">
+            
+            <div class="card bg-transparent border-0">
+              <div class="card-body">
+                <div class="row">
                   <div class="col-12 mb-3">
                     <img src="imagenes/logoGinther2.png" class="img-fluid"/>
                   </div>
@@ -213,12 +229,21 @@
                       Powered by <a href="www.ginthersoft.com">Ginthersoft ®</a>
                     </div>
                   </div>
+
+                  <?php
+                    if($numRows>0){            
+                  ?>
+                  <div class="col-12">
+                    <button class="btn btn-secondary btn-block" type="button" id="btnCumples">Cumpleaños</button>
+                  </div>
+                  <?php
+                    }
+                  ?>
                 </div>
               </div>
-            </div>
-            
-            
+            </div>            
           </div>
+          
         </div>
       </div>
     </div>
@@ -235,6 +260,51 @@
       <li></li>
       <li></li>
     </ul>
+  </div>
+
+  <div class="modal fade" id="dialog_bdays" tabindex="-1" role="dialog">
+    <div class="modal-dialog modal-lg">
+      <div class="modal-content">
+        <div class="modal-header">
+              <h4 class="modal-title">Cumpleaños del Mes</h4>
+          <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+            <span aria-hidden="true">&times;</span>
+          </button>
+
+        </div>
+        <div class="modal-body">
+          <table class="table">
+            <thead>
+              <tr>
+                <th scope="col">#</th>
+                <th scope="col">Nombre</th>
+                <th scope="col">Fecha</th>
+              </tr>
+            </thead>
+            <tbody>
+
+            <?php
+            while($row = mysqli_fetch_array($result)){
+              $nombre=$row["nombreCompleto"];
+              $dia = $row["dia_n"];
+              $cve = $row["cve_nom"];
+
+              echo "<tr>
+                        <td scope='col'>$cve</td>
+                        <td scope='col'>$nombre</td>
+                        <td scope='col'>$dia</td>
+                      </tr>";
+
+              // print_r($row);
+            }
+            ?>
+
+            </tbody>
+          </table>
+        </div>
+
+      </div>
+    </div>
   </div>
 
 </body>
@@ -266,6 +336,10 @@
             }else{
             mandarMensaje('Ingresa un usuario');
             }
+        });
+
+        $('#btnCumples').click(function(){
+            $("#dialog_bdays").modal("toggle");
         });
 
         $("#i_password").keyup(function(event) {

@@ -594,59 +594,66 @@ class Requisiciones
       if($id != null && $id != '')
         $where = " WHERE requisiciones.id = $id ";
 
-    $resultado = $this->link->query("
-      SELECT
-      requisiciones.id AS id,
-      requisiciones.id_unidad_negocio AS id_unidad_negocio,
-      requisiciones.id_sucursal AS id_sucursal,
-      requisiciones.id_area AS id_area,
-      IFNULL(requisiciones.id_departamento,0) AS id_departamento,
-      requisiciones.folio AS folio,
-      requisiciones.estatus AS estatus,
-      cat_unidades_negocio.nombre AS unidad, 
-      sucursales.descr AS sucursal,
-      cat_areas.descripcion AS are,
-      IFNULL(deptos.des_dep,'') AS depto,
-      requisiciones.solicito AS solicito,
-      requisiciones.capturo AS capturo,
-      requisiciones.id_proveedor AS id_proveedor,
-      requisiciones.fecha_pedido AS fecha_pedido,
-      requisiciones.tiempo_entrega AS tiempo_entrega,
-      requisiciones.descripcion AS descripcion,
-      requisiciones.id_orden_compra AS id_orden_compra,
-      requisiciones.folio_orden_compra AS folio_orden_compra,
-      requisiciones.subtotal AS subtotal,
-      requisiciones.iva AS iva,
-      requisiciones.total AS total,
-      requisiciones.id_capturo AS id_capturo,
-      requisiciones.tipo AS tipo,
+      $query = "SELECT
+                  requisiciones.id AS id,
+                  requisiciones.id_unidad_negocio AS id_unidad_negocio,
+                  requisiciones.id_sucursal AS id_sucursal,
+                  requisiciones.id_area AS id_area,
+                  IFNULL(requisiciones.id_departamento,0) AS id_departamento,
+                  requisiciones.folio AS folio,
+                  requisiciones.estatus AS estatus,
+                  cat_unidades_negocio.nombre AS unidad, 
+                  sucursales.descr AS sucursal,
+                  cat_areas.descripcion AS are,
+                  IFNULL(deptos.des_dep,'') AS depto,
+                  requisiciones.solicito AS solicito,
+                  requisiciones.capturo AS capturo,
+                  requisiciones.id_proveedor AS id_proveedor,
+                  requisiciones.fecha_pedido AS fecha_pedido,
+                  requisiciones.tiempo_entrega AS tiempo_entrega,
+                  requisiciones.descripcion AS descripcion,
+                  requisiciones.id_orden_compra AS id_orden_compra,
+                  requisiciones.folio_orden_compra AS folio_orden_compra,
+                  requisiciones.subtotal AS subtotal,
+                  requisiciones.iva AS iva,
+                  requisiciones.total AS total,
+                  requisiciones.id_capturo AS id_capturo,
+                  requisiciones.tipo AS tipo,
 
-      requisiciones.subtotal AS subtotal,
-      requisiciones.iva AS iva,
-      requisiciones.total AS total,
+                  requisiciones.subtotal AS subtotal,
+                  requisiciones.iva AS iva,
+                  requisiciones.total AS total,
 
-      requisiciones.excede_presupuesto as excede_presupuesto,
+                  requisiciones.excede_presupuesto as excede_presupuesto,
 
-      requisiciones.no_economico AS no_economico,
-      requisiciones.responsable AS responsable,
-      requisiciones.kilometraje AS kilometraje,
+                  requisiciones.no_economico AS no_economico,
+                  requisiciones.responsable AS responsable,
+                  requisiciones.kilometraje AS kilometraje,
 
-      requisiciones.id_familia_gasto,
-      IFNULL(fam_gastos.descr,'') AS familia_gasto,
-      requisiciones.b_anticipo,
-      requisiciones.monto_anticipo,
-      requisiciones.b_varias_familias,
+                  requisiciones.id_familia_gasto,
+                  IFNULL(fam_gastos.descr,'') AS familia_gasto,
+                  requisiciones.b_anticipo,
+                  requisiciones.monto_anticipo,
+                  requisiciones.b_varias_familias,
 
-      proveedores.nombre as proveedor
-      FROM requisiciones
-      INNER JOIN cat_unidades_negocio ON requisiciones.id_unidad_negocio = cat_unidades_negocio.id
-      INNER JOIN sucursales ON requisiciones.id_sucursal = sucursales.id_sucursal
-      INNER JOIN cat_areas ON requisiciones.id_area = cat_areas.id
-      INNER JOIN deptos ON requisiciones.id_departamento = deptos.id_depto 
-      INNER JOIN proveedores ON requisiciones.id_proveedor = proveedores.id
-      LEFT JOIN fam_gastos ON requisiciones.id_familia_gasto=fam_gastos.id_fam
-      $where
-      ORDER BY requisiciones.id DESC");
+                  proveedores.nombre as proveedor,
+                  IF((SELECT COUNT(id) FROM requisiciones_d WHERE id_requisicion = requisiciones.id) = 1,
+                      (SELECT productos.id_clas FROM requisiciones_d INNER JOIN productos ON requisiciones_d.id_producto = productos.id WHERE id_requisicion = requisiciones.id),
+                      0) contadorClas
+                FROM requisiciones
+                INNER JOIN cat_unidades_negocio ON requisiciones.id_unidad_negocio = cat_unidades_negocio.id
+                INNER JOIN sucursales ON requisiciones.id_sucursal = sucursales.id_sucursal
+                INNER JOIN cat_areas ON requisiciones.id_area = cat_areas.id
+                INNER JOIN deptos ON requisiciones.id_departamento = deptos.id_depto 
+                INNER JOIN proveedores ON requisiciones.id_proveedor = proveedores.id
+                LEFT JOIN fam_gastos ON requisiciones.id_familia_gasto=fam_gastos.id_fam
+                $where
+                ORDER BY requisiciones.id DESC";
+
+                // echo $query;
+                // exit();
+
+      $resultado = $this->link->query($query);
       return query2json($resultado);
 
     }
@@ -660,34 +667,38 @@ class Requisiciones
     function buscarDetallesRequisiciones($idRequisicion)
     {
 
-    $resultado = $this->link->query("
-      SELECT
-      requisiciones_d.id AS id,
-      requisiciones_d.id_producto AS id_producto,
-      requisiciones_d.id_linea AS id_linea,
-      requisiciones_d.id_familia AS id_familia,
-      requisiciones_d.cantidad AS cantidad,
-      requisiciones_d.descripcion AS descripcion,
-      requisiciones_d.costo_unitario AS costo_unitario,
-      requisiciones_d.iva AS porcentaje_iva,
-      requisiciones_d.justificacion AS justificacion,
-      requisiciones_d.total AS total,
-      requisiciones_d.excede_presupuesto AS excede_presupuesto,
-      requisiciones_d.descuento_unitario,
-      requisiciones_d.descuento_total,
-      productos.concepto AS concepto,
-      familias.tallas as verifica_talla,
-      IFNULL(lineas.descripcion,'') AS linea,
-      IFNULL(familias.descripcion,'') AS familia,
-      familias.id_familia_gasto,
-      fam_gastos.descr AS familia_gasto
-      FROM requisiciones_d
-      INNER JOIN productos ON requisiciones_d.id_producto = productos.id
-      INNER JOIN lineas ON requisiciones_d.id_linea = lineas.id
-      INNER JOIN familias ON requisiciones_d.id_familia = familias.id
-      LEFT JOIN fam_gastos ON familias.id_familia_gasto=fam_gastos.id_fam
-      WHERE requisiciones_d.id_requisicion = $idRequisicion");
-        return query2json($resultado);
+      $query = "SELECT
+                  requisiciones_d.id AS id,
+                  requisiciones_d.id_producto AS id_producto,
+                  requisiciones_d.id_linea AS id_linea,
+                  requisiciones_d.id_familia AS id_familia,
+                  requisiciones_d.cantidad AS cantidad,
+                  requisiciones_d.descripcion AS descripcion,
+                  requisiciones_d.costo_unitario AS costo_unitario,
+                  requisiciones_d.iva AS porcentaje_iva,
+                  requisiciones_d.justificacion AS justificacion,
+                  requisiciones_d.total AS total,
+                  requisiciones_d.excede_presupuesto AS excede_presupuesto,
+                  requisiciones_d.descuento_unitario,
+                  requisiciones_d.descuento_total,
+                  productos.concepto AS concepto,
+                  familias.tallas as verifica_talla,
+                  IFNULL(lineas.descripcion,'') AS linea,
+                  IFNULL(familias.descripcion,'') AS familia,
+                  familias.id_familia_gasto,
+                  fam_gastos.descr AS familia_gasto,
+                  IFNULL(gastos_clasificacion.id_clas, 0) as id_clas,
+                  IFNULL(gastos_clasificacion.descr, '') as clasificacion
+                FROM requisiciones_d
+                INNER JOIN productos ON requisiciones_d.id_producto = productos.id
+                INNER JOIN lineas ON requisiciones_d.id_linea = lineas.id
+                INNER JOIN familias ON requisiciones_d.id_familia = familias.id
+                LEFT JOIN fam_gastos ON familias.id_familia_gasto=fam_gastos.id_fam
+                LEFT JOIN gastos_clasificacion ON productos.id_clas = gastos_clasificacion.id_clas
+                WHERE requisiciones_d.id_requisicion = $idRequisicion";
+
+      $resultado = $this->link->query($query);
+      return query2json($resultado);
 
     }
 
@@ -897,33 +908,44 @@ class Requisiciones
     * @param int $idSucursal sucursal selecionada en la orden de compra
     *
     **/
-    function buscarRequisicionesPresupuesto($idFamilia,$idUnidad,$idSucursal)
+    function buscarRequisicionesPresupuesto($idFamilia,$idUnidad,$idSucursal,$idClas)
     {
 
+      $condClas = "";
+
+      if($idClas != 0){
+        $condClas = " AND a.id_clasificacion = $idClas ";
+      }
+
       $query="SELECT 
-      (IFNULL(SUM(tabla.presupuesto),0)-IFNULL(SUM(tabla.ejercido),0)) AS queda
-      FROM (	
-      SELECT 
-          IFNULL(b.descr,'') AS familia,
-          SUM(a.monto) AS presupuesto,
-          0 AS ejercido
-      FROM presupuesto_egresos a 
-      LEFT JOIN fam_gastos b ON a.id_familia_gasto = b.id_fam
-      WHERE a.id_unidad_negocio=".$idUnidad." AND a.id_sucursal=".$idSucursal." AND a.id_familia_gasto=(SELECT id_familia_gasto FROM familias WHERE id=".$idFamilia." ) AND a.anio = YEAR(CURDATE())AND a.mes = MONTH(CURDATE())
-      GROUP BY a.id_familia_gasto
-      UNION ALL
-      
-      SELECT 
-          IFNULL(b.descr,'') AS familia,
-          0 AS presupuesto,SUM(a.monto) AS ejercido
-      FROM movimientos_presupuesto a 
-      LEFT JOIN fam_gastos b ON a.id_familia_gasto = b.id_fam
-      WHERE a.id_unidad_negocio=".$idUnidad." AND a.id_sucursal=".$idSucursal." AND a.id_familia_gasto=(SELECT id_familia_gasto FROM familias WHERE id=".$idFamilia." ) AND YEAR(a.fecha_captura) = YEAR(CURDATE())AND MONTH(a.fecha_captura) = MONTH(CURDATE())
-      GROUP BY a.id_familia_gasto
-      ) AS tabla
-      
-      GROUP BY tabla.familia
-      ORDER BY tabla.familia ASC";
+                (IFNULL(SUM(tabla.presupuesto),0)-IFNULL(SUM(tabla.ejercido),0)) AS queda
+              FROM (	
+                    SELECT 
+                        IFNULL(b.descr,'') AS familia,
+                        SUM(a.monto) AS presupuesto,
+                        0 AS ejercido
+                    FROM presupuesto_egresos a 
+                    LEFT JOIN fam_gastos b ON a.id_familia_gasto = b.id_fam
+                    WHERE a.id_unidad_negocio=$idUnidad AND a.id_sucursal=$idSucursal AND a.id_familia_gasto=(SELECT id_familia_gasto FROM familias WHERE id=$idFamilia ) AND a.anio = YEAR(CURDATE())AND a.mes = MONTH(CURDATE()) $condClas
+                    GROUP BY a.id_familia_gasto
+
+                    UNION ALL
+                    
+                    SELECT 
+                        IFNULL(b.descr,'') AS familia,
+                        0 AS presupuesto,
+                        SUM(a.monto) AS ejercido
+                    FROM movimientos_presupuesto a 
+                    LEFT JOIN fam_gastos b ON a.id_familia_gasto = b.id_fam
+                    WHERE a.id_unidad_negocio=$idUnidad AND a.id_sucursal=$idSucursal AND a.id_familia_gasto=(SELECT id_familia_gasto FROM familias WHERE id=$idFamilia ) AND YEAR(a.fecha_captura) = YEAR(CURDATE())AND MONTH(a.fecha_captura) = MONTH(CURDATE()) $condClas 
+                    GROUP BY a.id_familia_gasto
+                  ) AS tabla              
+              GROUP BY tabla.familia
+              ORDER BY tabla.familia ASC";
+
+      // echo $query;
+      // exit();
+
       $result = mysqli_query($this->link,$query);
       $numRows = mysqli_num_rows($result);
       if($numRows>0){
@@ -1303,21 +1325,23 @@ class Requisiciones
     }
 
     function buscarRequisicionPartidas($idRequisicion){
-      $resultado = $this->link->query("
-      SELECT
-      requisiciones_d.id AS id,
-      requisiciones_d.cantidad AS cantidad,
-      requisiciones_d.costo_unitario AS costo_unitario,
-      requisiciones_d.iva AS porcentaje_iva,
-      ((requisiciones_d.cantidad*requisiciones_d.costo_unitario)*requisiciones_d.iva)/100 AS iva,
-      productos.concepto AS concepto,
-      familias.id_familia_gasto,
-      fam_gastos.descr AS familia_gasto
-      FROM requisiciones_d
-      INNER JOIN productos ON requisiciones_d.id_producto = productos.id
-      INNER JOIN familias ON requisiciones_d.id_familia = familias.id
-      LEFT JOIN fam_gastos ON familias.id_familia_gasto=fam_gastos.id_fam
-      WHERE requisiciones_d.id_requisicion = $idRequisicion");
+      $query = "SELECT
+                  requisiciones_d.id AS id,
+                  requisiciones_d.cantidad AS cantidad,
+                  requisiciones_d.costo_unitario AS costo_unitario,
+                  requisiciones_d.iva AS porcentaje_iva,
+                  ((requisiciones_d.cantidad*requisiciones_d.costo_unitario)*requisiciones_d.iva)/100 AS iva,
+                  productos.concepto AS concepto,
+                  familias.id_familia_gasto,
+                  fam_gastos.descr AS familia_gasto,
+                  productos.id_clas
+                FROM requisiciones_d
+                INNER JOIN productos ON requisiciones_d.id_producto = productos.id
+                INNER JOIN familias ON requisiciones_d.id_familia = familias.id
+                LEFT JOIN fam_gastos ON familias.id_familia_gasto=fam_gastos.id_fam
+                WHERE requisiciones_d.id_requisicion = $idRequisicion";
+      
+      $resultado = $this->link->query($query);
 
       return query2json($resultado);
     }

@@ -380,22 +380,24 @@ class SalidasAlmacen
               //->Guarda en movimientos_presupuesto el movimiento, segun los registros guardados en almacen_d
               if($i == 1)
               {
-                $movP = $afectarPresupuesto->guardarMovimientoPresupuesto($arr); 
+                // $movP = $afectarPresupuesto->guardarMovimientoPresupuesto($arr); 
 
-                if($movP > 0) 
-                  $verifica = $folio;
-                else
-                  $verifica = 0;
+                // if($movP > 0) 
+                //   $verifica = $folio;
+                // else
+                //   $verifica = 0;
+                $verifica = $folio;
 
               }else{
                 if($verifica > 0)
                 {
-                  $movP = $afectarPresupuesto->guardarMovimientoPresupuesto($arr);
+                  // $movP = $afectarPresupuesto->guardarMovimientoPresupuesto($arr);
 
-                  if($movP > 0) 
-                    $verifica = $folio;
-                  else
-                    $verifica = 0;
+                  // if($movP > 0) 
+                  //   $verifica = $folio;
+                  // else
+                  //   $verifica = 0;
+                  $verifica = $folio;
 
                 }else{
                   $test.= ' - b3';

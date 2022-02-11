@@ -111,33 +111,47 @@ class ClasificacionGasto
     **/
     function guardarActualizar($datos){
           
-    $verifica = 0;
+      $verifica = 0;
 
-    $idClasificacionGasto = $datos['idClasificacionGasto'];
-    $clave = $datos['clave'];
-    $descripcion = $datos['descripcion'];
-    $activo = $datos['activo'];
-    $tipo_mov = $datos['tipo_mov'];
-    $idFamiliaGasto = $datos['idFamiliaGasto'];
+      $idClasificacionGasto = $datos['idClasificacionGasto'];
+      $clave = $datos['clave'];
+      $descripcion = $datos['descripcion'];
+      $activo = $datos['activo'];
+      $tipo_mov = $datos['tipo_mov'];
+      $idFamiliaGasto = $datos['idFamiliaGasto'];
 
-    if($tipo_mov==0)
-    {
-      $query = "INSERT INTO gastos_clasificacion(clave,descr,activo,id_fam) VALUES ('$clave','$descripcion','$activo','$idFamiliaGasto')";
-      $result = mysqli_query($this->link, $query) or die(mysqli_error());
+      if($tipo_mov==0)
+      {
+        $query = "INSERT INTO gastos_clasificacion(clave,descr,activo,id_fam) VALUES ('$clave','$descripcion','$activo','$idFamiliaGasto')";
+        $result = mysqli_query($this->link, $query) or die(mysqli_error());
 
-      $idClasificacionGasto = mysqli_insert_id($this->link);
-    }else{
-      $query = "UPDATE gastos_clasificacion SET clave='$clave',descr='$descripcion', activo='$activo',id_fam='$idFamiliaGasto' WHERE id_clas=".$idClasificacionGasto;
-      $result = mysqli_query($this->link, $query) or die(mysqli_error());
-    }
-    
-    if ($result) 
-    {
-      $verifica = $idClasificacionGasto;  
-    }
-    
-    return $verifica;
-  }//- fin function guardarActualizar
+        $idClasificacionGasto = mysqli_insert_id($this->link);
+      }else{
+        $query = "UPDATE gastos_clasificacion SET clave='$clave',descr='$descripcion', activo='$activo',id_fam='$idFamiliaGasto' WHERE id_clas=".$idClasificacionGasto;
+        $result = mysqli_query($this->link, $query) or die(mysqli_error());
+      }
+      
+      if ($result) 
+      {
+        $verifica = $idClasificacionGasto;  
+      }
+      
+      return $verifica;
+    }//- fin function guardarActualizar
+
+    function buscarClasificacionesIdFamilia($idFamilia){
+
+      $query = "SELECT id_clas as id, descr as descripcion, clave
+                FROM gastos_clasificacion
+                WHERE id_fam = $idFamilia";
+
+                // echo $query;
+                // exit;
+
+      $result = $this->link->query($query);
+      
+      return query2json($result);
+    }//- fin function buscarClasificacionesIdFamilia
     
 }//--fin de class ClasificacionGasto
     

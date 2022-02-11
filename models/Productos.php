@@ -85,6 +85,7 @@ class Productos
           $clave = $datos[1]['clave'];
           $idFamilia = $datos[1]['idFamilia'];
           $idLinea = $datos[1]['idLinea'];
+          $idClasif = $datos[1]['idClasif'];
           $concepto = $datos[1]['concepto'];
           $servicio = $datos[1]['servicio'];
           $codigo_barras = $datos[1]['codigoBarras'];
@@ -97,7 +98,7 @@ class Productos
 
           if($tipo_mov==0){
   
-            $query = "INSERT INTO productos(clave,id_familia,id_linea,concepto,servicio,codigo_barras,costo,iva,inactivo) VALUES ('$clave','$idFamilia','$idLinea','$concepto','$servicio','$codigo_barras','$costo','$iva','$inactivo')";
+            $query = "INSERT INTO productos(clave,id_familia,id_linea,concepto,servicio,codigo_barras,costo,iva,inactivo, id_clas) VALUES ('$clave','$idFamilia','$idLinea','$concepto','$servicio','$codigo_barras','$costo','$iva','$inactivo', '$idClasif')";
             $result = mysqli_query($this->link, $query) or die(mysqli_error());
             $idProducto = mysqli_insert_id($this->link);
 
@@ -111,8 +112,8 @@ class Productos
               $conceptoEU = $concepto.' USADO';
               $idLineaEU = $obtenLineaEU->buscarLineaUsadoIdLinea($idLinea);
 
-              $queryEU = "INSERT INTO productos(clave,id_familia,id_linea,concepto,servicio,codigo_barras,costo,iva,inactivo) VALUES 
-              ('$claveEU',9,'$idLineaEU','$conceptoEU','$servicio','$codigo_barras','$costo','$iva','$inactivo')";
+              $queryEU = "INSERT INTO productos(clave,id_familia,id_linea,concepto,servicio,codigo_barras,costo,iva,inactivo, id_clas) VALUES 
+              ('$claveEU',9,'$idLineaEU','$conceptoEU','$servicio','$codigo_barras','$costo','$iva','$inactivo', $idClasif)";
               $resultEU = mysqli_query($this->link, $queryEU) or die(mysqli_error());
               $idProductoEU = mysqli_insert_id($this->link);
 
@@ -128,7 +129,7 @@ class Productos
                 $verifica = $idProducto;
           }else{
   
-            $query = "UPDATE productos SET clave='$clave',id_familia='$idFamilia',id_linea='$idLinea',concepto='$concepto',servicio='$servicio',codigo_barras='$codigo_barras',costo='$costo',iva='$iva',inactivo='$inactivo' WHERE id=".$idProducto;
+            $query = "UPDATE productos SET clave='$clave',id_familia='$idFamilia',id_linea='$idLinea',concepto='$concepto',servicio='$servicio',codigo_barras='$codigo_barras',costo='$costo',iva='$iva',inactivo='$inactivo',id_clas='$idClasif' WHERE id=".$idProducto;
             $result = mysqli_query($this->link, $query) or die(mysqli_error());
 
             if($result){
@@ -149,7 +150,7 @@ class Productos
   
           
           return $verifica;
-      }
+        }
   
       
       /**
@@ -203,53 +204,59 @@ class Productos
             $condicionLinea=' AND productos.id_linea='.$idLinea;
           }
 
-          $resultado = $this->link->query("SELECT
-          productos.id AS id,
-          productos.clave AS clave,
-          productos.concepto AS concepto,
-          productos.inactivo AS inactivo,
-          familias.descripcion AS familia,
-          familias.id_familia_gasto,
-          lineas.descripcion AS linea,
-          IFNULL(sub.equivalente_usado,0) AS equivalente
-          FROM productos
-          INNER JOIN familias ON productos.id_familia = familias.id
-          INNER JOIN lineas ON productos.id_linea = lineas.id
-          LEFT JOIN 
-            (
-              SELECT equivalente_usado FROM productos WHERE equivalente_usado>0
-            ) sub ON productos.id=sub.equivalente_usado
-          WHERE 1=1 $condicionFamilia $condicionLinea
-          HAVING equivalente = 0
-          ORDER BY productos.id asc");
+          $query = "SELECT
+                      productos.id AS id,
+                      productos.clave AS clave,
+                      productos.concepto AS concepto,
+                      productos.inactivo AS inactivo,
+                      familias.descripcion AS familia,
+                      familias.id_familia_gasto,
+                      lineas.descripcion AS linea,
+                      IFNULL(sub.equivalente_usado,0) AS equivalente
+                    FROM productos
+                    INNER JOIN familias ON productos.id_familia = familias.id
+                    INNER JOIN lineas ON productos.id_linea = lineas.id
+                    LEFT JOIN 
+                      (
+                        SELECT equivalente_usado FROM productos WHERE equivalente_usado>0
+                      ) sub ON productos.id=sub.equivalente_usado
+                    WHERE 1=1 $condicionFamilia $condicionLinea
+                    HAVING equivalente = 0
+                    ORDER BY productos.id asc";
+
+          $resultado = $this->link->query($query);
           return query2json($resultado);
   
         }//- fin function buscarProductos
         //--MGFS 22-10-2019  El campo "costo" se actualizará según el último precio de compra pero será posible modificarlo. Cuando se modifique, se agregará en bitácora el cambio.
         function buscarProductosId($idProducto){
-          
-             $resultado = $this->link->query("SELECT
-             productos.id AS id,
-             productos.equivalente_usado,
-             productos.clave AS clave,
-             productos.concepto AS concepto,
-             productos.descripcion AS descripcion,
-             productos.id_familia AS id_familia,
-             productos.id_linea AS id_linea,
-             productos.costo AS costo,
-             productos.servicio AS servicio,
-             productos.codigo_barras AS codigo_barras,
-             productos.iva AS iva,
-             productos.inactivo AS inactivo,
-             familias.descripcion AS familia,
-             familias.id_familia_gasto,
-             lineas.descripcion AS linea
-             FROM productos
-             INNER JOIN familias ON productos.id_familia = familias.id
-             INNER JOIN lineas ON productos.id_linea = lineas.id
-             WHERE productos.id=".$idProducto);
-             return query2json($resultado);
-            
+
+          $query = "SELECT
+                      productos.id AS id,
+                      productos.equivalente_usado,
+                      productos.clave AS clave,
+                      productos.concepto AS concepto,
+                      productos.descripcion AS descripcion,
+                      productos.id_familia AS id_familia,
+                      productos.id_linea AS id_linea,
+                      productos.costo AS costo,
+                      productos.servicio AS servicio,
+                      productos.codigo_barras AS codigo_barras,
+                      productos.iva AS iva,
+                      productos.inactivo AS inactivo,
+                      familias.descripcion AS familia,
+                      familias.id_familia_gasto,
+                      IFNULL(gastos_clasificacion.id_clas,0) AS id_clasif,
+                      IFNULL(gastos_clasificacion.descr,'') AS descr_clasif,
+                      lineas.descripcion AS linea
+                    FROM productos
+                    INNER JOIN familias ON productos.id_familia = familias.id
+                    INNER JOIN lineas ON productos.id_linea = lineas.id
+                    LEFT JOIN gastos_clasificacion ON gastos_clasificacion.id_clas = productos.id_clas
+                    WHERE productos.id=$idProducto";
+        
+            $resultado = $this->link->query($query);
+            return query2json($resultado);            
   
         }//- fin function buscarProductosId
 
@@ -291,52 +298,62 @@ class Productos
       else
         $condFamGasto = "";
 
-      $resultado = $this->link->query("SELECT
-      productos.id AS id,
-      productos.clave AS clave,
-      productos.concepto AS concepto,
-      IFNULL(productos.descripcion,'') AS descripcion,
-      productos.id_familia AS id_familia,
-      familias.descripcion AS familia,
-      productos.id_linea AS id_linea,
-      lineas.descripcion AS linea,
-      productos.costo AS costo,
-      productos_unidades.ultimo_precio_compra AS precio,
-      familias.tallas AS verifica_talla,
-      familias.id_familia_gasto,
-      fam_gastos.descr AS familia_gasto
-      FROM productos
-      INNER JOIN familias ON productos.id_familia = familias.id
-      INNER JOIN lineas ON productos.id_linea = lineas.id
-      INNER JOIN productos_unidades ON productos.id = productos_unidades.id_producto
-      LEFT JOIN fam_gastos ON familias.id_familia_gasto=fam_gastos.id_fam
-      WHERE productos_unidades.id_unidades=$idUnidad $familia $linea $tipo $condFamGasto
+      $query = "SELECT
+                  productos.id AS id,
+                  productos.clave AS clave,
+                  productos.concepto AS concepto,
+                  IFNULL(productos.descripcion,'') AS descripcion,
+                  productos.id_familia AS id_familia,
+                  familias.descripcion AS familia,
+                  productos.id_linea AS id_linea,
+                  lineas.descripcion AS linea,
+                  productos.costo AS costo,
+                  productos_unidades.ultimo_precio_compra AS precio,
+                  familias.tallas AS verifica_talla,
+                  familias.id_familia_gasto,
+                  fam_gastos.descr AS familia_gasto,
+                  IFNULL(gastos_clasificacion.id_clas, 0) id_clas,
+                  IFNULL(gastos_clasificacion.descr, '') as clasificacion
+                FROM productos
+                INNER JOIN familias ON productos.id_familia = familias.id
+                INNER JOIN lineas ON productos.id_linea = lineas.id
+                INNER JOIN productos_unidades ON productos.id = productos_unidades.id_producto
+                LEFT JOIN fam_gastos ON familias.id_familia_gasto=fam_gastos.id_fam
+                LEFT JOIN gastos_clasificacion ON productos.id_clas = gastos_clasificacion.id_clas
+                WHERE productos_unidades.id_unidades=$idUnidad $familia $linea $tipo $condFamGasto
 
-      UNION ALL
+                UNION ALL
 
-      SELECT
-      productos.id AS id,
-      productos.clave AS clave,
-      productos.concepto AS concepto,
-      IFNULL(productos.descripcion,'') AS descripcion,
-      productos.id_familia AS id_familia,
-      familias.descripcion AS familia,
-      productos.id_linea AS id_linea,
-      lineas.descripcion AS linea,
-      productos.costo AS costo,
-      0 AS precio,
-      familias.tallas AS verifica_talla,
-      familias.id_familia_gasto,
-      fam_gastos.descr AS familia_gasto
-      FROM productos
-      INNER JOIN familias ON productos.id_familia = familias.id
-      INNER JOIN lineas ON productos.id_linea = lineas.id
-      INNER JOIN productos prod ON productos.id = prod.equivalente_usado
-      LEFT JOIN fam_gastos ON familias.id_familia_gasto=fam_gastos.id_fam
-      LEFT JOIN productos_unidades ON productos.id = productos_unidades.id_producto
-      WHERE productos_unidades.id IS NULL $familia $linea $tipo $condFamGasto
+                SELECT
+                  productos.id AS id,
+                  productos.clave AS clave,
+                  productos.concepto AS concepto,
+                  IFNULL(productos.descripcion,'') AS descripcion,
+                  productos.id_familia AS id_familia,
+                  familias.descripcion AS familia,
+                  productos.id_linea AS id_linea,
+                  lineas.descripcion AS linea,
+                  productos.costo AS costo,
+                  0 AS precio,
+                  familias.tallas AS verifica_talla,
+                  familias.id_familia_gasto,
+                  fam_gastos.descr AS familia_gasto,
+                  IFNULL(gastos_clasificacion.id_clas, 0) id_clas,
+                  IFNULL(gastos_clasificacion.descr, '') as clasificacion
+                FROM productos
+                INNER JOIN familias ON productos.id_familia = familias.id
+                INNER JOIN lineas ON productos.id_linea = lineas.id
+                INNER JOIN productos prod ON productos.id = prod.equivalente_usado
+                LEFT JOIN fam_gastos ON familias.id_familia_gasto=fam_gastos.id_fam
+                LEFT JOIN gastos_clasificacion ON productos.id_clas = gastos_clasificacion.id_clas
+                LEFT JOIN productos_unidades ON productos.id = productos_unidades.id_producto
+                WHERE productos_unidades.id IS NULL $familia $linea $tipo $condFamGasto
+                ";
 
-      ");
+      // echo $query;
+      // exit();
+
+      $resultado = $this->link->query($query);
       return query2json($resultado);
 
     }

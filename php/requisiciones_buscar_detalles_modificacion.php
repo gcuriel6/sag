@@ -33,6 +33,8 @@
                 'familia'=>$detalle['familia'],
                 'id_familia_gasto'=>$detalle['id_familia_gasto'],
                 'familia_gasto'=>$detalle['familia_gasto'],
+                'id_clas'=>$detalle['id_clas'],
+                'clasificacion'=>$detalle['clasificacion'],
                 'verifica_talla'=>$detalle['verifica_talla'],  
                 'tallas'=>$modeloTallas->obtenerTallasDetalle($detalle['id'], 1)
             ]);

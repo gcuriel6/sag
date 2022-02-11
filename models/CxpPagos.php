@@ -419,6 +419,9 @@ class CxpPagos
       $tipoCuenta = $datos['tipoCuenta'];
       $fechaAplicacion = $datos['fechaAplicacion'];
 
+      // print_r($registros);
+      // exit();
+
       for($i=1;$i<=$registros[0];$i++){
 
         $id = $registros[$i]['id'];
@@ -428,8 +431,7 @@ class CxpPagos
         $rutaXml = $registros[$i]['rutaXml'];
         $rutaPdf = $registros[$i]['rutaPdf'];
 
-        if($tipo == 'gasto')
-        {
+        if($tipo == 'gasto'){
           //NJES Jan/17/01/2020 se busca el id_clasificacion_gasto del gasto para guardarlo en deudores_diversos
           $busqueda="SELECT a.id_unidad_negocio,a.id_sucursal,a.id_area,a.id_departamento,a.id_familia,a.id_clasificacion,a.fecha,a.id_trabajador AS id_empleado,
                       IF(a.id_trabajador=0,a.nombre,CONCAT(TRIM(b.nombre),' ',TRIM(b.apellido_p),' ',TRIM(b.apellido_m))) AS empleado,a.fecha_aplicacion_presupuestos
@@ -494,8 +496,7 @@ class CxpPagos
             $verifica = 0;
             break;
           }
-        }else if($tipo == 'viatico')
-        {
+        }else if($tipo == 'viatico'){
           //-->NJES Jan/17/2020 buscar id_clasificacion_gasto de viatico para insertarlo en movimientos_presupuesto
           $busqueda="SELECT a.id_unidad_negocio,a.id_sucursal,a.id_area,a.id_departamento,a.id_familia_gasto,
                       a.id_clasificacion_gasto,
@@ -506,8 +507,7 @@ class CxpPagos
                       WHERE a.id=".$id;
           $resultC = mysqli_query($this->link, $busqueda) or die(mysqli_error());
   
-          if($resultC)
-          {
+          if($resultC){
             $datosC=mysqli_fetch_array($resultC);
             $idUnidadNegocio=$datosC['id_unidad_negocio']; 
             $idSucursal=$datosC['id_sucursal'];
@@ -544,12 +544,10 @@ class CxpPagos
                         );
 
             
-            if($i == 1)
-            {
+            if($i == 1){
               $verifica = $this -> guardarDeudorDiverso($arr);
             }else{
-              if($verifica == 1)
-              {
+              if($verifica == 1){
                 $verifica = $this -> guardarDeudorDiverso($arr);
               }else{
                 $verifica = 0;
@@ -560,21 +558,30 @@ class CxpPagos
             $verifica = 0;
             break;
           }
-        }
-        else
-        { //es cxp_viatico o cxp_oc (registros generados del protal de proveedores)
+        }else{ //es cxp_viatico o cxp_oc (registros generados del protal de proveedores)
 
           //-->NJES Jan/20/2020 buscar id_clasificacion_gasto de cxp que se genero de un viatico para insertarlo en movimientos_presupuesto
-          $busqueda="SELECT a.id,a.no_factura,a.fecha,a.id_unidad_negocio,a.id_proveedor,
-                      a.id_sucursal,a.id_area,a.id_departamento,a.concepto,a.id_empleado,a.id_viatico,a.id_familia_gasto,id_clasificacion_gasto,
-                      IF(a.id_empleado=0,a.nombre_empleado,CONCAT(TRIM(b.nombre),' ',TRIM(b.apellido_p),' ',TRIM(b.apellido_m))) AS empleado
+          $busqueda="SELECT
+                        a.id,
+                        a.no_factura,
+                        a.fecha,
+                        a.id_unidad_negocio,
+                        a.id_proveedor,
+                        a.id_sucursal,
+                        a.id_area,
+                        a.id_departamento,
+                        a.concepto,
+                        a.id_empleado,
+                        a.id_viatico,
+                        a.id_familia_gasto,
+                        a.id_clasificacion_gasto,
+                        IF(a.id_empleado=0,a.nombre_empleado,CONCAT(TRIM(b.nombre),' ',TRIM(b.apellido_p),' ',TRIM(b.apellido_m))) AS empleado
                       FROM cxp a
                       LEFT JOIN trabajadores b ON a.id_empleado=b.id_trabajador
                       WHERE a.id=".$id;
           $resultC = mysqli_query($this->link, $busqueda) or die(mysqli_error());
   
-          if($resultC)
-          {
+          if($resultC){
             $datosC=mysqli_fetch_array($resultC);
             $idUnidadNegocio=$datosC['id_unidad_negocio']; 
             $idSucursal=$datosC['id_sucursal'];
@@ -591,37 +598,49 @@ class CxpPagos
             $idClasificacionGasto=$datosC['id_clasificacion_gasto'];
             $idOrdenServicio = 0;
 
-            if($tipo == 'cxp_os')
-            {
+            if($tipo == 'cxp_os' || $tipo == 'cxp_oc'){
+              $busquedaReq = "SELECT 
+                                cxp.id_entrada_compra AS id_ea,
+                                orden_compra.id AS id_oc,
+                                requisiciones.id AS id_requi,
+                                requisiciones.id_familia_gasto AS id_fam
+                              FROM cxp 
+                              INNER JOIN almacen_e ON cxp.id_entrada_compra = almacen_e.id
+                              INNER JOIN orden_compra ON almacen_e.id_oc = orden_compra.id
+                              INNER JOIN requisiciones ON orden_compra.ids_requisiciones = requisiciones.id
+                              WHERE cxp.id = $id ";
 
-                  $busquedaReq = "
-                        SELECT 
-                        cxp.id_entrada_compra AS id_ea,
-                        orden_compra.id AS id_oc,
-                        requisiciones.id AS id_requi,
-                        requisiciones.id_familia_gasto AS id_fam
-                        FROM cxp 
-                        INNER JOIN almacen_e ON cxp.id_entrada_compra = almacen_e.id
-                        INNER JOIN orden_compra ON almacen_e.id_oc = orden_compra.id
-                        INNER JOIN requisiciones ON orden_compra.ids_requisiciones = requisiciones.id
-                        WHERE cxp.id = $id ";
+              $resultReq = mysqli_query($this->link, $busquedaReq) or die(mysqli_error());
 
-                  $resultReq = mysqli_query($this->link, $busquedaReq) or die(mysqli_error());
+              if($resultReq){
+                $dReq = mysqli_fetch_array($resultReq);
+                $id_familia_gasto=  $dReq['id_fam'];
+                $idOrdenServicio = $dReq['id_requi'];
+              }else{
+                $verifica = false;
+                break;
+              }            
+            }
 
-                  if($resultReq)
-                  {
+            if($tipo == 'cxp_ar'){
+              $busquedaReq = "SELECT 
+                                cxp.id_entrada_compra AS id_ea,
+                                requisiciones.id AS id_requi,
+                                requisiciones.id_familia_gasto AS id_fam
+                              FROM cxp
+                              INNER JOIN requisiciones ON cxp.id_requisicion = requisiciones.id
+                              WHERE cxp.id = $id ";
 
-                        $dReq = mysqli_fetch_array($resultReq);
-                        $id_familia_gasto=  $dReq['id_fam'];
-                        $idOrdenServicio = $dReq['id_requi'];
+              $resultReq = mysqli_query($this->link, $busquedaReq) or die(mysqli_error());
 
-                  }
-                  else
-                  {
-                        $verifica = false;
-                        break;
-                  }
-            
+              if($resultReq){
+                $dReq = mysqli_fetch_array($resultReq);
+                $id_familia_gasto=  $dReq['id_fam'];
+                $idOrdenServicio = $dReq['id_requi'];
+              }else{
+                $verifica = false;
+                break;
+              }  
             }
 
             $arr=array('id_cxp'=>$id,
@@ -650,14 +669,11 @@ class CxpPagos
                         'rutaPdf'=>$rutaPdf,
                         'idProveedor'=>$idProveedor,
                         'fechaAplicacion'=>$fechaAplicacion,
-                        'idOrdenServicio'=>$idOrdenServicio
-                        );
+                        'idOrdenServicio'=>$idOrdenServicio);
 
-            if($i == 1)
+            if($i == 1){
               $verifica = $this -> guardarPagoCxP($arr);
-            else
-            {
-
+            }else{
               if($verifica == 1)
                 $verifica = $this -> guardarPagoCxP($arr);
               else
@@ -665,12 +681,8 @@ class CxpPagos
                 $verifica = 0;
                 break;
               }
-
             }
-
-          }
-          else
-          {
+          }else{
             $verifica = 0;
             break;
           }
@@ -956,7 +968,10 @@ class CxpPagos
     }//- fin function guardarGastoCajaChica
 
     function guardarPagoCxP($datos){
-     
+
+      // print_r($datos);
+      // exit();
+    
       $verifica = 0;
 
       $idCxP = $datos['id_cxp'];
@@ -990,56 +1005,134 @@ class CxpPagos
                   VALUES ('$idCxP','$idProveedor','$factura','$idConcepto','$claveConcepto','$fechaAplicacion','$importe','$referencia','$idBanco','$idCuentaBanco','L','$id_viatico','$idUnidadNegocio','$idSucursal','$idDepartamento','$idArea','$idFamiliaGasto','$idClasificacionGasto')";
       $result = mysqli_query($this->link, $query) or die(mysqli_error());
       
-      if($result) 
-      {
+      if($result){
         $queryA="UPDATE cxp SET estatus='L' WHERE id=".$idCxP;
         $resultA = mysqli_query($this->link, $queryA) or die(mysqli_error());
 
-        if($resultA)
-        {
-          if($tipo == 'cxp_viatico' || $tipo == 'cxp_os')
-          {
+        if($resultA){
+          // if($tipo == 'cxp_viatico' || $tipo == 'cxp_os')
+          // {
             //-->NJES June/19/2020 Se quita el area y departamento al hacer la afectación a presupuesto egreso (movimientos_presupuesto)
             //se crea un modelo y funcion para afectar el presupuesto egresos y no se encuentre el insert en varios archivos
-            $afectarPresupuesto = new MovimientosPresupuesto();
+          $afectarPresupuesto = new MovimientosPresupuesto();
 
-            $arrDatosMP = array(
-              'idUnidadNegocio' => $idUnidadNegocio,
-              'idSucursal' => $idSucursal,
-              'idFamiliaGasto' => $idFamiliaGasto,
-              'clasificacionGasto' => $idClasificacionGasto,
-              'total' => $importe,
-              'tipo' => 'C',
-              'idGasto' => $id_gasto,
-              'idViatico' => $id_viatico
-            );
+          switch($tipo){
+            case "cxp_oc":
+              $separado = explode(" ",$referencia);
+              $masSeparado=explode("-", $separado[0]);
+              $idOrdenCompra =  $masSeparado[1];
 
-            //---CUANDO SE LIQUIDA UN PAGO POR VIATICO GENERA SU MOVIMIENTO_PRESUPUESTO--
-            $resultMP = $afectarPresupuesto->guardarMovimientoPresupuesto($arrDatosMP); 
-            
-            if($resultMP > 0)
-            {
-              if($tipoCuenta == 0)
-              {
-                $verifica = $this -> guardarMovimientosBancos($datos);
-              }else{
-                $verifica = $this -> guardarGastoCajaChica($datos);
+              $queryOC = "SELECT sum(cantidad * precio) monto, pr.id_clas, fa.id_familia_gasto id_familia
+                          FROM almacen_d ad
+                          inner join productos pr ON ad.id_producto = pr.id 
+                          INNER JOIN almacen_e ae ON ae.id = ad.id_almacen_e 
+                          INNER JOIN familias fa ON pr.id_familia = fa.id
+                          INNER JOIN cxp ON cxp.id_entrada_compra = ae.id
+                          where ae.id_oc = (SELECT id FROM orden_compra WHERE folio = '$idOrdenCompra') 
+                          AND cxp.id_cxp = $idCxP 
+                          group by pr.id_clas";
+
+              $resultOC = mysqli_query($this->link, $queryOC) or die(mysqli_error());
+
+              while($row = mysqli_fetch_array($resultOC)) {  
+
+                $id_clas = $row["id_clas"];
+                $id_fam = $row["id_familia"];
+                $monto = $row["monto"];
+
+                $arrDatosMP = array(
+                  'idUnidadNegocio' => $idUnidadNegocio,
+                  'idSucursal' => $idSucursal,
+                  'idFamiliaGasto' => $id_fam,
+                  'clasificacionGasto' => $id_clas,
+                  'total' => $monto,
+                  'tipo' => 'C',
+                  'idGasto' => $id_gasto,
+                  'idViatico' => $id_viatico,
+                  'fecha'=>$fechaAplicacion
+                );
+                
+                $resultMP = $afectarPresupuesto->guardarMovimientoPresupuesto($arrDatosMP); 
               }
 
-            }else{
-              $verifica = 0;
-            }
+              break;
+            case "cxp_ar":
+              $queryOC = "SELECT sum(r.total) monto, pr.id_clas, fa.id_familia_gasto id_familia 
+                          FROM requisiciones_d rd 
+                          inner join productos pr ON rd.id_producto = pr.id
+                          INNER JOIN requisiciones r ON rd.id_requisicion = r.id
+                          INNER JOIN familias fa ON pr.id_familia = fa.id 
+                          inner join cxp cxp ON cxp.id_requisicion=r.id
+                          where r.id = $idOrdenServicio 
+                          group by pr.id_clas;";
+
+              $resultOC = mysqli_query($this->link, $queryOC) or die(mysqli_error());
+              $cantidad = mysqli_num_rows($resultOC);
+
+              $monto = $importe / $cantidad;
+
+              while($row = mysqli_fetch_array($resultOC)) {  
+
+                // print_r($row);
+                // continue;
+
+                $id_clas = $row["id_clas"];
+                $id_fam = $row["id_familia"];
+
+                $arrDatosMP = array(
+                  'idUnidadNegocio' => $idUnidadNegocio,
+                  'idSucursal' => $idSucursal,
+                  'idFamiliaGasto' => $id_fam,
+                  'clasificacionGasto' => $id_clas,
+                  'total' => $monto,
+                  'tipo' => 'C',
+                  'idGasto' => $id_gasto,
+                  'idViatico' => $id_viatico,
+                  'fecha'=>$fechaAplicacion
+                );
+                
+                $resultMP = $afectarPresupuesto->guardarMovimientoPresupuesto($arrDatosMP); 
+              }
+              break;
+            default:
+                $arrDatosMP = array(
+                  'idUnidadNegocio' => $idUnidadNegocio,
+                  'idSucursal' => $idSucursal,
+                  'idFamiliaGasto' => $idFamiliaGasto,
+                  'clasificacionGasto' => $idClasificacionGasto,
+                  'total' => $importe,
+                  'tipo' => 'C',
+                  'idGasto' => $id_gasto,
+                  'idViatico' => $id_viatico,
+                  'fecha'=>$fechaAplicacion
+                );
+                
+                $resultMP = $afectarPresupuesto->guardarMovimientoPresupuesto($arrDatosMP); 
+              break;
           }
-          else
-          { //-->NJES Feb/06/2020 Cuando es un cxp de orden de compra, anticipo requisición no afectar movimiento presupuesto porque ya se afecto al generar la recepción de mercancia
-            
-            if($tipoCuenta == 0)
-            {
+
+          
+          
+          if($resultMP > 0){
+            if($tipoCuenta == 0){
               $verifica = $this -> guardarMovimientosBancos($datos);
             }else{
               $verifica = $this -> guardarGastoCajaChica($datos);
             }
+          }else{
+            $verifica = 0;
           }
+          // }
+          // else
+          // { //-->NJES Feb/06/2020 Cuando es un cxp de orden de compra, anticipo requisición no afectar movimiento presupuesto porque ya se afecto al generar la recepción de mercancia
+            
+          //   if($tipoCuenta == 0)
+          //   {
+          //     $verifica = $this -> guardarMovimientosBancos($datos);
+          //   }else{
+          //     $verifica = $this -> guardarGastoCajaChica($datos);
+          //   }
+          // }
 
         }else{
           $verifica = 0;

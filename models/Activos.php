@@ -1458,7 +1458,8 @@ class Activos
     }
 
     function verificarResponsable($activo){
-      $query = "SELECT COUNT(id_activo) AS total FROM activos_responsables WHERE id_activo=$activo";
+      $query = "SELECT COUNT(id_activo) AS total FROM activos_responsables WHERE id_activo=$activo AND fecha_fin=0000-00-00";
+
       $result = mysqli_query($this->link,$query) or die(mysqli_error());
       //if ($result) {
         return query2json($result);
@@ -1549,21 +1550,20 @@ class Activos
     // @param entrada: ID activo int, Arreglo Responsable array()
     // @output: int
     function activosResponsableReasignar($activo, $arregloRes){
-        $verifica = 0;
-        $this->link->begin_transaction();
-        $this->link->query("START TRANSACTION;");
+      $verifica = 0;
+      $this->link->begin_transaction();
+      $this->link->query("START TRANSACTION;");
 
-        $verifica =$this -> actualizarActivoResponsable($activo, $arregloRes);
+      $verifica =$this -> actualizarActivoResponsable($activo, $arregloRes);
 
-        if($verifica == 1){
-          $this->link->query("commit;");
-        }
-        else{
-          $this->link->query('rollback;');
-        }
+      if($verifica == 1){
+        $this->link->query("commit;");
+      }
+      else{
+        $this->link->query('rollback;');
+      }
 
-        return $verifica;
-
+      return $verifica;
     }//- fin function
 
     /**
@@ -1574,52 +1574,53 @@ class Activos
       ---PARA GURADAR LOS PDFS CORRESPONDIENTES 
     */
     function actualizarActivoResponsable($activo, $arregloRes){
-        $verifica=0;
-        $_SESSION["id_activo"]=$activo;
-        // Arreglo Formulario Responsable
-        $unidad = $arregloRes['unidad'];
-        $sucursal = $arregloRes['sucursal'];
-        $area = $arregloRes['area'];
-        $dpto = $arregloRes['dpto'];
-        $no_empleado = (isset($arregloRes['no_empleado']))?$arregloRes['no_empleado']:0;
-        $no_cliente = (isset($arregloRes['no_cliente']))?$arregloRes['no_cliente']:0;
-        $vehNoLicencia = (isset($arregloRes['vehNoLicencia']))?$arregloRes['vehNoLicencia']:'';
-        $vehVigenciaLicencia = (isset($arregloRes['vehVigenciaLicencia']))?$arregloRes['vehVigenciaLicencia']:'';
-        $idUsuario = $_SESSION['id_usuario'];
-        
-        $cuip = isset($arregloRes['cuip']) ? $arregloRes['cuip'] : '';
-        $responsable_externo = isset($datos['responsable_externo']) ? $datos['responsable_externo'] : '';
 
-        $query = "SELECT id FROM activos_responsables WHERE id_activo=$activo AND fecha_fin=0000-00-00";
-        $result = mysqli_query($this->link, $query) or die(mysqli_error());
-        $id = mysqli_fetch_array($result);
-        $id = $id['id'];
+      $verifica=0;
+      $_SESSION["id_activo"]=$activo;
+      // Arreglo Formulario Responsable
+      $unidad = $arregloRes['unidad'];
+      $sucursal = $arregloRes['sucursal'];
+      $area = $arregloRes['area'];
+      $dpto = $arregloRes['dpto'];
+      $no_empleado = (isset($arregloRes['no_empleado']))?$arregloRes['no_empleado']:0;
+      $no_cliente = (isset($arregloRes['no_cliente']))?$arregloRes['no_cliente']:0;
+      $vehNoLicencia = (isset($arregloRes['vehNoLicencia']))?$arregloRes['vehNoLicencia']:'';
+      $vehVigenciaLicencia = (isset($arregloRes['vehVigenciaLicencia']))?$arregloRes['vehVigenciaLicencia']:'';
+      $idUsuario = $_SESSION['id_usuario'];
+      
+      $cuip = isset($arregloRes['cuip']) ? $arregloRes['cuip'] : '';
+      $responsable_externo = isset($datos['responsable_externo']) ? $datos['responsable_externo'] : '';
 
-        if ($result){
-          $query2 = "UPDATE activos_responsables SET fecha_fin=CURDATE() WHERE id = $id";
-          $result2 = mysqli_query($this->link, $query2) or die(mysqli_error());
+      $query = "SELECT id FROM activos_responsables WHERE id_activo=$activo AND fecha_fin=0000-00-00";
+      $result = mysqli_query($this->link, $query) or die(mysqli_error());
+      $id = mysqli_fetch_array($result);
+      $id = $id['id'];
 
-          if ($result2) {
-            $query3 = "INSERT INTO activos_responsables (id_unidad_negocio, id_sucursal, id_area, id_departamento, id_trabajador, id_cliente, id_activo, fecha_inicio, no_licencia, vigencia_licencia, responsable,id_usuario_captura,cuip,responsable_externo) 
-                        VALUES ($unidad,$sucursal,$area,$dpto,$no_empleado, $no_cliente, $activo, NOW(), '$vehNoLicencia', '$vehVigenciaLicencia', 1,'$idUsuario','$cuip','$responsable_externo')";
-            $result3 = mysqli_query($this->link, $query3) or die(mysqli_error());
+      if ($result){
+        $query2 = "UPDATE activos_responsables SET fecha_fin=CURDATE() WHERE id = $id";
+        $result2 = mysqli_query($this->link, $query2) or die(mysqli_error());
 
-            if ($result3){
-              $verifica = 1;
+        if ($result2) {
+          $query3 = "INSERT INTO activos_responsables (id_unidad_negocio, id_sucursal, id_area, id_departamento, id_trabajador, id_cliente, id_activo, fecha_inicio, no_licencia, vigencia_licencia, responsable,id_usuario_captura,cuip,responsable_externo) 
+                      VALUES ($unidad,$sucursal,$area,$dpto,$no_empleado, $no_cliente, $activo, NOW(), '$vehNoLicencia', '$vehVigenciaLicencia', 1,'$idUsuario','$cuip','$responsable_externo')";
+          $result3 = mysqli_query($this->link, $query3) or die(mysqli_error());
 
-            }else{
-              $verifica = 0;
-            }
-          }
-          else {
-            $verifica=0;
+          if ($result3){
+            $verifica = 1;
+
+          }else{
+            $verifica = 0;
           }
         }
         else {
-          $verifica = 0;
+          $verifica=0;
         }
+      }
+      else {
+        $verifica = 0;
+      }
 
-        return $verifica;
+      return $verifica;
     }//- fin function
 
     // @param entrada: Unidad Negocio int, No, empleado int, No. Serie int

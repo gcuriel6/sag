@@ -576,8 +576,14 @@ if (isset($_SESSION['usuario']) && $_SESSION['usuario']!='') {
 
 		var checkSession;
 		$(function(){
+			setTimeout(() => {
+				let src = $("body").find("iframe").attr("src");
+
+				if(src != "fr_login.php"){
+					checkSession = setInterval(checkForSession, 90000); //GCM se cambia sesion a menos tiempo
+				}
+			}, 1000);
 			
-			checkSession = setInterval(checkForSession, 90000); //GCM se cambia sesion a menos tiempo
 			// checkSession = setInterval(checkForSession, 900000); //-->cada 15 minutos verifica session  
 			//checkSession = setInterval(checkForSession, 120000);
 

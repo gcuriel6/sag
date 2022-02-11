@@ -22,8 +22,7 @@
 		$numS=mysqli_num_rows($resultS);
 		if($numS > 0){
 
-			for($K=0;$k<$numS;$k++){
-				$rowS=mysqli_fetch_array($resultS);
+			while($rowS=mysqli_fetch_array($resultS)){
 				$idSucursal = $rowS['id_sucursal'];
 				/***OBTNENGO TODO EL MENU */
 				$raiz = "GINTHERCORP";
@@ -33,9 +32,7 @@
 
 				$arra2=[];
 				$cont2=0;
-				for($i=0; $i < $num ; $i++) {
-
-					$row=mysqli_fetch_array($result);
+				while($row=mysqli_fetch_array($result)) {
 					$sistema = $row['sistema'];
 					/***BERIFICO LOS PERMISOS DE USUSRIO EN LA UNIDAD DE NEGOCIO POR CADA SUCURSAL */
 					$query2 = "SELECT permiso 
@@ -43,11 +40,13 @@
 					WHERE id_usuario = ".$idUsuario." AND pantalla = '$sistema' AND  id_unidad_negocio=".$idUnidadNegocio." AND id_sucursal=".$idSucursal;
 					$result2=mysqli_query($link, $query2);
 					$row2=mysqli_fetch_array($result2);
-					$per_usuario = $row2['permiso'];
-					/** VERIFICO A QUE OPCIONES TIENE DEL MENU SEGUN LA SECURSAL Y LO AGREGO AL ARREGLO */
-					$aux = (int)$row['comando'] & (int)$per_usuario;
-					if($aux > 0 && search($arr, 'hijo',$row['menuid'])==false){
-						$arr[$cont++]=array('padre'=>$row['sistema'],'hijo'=>$row['menuid'],'permiso'=>$per_usuario,'alt'=>$row['alt'],'icono'=>$row['icono']);
+					if(isset($row2['permiso'])){
+						$per_usuario = $row2['permiso'];
+						/** VERIFICO A QUE OPCIONES TIENE DEL MENU SEGUN LA SECURSAL Y LO AGREGO AL ARREGLO */
+						$aux = (int)$row['comando'] & (int)$per_usuario;
+						if($aux > 0 && search($arr, 'hijo',$row['menuid'])==false){
+							$arr[$cont++]=array('padre'=>$row['sistema'],'hijo'=>$row['menuid'],'permiso'=>$per_usuario,'alt'=>$row['alt'],'icono'=>$row['icono']);
+						}
 					}
 				}
 			}

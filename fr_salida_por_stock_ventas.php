@@ -735,12 +735,27 @@ session_start();
 
                             var producto = data[i];
 
-                            var html = "<tr class='tr_producto' alt='" + producto.id + "'  alt2='" + producto.concepto+ "' alt3='" + producto.id_familia + "' alt4='" + producto.familia + "' alt5='" + producto.id_linea + "' alt6='" + producto.linea + "' alt7='" + producto.costo + "' alt8='" + producto.descripcion + "' alt9='" + producto.existencia + "' alt10='"+producto.precio_venta+"' id_fam='"+producto.id_familia_gasto+"' servicio='"+producto.servicio+"'>";
+                            /*
+                            GCM - 31/01/2022 - Se agregan variables existenciaTexto y existenciaCantidad por que si es servicio no deja agregar mas de 1, ya que el query retorna 0 en existencia
+                            */
+
+                            let existenciaTexto;
+                            let existenciaCantidad;
+
+                            if(producto.servicio == 0){
+                                existenciaTexto = producto.existencia;
+                                existenciaCantidad = producto.existencia;
+                            }else{
+                                existenciaTexto = "Servicio";
+                                existenciaCantidad = 999999;
+                            }
+
+                            var html = "<tr class='tr_producto' alt='" + producto.id + "'  alt2='" + producto.concepto+ "' alt3='" + producto.id_familia + "' alt4='" + producto.familia + "' alt5='" + producto.id_linea + "' alt6='" + producto.linea + "' alt7='" + producto.costo + "' alt8='" + producto.descripcion + "' alt9='" + existenciaCantidad + "' alt10='"+producto.precio_venta+"' id_fam='"+producto.id_familia_gasto+"' servicio='"+producto.servicio+"'>";
                             html += "<td data-label='Familia'>" + producto.familia + "</td>";
                             html += "<td data-label='Línea'>" + producto.linea + "</td>";
                             html += "<td data-label='Concepto'>" + producto.concepto + "</td>";
                             html += "<td align='right' data-label='Precio'>" + formatearNumero(producto.costo) +  "</td>";
-                            html +="<td data-label='Existencia'>"+ producto.existencia +"</td>";
+                            html +="<td data-label='Existencia'>"+ existenciaTexto +"</td>";
                             html += "</tr>";
 
                             $('#t_productos tbody').append(html);

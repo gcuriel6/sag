@@ -133,13 +133,21 @@ class Familias
           $condicionEstatus=' WHERE a.inactiva=0';
         }
 
-        $resultado = $this->link->query("SELECT a.id,a.clave,a.descripcion,IF(a.tipo=1,'Gasto',IF(a.tipo=3,'Stock',
-                                         IF(a.tipo=2,'Mantenimiento',IF(a.tipo=0,'Activo Fijo',''))))AS tipo,
-                                         IF(a.tallas=0,'No','Si') AS tallas,a.inactiva,a.id_familia_gasto,IFNULL(b.descr,'') AS familia_gasto
-                                         FROM familias a
-                                         LEFT JOIN fam_gastos b ON a.id_familia_gasto=b.id_fam
-                                         $condicionEstatus
-                                         ORDER BY a.clave");
+        $query = "SELECT
+                    a.id,
+                    a.clave,
+                    a.descripcion,
+                    IF(a.tipo=1,'Gasto',IF(a.tipo=3,'Stock', IF(a.tipo=2,'Mantenimiento',IF(a.tipo=0,'Activo Fijo',''))))AS tipo,
+                    IF(a.tallas=0,'No','Si') AS tallas,
+                    a.inactiva,
+                    a.id_familia_gasto,
+                    IFNULL(b.descr,'') AS familia_gasto
+                  FROM familias a
+                  LEFT JOIN fam_gastos b ON a.id_familia_gasto=b.id_fam
+                  $condicionEstatus
+                  ORDER BY a.clave";
+
+        $resultado = $this->link->query($query);
         return query2json($resultado);
 
       }//- fin function buscarFamilias
