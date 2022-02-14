@@ -142,6 +142,15 @@ session_start();
                                     </div>
                                 </div>
                             </div>
+
+                            <div class="row">
+                                <div class="col-md-12">
+                                    <input type="checkbox" id="ch_externo" name="ch_externo" value=""> Externo
+                                </div>
+                                <div class="col-md-12">
+                                    <input type="text" id="i_empleado_externo" name="i_empleado_externo" class="form-control form-control-sm" autocomplete="off" disabled>
+                                </div>
+                            </div>
                         </div>
                     </div>
                 </form>
@@ -1097,6 +1106,7 @@ session_start();
                 //-->NJES Feb/10/2020 se toma el area y departamento del empleado para guardar informacion completa al afectar presupuesto
                 'idDepartamento':$('#i_empleado').attr('depto'),
                 'idArea':$('#i_empleado').attr('area'),
+                'empleadoExterno':$("#i_empleado_externo").val(),
                 'detalle':obtenerPartidas()
             };
 
@@ -1242,6 +1252,15 @@ session_start();
                         $('#i_num_movimiento').val(data[0].folio);
                         $('#i_fecha').val(data[0].fecha);
                         $('#i_empleado').attr({'alt':data[0].id_empleado,'depto':data[0].id_departamento,'area':data[0].id_area}).val(data[0].empleado);
+                        
+                        if(data[0].nombreExterno != null && data[0].nombreExterno != ""){
+                            $('#ch_externo').prop( "checked", true );
+                            $('#ch_externo').trigger("change");
+                            
+                            $("#i_empleado_externo").val(data[0].nombreExterno);
+                        }
+                        
+                        $("#i_empleado_externo").val();
 
                         $('#s_id_unidades').val(data[0].id_unidad_negocio);
                         $("#s_id_unidades").select2({
@@ -1341,6 +1360,8 @@ session_start();
             $('#form_partidas').validationEngine('hide');
             $('#form_partidas input').prop('disabled',false);
             $('#b_imprimir').prop('disabled',true);
+            $("#i_empleado_externo").val("");
+            $('#ch_externo').prop("disabled", false);
 
         }
 
@@ -1367,6 +1388,17 @@ session_start();
 
             return bandera; 
         }
+
+        $('#ch_externo').change(function(){
+            $('#i_empleado').val('');
+            if($("#ch_externo").is(':checked')){
+                $('#i_empleado_externo').addClass('validate[required]').prop('disabled',false);
+                $('#i_empleado').removeClass('validate[required]').prop('disabled',true);
+            }else{
+                $('#i_empleado_externo').removeClass('validate[required]').prop('disabled',true);
+                $('#i_empleado').addClass('validate[required]').prop('disabled',false);
+            }
+        });
 
     });
 

@@ -900,11 +900,11 @@
                       <thead>
                         <tr class="renglon">
                           
-                          <th scope="col">Clasificación</th>
-                          <th scope="col">Familia</th>
-                          <th scope="col">Línea</th>
-                          <th scope="col">Concepto</th>
-                          <th scope="col">Precio</th>
+                            <th scope="col">Familia</th>
+                            <th scope="col">Clasificación</th>
+                            <th scope="col">Línea</th>
+                            <th scope="col">Concepto</th>
+                            <th scope="col">Precio</th>
 
                         </tr>
                       </thead>
@@ -1388,8 +1388,8 @@
                         //---MGFS 23-10-2019 se cambia precio por costo ya que el costo del producto siempre se va actualizar o del catalogo o entrada por cmpra
                         //-->NJES July/29/2020 se cambia para se tome el ultimo precio de compra del producto por unidad
                         var html = "<tr class='producto-partida' alt='" + producto.id + "' alt2='" + producto.concepto+ "' alt3='" + producto.id_familia + "' alt4='" + producto.familia + "' alt5='" + producto.id_linea + "' alt6='" + producto.linea + "' alt7='" + producto.precio + "' alt8='" + producto.verifica_talla + "'   alt9='" + producto.id_familia_gasto + "' id_clas='"+producto.id_clas+"' clasificacion='"+producto.clasificacion+"'>";
-                        html += "<td>" + producto.clasificacion + "</td>";
                         html += "<td>" + producto.familia + "</td>";
+                        html += "<td>" + producto.clasificacion + "</td>";                        
                         html += "<td>" + producto.linea + "</td>";
                         html += "<td>" + producto.concepto + "</td>";
                         html += "<td align='right'>" + formatearNumero(producto.precio) +  "</td>";

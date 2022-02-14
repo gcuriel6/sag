@@ -40,6 +40,7 @@ $query = "SELECT a.id,
             IFNULL(n.descr,'') AS sucursal_salida,
             a.id_cliente,
             o.nombre_comercial AS cliente,
+            a.nombre_empleado AS nombreExterno,
             CASE
                 WHEN a.clasificacion = 1 THEN 'Regalos a empleados del mes'
                 WHEN a.clasificacion = 2 THEN 'Regalos cumpleaños a oficiales'
@@ -96,6 +97,7 @@ $usuarioCaptura = $row['usuario_captura'];
 $usuario = $row['usuario']; 
 $cve_concepto = $row['cve_concepto'];  
 $sucursalSalida = $row['sucursal_salida'];  
+$nombreExterno = $row["nombreExterno"];
 
 //--> NJES October/29/2020 asignar empleado o cliente y clasificacion
 $id_cliente = $row['id_cliente'];
@@ -209,11 +211,19 @@ table td{
     ?>
 
     <?php //si tiene empleado se agrega
-    if($idTrabajador != 0){ 
+    if($idTrabajador != 0){
     ?>
     <tr>
         <td class="verde">Empleado</td>
         <td><?php echo $idTrabajador.' - '.$empleado;?></td>
+    </tr>
+    <?php
+    }
+    if($nombreExterno != "" && $nombreExterno != null){
+    ?>
+    <tr>
+        <td class="verde">Externo</td>
+        <td><?php echo $nombreExterno;?></td>
     </tr>
     <?php
     }
@@ -370,7 +380,7 @@ table td{
         </tr>
         <tr>
             <td width="370" align="center"><?php echo $usuarioCaptura;?></td>
-            <td width="390" align="center"><?php echo $empleado;?></td>
+            <td width="390" align="center"><?php echo $empleado == "" ? $nombreExterno: $empleado;?></td>
         </tr>
     </table>
 <?php }else{?>

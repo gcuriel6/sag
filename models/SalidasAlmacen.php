@@ -53,7 +53,6 @@ class SalidasAlmacen
         $verifica = 0;
         $teat = '*';
 
-
         $tipoSalida = $datos['tipoSalida'];
         $idSalida = $datos['idSalida'];
         $folio = $datos['folio'];
@@ -63,6 +62,7 @@ class SalidasAlmacen
         $idUsuario = $datos['idUsuario'];
         $noPartidas = $datos['noPartidas'];
         $usuario = $datos['usuario'];
+        $empleadoExterno = $datos["empleadoExterno"];
 
         $observacion = isset($datos['observacion']) ? $datos['observacion'] : '';
         $idProveedor = isset($datos['idProveedor']) ? $datos['idProveedor'] : 0;
@@ -82,14 +82,14 @@ class SalidasAlmacen
         $clasificacion = isset($datos['clasificacion']) ? $datos['clasificacion'] : '';
 
         //-- MGFS 21-01-2020 SE AGREGA ID AREA Y ID DEPARTAMENTO CUANDO ES SALIDA POR UNIFORME(S02)
-        if($tipoSalida=='S02')
-        {
+        if($tipoSalida=='S02'){
 
           $teat .= 'A';
 
-          $buscaDepto="SELECT id_depto 
-          FROM deptos 
-          WHERE des_dep='RECLUTAMIENTO, SELECCION Y CONTRATACION' AND id_sucursal=".$idSucursal;
+          $buscaDepto="SELECT id_depto
+                        FROM deptos
+                        WHERE des_dep='RECLUTAMIENTO, SELECCION Y CONTRATACION' AND id_sucursal=".$idSucursal;
+
           $resultDepto = mysqli_query($this->link, $buscaDepto) or die(mysqli_error());
           $rowDepto=mysqli_fetch_array($resultDepto);
 
@@ -102,21 +102,14 @@ class SalidasAlmacen
           //----117 - REAL SHINY para unidad de negocio 4
           //----115 - GUARDERIAS para unidad de negocio  12
           if($idUnidadNegocio == 1){
-
             $idClasificacion = 116;
-
           }elseif($idUnidadNegocio == 4){
-
             $idClasificacion = 117;
-
           }elseif($idUnidadNegocio==12){
-
             $idClasificacion = 115;
-
           }else{
             $idClasificacion = isset($datos['idClasificacion']) ? $datos['idClasificacion'] : 0;
-          }
-         
+          }         
         }
       
         $idVenta = isset($datos['idVenta']) ? $datos['idVenta'] : 0;
@@ -169,8 +162,8 @@ class SalidasAlmacen
           {
 
             $teat .= 'D';
-              $query = "INSERT INTO almacen_e (folio,cve_concepto,id_compania,id_unidad_negocio,id_sucursal,observacion,id_usuario_captura,usuario_captura,no_partidas,id_clasificacion,id_proveedor,id_trabajador,id_sucursal_destino,id_departamento,id_area,id_venta,folio_venta_stock,iva,id_unidad_negocio_destino,id_cliente,clasificacion) 
-                              VALUES ('$folio','$tipoSalida','$idUnidadNegocio','$idUnidadNegocio','$idSucursal','$observacion','$idUsuario','$usuario','$noPartidas','$idClasificacion','$idProveedor','$idEmpleado','$idSucursalDestino','$idDepartamento','$idArea','$idVenta','$folioVentaStock','$iva','$idUnidadNegocioDestino','$idCliente','$clasificacion')";
+              $query = "INSERT INTO almacen_e (folio,cve_concepto,id_compania,id_unidad_negocio,id_sucursal,observacion,id_usuario_captura,usuario_captura,no_partidas,id_clasificacion,id_proveedor,id_trabajador,id_sucursal_destino,id_departamento,id_area,id_venta,folio_venta_stock,iva,id_unidad_negocio_destino,id_cliente,clasificacion, nombre_empleado) 
+                              VALUES ('$folio','$tipoSalida','$idUnidadNegocio','$idUnidadNegocio','$idSucursal','$observacion','$idUsuario','$usuario','$noPartidas','$idClasificacion','$idProveedor','$idEmpleado','$idSucursalDestino','$idDepartamento','$idArea','$idVenta','$folioVentaStock','$iva','$idUnidadNegocioDestino','$idCliente','$clasificacion','$empleadoExterno')";
               $result = mysqli_query($this->link, $query) or die(mysqli_error());
               $idSalida = mysqli_insert_id($this->link);
                   
@@ -483,26 +476,27 @@ class SalidasAlmacen
       **/ 
     function buscarSalidasId($idSalida){
         $result = $this->link->query("SELECT a.id,a.folio,a.folio_venta_stock,a.iva,a.cve_concepto,a.id_unidad_negocio,a.id_sucursal,
-                                        DATE(a.fecha) AS fecha,a.observacion,a.id_clasificacion,a.id_sucursal_destino,
-                                        a.id_proveedor,a.id_trabajador,b.nombre AS proveedor,CONCAT(TRIM(c.nombre),' ',TRIM(c.apellido_p),' ',TRIM(c.apellido_m)) AS empleado,
-                                        a.id_departamento,d.des_dep AS departamento,a.id_area,IFNULL(e.descripcion,'') AS area,
-                                        IFNULL(CONCAT(TRIM(f.nombre),' ',TRIM(f.apellido_p),' ',TRIM(f.apellido_m)),'') AS supervisor,
-                                        a.id_unidad_negocio_destino,
-                                        a.id_cliente,
-                                        a.clasificacion,
-                                        g.nombre_comercial AS cliente,
-                                        MAX(almacen_d.iva) AS iva_m,
-                                        a.estatus,
-                                        a.cambio_estatus
-                                        FROM almacen_e a
-                                        LEFT JOIN proveedores b ON a.id_proveedor=b.id
-                                        LEFT JOIN trabajadores c ON a.id_trabajador=c.id_trabajador
-                                        LEFT JOIN deptos d ON a.id_departamento=d.id_depto
-                                        LEFT JOIN cat_areas e ON d.id_area=e.id
-                                        LEFT JOIN trabajadores f ON d.id_supervisor=f.id_trabajador
-                                        LEFT JOIN cat_clientes g ON a.id_cliente=g.id
-                                        INNER JOIN almacen_d ON a.id=almacen_d.id_almacen_e
-                                        WHERE a.id=".$idSalida);
+                                          DATE(a.fecha) AS fecha,a.observacion,a.id_clasificacion,a.id_sucursal_destino,
+                                          a.id_proveedor,a.id_trabajador,b.nombre AS proveedor,CONCAT(TRIM(c.nombre),' ',TRIM(c.apellido_p),' ',TRIM(c.apellido_m)) AS empleado,
+                                          a.id_departamento,d.des_dep AS departamento,a.id_area,IFNULL(e.descripcion,'') AS area,
+                                          IFNULL(CONCAT(TRIM(f.nombre),' ',TRIM(f.apellido_p),' ',TRIM(f.apellido_m)),'') AS supervisor,
+                                          a.id_unidad_negocio_destino,
+                                          a.id_cliente,
+                                          a.clasificacion,
+                                          g.nombre_comercial AS cliente,
+                                          MAX(almacen_d.iva) AS iva_m,
+                                          a.estatus,
+                                          a.cambio_estatus,
+                                          a.nombre_empleado AS nombreExterno
+                                      FROM almacen_e a
+                                      LEFT JOIN proveedores b ON a.id_proveedor=b.id
+                                      LEFT JOIN trabajadores c ON a.id_trabajador=c.id_trabajador
+                                      LEFT JOIN deptos d ON a.id_departamento=d.id_depto
+                                      LEFT JOIN cat_areas e ON d.id_area=e.id
+                                      LEFT JOIN trabajadores f ON d.id_supervisor=f.id_trabajador
+                                      LEFT JOIN cat_clientes g ON a.id_cliente=g.id
+                                      INNER JOIN almacen_d ON a.id=almacen_d.id_almacen_e
+                                      WHERE a.id=".$idSalida);
 
         return query2json($result);
     }//-- fin function buscarSalidasI
