@@ -2956,8 +2956,15 @@
                 var iva = parseInt($(this).attr('iva'));
                 var descuento = parseFloat($(this).attr('descuento_total'));
 
+                console.log("costo del row: ", costo);
+                console.log("iva del row: ", iva);
+                console.log("descuento del row: ", descuento);
+
                 subtotal += costo;
+                console.log("el subtotal va en: ", subtotal);
                 tIva += ((costo/100) * iva);
+                console.log("el tIva va en: ", tIva);
+                console.log("-------------------------------");
                 descuentoTotal += descuento;
 
             });

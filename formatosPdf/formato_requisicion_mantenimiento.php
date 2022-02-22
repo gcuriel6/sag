@@ -1,6 +1,6 @@
 <?php 
-error_reporting(E_ALL);
-ini_set('display_errors', '1');
+// error_reporting(E_ALL);
+// ini_set('display_errors', '1');
 
 session_start();
 include("../php/conectar.php");
@@ -43,10 +43,6 @@ $query = "SELECT
       requisiciones.total AS total,
       requisiciones.id_capturo AS id_capturo,
       requisiciones.tipo AS tipo,
-
-       requisiciones.subtotal AS subtotal,
-       requisiciones.iva AS iva,
-       requisiciones.total AS total,
       
       requisiciones.folio_mantenimiento AS folio_mantenimiento,
       requisiciones.no_economico AS no_economico,
@@ -62,6 +58,9 @@ $query = "SELECT
       INNER JOIN deptos ON requisiciones.id_departamento = deptos.id_depto
       INNER JOIN proveedores ON requisiciones.id_proveedor = proveedores.id
       WHERE requisiciones.id = $idRequisicion";
+
+    //   echo $query;
+    //   exit();
 
 $consulta = mysqli_query($link, $query);
 $rowU = mysqli_fetch_array($consulta);
@@ -251,27 +250,40 @@ th, td {
   LEFT JOIN fam_gastos ON familias.id_familia_gasto=fam_gastos.id_fam
   WHERE requisiciones_d.id_requisicion = $idRequisicion
   ORDER BY requisiciones_d.id DESC";
+
+//   echo $queryD;
+//   exit();
   $resultDetalle = mysqli_query($link, $queryD);
   $cont= 0;
+  $totalRequi = 0;
+  $subtotalRequi = 0;
+  $tIvaRequi = 0;
+  $descuentoRequi = 0;
   while($rowD = mysqli_fetch_array($resultDetalle))
   {
-      $cont++;
-      $fondo='gris';
-      if($cont%2){
-        $fondo='';
-      }
-      echo "<tr class='".$fondo."'>";
-      echo "<td width='130'>- " . normaliza($rowD['familia_gastos'], 15) . " <br>  - ". normaliza($rowD['familia'], 15) . " <br>  - ".normaliza($rowD['linea'],15)."</td>";
-      echo "<td width='180'>- " . normaliza($rowD['concepto'],30) . " <br> - ".normaliza($rowD['descripcion'],30). " <br> - ".normaliza($rowD['justificacion'],41)."</td>";
-      echo "<td width='60' align='right'>" . $rowD['cantidad'] . "</td>";
-      echo "<td width='40' align='right'>" . $rowD['iva'] . "</td>";
-      echo "<td width='70' align='right'>" . dos_decimales($rowD['costo']) . "</td>";
-      echo "<td width='70' align='right'>" . dos_decimales($rowD['descuento_unitario']) . "</td>";
-      echo "<td width='70' align='right'>" . dos_decimales($rowD['descuento_total']) . "</td>";
-      echo "<td width='70' align='right'>" . dos_decimales($rowD['importe']) . "</td>";
-      echo "</tr>";
+    $cont++;
+    $fondo='gris';
+    if($cont%2){
+    $fondo='';
+    }
 
+    $subtotalRequi += $rowD['importe'];
+    $tIvaRequi += ($rowD['importe']/100)*$rowD['iva'];
+    $descuentoRequi += $rowD['descuento_total'];
+
+    echo "<tr class='".$fondo."'>";
+    echo "<td width='130'>- " . normaliza($rowD['familia_gastos'], 15) . " <br>  - ". normaliza($rowD['familia'], 15) . " <br>  - ".normaliza($rowD['linea'],15)."</td>";
+    echo "<td width='180'>- " . normaliza($rowD['concepto'],30) . " <br> - ".normaliza($rowD['descripcion'],30). " <br> - ".normaliza($rowD['justificacion'],41)."</td>";
+    echo "<td width='60' align='right'>" . $rowD['cantidad'] . "</td>";
+    echo "<td width='40' align='right'>" . $rowD['iva'] . "</td>";
+    echo "<td width='70' align='right'>" . dos_decimales($rowD['costo']) . "</td>";
+    echo "<td width='70' align='right'>" . dos_decimales($rowD['descuento_unitario']) . "</td>";
+    echo "<td width='70' align='right'>" . dos_decimales($rowD['descuento_total']) . "</td>";
+    echo "<td width='70' align='right'>" . dos_decimales($rowD['importe']) . "</td>";
+    echo "</tr>";
   }
+
+  $totalRequi += $subtotalRequi + $tIvaRequi;
        
 
 ?>
@@ -280,22 +292,22 @@ th, td {
         <tr>
             <td colspan="5" rowspan="4"><strong> Descripción General: </strong><br><?php echo normaliza($rowU['descripcion'],67);?></td>
             <td class="verde" colspan="2">Descuento </td>
-            <td class="dato"  align="right"><?php echo dos_decimales($rowU['descuento'])?></td>    
+            <td class="dato"  align="right"><?php echo dos_decimales($descuentoRequi)?></td>    
         </tr>
         <tr>
             <!--NJES March/12/2020 se normaliza texto para que no se sobrepase del borde-->
             <td class="verde" colspan="2">SubTotal </td>
-            <td class="dato"  align="right"><?php echo dos_decimales($rowU['subtotal'])?></td>    
+            <td class="dato"  align="right"><?php echo dos_decimales($subtotalRequi)?></td>    
         </tr>
         <tr>
             
             <td class="verde" colspan="2">Iva </td>
-            <td class="dato"  align="right"><?php echo dos_decimales($rowU['iva'])?></td>    
+            <td class="dato"  align="right"><?php echo dos_decimales($tIvaRequi)?></td>    
         </tr>
         <tr>
             
             <td class="verde" colspan="2">Total </td>
-            <td class="dato" align="right"><?php echo dos_decimales($rowU['total'])?></td>    
+            <td class="dato" align="right"><?php echo dos_decimales($totalRequi)?></td>    
         </tr>
     </tfoot>
 

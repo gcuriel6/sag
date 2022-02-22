@@ -3,6 +3,9 @@ $datosO=$_REQUEST['D'];
 $datosD = base64_decode($datosO);
 $arreglo = json_decode($datosD, true); //estoy recibiendo un json string, entonces lo tengo que decodificar y
 
+// print_r($arreglo);
+// exit();
+
 $path = $arreglo['path'];
 $tipo = $arreglo['tipo']; //1=abrir pdf en navegador 2=guardar el archivo en carpeta  3=abrir pdf en navegador   4=descargar archivo
 $idRegistro = isset($arreglo['idRegistro']) ? $arreglo['idRegistro'] : 0;
