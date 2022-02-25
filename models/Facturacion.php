@@ -13,7 +13,7 @@ class Facturacion
 
     public $link;
 
-    function Facturacion()
+    function __construct()
     {
   
       $this->link = Conectarse();
@@ -645,6 +645,11 @@ class Facturacion
                     uuid_timbre,xml_timbre,estatus) VALUES('$id','$tipo_cfdi','$no_cert_cfdi','$cert_cfdi','$fecha_cfdi',
                     '$hora_cfdi','$sello_cfdi','$cadena_cfdi','$xml_cfdi','$version_timbre','$fecha_timbre','$hora_timbre',
                     '$no_cert_timbre','$sello_timbre','$uuid_timbre','$xml_timbre','$estatus_cfd')";
+
+            // error_log("primer insert Facturacion");
+            // error_log($query);
+            // error_log("verificando sesion again");
+            // error_log(json_encode($_SESSION));
 
             $result = mysqli_query($this->link, $query) or die(mysqli_error());
 

@@ -9,7 +9,7 @@
     // $link = mysqli_connect("ginthersoft.com", "sistemas", "Pass123#$%", "ginthercorp");
 
     // conexion de test en gintestcorp.com (Hostgatos)
-    $link = mysqli_connect("gintestcorp.com", "pruebagi_sistemas", "Pass123#$%.", "pruebagi_ginthercorp");
+    $link = mysqli_connect("gintestcorp.com", "pruebagi_sistemas", "Pass123#$%.", "pruebagi_ginthercorp2");
     
     mysqli_set_charset($link,'utf8');
     if (!$link)
@@ -25,7 +25,7 @@
   function ConectarseCFDI()
   {
 
-    $linkCFDI = mysqli_connect("ginthersoft.com", "sistemas", "Pass123#$%", "cfdi_denken2");
+    $linkCFDI = mysqli_connect("gintestcorp.com", "pruebagi_sistemas", "Pass123#$%.", "pruebagi_cfdi_denken2");
     mysqli_set_charset($linkCFDI,'utf8');
     if (!$linkCFDI)
     {

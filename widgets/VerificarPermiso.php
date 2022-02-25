@@ -13,7 +13,7 @@ class VerificarPermiso
 
     public $link;
 
-    function VerificarPermiso()
+    function __construct()
     {
   
       $this->link = Conectarse();

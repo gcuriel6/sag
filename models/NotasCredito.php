@@ -13,7 +13,7 @@ class NotasCredito
 
     public $link;
 
-    function NotasCredito()
+    function __construct()
     {
   
       $this->link = Conectarse();
@@ -84,17 +84,25 @@ class NotasCredito
     **/
     function guardarNotaCredito($datos){
         $verifica = 0;
+        // error_log("verificando sesion1");
+        // error_log(json_encode($_SESSION));
 
         $this->link->begin_transaction();
         $this->link->query("START TRANSACTION;");
 
         $verifica = $this -> guardarActualizar($datos);
 
-        if($verifica === 0)
+        if($verifica === 0){
+            // error_log("hizo rollback");
+            // error_log("verificando sesion");
+            // error_log(json_encode($_SESSION));
             $this->link->query('ROLLBACK;');
-        else
+        }else{
+            // error_log("hizo commit");
+            // error_log("verificando sesion");
+            // error_log(json_encode($_SESSION));
             $this->link->query("COMMIT;");
-
+        }
         return $verifica;
     }
     //- fin function guardarFacturacion
@@ -106,6 +114,9 @@ class NotasCredito
       *
     **/
     function guardarActualizar($datos){
+        // error_log("verificando sesion2");
+        // error_log(json_encode($datos));
+
         $verifica = 0;
 
         $idUsuario = $_SESSION['id_usuario'];
@@ -169,6 +180,7 @@ class NotasCredito
         $totalUsd = 0;
 
         $tipoCambio = 1;
+        $tipoCambioC=1;
         if($moneda != 'MXN')
         {
             $tipoCambio = isset($datos['tipo_cambio']) ? $datos['tipo_cambio'] : 1;
@@ -201,6 +213,12 @@ class NotasCredito
                 '$diasCredito','$tasaIva','$fechaInicioPeriodo','$fechaFinPeriodo','$rfc','$razonSocialReceptor',
                 '$retencion','$importeRetencionPesos',
                 '$moneda','$tipoCambioC','$subtotalUsd','$ivaUsd','$importeRetencionUsd','$totalUsd', $idUsuario)";
+        
+        // error_log("primer insert");
+        // error_log($query);
+        // error_log("verificando sesion4");
+        // error_log(json_encode($_SESSION));
+
         $result = mysqli_query($this->link, $query) or die(mysqli_error());
         $idNotaCredito = mysqli_insert_id($this->link);
 
@@ -225,7 +243,9 @@ class NotasCredito
                           'importeRetencion'=>$importeRetencion,
                           'porcentajeRetencion'=>$porcentajeRetencion,
                           'moneda'=>$moneda,
-                          'tipo_cambio'=>$tipoCambio);
+                          'tipo_cambio'=>$tipoCambio,
+                          'idFactura'=>$idFactura
+                        );
 
         if ($result) 
         {
@@ -303,6 +323,8 @@ class NotasCredito
     **/ 
     function obtenerFolio($idEmpresaFiscal, $tipo)
     {
+        // error_log("verificando sesion3");
+        // error_log(json_encode($_SESSION));
 
         $result = mysqli_query($this->link, "SELECT  $tipo as folio FROM empresas_fiscales WHERE id_empresa = $idEmpresaFiscal");
         $row = mysqli_fetch_assoc($result);
@@ -319,7 +341,15 @@ class NotasCredito
     function actualizarFolio($idEmpresaFiscal, $folio, $tipo)
     {
 
-        $result = mysqli_query($this->link, "UPDATE empresas_fiscales set $tipo = $folio WHERE id_empresa = $idEmpresaFiscal");
+        $query = "UPDATE empresas_fiscales
+                    SET $tipo = $folio
+                    WHERE id_empresa = $idEmpresaFiscal";
+        // error_log("segundo update");
+        // error_log($query);
+        // error_log("verificando sesion9");
+        // error_log(json_encode($_SESSION));
+
+        $result = mysqli_query($this->link, $query);
     }
 
     /**
@@ -346,6 +376,14 @@ class NotasCredito
             clave_unidad_sat,unidad_sat,clave_producto_sat,producto_sat) 
             VALUES ('$idNotaCredito','$cantidad','$precio','$importePesos','$descripcion','$idClaveSATUnidad',
             '$nombreUnidadSAT','$idClaveSATProducto','$nombreProductoSAT')";
+
+        // echo $query;
+        // exit();
+        // error_log("segundo insert");
+        // error_log($query);
+        // error_log("verificando sesion5");
+        // error_log(json_encode($_SESSION));
+
         $result = mysqli_query($this->link, $query) or die(mysqli_error());
 
         //->le voy agregando al array los registros
@@ -375,6 +413,13 @@ class NotasCredito
         $verifica = 0;
 
         $query = "UPDATE facturas SET id_factura_cfdi ='$idCFDI' WHERE id=".$idFactura;
+        // echo $query;
+        // exit();
+        // error_log("primer update");
+        // error_log($query);
+        // error_log("verificando sesion8");
+        // error_log(json_encode($_SESSION));
+
         $result = mysqli_query($this->link, $query) or die(mysqli_error());
         
         if($result)

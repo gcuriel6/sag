@@ -409,14 +409,18 @@ if($xml != NULL){
                         $idCXC = $dato['id_cxc'];
                         $descripcionF='';
 
+                        //se cambia anio_actual y anio_siguiente en el select por que en algunos casos esta sumando de mas
+
                         if($idBitacoraPlan > 0){
                             $queryD= "SELECT
                             a.id, 
                             i.cantidad AS total_cat,
                             k.total AS total,
                             k.subtotal,
-                            IF(i.meses=12,YEAR(NOW()),0) AS anio_actual,
-                            YEAR(DATE_ADD(CURRENT_DATE(),INTERVAL 1 YEAR)) AS anio_siguiente,
+                            /*IF(i.meses=12,YEAR(NOW()),0) AS anio_actual,
+                            YEAR(DATE_ADD(CURRENT_DATE(),INTERVAL 1 YEAR)) AS anio_siguiente,*/
+                            YEAR(k.fecha_corte_recibo) AS anio_actual,
+                            YEAR(k.vencimiento) AS anio_siguiente,
                             MONTH(k.fecha_corte_recibo) AS mes_actual,
                             MONTH(k.vencimiento) AS mes_fin,
                             DATE(k.fecha_captura) AS fecha_captura,
@@ -455,18 +459,18 @@ if($xml != NULL){
                                 {
 
                                     if(intval($meses)==1)
-                                        $descripcionF = $descripcionPlan . ' '.$descripcionCat .' DE '. nombreMes(intval($mesActual)) .' CUENTA: '. $cuenta ;
+                                        $descripcionF = $descripcionPlan . ' '.$descripcionCat .' DE  01 de '. nombreMes(intval($mesActual)) .' CUENTA: '. $cuenta ;
                                     else if(intval($meses)==12)
-                                        $descripcionF = $descripcionPlan .' '. $descripcionCat. ' DEL PERIODO '. nombreMes(intval($mesActual)).' '. $anioActual .' - '.nombreMes(intval($mesFin)).' '. $anioSiguiente .' CUENTA: '. $cuenta;
+                                        $descripcionF = $descripcionPlan .' '. $descripcionCat. ' DEL PERIODO 01 de '. nombreMes(intval($mesActual)).' '. $anioActual .' - 01 de '.nombreMes(intval($mesFin)).' '. $anioSiguiente .' CUENTA: '. $cuenta;
                                     else
                                     {
 
                                         $fV = '2021-04-11';
 
                                         if($fV <= $fechaCaptura)
-                                            $descripcionF = $descripcionPlan .' '. $descripcionCat. ' DEL PERIODO  '. nombreMes(intval($mesActual))  .' - '.nombreMes(intval($mesFin)).' CUENTA: '. $cuenta;
+                                            $descripcionF = $descripcionPlan .' '. $descripcionCat. ' DEL PERIODO 01 de '. nombreMes(intval($mesActual))  .' - 01 de '.nombreMes(intval($mesFin)).' CUENTA: '. $cuenta;
                                         else
-                                            $descripcionF = $descripcionPlan .' '. $descripcionCat. ' DEL PERIODO  '. nombreMes(intval($mesActual))  .' - '.nombreMes(intval(--$mesFin)).' CUENTA: '. $cuenta;
+                                            $descripcionF = $descripcionPlan .' '. $descripcionCat. ' DEL PERIODO 01 de '. nombreMes(intval($mesActual))  .' - 01 de '.nombreMes(intval(--$mesFin)).' CUENTA: '. $cuenta;
 
                                     }
                                     

@@ -12,7 +12,7 @@ class ObtenerFecha
 
     public $link;
 
-    function ObtenerFecha()
+    function __construct()
     {
   
       $this->link = Conectarse();

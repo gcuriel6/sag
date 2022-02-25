@@ -3175,7 +3175,7 @@ session_start();
                 'idEmpresaFiscalEmisor' : $('#i_empresa_fiscal').attr('alt'),
                 'idCFDIEmpresaFiscal' : $('#i_empresa_fiscal').attr('alt2'),
                 'idRazonSocialReceptor' : $('#s_razon_social').val(),
-                'razonSocialReceptor' : $('#s_razon_social option:selected').text(),
+                'razonSocialReceptor' : $('#s_razon_social option:selected').attr('alt6'),
                 'codigoPostal' : $('#s_razon_social option:selected').attr('alt3'),
                 'rfc' : $('#i_rfc').val(),
                 'idUsoCFDI' : $('#s_cfdi').val(),
@@ -3297,7 +3297,7 @@ session_start();
                     $('#fondo_cargando').hide(); 
                 },
                 error: function (xhr) {
-                    //console.log('php/facturacion_buscar.php --> '+JSON.stringify(xhr));
+                    console.log('../cfdi_corporativo/php/ws_gf_retencion.php --> '+JSON.stringify(xhr));
                     mandarMensaje('* Error al generar timbre');
                 }
             });

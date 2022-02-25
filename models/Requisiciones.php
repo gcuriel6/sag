@@ -366,6 +366,10 @@ class Requisiciones
 
       foreach($requisicionD as $detalle)
       {
+
+        // print_r($detalle);
+        // continue;
+
           $num_partida++;
           $nPartida = $detalle['n_partida'];
           $idProducto = $detalle['id_producto'];
@@ -429,6 +433,7 @@ class Requisiciones
           }
 
       }
+      // exit();
    
       return $verifica;
 
@@ -458,93 +463,80 @@ class Requisiciones
       if($idSucursal != null)
         $where .= " AND sucursales.id_sucursal = $idSucursal ";  
 
-      if ($id == null)
-      {
-
-          if($fechaDe == '' && $fechaA == '')
-        $where .= " AND requisiciones.fecha_pedido >= DATE_SUB(CURRENT_DATE(),INTERVAL 30 DAY) ";
-      else if($fechaDe != null &&  $fechaA == null)
-        $where .= " AND requisiciones.fecha_pedido >= '$fechaDe' ";
-      else  //-->trae fecha inicio y fecha fin
-        $where .= " AND requisiciones.fecha_pedido >= '$fechaDe' AND requisiciones.fecha_pedido <= '$fechaA' ";
-
-
-
+      if ($id == null){
+        if($fechaDe == '' && $fechaA == '')
+          $where .= " AND requisiciones.fecha_pedido >= DATE_SUB(CURRENT_DATE(),INTERVAL 30 DAY) ";
+        else if($fechaDe != null &&  $fechaA == null)
+          $where .= " AND requisiciones.fecha_pedido >= '$fechaDe' ";
+        else  //-->trae fecha inicio y fecha fin
+          $where .= " AND requisiciones.fecha_pedido >= '$fechaDe' AND requisiciones.fecha_pedido <= '$fechaA' ";
       }
 
-          
+      $query = "SELECT
+                  requisiciones.id AS id,
+                  requisiciones.id_unidad_negocio AS id_unidad_negocio,
+                  requisiciones.id_sucursal AS id_sucursal,
+                  requisiciones.id_area AS id_area,
+                  requisiciones.id_departamento AS id_departamento,
+                  requisiciones.folio AS folio,
+                  requisiciones.estatus AS estatus,
+                  requisiciones.presupuesto_aprobado,
+                  cat_unidades_negocio.nombre AS unidad, 
+                  sucursales.descr AS sucursal,
+                  cat_areas.descripcion AS are,
+                  IFNULL(deptos.des_dep,'') AS depto,
+                  requisiciones.solicito AS solicito,
+                  requisiciones.id_proveedor AS id_proveedor,
+                  requisiciones.fecha_pedido AS fecha_pedido,
+                  requisiciones.tiempo_entrega AS tiempo_entrega,
+                  requisiciones.descripcion AS descripcion,
+                  requisiciones.id_orden_compra AS id_orden_compra,
+                  requisiciones.folio_orden_compra AS folio_orden_compra,
+                  requisiciones.subtotal AS subtotal,
+                  requisiciones.iva AS iva,
+                  requisiciones.total AS total,
+                  requisiciones.id_capturo AS id_capturo,
+                  requisiciones.tipo AS tipo,
+                  requisiciones.descuento,
+                  requisiciones.excede_presupuesto AS excede_presupuesto,
+                  requisiciones.folio_mantenimiento AS folio_mantenimiento,
+                  requisiciones.no_economico AS no_economico,
+                  requisiciones.responsable AS responsable,
+                  requisiciones.kilometraje AS kilometraje,
+
+                  requisiciones.id_familia_gasto,
+                  requisiciones.b_anticipo,
+                  requisiciones.monto_anticipo,
+                  requisiciones.b_varias_familias,
+
+                  proveedores.nombre as proveedor,
+                  usuarios.usuario AS capturo,
+
+                  IFNULL(gastos.id,0) AS id_gasto,
+                  IFNULL(gastos.referencia,'') AS referencia_gasto,
+                  requisiciones.id_activo_fijo,
+                  IFNULL(CONCAT(activos_responsables.id_trabajador,' - ',TRIM(trabajadores.nombre),' ',TRIM(trabajadores.apellido_p),' ',TRIM(trabajadores.apellido_m)),'Sin responsable') AS responsable_activo_fijo,
+                  MAX(requisiciones_d.iva) AS iva_m
+                FROM requisiciones
+                INNER JOIN cat_unidades_negocio ON requisiciones.id_unidad_negocio = cat_unidades_negocio.id
+                INNER JOIN sucursales ON requisiciones.id_sucursal = sucursales.id_sucursal
+                INNER JOIN cat_areas ON requisiciones.id_area = cat_areas.id
+                INNER JOIN deptos ON requisiciones.id_departamento = deptos.id_depto AND deptos.tipo='I'
+                INNER JOIN proveedores ON requisiciones.id_proveedor = proveedores.id
+                LEFT JOIN  usuarios ON requisiciones.id_capturo=usuarios.id_usuario
+                LEFT JOIN gastos ON requisiciones.id = gastos.id_requisicion
+                LEFT JOIN activos ON requisiciones.id_activo_fijo=activos.id
+                LEFT JOIN activos_responsables ON activos.id = activos_responsables.id_activo AND activos_responsables.responsable=1
+                LEFT JOIN trabajadores ON activos_responsables.id_trabajador = trabajadores.id_trabajador
+                INNER JOIN requisiciones_d ON requisiciones.id=requisiciones_d.id_requisicion
+                $where
+                GROUP BY requisiciones.id
+                ORDER BY requisiciones.id DESC";
        
-    //-->NJES March/11/2020 se obtiene el responsable del activo fijo
-    $resultado = $this->link->query("
-      SELECT
-      requisiciones.id AS id,
-      requisiciones.id_unidad_negocio AS id_unidad_negocio,
-      requisiciones.id_sucursal AS id_sucursal,
-      requisiciones.id_area AS id_area,
-      requisiciones.id_departamento AS id_departamento,
-      requisiciones.folio AS folio,
-      requisiciones.estatus AS estatus,
-      requisiciones.presupuesto_aprobado,
-      cat_unidades_negocio.nombre AS unidad, 
-      sucursales.descr AS sucursal,
-      cat_areas.descripcion AS are,
-      IFNULL(deptos.des_dep,'') AS depto,
-      requisiciones.solicito AS solicito,
-      requisiciones.id_proveedor AS id_proveedor,
-      requisiciones.fecha_pedido AS fecha_pedido,
-      requisiciones.tiempo_entrega AS tiempo_entrega,
-      requisiciones.descripcion AS descripcion,
-      requisiciones.id_orden_compra AS id_orden_compra,
-      requisiciones.folio_orden_compra AS folio_orden_compra,
-      requisiciones.subtotal AS subtotal,
-      requisiciones.iva AS iva,
-      requisiciones.total AS total,
-      requisiciones.id_capturo AS id_capturo,
-      requisiciones.tipo AS tipo,
+      //-->NJES March/11/2020 se obtiene el responsable del activo fijo
+      $resultado = $this->link->query($query);
 
-      requisiciones.subtotal AS subtotal,
-      requisiciones.iva AS iva,
-      requisiciones.total AS total,
-      requisiciones.descuento,
-
-      requisiciones.excede_presupuesto AS excede_presupuesto,
-
-      requisiciones.folio_mantenimiento AS folio_mantenimiento,
-      requisiciones.no_economico AS no_economico,
-      requisiciones.responsable AS responsable,
-      requisiciones.kilometraje AS kilometraje,
-
-      requisiciones.id_familia_gasto,
-      requisiciones.b_anticipo,
-      requisiciones.monto_anticipo,
-      requisiciones.b_varias_familias,
-
-      proveedores.nombre as proveedor,
-      usuarios.usuario AS capturo,
-
-      IFNULL(gastos.id,0) AS id_gasto,
-      IFNULL(gastos.referencia,'') AS referencia_gasto,
-      requisiciones.id_activo_fijo,
-      IFNULL(CONCAT(activos_responsables.id_trabajador,' - ',TRIM(trabajadores.nombre),' ',TRIM(trabajadores.apellido_p),' ',TRIM(trabajadores.apellido_m)),'Sin responsable') AS responsable_activo_fijo,
-      MAX(requisiciones_d.iva) AS iva_m
-      FROM requisiciones
-      INNER JOIN cat_unidades_negocio ON requisiciones.id_unidad_negocio = cat_unidades_negocio.id
-      INNER JOIN sucursales ON requisiciones.id_sucursal = sucursales.id_sucursal
-      INNER JOIN cat_areas ON requisiciones.id_area = cat_areas.id
-      INNER JOIN deptos ON requisiciones.id_departamento = deptos.id_depto AND deptos.tipo='I'
-      INNER JOIN proveedores ON requisiciones.id_proveedor = proveedores.id
-      LEFT JOIN  usuarios ON requisiciones.id_capturo=usuarios.id_usuario
-      LEFT JOIN gastos ON requisiciones.id = gastos.id_requisicion
-      LEFT JOIN activos ON requisiciones.id_activo_fijo=activos.id
-      LEFT JOIN activos_responsables ON activos.id = activos_responsables.id_activo AND activos_responsables.responsable=1
-      LEFT JOIN trabajadores ON activos_responsables.id_trabajador = trabajadores.id_trabajador
-      INNER JOIN requisiciones_d ON requisiciones.id=requisiciones_d.id_requisicion
-      $where
-      GROUP BY requisiciones.id
-      ORDER BY requisiciones.id DESC");
-
-        return query2json($resultado);
-
+      return query2json($resultado);
     }
 
     function cancelarRequisicion($idRequisicion)

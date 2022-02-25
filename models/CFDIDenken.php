@@ -11,16 +11,19 @@ class CFDIDenken
     **/
 
     public $linkCFDI;
+    public $link;
 
-    function CFDIDenken()
+    function __construct()
     {
   
       $this->linkCFDI = ConectarseCFDI();
+      $this->link = Conectarse();
 
     }
 
     function guardaFactura($facturaE,$facturaD)
     {
+        // error_log(json_encode($facturaE));
         
         $verifica = 0;
 
@@ -60,15 +63,54 @@ class CFDIDenken
                     '$subtotal','$iva','$moneda',$tipoCambio,'$usuario','$idMetodoPago','$idFormaPago','$idUsoCFDI',
                     '$rfc','$razonSocialReceptor','MX','$codigoPostal','$retencion','$importeRetencion',
                     '$porcentajeRetencion','$descuento')";
-        $result = mysqli_query($this->linkCFDI, $query) or die(mysqli_error());
+        // echo $query;
+        // exit();
+        // error_log("tercer insert");
+        // error_log($query);
+        // error_log("verificando sesion6");
+        // error_log(json_encode($_SESSION));
+        
+        $result = mysqli_query($this->linkCFDI, $query) or die(mysqli_error($this->linkCFDI));
         $idCFDI = mysqli_insert_id($this->linkCFDI);
 
         if($result)
         {
+            // echo $tipo;
+            // exit();
             if($tipo == 'sustituir')
                 $verifica = $this -> guardaSustituirFactura($facturaD,$idCFDI,$tasaIva,$facturasSustituir);
-            else
+            else{
                 $verifica = $this -> guardarPartidas($facturaD,$idCFDI,$tasaIva);
+
+                if($folioNotaCredito != 0){
+
+                    $idFactura = $facturaE['idFactura'];
+
+                    // $query = "INSERT INTO factura_r(registro_e,tipo_relacion,uuid_documento) 
+                    //             VALUES ('$idCFDI','$tipo','$uuidDoc')";
+                    $query = "SELECT uuid_timbre FROM facturas_cfdi WHERE id_factura = $idFactura;";
+
+                    $result = mysqli_query($this->link, $query) or die(mysqli_error($this->link));
+
+                    while($miRow = mysqli_fetch_array($result)){
+                        $uuidDoc = $miRow["uuid_timbre"];
+
+                        $query2 = "INSERT INTO factura_r(registro_e,tipo_relacion,uuid_documento) 
+                                    VALUES ('$idCFDI','01','$uuidDoc')";
+
+                        mysqli_query($this->linkCFDI, $query2) or die(mysqli_error($this->linkCFDI));
+                    }
+
+                    // if ($result) 
+                    // {
+                    //     $verifica = 1;
+                    // }else{
+                    //     $verifica = 0;
+                    //     break;
+                    // }
+
+                }
+            }
         }
 
         return $verifica;
@@ -79,12 +121,14 @@ class CFDIDenken
 
         foreach($facturasSustituir as $partida)
         {
+            // print_r($partida);
+            // continue;
             $tipo = $partida['tipo'];
             $uuidDoc = $partida['uuidDoc'];
 
             $query = "INSERT INTO factura_r(registro_e,tipo_relacion,uuid_documento) 
                         VALUES ('$idCFDI','$tipo','$uuidDoc')";
-            $result = mysqli_query($this->linkCFDI, $query) or die(mysqli_error());
+            $result = mysqli_query($this->linkCFDI, $query) or die(mysqli_error($this->linkCFDI));
 
             if ($result) 
             {
@@ -106,6 +150,9 @@ class CFDIDenken
     function guardarPartidas($facturaD,$idCFDI,$tasaIva){
         $verifica = 0;
 
+        // print_r($facturaD);
+        // exit();
+
         foreach($facturaD as $partida)
         {
             $concepto = $partida['concepto'];
@@ -116,7 +163,7 @@ class CFDIDenken
             $unidad = $partida['unidad'];
 
             //-->NJES Feb/20/2020 se obtiene el descuento porque en ventas alarmas pueden traer descuento y se prorratea para las partidas al guardar prefactura
-            $porcentajeDescuento = $partida['porcentajeDescuento'];
+            $porcentajeDescuento = isset($partida['porcentajeDescuento']) ? $partida['porcentajeDescuento'] : 0;
 
             if($tasaIva == 16)
                 $tIva = 0.16;
@@ -129,7 +176,13 @@ class CFDIDenken
                     clave_unidad,unidad,tasa_iva,descuento) 
                     VALUES ('$idCFDI','$concepto','$precioUnitario','$cantidad','$claveProducto',
                     '$claveUnidad','$unidad','$tIva','$porcentajeDescuento')";
-            $result = mysqli_query($this->linkCFDI, $query) or die(mysqli_error());
+
+            // error_log("multiples insert");
+            // error_log($query);
+            // error_log("verificando sesion7");
+            // error_log(json_encode($_SESSION));
+
+            $result = mysqli_query($this->linkCFDI, $query) or die(mysqli_error($this->linkCFDI));
 
             if ($result) 
             {
@@ -195,7 +248,7 @@ class CFDIDenken
                     cod_pos_cliente,usuario_captura,id_empresa) 
                     VALUES ('$folio','$fecha','$rfc_cliente','$razon_social_cliente',
                     'MXN','$cp_cliente','$usuario','$idEmpresaFiscal')";
-        $result = mysqli_query($this->linkCFDI, $query) or die(mysqli_error());
+        $result = mysqli_query($this->linkCFDI, $query) or die(mysqli_error($this->linkCFDI));
         $idCFDI = mysqli_insert_id($this->linkCFDI);
 
         if($result)
@@ -216,7 +269,7 @@ class CFDIDenken
 
         $query = "INSERT INTO pagos_p(registro_e,monto_pago,forma_pago,moneda_pago,fecha_pago,tcambio) 
                 VALUES ('$idCFDI','$monto','$formaPago','$moneda','$fechaN','$tipoCambio')";
-        $result = mysqli_query($this->linkCFDI, $query) or die(mysqli_error());
+        $result = mysqli_query($this->linkCFDI, $query) or die(mysqli_error($this->linkCFDI));
         $idPagoP = mysqli_insert_id($this->linkCFDI);
 
         if($result)
@@ -240,7 +293,7 @@ class CFDIDenken
                     moneda_dr,importe_saldo_anterior,importe_saldo_insoluto,importe_pagado,num_parcialidad) 
                     VALUES ('$idPagoP','$uuidfactura','$folioFactura','$idMetodoPago','$moneda','$saldoAnterior',
                     '$saldoInsoluto','$importePagado','$numParcialidad')";
-            $result = mysqli_query($this->linkCFDI, $query) or die(mysqli_error());
+            $result = mysqli_query($this->linkCFDI, $query) or die(mysqli_error($this->linkCFDI));
 
             if ($result) 
             {
@@ -275,7 +328,7 @@ class CFDIDenken
 
             $query = "INSERT INTO pagos_r(registro_e,tipo_relacion,uuid_documento) 
                         VALUES ('$idCFDI','$tipo','$uuidDoc')";
-            $result = mysqli_query($this->linkCFDI, $query) or die(mysqli_error());
+            $result = mysqli_query($this->linkCFDI, $query) or die(mysqli_error($this->linkCFDI));
 
             if ($result) 
             {
@@ -302,7 +355,7 @@ class CFDIDenken
         header ("content-type: text/text");
         
         $query = "UPDATE factura_e SET adenda = '" .  $adenda . "' where registro = $idCFDI" ;
-        $result = mysqli_query($this->linkCFDI, $query) or die(mysqli_error());
+        $result = mysqli_query($this->linkCFDI, $query) or die(mysqli_error($this->linkCFDI));
 
         if ($result) 
             $verifica = true;

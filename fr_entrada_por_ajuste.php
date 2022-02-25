@@ -799,11 +799,11 @@ session_start();
                             if(!row)
                             {
 
-                                var html = "<tr class='tr_producto'  id='bp_" + producto.id + "' alt='" + producto.id + "'  alt2='" + producto.concepto+ "' alt3='" + producto.id_familia + "' alt4='" + producto.familia + "' alt5='" + producto.id_linea + "' alt6='" + producto.linea + "' alt7='" + producto.precio + "' alt8='" + producto.descripcion + "' alt9='" + producto.existencia + "'>";
+                                var html = "<tr class='tr_producto'  id='bp_" + producto.id + "' alt='" + producto.id + "'  alt2='" + producto.concepto+ "' alt3='" + producto.id_familia + "' alt4='" + producto.familia + "' alt5='" + producto.id_linea + "' alt6='" + producto.linea + "' alt7='" + producto.costo + "' alt8='" + producto.descripcion + "' alt9='" + producto.existencia + "'>";
                                 html += "<td data-label='Familia'>" + producto.familia + "</td>";
                                 html += "<td data-label='Línea'>" + producto.linea + "</td>";
                                 html += "<td data-label='Concepto'>" + producto.concepto + "</td>";
-                                html += "<td align='right' data-label='Precio'>" + formatearNumero(producto.precio) +  "</td>";
+                                html += "<td align='right' data-label='Precio'>" + formatearNumero(producto.costo) +  "</td>";
                                 html += "</tr>";
 
                             }                            
