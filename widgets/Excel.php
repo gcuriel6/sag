@@ -1280,6 +1280,81 @@ class Excel
             $resultado = mysqli_query($this->link, $query)or die(mysqli_error()); 
         }
 
+        if($modulo == 'REPORTES_BANCOS_TODOS')
+        {
+            $arreglo = json_decode($datos, true);
+           
+            $fechaInicio = $arreglo['fechaInicio'];
+            $fechaFin = $arreglo['fechaFin'];
+            
+            $condicionFecha='';
+
+            if($fechaInicio == '' && $fechaFin == '')
+            {
+                $condicionFecha=" AND MONTH(a.fecha_aplicacion) = MONTH(NOW()) AND YEAR(a.fecha_aplicacion) = YEAR(NOW())";
+            }else if($fechaInicio != '' &&  $fechaFin == '')
+            {
+                $condicionFecha=" AND DATE(a.fecha_aplicacion) >= '$fechaInicio'";
+            }else{  //-->trae fecha inicio y fecha fin
+                $condicionFecha=" AND DATE(a.fecha_aplicacion) BETWEEN '$fechaInicio' AND '$fechaFin'";
+            }
+        
+            /*-->NJES July/01/2020 En la columna de Importe se debe mostrar el saldo actual de la cuenta 
+            y el nombre de la columna debe corresponder a ese dato.  
+            El reporte debe contar un  filtro de fechas y un campo para visualizar el saldo de la 
+            fecha inicio seleccionada, así como un campo para visualizar el saldo de la fecha fin 
+            seleccionada. */
+
+            $query = "SELECT a.id,
+                        IFNULL(sucursales.descr,'') AS sucursal,
+                        a.id_cuenta_banco,
+                        IFNULL(a.observaciones,'') as observaciones,
+                        b.id_banco,
+                        b.cuenta as cuenta,
+                        c.descripcion AS banco,
+                        b.descripcion,
+                        CASE
+                            WHEN a.tipo = 'T' THEN 'Transferencia'
+                            WHEN a.tipo = 'I' THEN 'Monto Inicial'
+                            WHEN a.tipo = 'C' THEN 'Cargo'
+                            ELSE 'Abono'
+                        END AS tipo,
+                        CASE
+                            WHEN a.tipo = 'I' THEN 'Ingreso'
+                            WHEN a.tipo = 'A' THEN 'Ingreso'
+                            WHEN a.tipo = 'C' THEN 'Egreso'
+                            WHEN a.tipo = 'T' AND a.transferencia = 0 THEN 'Egreso'
+                            ELSE 'Ingreso'
+                        END AS movimiento,
+                        a.monto,
+                        a.fecha_aplicacion,
+                        a.monto AS saldo,
+                        a.id_cxc,
+                        d.id_pago_d,
+                        e.id_factura,
+                        e.id_pago_e,
+                        IFNULL(d.folio_pago,'') AS folio_pago,
+                        IFNULL(e.folio_factura,'') AS folio_factura,
+                        IFNULL(orden_compra.folio,'No aplica') AS folio_oc,
+                        IFNULL(IF(cxp.id_requisicion > 0,requisiciones.folio,orden_compra.requisiciones),'No aplica') AS folio_requi
+                    FROM movimientos_bancos a
+                    LEFT JOIN cuentas_bancos b ON a.id_cuenta_banco=b.id
+                    LEFT JOIN bancos c ON b.id_banco=c.id
+                    LEFT JOIN cxc d ON a.id_cxc=d.id
+                    LEFT JOIN pagos_d e ON d.id_pago_d=e.id
+                    LEFT JOIN cxp ON a.id_cxp=cxp.id
+                    LEFT JOIN almacen_e ON cxp.id_entrada_compra=almacen_e.id
+                    LEFT JOIN orden_compra ON almacen_e.id_oc=orden_compra.id
+                    LEFT JOIN sucursales ON cxp.id_sucursal=sucursales.id_sucursal
+                    LEFT JOIN requisiciones ON cxp.id_requisicion=requisiciones.id
+                    WHERE 1 
+                    $condicionFecha 
+                    ORDER BY a.fecha_aplicacion DESC,a.id DESC";
+            
+
+            $resultado = mysqli_query($this->link, $query)or die(mysqli_error()); 
+        }
+
         if($modulo == 'SALDOS_CUENTAS_BANCOS')
         {
             $arreglo = json_decode($datos, true);

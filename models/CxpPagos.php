@@ -419,7 +419,7 @@ class CxpPagos
       $tipoCuenta = $datos['tipoCuenta'];
       $fechaAplicacion = $datos['fechaAplicacion'];
 
-      // print_r($registros);
+      // print_r($datos);
       // exit();
 
       for($i=1;$i<=$registros[0];$i++){
@@ -579,10 +579,15 @@ class CxpPagos
                       FROM cxp a
                       LEFT JOIN trabajadores b ON a.id_empleado=b.id_trabajador
                       WHERE a.id=".$id;
+
+                      // echo $busqueda;
+                      // exit();
           $resultC = mysqli_query($this->link, $busqueda) or die(mysqli_error());
   
           if($resultC){
             $datosC=mysqli_fetch_array($resultC);
+            // print_r($datosC);
+            // exit();
             $idUnidadNegocio=$datosC['id_unidad_negocio']; 
             $idSucursal=$datosC['id_sucursal'];
             $idDepartamento=$datosC['id_departamento'];
@@ -609,6 +614,9 @@ class CxpPagos
                               INNER JOIN orden_compra ON almacen_e.id_oc = orden_compra.id
                               INNER JOIN requisiciones ON orden_compra.ids_requisiciones = requisiciones.id
                               WHERE cxp.id = $id ";
+
+              // echo $busquedaReq;
+              // exit();
 
               $resultReq = mysqli_query($this->link, $busquedaReq) or die(mysqli_error());
 
@@ -670,6 +678,9 @@ class CxpPagos
                         'idProveedor'=>$idProveedor,
                         'fechaAplicacion'=>$fechaAplicacion,
                         'idOrdenServicio'=>$idOrdenServicio);
+
+              // print_r($arr);
+              // exit();
 
             if($i == 1){
               $verifica = $this -> guardarPagoCxP($arr);
@@ -1003,6 +1014,7 @@ class CxpPagos
 
       $query = "INSERT INTO cxp(id_cxp,id_proveedor,no_factura,id_concepto,clave_concepto,fecha,subtotal,referencia,id_banco,id_cuenta_banco,estatus,id_viatico,id_unidad_negocio,id_sucursal,id_area,id_departamento,id_familia_gasto,id_clasificacion_gasto) 
                   VALUES ('$idCxP','$idProveedor','$factura','$idConcepto','$claveConcepto','$fechaAplicacion','$importe','$referencia','$idBanco','$idCuentaBanco','L','$id_viatico','$idUnidadNegocio','$idSucursal','$idDepartamento','$idArea','$idFamiliaGasto','$idClasificacionGasto')";
+
       $result = mysqli_query($this->link, $query) or die(mysqli_error());
       
       if($result){
@@ -1028,9 +1040,12 @@ class CxpPagos
                           INNER JOIN almacen_e ae ON ae.id = ad.id_almacen_e 
                           INNER JOIN familias fa ON pr.id_familia = fa.id
                           INNER JOIN cxp ON cxp.id_entrada_compra = ae.id
-                          where ae.id_oc = (SELECT id FROM orden_compra WHERE folio = '$idOrdenCompra') 
+                          where ae.id_oc = (SELECT id FROM orden_compra WHERE folio = '$idOrdenCompra' AND id_sucursal = '$idSucursal') 
                           AND cxp.id_cxp = $idCxP 
                           group by pr.id_clas";
+
+                // echo $queryOC;
+                // exit();
 
               $resultOC = mysqli_query($this->link, $queryOC) or die(mysqli_error());
 

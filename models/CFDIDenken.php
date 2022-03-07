@@ -224,6 +224,8 @@ class CFDIDenken
     }
 
     function guardaPago($pagosE,$pagosD){
+        // error_log(json_encode($pagosD));
+        // error_log(json_encode($pagosE));
         $verifica = 0;
 
         $idEmpresaFiscal = $pagosE['idEmpresaFiscal'];

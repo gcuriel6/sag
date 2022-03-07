@@ -12,7 +12,7 @@ class Vision
 
     public $link;
 
-    function Vision()
+    function __construct()
     {
   
       $this->link = Conectarse();

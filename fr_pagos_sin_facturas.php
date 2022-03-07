@@ -198,6 +198,22 @@ session_start();
                             <input type="text" id="i_importe" name="i_importe" class="form-control form-control-sm"  autocomplete="off" >
                         </div>
                     </div>
+                    <div class="row form-group">
+                        <div class="col-md-3">
+                            <label for="s_clientes" class="col-form-label">Cliente</label>
+                            <select id="s_clientes" name="s_clientes" class="form-control form-control-sm"></select>
+                        </div>
+                    </div>
+                    <div class="row form-group">
+                        <div class="col-md-4">
+                            <label for="s_razones" class="col-form-label">Razon Social</label>
+                            <select id="s_razones" name="s_razones" class="form-control form-control-sm" disabled></select>
+                        </div>
+                        <div class="col-md-4">
+                            <label for="i_rfc" class="col-form-label">RFC</label>
+                            <input type="text" id="i_rfc" name="i_rfc" class="form-control form-control-sm" disabled></input>
+                        </div>
+                    </div>
                     <br>
                     <div class="row">
                          <div class="col-md-1">
@@ -384,6 +400,7 @@ session_start();
     var usuario='<?php echo $_SESSION['usuario']?>';
     var idPago = 0;
     var rfcInicial = '';
+    let objRazonesSociales = [];
 
     var matriz = <?php echo $_SESSION['sucursales']?>;
 
@@ -398,6 +415,8 @@ session_start();
         muestraSucursalesPermiso('s_filtro_sucursal',idUnidadActual,modulo,idUsuario);
 
         muestraCuentasBancos('s_banco', 0,1,idUnidadActual);
+        mostrarClientes();
+        mostrarRazones();
 
         //-->NJES May/07/2020 si la unindad es alarmas mostrar checkbox para buscar facturas a venta publico en general
         if(idUnidadActual == 2)
@@ -771,8 +790,7 @@ session_start();
             $('#i_importe').val(formatearNumero(total));
         }
 
-        $('#t_facturas').on('click', '#b_eliminar', function()
-        {
+        $('#t_facturas').on('click', '#b_eliminar', function(){
             $(this).parent().parent().remove();
             calculaTotalesImporte();
         });
@@ -794,28 +812,28 @@ session_start();
             var idSucursal = $('#s_id_sucursales').val();
 
             $('#b_guardar').prop('disabled',true);
-            if ($('#forma_general').validationEngine('validate'))
-            {
-                        
-                        var unidad = $('#s_id_unidades').val();
-                        var sucursal = $('#s_id_sucursales').val();
-                        var importe = $('#i_importe').attr('alt');
-                        var fecha = $('#i_fecha').val();
-                        var concepto = $('#i_concepto_ingreso').val();
-                        var descripcion = $('#i_descripcion').val();
+            if ($('#forma_general').validationEngine('validate')){                    
+                var unidad = $('#s_id_unidades').val();
+                var sucursal = $('#s_id_sucursales').val();
+                var importe = $('#i_importe').attr('alt');
+                var fecha = $('#i_fecha').val();
+                var concepto = $('#i_concepto_ingreso').val();
+                var descripcion = $('#i_descripcion').val();
+                let cliente = $("#s_clientes").val();
+                let razones = $("#s_razones").val();
 
-                        if(verificaLlaves(unidad,sucursal) != '')
-                        {
-                            mandarMensaje('Alguna de las partidas no cohincide con los datos principales.'); 
-                            $('#b_guardar').prop('disabled',false);
-                        }else{
-                            guardar('pago');
-                        }
-                    
-                }else{
-                    mandarMensaje('Debe existir por lo menos una factura para generar el pago.');
-                    $('#b_guardar').prop('disabled',false);
-                }
+                if(razones != null && razones != 0){
+                    if(verificaLlaves(unidad,sucursal) != ''){
+                        mandarMensaje('Alguna de las partidas no cohincide con los datos principales.'); 
+                        $('#b_guardar').prop('disabled',false);
+                    }else{
+                        guardar('pago');
+                    }    
+                }            
+            }else{
+                mandarMensaje('Debe existir por lo menos una factura para generar el pago.');
+                $('#b_guardar').prop('disabled',false);
+            }
         });
 
         //-->NJES April/03/2020 busca en array el valor recorrido, si regresa -1 quiere decir que no es igual y lo agrega al array
@@ -857,36 +875,30 @@ session_start();
                 'idCuentaBanco' : $('#s_banco').val(),
                 'fecha' : $('#i_fecha').val(),
                 'concepto' : $('#i_concepto_ingreso').val(),
-                'descripcion' : $('#i_descripcion').val()          
+                'descripcion' : $('#i_descripcion').val(),
+                'cliente' : $("#s_clientes").val(),
+                'razon' : $("#s_razones").val(),
+                'rfc' : $("#i_rfc").val()
             };
-
-            console.log(JSON.stringify(info));
 
             $.ajax({
                 type: 'POST',
                 url: 'php/pagos_guardar_sin_factura.php',
                 //dataType:"json", 
                 data:  {'datos':info},
-                success: function(data) 
-                {
-
+                success: function(data){
                     //console.log(data);
-                    if(data != 0 )
-                    {
-
+                    if(data != 0 ){
                         $('#i_id').val(data.id);
                         var id = data.id;
                         mandarMensaje('Se guardo correctamente');
-
-                    }
-                    else
+                    }else
                         mandarMensaje('Error al guardar.');
 
                     $('#b_guardar').prop('disabled',false);
 
                 },
-                error: function (xhr) 
-                {
+                error: function (xhr){
                     console.log('php/pagos_guardar_sin_factura.php --> '+JSON.stringify(xhr));
                     mandarMensaje('* Error al guardar.');
                     $('#b_guardar').prop('disabled',false);
@@ -923,8 +935,6 @@ session_start();
 
             return arreglo;
         }
-
-
 
         function eliminarPago(idPago){
             $.ajax({
@@ -975,8 +985,7 @@ session_start();
             return est;
         }
 
-        $('#b_buscar_pagos').click(function()
-        {
+        $('#b_buscar_pagos').click(function(){
 
             muestraSelectUnidades(matriz,'s_filtro_unidad',idUnidadActual);
             $('#forma_general').validationEngine('hide');
@@ -1036,8 +1045,7 @@ session_start();
             }
         });
         //--MGFS 21-02-2020 se agrega folio de factura---
-        function buscarPagos(idUnidadNegocio,idSucursal)
-        {
+        function buscarPagos(idUnidadNegocio,idSucursal){
 
             $('#i_filtro_pagos').val('');
             $('.renglon_pagos').remove();
@@ -1093,8 +1101,7 @@ session_start();
             });
         }
 
-        $('#t_pagos_buscar').on('click', '.renglon_pagos', function()
-        {
+        $('#t_pagos_buscar').on('click', '.renglon_pagos', function(){
 
             idPago = $(this).attr('alt');
             var idCliente = $(this).attr('cliente');
@@ -1111,8 +1118,7 @@ session_start();
 
         });
 
-        function muestraRegistro(idPago)
-        {
+        function muestraRegistro(idPago){
 
             $('#b_agregar').prop('disabled',true);
             $('#div_estatus').html('');
@@ -1124,11 +1130,8 @@ session_start();
                 data : {'id_pago': idPago},
                 success: function(data)
                 {
-
-
                     if(data.length >0)
                     {
-
                         var dato = data[0];
 
                         $('#s_id_unidades').val(dato.id_unidad_negocio);
@@ -1151,6 +1154,32 @@ session_start();
                         $('#i_importe').val(dato.monto);
 
                         $('#b_guardar').prop('disabled', true);
+
+                        
+
+                        if(dato.id_cliente == 0){
+                            $("#s_clientes").val(-1);
+                            $("#s_razones").html("<option value='0' disabled selected>...</option>");
+                            $("#i_rfc").val("");
+                        }else{
+                            $("#s_clientes").val(dato.id_cliente);
+                            $("#s_clientes").trigger("change");
+                        }
+
+                        if(dato.id_razon == 0){
+                            mandarMensaje("Este pago no tiene razon social registrada, se seleccionara por default si el cliente solo cuenta con una razon social.");
+                        }
+
+                        setTimeout(() => {
+                            let razones = $("#s_razones").val();
+
+                            if(razones == null || razones == 0 || razones == undefined){
+                                if(dato.id_razon != "" && dato.id_razon != 0){
+                                    $("#s_razones").val(dato.id_razon);
+                                    $("#s_razones").trigger("change");
+                                }
+                            }
+                        }, 700);
 
                         $('#dialog_buscar_pagos').modal('hide');
                         
@@ -1426,6 +1455,11 @@ session_start();
             $('#s_metodo_pago').prop('disabled',false);
             $('#s_razon_social').prop('disabled',false);
             $('#b_buscar_clientes').prop('disabled',false);
+
+            $("#s_razones").html("<option disabled selected value='0'>...</option>");
+            $("#s_razones").prop("disabled", true);
+            $("#i_rfc").val("");
+            $("#i_rfc").prop("disabled", true);
                 
         }
 
@@ -1443,8 +1477,7 @@ session_start();
             window.open("php/convierte_pdf.php?D="+datosJ,'_new');
         });
 
-        $('#b_descargar_acuse').click(function()
-        {
+        $('#b_descargar_acuse').click(function(){
 
             var datos = {
                 'path':'formato_acuse_pago',
@@ -1483,8 +1516,7 @@ session_start();
             mandaCorreo(idPago,folioPago,ruta,tipo);
         });
 
-        function generaPdf(id,folio,nombreArchivo,tipo,tipoAr)
-        {
+        function generaPdf(id,folio,nombreArchivo,tipo,tipoAr){
             var ruta = '../pagos/archivos/'+tipoAr+'_'+folio+'_'+id;
 
             var datos = {
@@ -1508,8 +1540,7 @@ session_start();
             });
         }
 
-        function generaXml(idPago,folioPago,ruta,nombreArchivo,tipoAr)
-        {
+        function generaXml(idPago,folioPago,ruta,nombreArchivo,tipoAr){
             $.post('php/pagos_generar_baja_xml.php',{'id':idPago,'folio':folioPago,'tipo':tipoAr},
             function(data_ruta)
             {
@@ -1529,8 +1560,7 @@ session_start();
             });
         }
 
-        function mandaCorreo(idPago,folioPago,ruta,tipo)
-        {
+        function mandaCorreo(idPago,folioPago,ruta,tipo){
             if(validarEmail( $('#dir_correo').val()) =='')
             {
 
@@ -1754,6 +1784,83 @@ session_start();
                 habilitaBotonFacturas();
             }
         });
+
+        $("#s_clientes").on("change",function(){
+            let idCliente = $(this).val();
+            $("#i_rfc").val("");
+
+            if(idCliente != null && idCliente != 0){
+                //todo here
+                let filtrados = objRazonesSociales.filter(x => x.id_cliente == idCliente);
+
+                if(filtrados.length == 0){
+                    $("#s_razones").html(`<option value="0" selected disabled>...</option>`);
+                    mandarMensaje("No hay razon social en este cliente");
+                    $("#s_razones").prop("disabled", true);
+                }else{
+                    if(filtrados.length > 1){
+                        $("#s_razones").html(`<option value="0" selected disabled>...</option>`);
+                        $("#s_razones").prop("disabled", false);
+                    }else{
+                        $("#s_razones").html(``);
+                        $("#s_razones").prop("disabled", true);
+                        setTimeout(() => {
+                            $("#s_razones").trigger("change");
+                        }, 300);
+                    }
+                    filtrados.forEach(ele => {
+                        $("#s_razones").append(`<option value="${ele.id}">${ele.nombre_corto} - ${ele.razon_social} (${ele.estatus})</option>`);
+                    });
+                }
+                $("#s_razones").select2();
+            }
+        });
+
+        $("#s_razones").on("change",function(){
+            let idRazon = $(this).val();
+
+            let filtrado = objRazonesSociales.filter(x => x.id == idRazon);
+
+            $("#i_rfc").val(filtrado[0].rfc);
+        });
+
+        function mostrarClientes(){
+            $.ajax({
+                type: 'POST',
+                url: 'php/clientes_buscar.php',
+                data:  {'estatus':0},
+                success: function(data){
+
+                    let arreglo = JSON.parse(data);
+
+                    $("#s_clientes").html(`<option value="0" selected disabled>...</option>`);
+                    
+                    arreglo.forEach(element => {
+                        $("#s_clientes").append(`<option value="${element.id}">${element.nombre_comercial}</option>`);
+                    });
+
+                    $("#s_clientes").select2();
+                    
+                },
+                error: function (xhr){
+                    console.log('php/clientes_buscar.php --> '+JSON.stringify(xhr));
+                }
+            });
+        }
+
+        function mostrarRazones(){
+            $.ajax({
+                type: 'POST',
+                url: 'php/razones_sociales_buscar.php',
+                data:  {'estatus':3},
+                success: function(data){
+                    objRazonesSociales = JSON.parse(data);                    
+                },
+                error: function (xhr){
+                    console.log('php/razones_sociales_buscar.php --> '+JSON.stringify(xhr));
+                }
+            });
+        } 
        
     });
 

@@ -12,7 +12,7 @@ class CxC
 
     public $link;
 
-    function CxC()
+    function __construct()
     {
   
       $this->link = Conectarse();
@@ -113,7 +113,7 @@ class CxC
                 $sucursal = ' AND a.id_sucursal ='.$idSucursal;
             }
 
-        $result = $this->link->query("SELECT 
+            $query = "SELECT 
                             a.id,
                             a.id_unidad_negocio,
                             a.fecha AS fecha, 
@@ -181,7 +181,12 @@ class CxC
                     AND a.id_orden_servicio=0 AND a.id_venta=0 AND SUBSTR(a.cve_concepto, 1, 1) = 'C' AND a.cargo_inicial=1
                     $condClientesActivos 
                     GROUP BY a.folio_cxc,a.id_factura,a.id_nota_credito
-                    ORDER BY a.id DESC");
+                    ORDER BY a.id DESC";
+
+            // echo $query;
+            // exit();
+
+            $result = $this->link->query($query);
         
             return query2json($result);
 
@@ -1365,7 +1370,7 @@ class CxC
       * @param varchar $datos array que contiene los datos a insertar
       *
     **/
-    function guardarPagoSinFactura($datos){ // aqui ojo
+    function guardarPagoSinFactura($datos){ // aqui ojo, GCM 16/Feb/22 - OK
         $verifica = 0;
 
         $idUnidadNegocio = $datos['idUnidadNegocio'];
@@ -1375,12 +1380,15 @@ class CxC
         $idCuentaBanco = $datos['idCuentaBanco'];
         $concepto = $datos['concepto'];
         $descripcion = $datos['descripcion'];
+        $cliente = $datos['cliente'];
+        $razon = $datos["razon"];
+        $rfc = $datos["rfc"];
 
         $folio = $this ->  obtenerFolioSinFactura($idUnidadNegocio); 
 
 
-        $query = "INSERT INTO pagos_sin_factura(id_unidad_negocio,id_sucursal,fecha,monto,id_cuenta_banco,concepto,descripcion,folio) 
-                    VALUES ('$idUnidadNegocio','$idSucursal','$fecha','$importe','$idCuentaBanco','$concepto','$descripcion','$folio')";
+        $query = "INSERT INTO pagos_sin_factura(id_unidad_negocio,id_sucursal,fecha,monto,id_cuenta_banco,concepto,descripcion,folio, id_cliente, rfc_cliente, id_razon_social) 
+                    VALUES ('$idUnidadNegocio','$idSucursal','$fecha','$importe','$idCuentaBanco','$concepto','$descripcion','$folio', $cliente, '$rfc', $razon)";
         $result = mysqli_query($this->link, $query) or die(mysqli_error());
         $id = mysqli_insert_id($this->link);
 

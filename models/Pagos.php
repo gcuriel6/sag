@@ -14,7 +14,7 @@ class Pagos
 
     public $link;
 
-    function Pagos()
+    function __construct()
     {
   
       $this->link = Conectarse();
@@ -116,6 +116,8 @@ class Pagos
       *
     **/
     function guardarPagos($datos){
+        // error_log(json_encode($datos));
+        // exit();
         $verifica = 0;
 
         $this->link->begin_transaction();
@@ -123,11 +125,13 @@ class Pagos
 
         $verifica = $this->guardarActualizar($datos);
 
-        if($verifica === 0)
+        if($verifica === 0){
+            // error_log("hizo rollback" );
             $this->link->query('ROLLBACK;');
-        else
+        }else{
+            // error_log("hizo commit" );
             $this->link->query("COMMIT;");
-
+        }
         return $verifica;
     }//- fin function guardarFacturacion
 
@@ -164,6 +168,7 @@ class Pagos
         $partidas = $datos['facturasPagar'];
         $pagosSustituir = isset($datos['pagosSustituir']) ? $datos['pagosSustituir'] : '';
         $tipo = isset($datos['tipo']) ? $datos['tipo'] :'';
+        $idPagoSF = isset($datos['pagoSF']) ? $datos['pagoSF'] : 0;
 
         //-->NJES April/03/2020 recibe bandera para indicar si es por mismo rfc
         $mismoRFC = $datos['mismoRFC'];
@@ -189,6 +194,7 @@ class Pagos
                 '$idRazonSocialCliente','$rfcCliente','$razonSocialCliente','$cpCliente',
                 '$idMetodoPago','$concepto','$formaPago','$fecha','$idCuentaBanco',
                 '$bancoCliente','$numCuentaCliente','$mismoRFC')";
+                // error_log($query);
         $result = mysqli_query($this->link, $query) or die(mysqli_error());
         $idPago = mysqli_insert_id($this->link);
 
@@ -224,7 +230,9 @@ class Pagos
                             'idUsuario'=>$idUsuario,
                             'moneda'=>$moneda,
                             'monto_usd'=>$importe,
-                            'tipo_cambio'=>$tipoCambio);
+                            'tipo_cambio'=>$tipoCambio,
+                            'idPagoSF'=>$idPagoSF
+                            );
 
         if ($result) 
           $verifica = $this->guardarPagosP($datosInfo); 
@@ -234,6 +242,53 @@ class Pagos
 
     function guardarPagosP($datosInfo){
         $verifica = 0;
+        // error_log("linea242".json_encode($datosInfo));
+        /*
+            "folio":3781,
+            "idPago":86395,
+            "idMetodoPago":"PPD",
+            "monto":"7000",
+            "fecha":"2022-02-23 23:00:00",
+            "idEmpresaFiscal":"2",
+            "partidas":[
+                "idFactura":"88100",
+                "uuidfactura":"630EC83E-EC54-46D8-92C7-9D504ED700A0",
+                "folioFactura":"13123",
+                "importe":"7000",
+                "importe_pesos":"7000",
+                "saldoAnterior":"57793.2400",
+                "saldo_anterior_original":"57793.2400",
+                "multipleCXC":"0",
+                "idServicio":"148"
+                ],
+            "pagosE":{
+                "folio":3781,
+                "fecha":"2022-02-23 23:00:00",
+                "idEmpresaFiscal":"2",
+                "rfcCliente":"GCE9910122T4",
+                "razonSocialCliente":"GCC CEMENTO S.A DE C.V",
+                "cpCliente":"32676",
+                "usuario":"JESSICALIMAS",
+                "idMetodoPago":"PPD",
+                "formaPago":"03",
+                "monto":"7000",
+                "pagosSustituir":"",
+                "tipo":"pagoSF",
+                "moneda":"MXN",
+                "tipo_cambio":1
+                },
+            "pagosSustituir":"",
+            "tipo":"pagoSF",
+            "idUnidadNegocio":"1",
+            "idSucursal":"2",
+            "idCuentaBanco":"6",
+            "tipoCuenta":"0",
+            "idUsuario":"316",
+            "moneda":"MXN",
+            "monto_usd":"7000",
+            "tipo_cambio":1,
+            "idPagoSF":"1"}
+        */
 
         $idPago = $datosInfo['idPago'];
         $monto = $datosInfo['monto'];
@@ -303,6 +358,7 @@ class Pagos
 
         $pagosSustituir = $datosInfo['pagosSustituir'];
         $tipo = $datosInfo['tipo'];
+        $idPagoSF = $datosInfo['idPagoSF'];
 
         $pagosE = $datosInfo['pagosE'];
 
@@ -355,7 +411,8 @@ class Pagos
                 VALUES ('$idPago','$idFactura','$uuidfactura','$folioFactura','$idMetodoPago',
                 '$saldoAnterior','$saldoInsolutoPesos','$importePesos','$numParcialidad','$multipleCXC',
                 '$idServicio','$importeUSD','$moneda','$saldoAnteriorOriginalUSD','$saldoInsolutoUSD')";
-            $result = mysqli_query($this->link, $query) or die(mysqli_error());
+                // error_log($query);
+            $result = mysqli_query($this->link, $query) or die(mysqli_error($this->link));
             $idPagoD = mysqli_insert_id($this->link);
 
             //->le voy agregando al array los registros
@@ -368,7 +425,7 @@ class Pagos
 
             if ($result) 
             {
-                
+                // error_log(json_encode($datosInfo));
                 //--MGFS SE AGREGA CONDICION DE MULTIPLE CXC PARA PAGAR VARIOS ID CXC CON UN SOLO PAGO
                 if($multipleCXC==0){
 
@@ -388,14 +445,22 @@ class Pagos
                     $valor=0;
                     if($tipoCuenta == 0)
                     {
-                        $valor = $cxcModelo-> guardarMovimientosBancos($idCxC,$arreglo);
+                        if($tipo == "pagoSF"){
+                            $valor = $this->actualizarPagosSinFactura($idPagoSF, $importe, $idCxC, $fecha, $idFactura, $folioFactura);
+                        }else{
+                            $valor = $cxcModelo-> guardarMovimientosBancos($idCxC,$arreglo);
+                        }                            
                     }else{
-                        $valor = $cxcModelo-> guardarGastoCajaChica($idCxC,$arreglo);
+                        if($tipo == "pagoSF"){
+                            $valor = $this->actualizarPagosSinFactura($idPagoSF, $importe, $idCxC, $fecha, $idFactura, $folioFactura);
+                        }else{
+                            $valor = $cxcModelo-> guardarGastoCajaChica($idCxC,$arreglo);
+                        }
                     }
 
-                    if((int)$valor > 0)
+                    if((int)$valor > 0){
                         $verifica = 1;
-                    else{
+                    }else{
                         $verifica = 0;
                         break;
                     }
@@ -417,16 +482,31 @@ class Pagos
         {
             if($this->actualizarFolio($idEmpresaFiscal, $folio, 'folio_pago') == 1)
             {
+                // error_log("holi");
                 $cfdiDenke = new CFDIDenken();  //--> hago una instancia de la otra clase para poder usar las funciones de la otra en esta
 
                 if($idMetodoPago == 'PPD')
                 {
                     if($tipo == 'sustituir')
                         $verifica = $this->guardaSustituirPago($idPago,$pagosE,$pagosD,$pagosSustituir);
-                    else{
+                    else{ //pago o pagoSF
                         $idCFDI = $cfdiDenke->guardaPago($pagosE,$pagosD); 
                         $verifica = $this->actualizaCFDIPago($idPago,$idCFDI);
                     }
+                    // switch($tipo){
+                    //     case "sustituir":
+                    //         $verifica = $this->guardaSustituirPago($idPago,$pagosE,$pagosD,$pagosSustituir);
+                    //         break;
+                    //     case "pago":
+                    //         $idCFDI = $cfdiDenke->guardaPago($pagosE,$pagosD);
+                    //         $verifica = $this->actualizaCFDIPago($idPago,$idCFDI);
+                    //         break;
+                    //     case "pagoSF":
+                    //         $idCFDI = $cfdiDenke->guardaPago($pagosE,$pagosD);
+                    //         $resultado = $this->actualizarPagosSinFactura($idPagoSF, $partidas);
+                    //         $verifica = $this->actualizaCFDIPago($idPago,$idCFDI);
+                    //         break;
+                    // }
                 }else{
                     //$verifica = json_encode(array('idPago'=>$idPago));
                     //-->NJES May/08/2020 generar registro de cfdi tambien cuando es PUE
@@ -441,9 +521,10 @@ class Pagos
                         $verifica = 0;
                 }
             
-            }else
+            }else{
+                // error_log("no holi");
                 $verifica = 0;
-
+            }
             //$this->actualizarFolio($idEmpresaFiscal, $folio, 'folio_pago');   
 
         }
@@ -1127,24 +1208,28 @@ class Pagos
         return $verifica;
     }//- fin function guardarpagossinfacturas
 
-function buscarPagosSinFacturaID($id)
-    {
+    function buscarPagosSinFacturaID($id){
+
+        $query = "SELECT a.id,
+                        a.folio,
+                        a.id_unidad_negocio,
+                        DATE(a.fecha) AS fecha,
+                        b.descr AS sucursal,
+                        a.id_sucursal,
+                        a.monto,
+                        a.concepto,
+                        a.descripcion,
+                        a.id_cuenta_banco,
+                        c.descripcion AS banco,
+                        a.id_cliente,
+                        a.rfc_cliente,
+                        a.id_razon_social as id_razon
+                    FROM pagos_sin_factura a
+                    INNER JOIN sucursales b ON a.id_sucursal=b.id_sucursal
+                    LEFT JOIN cuentas_bancos c ON a.id_cuenta_banco = c.id
+                    WHERE a.id = $id";
         
-        $result = $this->link->query("SELECT a.id,
-                    a.folio,
-                    a.id_unidad_negocio,
-                    DATE(a.fecha) AS fecha,
-                    b.descr AS sucursal,
-                    a.id_sucursal,
-                    a.monto,
-                    a.concepto,
-                    a.descripcion,
-                    a.id_cuenta_banco,
-                    c.descripcion AS banco
-                FROM pagos_sin_factura a
-                INNER JOIN sucursales b ON a.id_sucursal=b.id_sucursal
-                LEFT JOIN cuentas_bancos c ON a.id_cuenta_banco = c.id
-                WHERE a.id = $id");
+        $result = $this->link->query($query);
 
         return query2json($result);
 
@@ -1176,22 +1261,27 @@ function buscarPagosSinFacturaID($id)
             }else{  //-->trae fecha inicio y fecha fin
                 $fecha=" AND DATE(a.fecha) BETWEEN '$fechaInicio' AND '$fechaFin' ";
             }
+            
+            $query = "SELECT a.id,
+                                a.folio,
+                                DATE(a.fecha) AS fecha,
+                                b.descr AS sucursal,
+                                a.id_unidad_negocio,
+                                a.monto AS importe,
+                                a.concepto,
+                                a.descripcion,
+                                c.descripcion AS banco
+                        FROM pagos_sin_factura a
+                        INNER JOIN sucursales b ON a.id_sucursal=b.id_sucursal
+                        LEFT JOIN cuentas_bancos c ON a.id_cuenta_banco = c.id
+                        WHERE a.id_unidad_negocio=$idUnidadNegocio $sucursal $fecha
+                        GROUP BY a.id
+                        ORDER BY a.fecha DESC,a.id";
 
-            $result = $this->link->query("SELECT a.id,
-                                                    a.folio,
-                                                    DATE(a.fecha) AS fecha,
-                                                    b.descr AS sucursal,
-                                                    a.id_unidad_negocio,
-                                                    a.monto AS importe,
-                                                    a.concepto,
-                                                    a.descripcion,
-                                                    c.descripcion AS banco
-                                            FROM pagos_sin_factura a
-                                            INNER JOIN sucursales b ON a.id_sucursal=b.id_sucursal
-                                            LEFT JOIN cuentas_bancos c ON a.id_cuenta_banco = c.id
-                                            WHERE a.id_unidad_negocio=$idUnidadNegocio $sucursal $fecha
-                                            GROUP BY a.id
-                                            ORDER BY a.fecha DESC,a.id");
+                        // echo $query;
+                        // exit();
+
+            $result = $this->link->query($query);
         
             return query2json($result);
 
@@ -1203,7 +1293,91 @@ function buscarPagosSinFacturaID($id)
         }
     }//- fin function buscarPagos
 
+    // GCM 01/Mar/2022 se agrega funcion para traer PSF para el select en fr_pagos
+    function buscarPagosPSF($idRazonSocial, $idCliente){
 
+        $query = "SELECT concepto, descripcion, fecha, folio, id as idPsf, id_cuenta_banco, monto 
+                    FROM pagos_sin_factura
+                    WHERE id_cliente = $idCliente
+                        AND id_razon_social = $idRazonSocial
+                        AND estatus = 0";
+
+                    // echo $query;
+                    // exit();
+
+        $result = $this->link->query($query);
+
+        if($result){
+            return query2json($result);
+        }else{                
+            $arr = array();
+            return json_encode($arr);
+        }
+    }//- fin function buscarPagosPSF
+
+    function actualizarPagosSinFactura($idPagoSF, $importe, $idCxC, $fecha, $idFactura, $folioFactura){
+        $verificar = 0;
+
+        $idUsuario = $_SESSION["id_usuario"];
+
+        $query3 = "SELECT monto
+                    FROM pagos_sin_factura
+                    WHERE id = $idPagoSF";
+
+        $result3 = mysqli_query($this->link, $query3) or die(mysqli_error($this->link));
+
+        if($result3){
+            $row = mysqli_fetch_array($result3);
+            $monto = $row['monto'];
+
+            if($monto >= $importe){
+                $query = "INSERT INTO pagos_sin_factura_bitacora (fk_pago_sin_factura, monto_inicial, monto_final, monto_ingresado, id_usuario_captura, id_cxc)
+                    SELECT $idPagoSF, monto, (monto - $importe), $importe, $idUsuario, $idCxC
+                    FROM pagos_sin_factura
+                    WHERE id = $idPagoSF;";
+
+                $result = mysqli_query($this->link, $query) or die(mysqli_error($this->link));
+
+                if($result){
+                    $query2 = "UPDATE pagos_sin_factura
+                                SET monto = monto - $importe,
+                                    estatus = CASE
+                                                WHEN monto = 0 THEN 1
+                                                ELSE 0
+                                            END
+                                WHERE id = $idPagoSF;";
+
+                                error_log($query2);
+
+                    $result2 = mysqli_query($this->link, $query2) or die(mysqli_error($this->link));
+
+                    if($result2){
+                        $query4 = "UPDATE cxc
+                                    SET id_factura = $idFactura,
+                                        folio_factura = '$folioFactura',
+                                        mes = MONTH('$fecha'),
+                                        anio = YEAR('$fecha');";
+
+                        $result4 = mysqli_query($this->link, $query4) or die(mysqli_error($this->link));
+
+                        if($result4){
+                            $verificar = 1;
+                        }else{
+                            return 0;
+                        }
+                    }else{
+                        return 0;
+                    }
+                }else{
+                    return 0;
+                }
+            }else{
+                return 0;
+            }
+        }
+
+        return $verificar;
+    }
 
 }//--fin de class Pagos
     

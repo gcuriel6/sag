@@ -2272,7 +2272,6 @@ session_start();
                 data : {'empresa':idEmpresa, 'registro': idCFDI},
                 success: function(data)
                 {
-
                     console.log(data);
                     if(data == 'OK')
                     {

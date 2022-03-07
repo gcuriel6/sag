@@ -3,7 +3,9 @@
     // error_log("verificando sesion antes de");
     // error_log(json_encode($_SESSION));
 
-    // session_start();
+    if (session_status() === PHP_SESSION_NONE) {
+        session_start();
+    }
 
     // error_log("verificando sesion despues de");
     // error_log(json_encode($_SESSION));

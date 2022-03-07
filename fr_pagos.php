@@ -393,6 +393,17 @@ session_start();
 
                     <div class="row">
                         <div class="col-md-1">
+                        </div>
+                        <div class="col-md-1">
+                            <div class="form-check">
+                                <input class="form-check-input" id="ch_psf" type="checkbox">
+                                <label class="form-check-label">PSF</label>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="row">
+                        <div class="col-md-1">
                             <label for="s_concepto" class="col-form-label requerido">Concepto</label>
                         </div>
                         <div class="col-md-3">
@@ -505,7 +516,7 @@ session_start();
         </div>
         <div class="modal-body">
             <div class="row">
-                <div class="col-sm-12 col-md-10"><input type="text" name="i_filtro_empresa_fiscal" id="i_filtro_empresa_fiscal" class="form-control filtrar_renglones" placeholder="Filtrar" autocomplete="off"></div>
+                <div class="col-sm-12 col-md-10"><input type="text" name="i_filtro_empresa_fiscal" id="i_filtro_empresa_fiscal" class="form-control filtrar_renglones" placeholder="Filtrar" autocomplete="off" alt="renglon_empresa_fiscal"></div>
             </div>    
             <br>
             <div class="row">
@@ -762,6 +773,33 @@ session_start();
             </div>
             <div class="modal-footer">    
                 <button type="button" class="btn btn-dark btn-sm" data-dismiss="modal">Cerrar</button>
+            </div>
+        </div>
+    </div>
+</div>
+
+<div id="dialog_pagos_psf" class="modal fade bd-example-modal-lg" tabindex="-1" role="dialog" aria-labelledby="myLargeModalLabel" aria-hidden="true">
+    <div class="modal-dialog">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h5 class="modal-title">Pagos sin Factura</h5>
+                <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                    <span aria-hidden="true">&times;</span>
+                </button>
+            </div>
+            <div class="modal-body">
+                <div class="row">
+                    <div class="col-12">
+                        <div class="form-group">
+                            <label for="s_pagos_psf">Pagos</label>
+                            <select class="form-control" id="s_pagos_psf"></select>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="modal-footer">
+                <button type="button" class="btn btn-secondary btn-sm" data-dismiss="modal">Cerrar</button>
+                <button type="button" class="btn btn-primary btn-sm" id="btnGuardarPSF">Guardar</button>
             </div>
         </div>
     </div>
@@ -1074,6 +1112,7 @@ session_start();
 
             $('#i_filtro_facturas').val('');
             $('#t_facturas_buscar tbody').html('');
+            $('#b_buscar_facturas').prop("disabled", true);
 
             if($('#ch_factura_por_rfc').is(':checked'))
             {
@@ -1145,14 +1184,16 @@ session_start();
 
                         $('#t_facturas_buscar tbody').append(html);
                     }
+
+                    $('#dialog_buscar_facturas').modal('show');
+                    $('#b_buscar_facturas').prop("disabled", false);
                 },
                 error: function (xhr) {
                     console.log('php/facturacion_buscar_facturas_idCliente_un_cxc.php --> '+JSON.stringify(xhr));
                     mandarMensaje('* No se encontró información al buscar facturas.');
+                    $('#b_buscar_facturas').prop("disabled", false);
                 }
             });
-
-            $('#dialog_buscar_facturas').modal('show');
         }
 
         $('#t_facturas_buscar').on('click', '.renglon_facturas_s', function(){
@@ -1451,9 +1492,14 @@ session_start();
 
                             var idsServicios = idServicioMismoRFC();
                             //console.log(' '+idsServicios.length+' * '+JSON.stringify(idsServicios).indexOf(idCliente)+' '); 
-                            if(idsServicios.length > 1 && JSON.stringify(idsServicios).indexOf(idCliente) != -1)
-                                guardar('pago');
-                            else
+                            if(idsServicios.length > 1 && JSON.stringify(idsServicios).indexOf(idCliente) != -1){
+                                
+                                if($("#ch_psf").is(":checked")) {
+                                    mostrarModalPSF();
+                                }else{
+                                    guardar('pago');
+                                }  
+                            }else
                             {
                                 mandarMensaje('Debe existir por lo menos una factura para el cliente seleccionado y una factura para diferente cliente pero mismo RFC.');
                                 $('#b_guardar').prop('disabled',false);
@@ -1467,9 +1513,13 @@ session_start();
                             //unidad diferente de alarmas tenga partidas igual y diferente de sucursal pero mismo rfc
                             var idsSucursales = idSucursalMismoRFC();
                             console.log(' '+idsSucursales.length+' * '+JSON.stringify(idsSucursales).indexOf(idSucursal)+' ');
-                            if(idsSucursales.length > 1 && JSON.stringify(idsSucursales).indexOf(idSucursal) != -1)
-                                guardar('pago');
-                            else{
+                            if(idsSucursales.length > 1 && JSON.stringify(idsSucursales).indexOf(idSucursal) != -1){
+                                if($("#ch_psf").is(":checked")) {
+                                    mostrarModalPSF();
+                                }else{
+                                    guardar('pago');
+                                }   
+                            }else{
                                 mandarMensaje('Debe existir por lo menos una factura para la sucursale seleccionada y una factura para diferente sucursal pero mismo RFC.');
                                 $('#b_guardar').prop('disabled',false);
                             }
@@ -1488,8 +1538,13 @@ session_start();
                         {
                             mandarMensaje('Alguna de las partidas no cohincide con los datos principales.'); 
                             $('#b_guardar').prop('disabled',false);
-                        }else
-                            guardar('pago');
+                        }else{
+                            if($("#ch_psf").is(":checked")) {
+                                mostrarModalPSF();
+                            }else{
+                                guardar('pago');
+                            }  
+                        }
                     }
                 }else{
                     mandarMensaje('Debe existir por lo menos una factura para generar el pago.');
@@ -1549,6 +1604,16 @@ session_start();
             var metodoPago = $('#s_metodo_pago').val();
             var idEmpresa = $('#i_empresa_fiscal').attr('alt2');
 
+            let idCuentaBanco = $('#s_banco').val();
+            let fecha = $('#i_fecha').val();
+            let tipoCuenta = $('#s_banco option:selected').attr('alt2');
+
+            if(tipo == "pagoSF"){
+                idCuentaBanco = $("#s_pagos_psf option:selected").attr("alt2");
+                fecha = $("#s_pagos_psf option:selected").attr("alt1");
+                tipoCuenta = 0;
+            }
+
             if($('#ch_factura_por_rfc').is(':checked'))
                 var mismoRFC = 1;
             else
@@ -1564,26 +1629,27 @@ session_start();
                 'concepto' : $('#s_concepto').val(),
                 'formaPago' : $('#s_forma_pago').val(),
                 'bancoCliente' : $('#i_banco_cliente').val(),
-                'idCuentaBanco' : $('#s_banco').val(),
-                'idUsuario' : idUsuario,
-                'tipoCuenta' : $('#s_banco option:selected').attr('alt2'),
+                idCuentaBanco,
+                idUsuario,
+                tipoCuenta,
                 'numCuentaCliente' : $('#i_cuenta_cliente').val(),
-                'fecha' : $('#i_fecha').val(),
-                'usuario' : usuario,
+                fecha,
+                usuario,
                 'facturasPagar' : obtieneFacturasPagar(),
                 'idRazonSocialCliente' : $('#s_razon_social').val(),
                 'rfcCliente' : $('#i_rfc_cliente').val(),
                 'razonSocialCliente' : $('#s_razon_social option:selected').attr('alt6'),
                 'cpCliente' : $('#i_cp_cliente').val(),
                 'pagosSustituir' : obtienePagosSustituir(),
-                'tipo' : tipo,
+                tipo,
                 //-->NJES April/03/2020 envia bandera para indicar si es un pago por mismo rfc
-                'mismoRFC' : mismoRFC,
+                mismoRFC,
                 //-->NJES Jun/13/2021 agrega moneda y tipo de cambio
                 //en guinthercorp se cuarda el quivalente en pesos y en cfdi_denken2 se guarda el monto original
                 'moneda' : $('input[name=radio_moneda]:checked').val(),
                 'tipo_cambio' : quitaComa($('#i_tipo_cambio').val()),
-                'importe_pesos' : quitaComa($('#i_importe_pesos').val())
+                'importe_pesos' : quitaComa($('#i_importe_pesos').val()),
+                'pagoSF' : $("#s_pagos_psf").val()
             };
 
             console.log(JSON.stringify(info));
@@ -2578,6 +2644,7 @@ session_start();
 
             $('#dialog_relacion_pagos').modal('show');
         }
+
         $('#ch_venta_publico_general').click(function(){
             if($('#ch_venta_publico_general').is(':checked'))
             {
@@ -2646,6 +2713,64 @@ session_start();
 
             return importe;
         }
+
+        $('#ch_psf').change(function() {
+            let inputs = "#i_banco_cliente, #s_banco, #i_cuenta_cliente, #i_fecha";
+            if(this.checked) {
+                $(inputs).attr("disabled", true).removeClass("validate[required]");
+            }else{
+                $(inputs).attr("disabled", false).addClass("validate[required]");
+            }  
+        });
+
+        function mostrarModalPSF(){
+
+            var razon_social = $('#s_razon_social').val();
+            var idCliente = $('#i_cliente').attr('alt');
+
+            $.ajax({
+                type: 'POST',
+                url: 'php/buscar_pagos_psf.php',
+                dataType:"json", 
+                data : {razon_social, idCliente},
+                success: function(data) {
+                    $('#b_guardar').prop('disabled',false);
+                    if(data.length > 0){
+                        $("#s_pagos_psf").html("<option value='0' disabled selected>...</option>");
+
+                        data.map(function(x, y) {
+                            $("#s_pagos_psf").append(`<option value="${x.idPsf}" alt1="${x.fecha}" alt2="${x.id_cuenta_banco}">${x.monto} - ${x.folio} - ${x.concepto}</option>`);
+                        });
+
+                        $("#dialog_pagos_psf").modal("toggle");
+                    }else{
+                        mandarMensaje("No hay pagos sin factura para esta razón social");
+                    }
+                },
+                error: function (xhr) {
+                    console.log('php/buscar_pagos_psf.php --> '+JSON.stringify(xhr));
+                    mandarMensaje('* No se guardo pago sin factura');
+                    $('#b_guardar').prop('disabled',false);
+                }
+            });
+
+            $("#btnGuardarPSF").off("click");
+            $("#btnGuardarPSF").on("click", ()=>{
+                let idPsf = $("#s_pagos_psf").val();
+
+                if(idPsf != null && idPsf != 0){
+                    guardar('pagoSF');
+                }
+            });
+        }
+
+        // $('#ch_psf').change(function() {
+        //     if(this.checked) {
+                
+        //     }else{
+
+        //     }  
+        // });
        
     });
 
