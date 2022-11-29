@@ -31,7 +31,7 @@ SUM(l.precio_venta*l.cantidad) AS subtotal,
 -- (SUM(l.precio_venta*l.cantidad)*(a.iva/100)) AS total_iva
 SUM(l.cantidad*l.descuento_unitario) AS descuento_total,
 SUM((l.precio_venta*l.cantidad)*(l.iva/100)) as total_iva,
-SUM(l.precio_venta*l.cantidad)+SUM((l.precio_venta*l.cantidad)*(l.iva/100)) AS total
+SUM(l.precio_venta*l.cantidad)+SUM((l.precio_venta*l.cantidad)*(l.iva/100))-SUM(l.cantidad*l.descuento_unitario) AS total
 FROM almacen_e a
 LEFT JOIN almacen_d l ON a.id=l.id_almacen_e
 LEFT JOIN cat_unidades_negocio d ON a.id_unidad_negocio=d.id

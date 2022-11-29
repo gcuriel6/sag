@@ -106,7 +106,7 @@
                     </div>
                     <div class="col-sm-12 col-md-5"></div>
                     <div class="col-sm-12 col-md-2">
-                        <!--<button type="button" class="btn btn-primary btn-sm form-control" id="b_pdf"><i class="fa fa-print" aria-hidden="true"></i> PDF</button>-->
+                        <button type="button" class="btn btn-success btn-sm form-control" id="b_excel_2"><i class="fa fa-file-excel-o" aria-hidden="true"></i> EXCEL Tallas</button>
                     </div>
                     
                     <div class="col-sm-12 col-md-2">
@@ -687,6 +687,32 @@
             $('#i_nombre_excel').val('Detalle');
             $('#i_fecha_excel').val(hoy);
             $('#i_modulo_excel').val('DETALLE_MOV');
+            $('#i_datos_excel').val(JSON.stringify(datos));
+            
+            $("#f_imprimir_excel").submit();
+
+        });
+
+        $('#b_excel_2').click(function()
+        {
+
+            var html = '';
+            var aux = new Date();
+            var hoy = aux.getFullYear()+'_'+(aux.getMonth()+1)+'_'+aux.getDate();
+            
+
+
+            var datos = 
+            {
+                'id_sucursal':$('#s_id_sucursal').val(),
+                'id_producto':$('#i_id_producto').val(),
+                'fecha_de':$('#i_fecha_de').val(),
+                'fecha_a':$('#i_fecha_a').val()
+            };
+
+            $('#i_nombre_excel').val('Detalle');
+            $('#i_fecha_excel').val(hoy);
+            $('#i_modulo_excel').val('DETALLE_MOV_2');
             $('#i_datos_excel').val(JSON.stringify(datos));
             
             $("#f_imprimir_excel").submit();

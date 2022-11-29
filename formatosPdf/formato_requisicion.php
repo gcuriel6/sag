@@ -13,6 +13,11 @@ $arreglo = json_decode($datosD, true); //estoy recibiendo un json string, entonc
 
 $respuestaGoogle = ( currencyConverter("MXN","USD"));
 $taza = $respuestaGoogle["exhangeRate"];
+/*
+    Unidades de requis en dolares
+    -30 - Alimentos Mexicanos
+    -19 - FAM
+*/
 $unidadesDolares = array(30);
 
 $idRequisicion = $arreglo['idRegistro'];
@@ -52,7 +57,9 @@ $query = "SELECT
         requisiciones.total AS total,
 
       requisiciones.descuento AS descuento,
-      proveedores.nombre as proveedor
+      proveedores.nombre as proveedor,
+      requisiciones.b_anticipo,
+      requisiciones.monto_anticipo
       FROM requisiciones
       INNER JOIN cat_unidades_negocio ON requisiciones.id_unidad_negocio = cat_unidades_negocio.id
       INNER JOIN sucursales ON requisiciones.id_sucursal = sucursales.id_sucursal
@@ -237,12 +244,42 @@ th, td {
                 
             </td>
     </tr>
-    <tr>
-        <td colspan="5" width="50" class="datos"  ><b>Descripción</b></td> 
-    </tr>
-    <tr>
-        <td colspan="5" class="datos" ><?php echo normaliza($rowU['descripcion'],94); ?></td>
-    </tr>
+        <?php
+            $tiposAnticipo = [0,2,3];
+
+            if(in_array($rowU["tipo"],$tiposAnticipo)){
+                if($rowU["b_anticipo"]==1){
+                    ?>
+                        <tr>
+                            <td colspan="4" class="datos"><b>Descripción</b></td> 
+                            <td class="datos"><b>Anticipo</b></td> 
+                        </tr>
+                        <tr>
+                            <td colspan="4" class="datos" ><?php echo normaliza($rowU['descripcion'],94); ?></td>
+                            <td class="datos"><?php echo $rowU["monto_anticipo"]; ?></td>
+                        </tr>
+                    <?php
+                }else{
+                    ?>
+                        <tr>
+                            <td colspan="5" width="50" class="datos"  ><b>Descripción</b></td> 
+                        </tr>
+                        <tr>
+                            <td colspan="5" class="datos" ><?php echo normaliza($rowU['descripcion'],94); ?></td>
+                        </tr>
+                    <?php
+                }
+            }else{
+                ?>
+                    <tr>
+                        <td colspan="5" width="50" class="datos"  ><b>Descripción</b></td> 
+                    </tr>
+                    <tr>
+                        <td colspan="5" class="datos" ><?php echo normaliza($rowU['descripcion'],94); ?></td>
+                    </tr>
+                <?php
+            }
+        ?>
 </table>
    <br>
    <table width="710" class="borde_tabla2">

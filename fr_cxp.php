@@ -556,7 +556,13 @@ session_start();
                     {
                         var dato=arreglo[i];
                         
-                        saldoDisponibleCuentaB = dato.saldo_disponible;
+                        let saldo = 999999999;
+
+                        if(dato.saldo_disponible > 0){
+                            saldo = dato.saldo_disponible;
+                        }
+                        
+                        saldoDisponibleCuentaB = saldo;
               
                     }
                 },
@@ -627,14 +633,15 @@ session_start();
             {
                 if(parseFloat(quitaComa($('#i_saldo').val())) > 0)
                 {   
-                    console.log(parseFloat(saldoDisponibleCuentaB)+' - '+parseFloat(quitaComa($('#i_importe').val())));
-                    if(parseFloat(saldoDisponibleCuentaB) >= parseFloat(quitaComa($('#i_importe').val())))
-                    {  
+                    // console.log(parseFloat(saldoDisponibleCuentaB)+' - '+parseFloat(quitaComa($('#i_importe').val())));
+                    // if(parseFloat(saldoDisponibleCuentaB) >= parseFloat(quitaComa($('#i_importe').val())))
+                    // {  
+                        //2022-06-03 GCM - Se quita validador de saldo disponible para que siempre deje hacer el movimiento aun que no tenga saldo disponible
                         guardar();
-                    }else{
-                        mandarMensaje('El saldo actual de la cuenta banco '+$('#s_cuenta_banco option:selected').text()+' es insuficiente para realizar el movimiento.');
-                        $('#b_guardar').prop('disabled',false);
-                    }
+                    // }else{
+                    //     mandarMensaje('El saldo actual de la cuenta banco '+$('#s_cuenta_banco option:selected').text()+' es insuficiente para realizar el movimiento.');
+                    //     $('#b_guardar').prop('disabled',false);
+                    // }
                 }else{
                     var concepto = $('#s_concepto_cxp option:selected').attr('alt');
                     var res = concepto.substr(0, 1);

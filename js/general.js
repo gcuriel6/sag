@@ -1083,6 +1083,46 @@ function muestraSelectMunicipios(contenedor,idEstado){
     });
 }
 
+function muestraSelectRegimen(contenedor){
+
+    let miSelect = "#"+contenedor;
+
+    $(miSelect).select2();
+
+    var html='<option value="" disabled selected>Selecciona</option>';
+    $(miSelect).html(html);
+
+    $.ajax({
+
+            type: 'POST',
+            url: 'php/combos_buscar.php',
+            dataType:"json", 
+            data:{
+                'tipoSelect' : 'REGIMEN'
+            },
+            success: function(data) {
+                console.log(data);
+               
+                if(data!=0){
+
+                    var arreglo=data;
+                    for(var i=0;i<arreglo.length;i++){
+                        var dato=arreglo[i];
+                           
+                        html+='<option value="'+dato.id+'">'+dato.id+' - '+dato.descr+'</option>';
+                    }
+                    $(miSelect).html(html);
+
+                }
+
+            },
+            error: function (xhr) {
+                console.log("muestraSelectRegimen: "+JSON.stringify(xhr));    
+                mandarMensaje('* No se encontró información de Paises');
+            }
+     });
+}
+
 /*
 Limpia combo de paises, estados y municipios
 *idSelectPais = nombre id de select paises
@@ -3658,7 +3698,7 @@ function muestraSelectRazonesSociales(idCliente,idUnidadNegocio,contenedor)
                 for(var i=0;i<arreglo.length;i++)
                 {
                     var dato=arreglo[i];                    
-                    html+="<option value='"+dato.id+"' alt='"+dato.dias_cred+"' alt2='"+dato.rfc+"' alt3='"+dato.codigo_postal+"' alt4='"+dato.correo_facturas+"' alt5='"+dato.id_pais+"' alt6='"+dato.razon_social+"' alt7='"+dato.adenda+"'>"+ dato.nombre_corto + ' - ' + dato.razon_social+"</option>";
+                    html+="<option value='"+dato.id+"' alt='"+dato.dias_cred+"' alt2='"+dato.rfc+"' alt3='"+dato.codigo_postal+"' alt4='"+dato.correo_facturas+"' alt5='"+dato.id_pais+"' alt6='"+dato.razon_social+"' alt7='"+dato.adenda+"' alt8='"+dato.regimen_fiscal+"'>"+ dato.nombre_corto + ' - ' + dato.razon_social+"</option>";
                 }
 
                 $('#'+contenedor).html(html);

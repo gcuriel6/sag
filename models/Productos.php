@@ -892,6 +892,9 @@ class Productos
         GROUP BY productos.id
         ORDER BY familias.descripcion,lineas.descripcion,productos.concepto";
 
+        // echo $query;
+        // exit();
+
         $resultado = $this->link->query($query);
         
         return query2json($resultado);

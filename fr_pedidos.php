@@ -209,6 +209,13 @@
                     Campo no puede ir vacio. 
                   </div>
                 </div>
+                <div class="form-group col-md-6">
+                  <label>Dias de entrega</label>
+                  <input type="text" class="form-control" id="diasProspecto">
+                  <div class="invalid-feedback">
+                    Campo no puede ir vacio. 
+                  </div>
+                </div>
               </div>
               <div class="form-row">
                 <div class="form-group col-md-6">
@@ -356,7 +363,7 @@
               <select class="form-control" id="nombreClienteCotizacion"></select>
             </div>
           </div>
-          <div class="col-12">
+          <!-- <div class="col-12">
             <hr>
             <label>Seleccionar</label>
             <form id="formSelectMateria">
@@ -392,7 +399,7 @@
               <tbody>
               </tbody>
             </table>
-          </div>
+          </div> -->
         </div>
       </div>
       <div class="modal-footer">
@@ -661,14 +668,15 @@
 
     if(idCliente){
 
-      let materia = obtenerMaterias();
+      // let materia = obtenerMaterias();
 
-      if(materia){
-        // $("#tableListadoMaterias .quitarProducto").prop("disabled", true);
-        cambiarEstatusCotizacion(idCotiz, idCliente, 1, materia);
-      }else{
-        mandarMensaje("Hay que agregar por lo menos una materia prima");
-      }
+      // if(materia){
+      //   // $("#tableListadoMaterias .quitarProducto").prop("disabled", true);
+      //   cambiarEstatusCotizacion(idCotiz, idCliente, 1, materia);
+      // }else{
+      //   mandarMensaje("Hay que agregar por lo menos una materia prima");
+      // }
+      cambiarEstatusCotizacion(idCotiz, idCliente, 1, null);
       
     }else{
       mandarMensaje("Hay que seleccionar un cliente de la lista");
@@ -727,8 +735,30 @@
         'path':'formato_cotizacion_vision',
         'idCotiz':idCotiz,
         'nombreArchivo':'cotizacion',
-        'tipo':1
+        'tipo':5,
+        'enviar': 0
     };
+
+    // console.log(datos);
+
+    let objJsonStr = JSON.stringify(datos);
+    let datosJ = datosUrl(objJsonStr);
+
+    window.open("php/convierte_pdf.php?D="+datosJ,'_new');
+  });
+
+  $("#tableListadoHistorial").on("click",".btnEnviarPdf",function(){
+    let idCotiz = $( this ).closest( "tr" ).attr("alt");
+
+    var datos = {
+        'path':'formato_cotizacion_vision',
+        'idCotiz':idCotiz,
+        'nombreArchivo':'cotizacion',
+        'tipo':5,
+        'enviar': 1
+    };
+
+    // console.log(datos);
 
     let objJsonStr = JSON.stringify(datos);
     let datosJ = datosUrl(objJsonStr);
@@ -878,7 +908,8 @@
 
       h1[0].map((k,v, i)=>{
 
-        let btnPdf = `<button class="btn btn-danger btn-sm btnVerPdf"><i class="fas fa-file-pdf"></i></button>`;
+        let btnVerPdf = `<button class="btn btn-danger btn-sm btnVerPdf"><i class="fas fa-file-pdf"></i></button>`;
+        let btnEnviarPdf = `<button class="btn btn-primary btn-sm btnEnviarPdf"><i class="fas fa-envelope"></i></button>`;
 
         let btnCancelar = `<button class="btn btn-warning btn-sm btnCancelar"><i class="fas fa-ban"></i></button>`;
         let btnAprobar = `<button class="btn btn-success btn-sm btnAprobar"><i class="fas fa-check-circle"></i></button>`;
@@ -909,7 +940,7 @@
                     <td>${k.fecha}</td>
                     <td>${k.total}</td>
                     <td>${estatus}</td>
-                    <td>${todosBotones + btnPdf}</td>
+                    <td>${todosBotones + btnVerPdf + btnEnviarPdf}</td>
                   </tr>`;
 
         $("#tableListadoHistorial tbody").append(row);

@@ -642,8 +642,8 @@ class Requisiciones
                 $where
                 ORDER BY requisiciones.id DESC";
 
-                // echo $query;
-                // exit();
+                echo $query;
+                exit();
 
       $resultado = $this->link->query($query);
       return query2json($resultado);
@@ -934,6 +934,52 @@ class Requisiciones
                   ) AS tabla              
               GROUP BY tabla.familia
               ORDER BY tabla.familia ASC";
+
+      // echo $query;
+      // exit();
+
+      $result = mysqli_query($this->link,$query);
+      $numRows = mysqli_num_rows($result);
+      if($numRows>0){
+
+        $row = mysqli_fetch_array($result);
+        return $row['queda'];
+
+      }else{
+
+        return 0;
+      }
+
+    }
+
+    function buscarRequisicionesRequisitados($idFamilia,$idUnidad,$idSucursal,$idClas){
+
+      $query="SELECT
+                SUM(tabla.presupuesto) - SUM(tabla.ejercido) AS difer
+              FROM (
+                SELECT
+                  SUM(a.monto) AS presupuesto,
+                  0 AS ejercido
+                FROM presupuesto_egresos a 
+                LEFT JOIN fam_gastos b ON a.id_familia_gasto = b.id_fam
+                WHERE a.id_unidad_negocio=$idFamilia AND a.id_sucursal=$idSucursal AND a.id_familia_gasto=(SELECT id_familia_gasto FROM familias WHERE id=$idFamilia ) AND a.anio = YEAR(CURDATE())AND a.mes = MONTH(CURDATE())
+                GROUP BY a.id_familia_gasto
+                  
+                  UNION ALL
+              
+                SELECT
+                  0 as presupuesto,
+                  (re.total) as ejercido
+                FROM requisiciones re
+                INNER JOIN requisiciones_d rd ON rd.id_requisicion = re.id
+                WHERE re.estatus <> 7
+                AND re.id_unidad_negocio = $idUnidad
+                AND re.id_sucursal = $idSucursal
+                AND rd.id_familia = $idFamilia
+                AND YEAR(re.fecha_creacion) = YEAR(NOW())
+                AND MONTH(re.fecha_creacion) = MONTH(NOW())
+                  GROUP BY re.id
+              ) as tabla";
 
       // echo $query;
       // exit();

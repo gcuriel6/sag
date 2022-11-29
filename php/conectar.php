@@ -9,7 +9,7 @@
     // $link = mysqli_connect("ginthersoft.com", "sistemas", "Pass123#$%", "ginthercorp");
 
     // conexion de test en gintestcorp.com (Hostgatos)
-    $link = mysqli_connect("gintestcorp.com", "pruebagi_sistemas", "Pass123#$%.", "pruebagi_ginthercorp2");
+    $link = mysqli_connect("gintestcorp.com", "pruebagi_sistemas", "Pass123#$%.", "pruebagi_ginthercorp3");
     
     mysqli_set_charset($link,'utf8');
     if (!$link)

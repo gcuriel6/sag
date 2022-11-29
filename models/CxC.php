@@ -141,7 +141,8 @@ class CxC
                             ef.razon_social AS empresa_fiscal,
                             a.vencimiento AS fecha_vencimiento,
                             a.id_razon_social,
-                            d.rfc AS rfc_receptor  
+                            d.rfc AS rfc_receptor,
+                            IFNULL((SELECT GROUP_CONCAT(des_dep) deptos FROM facturas_deptos fd INNER JOIN deptos de ON fd.id_depto = de.id_depto WHERE fd.id_factura = a.id_factura),'') AS deptos
                             FROM cxc a           
                             LEFT JOIN cat_unidades_negocio b ON a.id_unidad_negocio=b.id           
                             LEFT JOIN sucursales c ON a.id_sucursal=c.id_sucursal   
@@ -1061,9 +1062,33 @@ class CxC
         
   
         return $verifica;
-      }//- fin function guardarMovimientosBancos
+    }//- fin function guardarMovimientosBancos
+
+    function guardarMovimientosBancosSF($idCxC,$datos){
+        $verifica = 0;
   
-      function guardarGastoCajaChica($idCxC,$datos){
+        $idCuentaBanco = $datos['idCuentaBanco'];
+        $idUsuario = $datos['idUsuario'];
+        $importe = $datos['importe'];
+        $categoria = $datos['categoria'];
+        $fecha = $datos['fecha'];
+        $fechaAplicacion = $datos['fechaAplicacion'];
+        
+        $query = "INSERT INTO movimientos_bancos(id_cuenta_banco,monto,tipo,id_usuario,observaciones,id_psf,fecha_aplicacion) 
+                  VALUES ('$idCuentaBanco','$importe','A','$idUsuario','$categoria','$idCxC','$fechaAplicacion')";
+                //   error_log($query);
+        $result = mysqli_query($this->link, $query) or die(mysqli_error());
+        
+        if($result)
+            $verifica = $idCxC;          
+        else
+          $verifica = 0;
+        
+  
+        return $verifica;
+    }//- fin function guardarMovimientosBancos
+  
+    function guardarGastoCajaChica($idCxC,$datos){
         $verifica = 0;
   
         $idUnidadNegocio = $datos['idUnidadNegocio'];
@@ -1108,13 +1133,13 @@ class CxC
         }
   
         return $verifica;
-      }//- fin function guardarGastoCajaChica
+    }//- fin function guardarGastoCajaChica
 
-       /**
-      * Busca los cargos y abonos de una factura de alarmas
-      * 
-      * @param int id_CxC de la factura
-      *
+    /**
+     * Busca los cargos y abonos de una factura de alarmas
+    * 
+    * @param int id_CxC de la factura
+    *
     **/
     function buscarRegistrosIdCxCAlarmas($idCxC,$tipo){
 
@@ -1417,7 +1442,7 @@ class CxC
                         'fechaAplicacion'=>$fecha
                     );
 
-                    $verifica = $this -> guardarMovimientosBancos($id,$arr); 
+                    $verifica = $this -> guardarMovimientosBancosSF($id,$arr); 
                 }
                 else{
                     $verifica = 0;

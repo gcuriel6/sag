@@ -294,7 +294,7 @@
                         </div>
                         <div class="row" id="div_varias_familias">
                             <div class="col-sm-12 col-md-11 badge badge-light">
-                                <label for="ch_varias_familias" class="col-form-label">Permitir diferentes familias de gastos</label>
+                                <label for="ch_varias_familias" class="col-form-label">Permitir diferentes familias (o clasificaciones) de gastos</label>
                                 <input type="checkbox" id="ch_varias_familias" name="ch_varias_familias" value="">
                             </div>
                         </div>
@@ -1814,6 +1814,97 @@
                 
         }
 
+        function verificarRequisitados(){
+
+            var verificaP = false;
+            let idUnidad = $('#s_id_unidad').val();
+            let idSucursal = $('#s_id_sucursal').val();            
+            let datosRows = [];
+            let clasifsSumadas = [];
+
+            //obtenemos todos los rows con su respectiva informacion
+            $("#t_partidas tbody tr").each(function()
+            { 
+                var idFamiliaT = $(this).attr('id_familia');
+                var idClas = $(this).attr('id_clas');
+                var costo = $(this).attr('costo');
+                //TODO Recorrer cada row y sumar los de misma clasificacion y meterlos en arreglo, y por cada elemento en mi arreglo hacer un each y verificar presupuesto
+                datosRows.push({costo, idFamiliaT, idClas});
+                
+            });
+
+            //ordenamos el arreglo en orden ascendiente para poder sumar las id_clasificacion
+            datosRows.sort((a, b) => {
+                return a.idClas - b.idClas;
+            });
+
+            let idClasAnterior = 0;
+            let idFamAnterior = 0;
+            let costoTotalClasif = parseFloat(0);
+
+            datosRows.forEach((e) => {
+                if(e.idClas != idClasAnterior){
+                    if(idClasAnterior != 0){
+                        clasifsSumadas.push({"idFam":idFamAnterior, "idClas":idClasAnterior, "costo":costoTotalClasif});
+                    }
+                    idClasAnterior = e.idClas;
+                    idFamAnterior = e.idFamiliaT;
+                    costoTotalClasif = parseFloat(e.costo);
+                }else{
+                    costoTotalClasif+= parseFloat(e.costo);
+                }
+            });
+            clasifsSumadas.push({"idFam":idFamAnterior, "idClas":idClasAnterior, "costo":costoTotalClasif});
+
+            let arregloPresupuestoVerificado = []
+
+            clasifsSumadas.forEach((e) => {
+                $.ajax({
+                        type: 'POST',
+                        url: 'php/requisiciones_verifica_requisitados.php',
+                    
+                        data:{
+                            'idFamilia' : e.idFam,
+                            'idUnidad' :  idUnidad,
+                            'idSucursal' : idSucursal,
+                            'idClas': e.idClas
+                        },
+                        async: false,
+                        success: function(data){                            
+
+                            $("#t_partidas tbody tr").each(function(){
+                                
+                                var idClas = $(this).attr('id_clas');
+
+                                if(idClas == e.idClas){
+                                    $(this).removeClass('excede');
+                                    $(this).removeAttr('excedePresupuesto');
+
+                                    if(parseFloat(e.costo)<= parseFloat(data)){
+                                        $(this).attr('excedePresupuesto',0);
+                                        verificaP = verificaP;
+                                    }else{
+                                        verificaP = true;
+                                        $(this).attr('excedePresupuesto',1);
+                                        $(this).addClass('excede');
+                                    }
+                                }
+
+                            });
+                            
+                        },
+                        error: function (xhr)
+                        {
+                            console.log('php/verifica_presupuesto_producto.php --->'+ JSON.stringify(xhr));
+                            mandarMensaje('* Ocurrio un error al verificar el presupuesto');//xhr.responseText
+                        }
+                });
+            });
+
+            return verificaP;
+                
+        }
+
         $(document).on('click','#modal_alerta2 .b_cancelar',function(){
             mandarMensaje('No se guardo la requisición, </br>modificala para que no exceda el presupuesto ó indica que si deseas continuar y exceda el presupuesto al guardar.');
         });
@@ -2237,8 +2328,13 @@
                             {
                                 if($('#i_anticipo').val() != '' && parseFloat(quitaComa($('#i_anticipo').val())) > 0 && parseFloat(quitaComa($('#i_anticipo').val())) <= parseFloat(quitaComa($('#i_total').val())))
                                 {
+                                    let verificaRequisitadas = verificarRequisitados();
+                                    if(verificaRequisitadas == true){
+                                        mandarMensaje("Productos en amarillo exceden presupuesto");
+                                    }
+
                                     var yaVerfico=verificarPresupuesto();
-                    
+                        
                                     if( yaVerfico == true){
                                         mandarMensajeConfimacion('Verifica los productos en amarillo, ya que exceden del presupuesto, ¿Deseas continuar?',0,'aceptar_presupuesto');
                                         $('#b_guardar').prop('disabled',false);
@@ -2252,6 +2348,11 @@
                                     $('#b_guardar').prop('disabled',false);
                                 }
                             }else{
+                                let verificaRequisitadas = verificarRequisitados();
+                                if(verificaRequisitadas == true){
+                                    mandarMensaje("Productos en amarillo exceden presupuesto");
+                                }
+                                
                                 var yaVerfico=verificarPresupuesto();
                     
                                 if( yaVerfico == true){

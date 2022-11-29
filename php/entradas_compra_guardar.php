@@ -24,6 +24,7 @@ $entradaA['idDepartamento'] = $_REQUEST['idDepartamento'];
 $entradaA['importe'] = $_REQUEST['importe'];
 $entradaA['foliosRequis'] = $_REQUEST['foliosRequis'];
 $entradaA['idsRequis'] = $_REQUEST['idsRequis'];
+$entradaA['montoIsr'] = $_REQUEST['montoIsr'];
 
 $partidas = $_REQUEST['partidas'];
 

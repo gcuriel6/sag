@@ -203,13 +203,27 @@ class RecibosAlarmas
                         WHEN cxc.estatus = 'C' THEN 'Cancelado'
                         WHEN cxc.estatus = 'A' THEN 'Activo'
                         WHEN cxc.estatus = 'T' THEN 'Timbrado'
+                        WHEN cxc.estatus = 'S' THEN 'Pagado'
                     END estatusCxc,
                     IFNULL(cxc.justificacion_cancelado, '') justiCanc,
                     CASE
                         WHEN fac.estatus = 'C' THEN 'Cancelado'
                         WHEN fac.estatus = 'A' THEN 'Activo'
                         WHEN fac.estatus = 'T' THEN 'Timbrado'
-                    END estatusFac
+                    END estatusFac,
+                    CASE
+                      WHEN cxc.id_venta > 0 THEN ne.vendedor
+                      ELSE ''
+                    END vendedor,
+                    CASE
+                      WHEN cxc.id_venta > 0 THEN ne.tecnico
+                      WHEN cxc.id_orden_servicio > 0 THEN so.tecnico
+                      ELSE ''
+                    END tecnico,
+                    CASE
+                      WHEN cxc.id_orden_servicio > 0 THEN us.usuario
+                      ELSE ''
+                    END usuarioCreacion
                   FROM cxc as cxc
                   LEFT JOIN sucursales suc ON suc.id_sucursal = cxc.id_sucursal
                   LEFT JOIN servicios ser ON cxc.id_razon_social_servicio = ser.id
@@ -218,6 +232,7 @@ class RecibosAlarmas
                   LEFT JOIN servicios_cat_planes scp ON sbp.id_plan = scp.id
                   LEFT JOIN notas_e ne ON ne.id = cxc.id_venta
                   LEFT JOIN servicios_ordenes so ON cxc.id_orden_servicio = so.id
+                  LEFT JOIN usuarios us ON so.id_usuario_captura = us.id_usuario
                   LEFT JOIN (
                     SELECT SUM(importe_pagado) abono, id_factura
                       FROM pagos_d

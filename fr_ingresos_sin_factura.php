@@ -90,13 +90,25 @@ session_start();
                             <div class="row">
                                 <div class="col-sm-12 col-md-10">
                                     <div class="form-group row">
-                                        <div class="col-sm-12 col-md-6">
-                                            <label for="s_id_unidad" class="col-form-label requerido">Unidad de Negocio </label>
-                                            <select id="s_id_unidad" name="s_id_unidad" class="form-control validate[required]" autocomplete="off" style="width:100%;"></select>
+                                        <div class="col-sm-12 col-md-3">
+                                            <label for="s_id_unidad" class="col-form-label">Unidad de Negocio </label>
+                                            <select id="s_id_unidad" name="s_id_unidad" class="form-control" autocomplete="off" style="width:100%;"></select>
                                         </div>
-                                        <div class="col-sm-12 col-md-6">
-                                            <label for="s_id_sucursal" class="col-form-label requerido">Sucursal </label>
-                                            <select id="s_id_sucursal" name="s_id_sucursal" class="form-control validate[required]" autocomplete="off" style="width:100%;"></select>
+                                        <div class="col-sm-12 col-md-1">
+                                            <label for="">SIN Unidad</label>
+                                            <input type="checkbox" name="" id="ch_sin_unidad">
+                                        </div>
+                                        <div class="col-sm-12 col-md-1">
+                                            <label for="">FONDEO</label>
+                                            <input type="checkbox" name="" id="ch_fondeo">
+                                        </div>
+                                        <div class="col-sm-12 col-md-4">
+                                            <label for="s_id_sucursal" class="col-form-label">Sucursal </label>
+                                            <select id="s_id_sucursal" name="s_id_sucursal" class="form-control" autocomplete="off" style="width:100%;"></select>
+                                        </div>
+                                        <div class="col-sm-12 col-md-4">
+                                            <label for="s_cuenta" class="col-form-label requerido">Cuenta</label>
+                                            <select id="s_cuenta" name="s_cuenta" class="form-control form-control-sm validate[required]" autocomplete="off" style="width:100%;"></select>
                                         </div>
                                     </div>
                                 </div>
@@ -151,23 +163,23 @@ session_start();
                                 </div>
                             </div>-->
 
-                            <div class="row">
+                            <!-- <div class="row">
                                 <div class="col-sm-12 col-md-5">
-                                    <label for="s_id_area" class="col-form-label requerido">Área </label>
-                                    <select id="s_id_area" name="s_id_area" class="form-control validate[required]" autocomplete="off" style="width:100%;"></select>
+                                    <label for="s_id_area" class="col-form-label">Área </label>
+                                    <select id="s_id_area" name="s_id_area" class="form-control" autocomplete="off" style="width:100%;"></select>
                                 </div>
                                 <div class="col-sm-12 col-md-1"></div>
                                 <div class="col-sm-12 col-md-5">
-                                    <label for="s_id_departamento" class="col-form-label requerido">Departamento Interno </label>
-                                    <select id="s_id_departamento" name="s_id_departamento" class="form-control form-control-sm validate[required]" autocomplete="off" style="width:100%;"></select>
+                                    <label for="s_id_departamento" class="col-form-label">Departamento Interno </label>
+                                    <select id="s_id_departamento" name="s_id_departamento" class="form-control form-control-sm" autocomplete="off" style="width:100%;"></select>
                                 </div>
-                            </div>
-                            <div class="row">
+                            </div> -->
+                            <!-- <div class="row">
                                 <div class="col-sm-12 col-md-5">
-                                    <label for="i_empresa_fiscal" class="col-form-label requerido">Empresa </label>
+                                    <label for="i_empresa_fiscal" class="col-form-label">Empresa </label>
                                     <div class="row">
                                         <div class="input-group col-sm-12 col-md-12">
-                                            <input type="text" id="i_empresa_fiscal" name="i_empresa_fiscal" class="form-control validate[required]" readonly autocomplete="off" aria-describedby="b_buscar_empresa">
+                                            <input type="text" id="i_empresa_fiscal" name="i_empresa_fiscal" class="form-control" readonly autocomplete="off" aria-describedby="b_buscar_empresa">
                                             <div class="input-group-btn">
                                                 <button class="btn btn-primary" type="button" id="b_buscar_empresa" style="margin:0px;">
                                                     <i class="fa fa-search" aria-hidden="true"></i>
@@ -177,22 +189,18 @@ session_start();
                                     </div>
                                 </div>
                                 <div class="col-sm-12 col-md-1"></div>
-                                <div class="col-sm-12 col-md-5">
-                                    <label for="s_cuenta" class="col-form-label requerido">Cuenta</label>
-                                    <select id="s_cuenta" name="s_cuenta" class="form-control form-control-sm validate[required]" autocomplete="off" style="width:100%;"></select>
-                                </div>
-                            </div>
+                                
+                            </div> -->
                             <div class="form-group row">
-                                <div class="col-sm-12 col-md-5">
+                                <div class="col-sm-12 col-md-4">
                                     <label for="s_tipo_ingreso" class="col-form-label requerido">Tipo Ingreso </label>
                                     <select id="s_tipo_ingreso" name="s_tipo_ingreso" class="form-control form-control-sm validate[required]" autocomplete="off" style="width:100%;"></select>
                                 </div>
-                                <div class="col-sm-12 col-md-1"></div>
-                                <div class="col-sm-12 col-md-3">
+                                <div class="col-sm-12 col-md-4">
                                     <label for="i_importe" class="col-form-label requerido">Importe </label>
                                     <input type="text" class="form-control validate[required,custom[number],min[0.01]]" id="i_importe" name="i_importe" autocomplete="off">
                                 </div>
-                                <div class="col-sm-12 col-md-3">
+                                <div class="col-sm-12 col-md-4">
                                     <label for="i_fecha" class="col-form-label requerido">Fecha </label>
                                     <input type="text" id="i_fecha" name="i_fecha" readonly class="form-control form-control-sm fecha validate[required]" autocomplete="off"/>
                                 </div>
@@ -412,6 +420,7 @@ session_start();
         muestraSelectUnidades(matriz, 's_id_unidad', idUnidadActual);
         muestraSucursalesPermiso('s_id_sucursal', idUnidadActual, modulo,idUsuario);
         muestraAreasAccesoValor('s_id_area',3);
+        muestraCuentasBancosCajaChicaSucursal('s_cuenta',$('#s_id_unidad').val(),0);
 
         $('#s_id_unidad').change(function()
        {
@@ -677,7 +686,7 @@ session_start();
         /* funcion que manda a generar la insecion o actualizacion de un registro */    
         function guardar(){
 
-         $.ajax({
+            $.ajax({
                 type: 'POST',
                 url: 'php/ingresos_sin_factura_guardar.php', 
                 dataType:"json", 
@@ -727,11 +736,44 @@ session_start();
             var paquete = [];
                 paquete[0]= 1;
             var cont = 0;
+
+            let unidad = $('#s_id_unidad').val();
+            let sucursal = 0;
+            let area = 0;
+            let dept = 0;
+            let empr = 0;
+            let fondeo = 0;
+
+            // if($('#i_empresa_fiscal').attr('alt') != "" && $('#i_empresa_fiscal').attr('alt') != 0 && $('#i_empresa_fiscal').attr('alt') != NULL){
+            //     empr = $('#i_empresa_fiscal').attr('alt');
+            // }
+
+            
+            if ($('#ch_sin_unidad').is(':checked')) {
+                unidad = 0;
+            }
+
+            if ($('#ch_fondeo').is(':checked')) {
+                fondeo = 1;
+            }
+
+            if($('#s_id_sucursal').val() != 0 && $('#s_id_sucursal').val() != "" && $('#s_id_sucursal').val() != null){
+                sucursal = $('#s_id_sucursal').val();
+            }
+
+            // if($('#s_id_area').val() != 0 && $('#s_id_area').val() != "" && $('#s_id_area').val() != NULL){
+            //     area = $('#s_id_area').val();
+            // }
+
+            // if($('#s_id_departamento').val() != 0 && $('#s_id_departamento').val() != "" && $('#s_id_departamento').val() != NULL){
+            //     dept = $('#s_id_departamento').val();
+            // }
+
             var paq = {
                     'tipoMov'   : tipoMov,
                     'idUsuario' : idUsuario,
                     'idIngreso' : idIngreso,
-                    'idEmpresa' : $('#i_empresa_fiscal').attr('alt'),
+                    'idEmpresa' : empr,
                     'idBanco' : idBanco,
                     'cuenta' : $('#s_cuenta').val(),
                     'idTipoIngreso' : $('#s_tipo_ingreso').val(),
@@ -741,10 +783,11 @@ session_start();
                     'justificacion' :  $('#ta_justificacion').val(),
                     'tipoCuenta' : $('#s_cuenta option:selected').attr('alt2'),
                     'descripcion' : $('#s_cuenta option:selected').text(),
-                    'idUnidadNegocio': $('#s_id_unidad').val(),
-                    'idSucursal': $('#s_id_sucursal').val(),
-                    'idArea': $('#s_id_area').val(),
-                    'idDepartamento': $('#s_id_departamento').val()
+                    'idUnidadNegocio': unidad,
+                    'idSucursal': sucursal,
+                    'idArea': area,
+                    'idDepartamento': dept,
+                    fondeo
                 }
                 paquete.push(paq);
               
@@ -782,6 +825,8 @@ session_start();
             muestraSucursalesPermiso('s_id_sucursal', idUnidadActual, modulo,idUsuario);
             muestraAreasAccesoValor('s_id_area',3);
             $('#s_id_departamento').html('');
+            $('#ch_sin_unidad').prop('checked',false);
+            $('#ch_fondeo').prop('checked',false);
         }
 
         $('#b_cancelar').on('click',function(){

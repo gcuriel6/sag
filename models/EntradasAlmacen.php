@@ -50,6 +50,8 @@ class EntradasAlmacen
       *
       **/ 
       function guardarActualizar($datos){
+        // print_r($datos);
+        // exit();
        
         $verifica = 0;
 
@@ -187,95 +189,92 @@ class EntradasAlmacen
             }
           }
 
-          if($familia_usados == 1 && $familiaAnterior != 'UNIFORMES USADOS')
-            {
-
+          if($familia_usados == 1 && $familiaAnterior != 'UNIFORMES USADOS'){
              
-                if($this->actualizaProducto($idAlmacenD, $idProducto) == true )
-                  $verifica = $folio;
-                else
-                {
-                  $verifica = 0;
-                  break;
-                }
-             
-
-            }
+            if($this->actualizaProducto($idAlmacenD, $idProducto) == true )
+              $verifica = $folio;
             else
             {
+              $verifica = 0;
+              break;
+            }
+
+          }else{
 
               if($tipoEntrada == 'E02')
               {
-                $busca = "SELECT id_unidad_negocio,id_sucursal,id_departamento,id_area 
-                        FROM almacen_e WHERE id=$idEntrada";
-                $result1 = mysqli_query($this->link, $busca) or die(mysqli_error());
-                $row1 = mysqli_fetch_array($result1);
+                // $busca = "SELECT id_unidad_negocio,id_sucursal,id_departamento,id_area 
+                //         FROM almacen_e WHERE id=$idEntrada";
+                // $result1 = mysqli_query($this->link, $busca) or die(mysqli_error());
+                // $row1 = mysqli_fetch_array($result1);
           
-                $idUnidadNegocio = $row1['id_unidad_negocio'];
-                $idSucursal = $row1['id_sucursal'];
-                //$idDepartamento = $row1['id_departamento'];
-                //$idArea = $row1['id_area'];
+                // $idUnidadNegocio = $row1['id_unidad_negocio'];
+                // $idSucursal = $row1['id_sucursal'];
+                // //$idDepartamento = $row1['id_departamento'];
+                // //$idArea = $row1['id_area'];
 
-                //-- MGFS 21-01-2020 SE AGREGA ID AREA Y ID DEPARTAMENTO CUANDO ES ENTRADA POR DEVOLUCION DE UNIFORME(E02)
-                $buscaDepto="SELECT id_depto 
-                FROM deptos 
-                WHERE des_dep='RECLUTAMIENTO, SELECCION Y CONTRATACION' AND id_sucursal=".$idSucursal;
-                $resultDepto = mysqli_query($this->link, $buscaDepto) or die(mysqli_error());
-                $rowDepto=mysqli_fetch_array($resultDepto);
+                // //-- MGFS 21-01-2020 SE AGREGA ID AREA Y ID DEPARTAMENTO CUANDO ES ENTRADA POR DEVOLUCION DE UNIFORME(E02)
+                // $buscaDepto="SELECT id_depto 
+                // FROM deptos 
+                // WHERE des_dep='RECLUTAMIENTO, SELECCION Y CONTRATACION' AND id_sucursal=".$idSucursal;
+                // $resultDepto = mysqli_query($this->link, $buscaDepto) or die(mysqli_error());
+                // $rowDepto=mysqli_fetch_array($resultDepto);
 
-                $idDepartamento = $rowDepto['id_depto'];
-                $idArea = 4;//--POR PARTE DE SECORP SE INGRESA ESTA AREA SIEMPRE
-                $idFamiliaGasto = 43;
-                //----MGFS 21-01-2020  LA CLASIFICACION SERA POR UNIDAD PERO SE VAN ASIGNANDO 
-                //----YA QUE NO ESTA LIGADO A AUN ID UNIDAD SOLO AL ID FAMILIA GASTO PERO SOLO HAY 3 EN ESTE MOMENTO:
-                //----116 - SECORP para unidad de negocio 1
-                //----117 - REAL SHINY para unidad de negocio 4
-                //----115 - GUARDERIAS para unidad de negocio  12
-                if($idUnidadNegocio == 1){
+                // $idDepartamento = $rowDepto['id_depto'];
+                // $idArea = 4;//--POR PARTE DE SECORP SE INGRESA ESTA AREA SIEMPRE
+                // $idFamiliaGasto = 43;
+                // //----MGFS 21-01-2020  LA CLASIFICACION SERA POR UNIDAD PERO SE VAN ASIGNANDO 
+                // //----YA QUE NO ESTA LIGADO A AUN ID UNIDAD SOLO AL ID FAMILIA GASTO PERO SOLO HAY 3 EN ESTE MOMENTO:
+                // //----116 - SECORP para unidad de negocio 1
+                // //----117 - REAL SHINY para unidad de negocio 4
+                // //----115 - GUARDERIAS para unidad de negocio  12
+                // if($idUnidadNegocio == 1){
 
-                  $idClasificacion = 116;
+                //   $idClasificacion = 116;
 
-                }elseif($idUnidadNegocio == 4){
+                // }elseif($idUnidadNegocio == 4){
 
-                  $idClasificacion = 117;
+                //   $idClasificacion = 117;
 
-                }elseif($idUnidadNegocio==12){
+                // }elseif($idUnidadNegocio==12){
 
-                  $idClasificacion = 115;
+                //   $idClasificacion = 115;
 
-                }else{
-                  $idClasificacion = isset($datos['idClasificacion']) ? $datos['idClasificacion'] : 0;
-                }
+                // }else{
+                //   $idClasificacion = isset($datos['idClasificacion']) ? $datos['idClasificacion'] : 0;
+                // }
                 
 
-                $importeC = $importe*(-1);
+                // $importeC = $importe/**(-1)*/;
 
-                //-->NJES June/17/2020 DEN18-2760 Se quita el area y departamento al hacer la afectación a presupuesto egreso (movimientos_presupuesto)
-                //se crea un modelo y funcion para afectar el presupuesto egresos y no se encuentre el insert en varios archivos
-                $arr = array('idAlmacenD'=>$idAlmacenD,
-                            'total'=>$importeC,
-                            'idUnidadNegocio'=>$idUnidadNegocio,
-                            'idSucursal'=>$idSucursal,
-                            'idFamiliaGasto'=>$idFamiliaGasto,
-                            'clasificacionGasto'=>$idClasificacion,
-                            'tipo'=>'C'
-                          );
+                // //-->NJES June/17/2020 DEN18-2760 Se quita el area y departamento al hacer la afectación a presupuesto egreso (movimientos_presupuesto)
+                // //se crea un modelo y funcion para afectar el presupuesto egresos y no se encuentre el insert en varios archivos
+                // $arr = array('idAlmacenD'=>$idAlmacenD,
+                //             'total'=>$importeC,
+                //             'idUnidadNegocio'=>$idUnidadNegocio,
+                //             'idSucursal'=>$idSucursal,
+                //             'idFamiliaGasto'=>$idFamiliaGasto,
+                //             'clasificacionGasto'=>$idClasificacion,
+                //             'tipo'=>'C'
+                //           );
 
-                $afectarPresupuesto = new MovimientosPresupuesto();
+                // $afectarPresupuesto = new MovimientosPresupuesto();
 
-                $movP = $afectarPresupuesto->guardarMovimientoPresupuesto($arr); 
+                // $movP = $afectarPresupuesto->guardarMovimientoPresupuesto($arr); 
 
-                if($movP > 0)
-                {
-                  if($i==$detalle[0])
-                  {
-                    $verifica = $folio;
-                    break;
-                  }
-                }else{
-                  $verifica = 0;
-                  break;
-                }
+                // if($movP > 0)
+                // {
+                //   if($i==$detalle[0])
+                //   {
+                //     $verifica = $folio;
+                //     break;
+                //   }
+                // }else{
+                //   $verifica = 0;
+                //   break;
+                // }
+                //19/Julio/2022 GCM se comenta todo lo de afectar presupuesto
+                $verifica = $folio;
 
               }else{
                 if($i==$detalle[0])

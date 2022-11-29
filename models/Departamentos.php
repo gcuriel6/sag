@@ -75,97 +75,97 @@ class Departamentos
       * @param int $ininactivo estatus de una departamento  1='inactivo' 0='Ininactivo'  
       *
       **/ 
-      function guardarActualizar($datos){
-          
+    function guardarActualizar($datos){
+        
+      $verifica = 0;
+
+      $idDepartamento = $datos[1]['idDepartamento'];
+      $tipo_mov = $datos[1]['tipo_mov'];
+      $clave = $datos[1]['clave'];
+      $descripcion = $datos[1]['descripcion'];
+      $idSucursal = $datos[1]['idSucursal'];
+      $idUnidad = $datos[1]['idUnidad'];
+      $idArea = $datos[1]['idArea'];
+      $servicioInicio = $datos[1]['servicioInicio'];
+      $domicilio = $datos[1]['domicilio'];
+      $colonia = $datos[1]['colonia'];
+      $cp = $datos[1]['cp'];
+      $numInt = $datos[1]['numInt'];
+      $numExt = $datos[1]['numExt'];
+      $tipo = $datos[1]['tipo'];
+      $idPais = $datos[1]['idPais'];
+      $idEstado = $datos[1]['idEstado'];
+      $idMunicipio = $datos[1]['idMunicipio'];
+      $idDepartamentoNomina = $datos[1]['idDepartamentoNomina'];
+      $idDepartamentoInterno = $datos[1]['idDepartamentoInterno'];
+      $ubicacion = $datos[1]['ubicacion'];
+      $inactivo = $datos[1]['inactivo'];
+      $idSupervisor = (isset($datos[1]['idSupervisor'])!='')?$datos[1]['idSupervisor']:0;
+      //---MGFS 08-01-2020 ESTO ES PARA QUE PUEDAN ACCESAR DESDE EL PORTAL 
+      $presupuesto=0;
+      if($tipo=='O'){
+        $presupuesto=1;
+      }
+
+      //-->NJES Feb/14/2020 se reciben parametros cliente y razón social para generar contrato cliente
+      $idCliente = (isset($datos[1]['idCliente'])!='')?$datos[1]['idCliente']:0;
+      $idRazonSocialCliente = (isset($datos[1]['idRazonSocialCliente'])!='')?$datos[1]['idRazonSocialCliente']:0;
+      $idContrato = (isset($datos[1]['idContrato'])!='')?$datos[1]['idContrato']:0;
+
+      if($tipo_mov==0){
+
+        $query = "INSERT INTO deptos(cve_dep,des_dep,id_compania,id_unidad_negocio,id_sucursal,id_area,presupuesto,inactivo,domicilio,no_int,no_ext,colonia,codigo_postal,id_pais,
+        id_estado,id_municipio,id_departamento_nomina,id_departamento_interno,ubicacion,tipo,inicio_servicio,id_supervisor) VALUES ('$clave','$descripcion','$idSucursal','$idUnidad','$idSucursal'
+        ,'$idArea','$presupuesto','$inactivo','$domicilio','$numInt','$numExt','$colonia','$cp','$idPais','$idEstado','$idMunicipio','$idDepartamentoNomina','$idDepartamentoInterno','$ubicacion','$tipo','$servicioInicio','$idSupervisor')";
+        $result = mysqli_query($this->link, $query) or die(mysqli_error());
+        $idDepartamento = mysqli_insert_id($this->link);
+
+      }else{
+
+        $query = "UPDATE deptos SET 
+        cve_dep='$clave', 
+        des_dep='$descripcion', 
+        id_compania='$idSucursal',
+        id_unidad_negocio='$idUnidad', 
+        id_sucursal='$idSucursal',
+        id_area='$idArea', 
+        presupuesto='$presupuesto',
+        inactivo='$inactivo', 
+        domicilio='$domicilio', 
+        no_int='$numInt',
+        no_ext='$numExt', 
+        colonia='$colonia',
+        codigo_postal='$cp',
+        id_pais='$idPais', 
+        id_estado='$idEstado', 
+        id_municipio='$idMunicipio', 
+        id_departamento_nomina='$idDepartamentoNomina',
+        id_departamento_interno='$idDepartamentoInterno',
+        ubicacion='$ubicacion',
+        tipo='$tipo',
+        inicio_servicio='$servicioInicio',
+        id_supervisor='$idSupervisor' 
+        WHERE id_depto=".$idDepartamento;
+        $result = mysqli_query($this->link, $query) or die(mysqli_error());
+  
+      }
+      
+      if ($result) 
+      {
+        //$verifica = $idDepartamento;  
+        $arr=array('idCliente'=>$idCliente,
+                    'idRazonSocialCliente'=>$idRazonSocialCliente,
+                    'idSupervisor'=>$idSupervisor,
+                    'idDepartamento'=>$idDepartamento,
+                    'tipo_mov'=>$tipo_mov,
+                    'idContrato'=>$idContrato);
+
+        $verifica = $this-> guardarContratoCliente($arr);
+      }else
         $verifica = 0;
 
-        $idDepartamento = $datos[1]['idDepartamento'];
-        $tipo_mov = $datos[1]['tipo_mov'];
-        $clave = $datos[1]['clave'];
-        $descripcion = $datos[1]['descripcion'];
-        $idSucursal = $datos[1]['idSucursal'];
-        $idUnidad = $datos[1]['idUnidad'];
-        $idArea = $datos[1]['idArea'];
-        $servicioInicio = $datos[1]['servicioInicio'];
-        $domicilio = $datos[1]['domicilio'];
-        $colonia = $datos[1]['colonia'];
-        $cp = $datos[1]['cp'];
-        $numInt = $datos[1]['numInt'];
-        $numExt = $datos[1]['numExt'];
-        $tipo = $datos[1]['tipo'];
-        $idPais = $datos[1]['idPais'];
-        $idEstado = $datos[1]['idEstado'];
-        $idMunicipio = $datos[1]['idMunicipio'];
-        $idDepartamentoNomina = $datos[1]['idDepartamentoNomina'];
-        $idDepartamentoInterno = $datos[1]['idDepartamentoInterno'];
-        $ubicacion = $datos[1]['ubicacion'];
-        $inactivo = $datos[1]['inactivo'];
-        $idSupervisor = (isset($datos[1]['idSupervisor'])!='')?$datos[1]['idSupervisor']:0;
-        //---MGFS 08-01-2020 ESTO ES PARA QUE PUEDAN ACCESAR DESDE EL PORTAL 
-        $presupuesto=0;
-        if($tipo=='O'){
-          $presupuesto=1;
-        }
-
-        //-->NJES Feb/14/2020 se reciben parametros cliente y razón social para generar contrato cliente
-        $idCliente = (isset($datos[1]['idCliente'])!='')?$datos[1]['idCliente']:0;
-        $idRazonSocialCliente = (isset($datos[1]['idRazonSocialCliente'])!='')?$datos[1]['idRazonSocialCliente']:0;
-        $idContrato = (isset($datos[1]['idContrato'])!='')?$datos[1]['idContrato']:0;
-
-        if($tipo_mov==0){
-
-          $query = "INSERT INTO deptos(cve_dep,des_dep,id_compania,id_unidad_negocio,id_sucursal,id_area,presupuesto,inactivo,domicilio,no_int,no_ext,colonia,codigo_postal,id_pais,
-id_estado,id_municipio,id_departamento_nomina,id_departamento_interno,ubicacion,tipo,inicio_servicio,id_supervisor) VALUES ('$clave','$descripcion','$idSucursal','$idUnidad','$idSucursal'
-,'$idArea','$presupuesto','$inactivo','$domicilio','$numInt','$numExt','$colonia','$cp','$idPais','$idEstado','$idMunicipio','$idDepartamentoNomina','$idDepartamentoInterno','$ubicacion','$tipo','$servicioInicio','$idSupervisor')";
-          $result = mysqli_query($this->link, $query) or die(mysqli_error());
-          $idDepartamento = mysqli_insert_id($this->link);
-
-        }else{
-
-          $query = "UPDATE deptos SET 
-          cve_dep='$clave', 
-          des_dep='$descripcion', 
-          id_compania='$idSucursal',
-          id_unidad_negocio='$idUnidad', 
-          id_sucursal='$idSucursal',
-          id_area='$idArea', 
-          presupuesto='$presupuesto',
-          inactivo='$inactivo', 
-          domicilio='$domicilio', 
-          no_int='$numInt',
-          no_ext='$numExt', 
-          colonia='$colonia',
-          codigo_postal='$cp',
-          id_pais='$idPais', 
-          id_estado='$idEstado', 
-          id_municipio='$idMunicipio', 
-          id_departamento_nomina='$idDepartamentoNomina',
-          id_departamento_interno='$idDepartamentoInterno',
-          ubicacion='$ubicacion',
-          tipo='$tipo',
-          inicio_servicio='$servicioInicio',
-          id_supervisor='$idSupervisor' 
-          WHERE id_depto=".$idDepartamento;
-          $result = mysqli_query($this->link, $query) or die(mysqli_error());
-    
-        }
-        
-        if ($result) 
-        {
-          //$verifica = $idDepartamento;  
-          $arr=array('idCliente'=>$idCliente,
-                      'idRazonSocialCliente'=>$idRazonSocialCliente,
-                      'idSupervisor'=>$idSupervisor,
-                      'idDepartamento'=>$idDepartamento,
-                      'tipo_mov'=>$tipo_mov,
-                      'idContrato'=>$idContrato);
-
-          $verifica = $this-> guardarContratoCliente($arr);
-        }else
-          $verifica = 0;
-
-        
-        return $verifica;
+      
+      return $verifica;
     }
 
     
@@ -489,7 +489,23 @@ id_estado,id_municipio,id_departamento_nomina,id_departamento_interno,ubicacion,
 
         return $verifica;
       }
+
+      function buscarDeptosPorSucursal($idSucursal){
+        $query = "SELECT id_depto, des_dep nombre
+                  FROM deptos
+                  WHERE id_sucursal = $idSucursal
+                    AND inactivo = 0;";
+          
+        return query2json($this->link->query($query));
+      }
     
+      function buscarDeptosPorFactura($idFactura){
+        $query = "SELECT GROUP_CONCAT(id_depto) deptos
+                  FROM facturas_deptos
+                  WHERE id_factura = $idFactura;";
+          
+        return query2json($this->link->query($query));
+      }
     
 }//--fin de class Departamentos
     

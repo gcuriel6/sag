@@ -1175,7 +1175,7 @@ session_start();
                 success: function(data)
                 {
 
-                    //console.log(data);
+                    console.log(data);
                     if(data > 0 )
                     {
                         mandarMensaje('La salida de uniforme: '+data+' se guardó correctamente');

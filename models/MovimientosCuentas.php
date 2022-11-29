@@ -60,6 +60,7 @@ class MovimientosCuentas
         $tipoCuentaOrigen = isset($datos['tipoCuentaOrigen']) ? $datos['tipoCuentaOrigen'] : 0;
         $tipoCuentaDestino = isset($datos['tipoCuentaDestino']) ? $datos['tipoCuentaDestino'] : 0;
         $fechaAplicacion = isset($datos['fechaAplicacion']) ? $datos['fechaAplicacion'] : '0000-00-00';
+        $fondeo = isset($datos['fondeo']) ? $datos['fondeo'] : 0;
 
         //-->NJES Jan/20/2020 se agrga cambio para que de una caja chica pueda transferir tambien a otra caja chica
         if($tipoCuentaOrigen == 1)  //-->Transfiere de la caja chica (engreso) 
@@ -82,8 +83,8 @@ class MovimientosCuentas
             }
 
         }else{ //-->transferencia de una cuanta banco  
-            $query = "INSERT INTO movimientos_bancos(id_cuenta_banco,monto,transferencia,tipo,id_usuario,observaciones,fecha_aplicacion) 
-                        VALUES ('$idCuentaOrigen','$monto',0,'$tipo','$idUsuario','$observacion','$fechaAplicacion')";
+            $query = "INSERT INTO movimientos_bancos(id_cuenta_banco,monto,transferencia,tipo,id_usuario,observaciones,fecha_aplicacion, fondeo) 
+                        VALUES ('$idCuentaOrigen','$monto',0,'$tipo','$idUsuario','$observacion','$fechaAplicacion', $fondeo)";
             $result = mysqli_query($this->link, $query) or die(mysqli_error());
             $idRegistro = mysqli_insert_id($this->link);
                 
@@ -108,8 +109,8 @@ class MovimientosCuentas
                         $verifica = 0;
                     }
                 }else{  //-->Realiza un ingreso a una cuenta banco
-                    $query2 = "INSERT INTO movimientos_bancos(id_cuenta_banco,monto,transferencia,tipo,id_usuario,observaciones,fecha_aplicacion) 
-                            VALUES ('$idCuentaDestino','$monto','$idRegistro','$tipo','$idUsuario','$observacion','$fechaAplicacion')";
+                    $query2 = "INSERT INTO movimientos_bancos(id_cuenta_banco,monto,transferencia,tipo,id_usuario,observaciones,fecha_aplicacion, fondeo) 
+                            VALUES ('$idCuentaDestino','$monto','$idRegistro','$tipo','$idUsuario','$observacion','$fechaAplicacion', $fondeo)";
                     $result2 = mysqli_query($this->link, $query2) or die(mysqli_error());
                     $idMovimientoBanco = mysqli_insert_id($this->link);
                     
@@ -243,9 +244,19 @@ class MovimientosCuentas
     }
 
     function buscarSaldoDisponibleCuenta($idCuentaBanco){
-        $resultado = $this->link->query("SELECT IFNULL((SUM(IF(tipo='A',monto,0))+SUM(IF(tipo='I',monto,0))+SUM(IF(tipo='T' && transferencia >0,monto,0)))-(SUM(IF(tipo='C',monto,0))+SUM(IF(tipo='T' && transferencia = 0,monto,0))),0) AS saldo_disponible
-                                            FROM movimientos_bancos
-                                            WHERE id_cuenta_banco=".$idCuentaBanco);
+
+        //2022-06-02 GCM - Se agrega un validador si el saldo esta en negativo se retornara 999999999 para que si deje capturar
+        $query = "SELECT cb.id,
+                    sd.cantidad + (SUM(IF(mb.tipo = 'I' OR mb.tipo = 'A' OR (mb.tipo = 'T' AND mb.transferencia <> 0),mb.monto,0)) - SUM(IF(mb.tipo = 'C' OR (mb.tipo = 'T' AND mb.transferencia = 0),mb.monto,0))) as saldo_disponible
+                    FROM saldos_diarios sd
+                    INNER JOIN cuentas_bancos cb ON cb.id = sd.id_cuenta_banco
+                    LEFT JOIN movimientos_bancos mb ON mb.id_cuenta_banco = cb.id AND DATE(mb.fecha) = DATE(NOW())
+                    WHERE sd.fecha = (SELECT MAX(t2.fecha)
+                                        FROM saldos_diarios t2
+                                        WHERE t2.id_cuenta_banco = sd.id_cuenta_banco)
+                            AND sd.id_cuenta_banco = $idCuentaBanco";
+
+        $resultado = $this->link->query($query);
         return query2json($resultado);
     }//- fin function buscarSaldoDisponibleCuenta
 
@@ -271,78 +282,80 @@ class MovimientosCuentas
         seleccionada. */
         if($idCuenta==''){
 
-            $resultado = $this->link->query("SELECT pre.id,
-                pre.id_cuenta_banco,               
-                pre.id_banco,        
-                pre.cuenta,        
-                pre.banco,        
-                pre.descripcion,              
-                pre.fecha_aplicacion, 
-                SUM(pre.saldo_actual) AS saldo_actual,
-                SUM(pre.saldo_fecha_inicio) AS saldo_fecha_inicio, 
-                SUM(pre.saldo_fecha_fin) AS saldo_fecha_fin
-                FROM 
-                    (SELECT a.id,a.id_cuenta_banco,               
-                    IFNULL(b.id_banco,0) AS id_banco,        
-                    IFNULL(b.cuenta,'') AS cuenta,        
-                    IFNULL(c.descripcion,'') AS banco,        
-                    IFNULL(b.descripcion,'') AS descripcion,              
-                    a.fecha_aplicacion, 
-                    0 AS saldo_actual,
-                    0 AS saldo_fecha_inicio, 
-                    0 AS saldo_fecha_fin
-                    FROM movimientos_bancos a 
-                    LEFT JOIN cuentas_bancos b ON a.id_cuenta_banco=b.id
-                    LEFT JOIN bancos c ON b.id_banco=c.id
-                    WHERE 1 $condicionFecha 
-                    GROUP BY a.id_cuenta_banco
-                    UNION ALL
-                    SELECT a.id,a.id_cuenta_banco,               
-                    IFNULL(b.id_banco,0) AS id_banco,        
-                    IFNULL(b.cuenta,'') AS cuenta,        
-                    IFNULL(c.descripcion,'') AS banco,        
-                    IFNULL(b.descripcion,'') AS descripcion,              
-                    a.fecha_aplicacion, 
-                    IFNULL((SUM(IF(a.tipo='A',a.monto,0))+SUM(IF(a.tipo='I',a.monto,0))+SUM(IF(a.tipo='T' && a.transferencia >0,a.monto,0)))-(SUM(IF(a.tipo='C',a.monto,0))+SUM(IF(a.tipo='T' && a.transferencia = 0,a.monto,0))),0) AS saldo_actual,
-                    0 AS saldo_fecha_inicio, 
-                    0 AS saldo_fecha_fin
-                    FROM movimientos_bancos a 
-                    LEFT JOIN cuentas_bancos b ON a.id_cuenta_banco=b.id
-                    LEFT JOIN bancos c ON b.id_banco=c.id 
-                    GROUP BY a.id_cuenta_banco
-                    UNION ALL
-                    SELECT a.id,a.id_cuenta_banco,               
-                    IFNULL(b.id_banco,0) AS id_banco,        
-                    IFNULL(b.cuenta,'') AS cuenta,        
-                    IFNULL(c.descripcion,'') AS banco,        
-                    IFNULL(b.descripcion,'') AS descripcion,              
-                    a.fecha_aplicacion, 
-                    0 AS saldo_actual,
-                    IFNULL((SUM(IF(a.tipo='A',a.monto,0))+SUM(IF(a.tipo='I',a.monto,0))+SUM(IF(a.tipo='T' && a.transferencia >0,a.monto,0)))-(SUM(IF(a.tipo='C',a.monto,0))+SUM(IF(a.tipo='T' && a.transferencia = 0,a.monto,0))),0) AS saldo_fecha_inicio, 
-                    0 AS saldo_fecha_fin
-                    FROM movimientos_bancos a 
-                    LEFT JOIN cuentas_bancos b ON a.id_cuenta_banco=b.id
-                    LEFT JOIN bancos c ON b.id_banco=c.id
-                    WHERE DATE(a.fecha_aplicacion) < '$fechaInicio'
-                    GROUP BY a.id_cuenta_banco
-                    UNION ALL
-                    SELECT a.id,a.id_cuenta_banco,               
-                    IFNULL(b.id_banco,0) AS id_banco,        
-                    IFNULL(b.cuenta,'') AS cuenta,        
-                    IFNULL(c.descripcion,'') AS banco,        
-                    IFNULL(b.descripcion,'') AS descripcion,              
-                    a.fecha_aplicacion, 
-                    0 AS saldo_actual,
-                    0 AS saldo_fecha_inicio, 
-                    IFNULL((SUM(IF(a.tipo='A',a.monto,0))+SUM(IF(a.tipo='I',a.monto,0))+SUM(IF(a.tipo='T' && a.transferencia >0,a.monto,0)))-(SUM(IF(a.tipo='C',a.monto,0))+SUM(IF(a.tipo='T' && a.transferencia = 0,a.monto,0))),0) AS saldo_fecha_fin
-                    FROM movimientos_bancos a 
-                    LEFT JOIN cuentas_bancos b ON a.id_cuenta_banco=b.id
-                    LEFT JOIN bancos c ON b.id_banco=c.id
-                    WHERE DATE(a.fecha_aplicacion) < '$fechaFin'
-                    GROUP BY a.id_cuenta_banco
-                ) AS pre 
-                GROUP BY pre.id_cuenta_banco
-                ORDER BY pre.fecha_aplicacion DESC");
+            $query = "SELECT pre.id,
+                        pre.id_cuenta_banco,               
+                        pre.id_banco,        
+                        pre.cuenta,        
+                        pre.banco,        
+                        pre.descripcion,              
+                        pre.fecha_aplicacion, 
+                        SUM(pre.saldo_actual) AS saldo_actual,
+                        SUM(pre.saldo_fecha_inicio) AS saldo_fecha_inicio, 
+                        SUM(pre.saldo_fecha_fin) AS saldo_fecha_fin
+                        FROM 
+                            (SELECT a.id,a.id_cuenta_banco,               
+                            IFNULL(b.id_banco,0) AS id_banco,        
+                            IFNULL(b.cuenta,'') AS cuenta,        
+                            IFNULL(c.descripcion,'') AS banco,        
+                            IFNULL(b.descripcion,'') AS descripcion,              
+                            a.fecha_aplicacion, 
+                            0 AS saldo_actual,
+                            0 AS saldo_fecha_inicio, 
+                            0 AS saldo_fecha_fin
+                            FROM movimientos_bancos a 
+                            LEFT JOIN cuentas_bancos b ON a.id_cuenta_banco=b.id
+                            LEFT JOIN bancos c ON b.id_banco=c.id
+                            WHERE 1 $condicionFecha 
+                            GROUP BY a.id_cuenta_banco
+                            UNION ALL
+                            SELECT a.id,a.id_cuenta_banco,               
+                            IFNULL(b.id_banco,0) AS id_banco,        
+                            IFNULL(b.cuenta,'') AS cuenta,        
+                            IFNULL(c.descripcion,'') AS banco,        
+                            IFNULL(b.descripcion,'') AS descripcion,              
+                            a.fecha_aplicacion, 
+                            IFNULL((SUM(IF(a.tipo='A',a.monto,0))+SUM(IF(a.tipo='I',a.monto,0))+SUM(IF(a.tipo='T' && a.transferencia >0,a.monto,0)))-(SUM(IF(a.tipo='C',a.monto,0))+SUM(IF(a.tipo='T' && a.transferencia = 0,a.monto,0))),0) AS saldo_actual,
+                            0 AS saldo_fecha_inicio, 
+                            0 AS saldo_fecha_fin
+                            FROM movimientos_bancos a 
+                            LEFT JOIN cuentas_bancos b ON a.id_cuenta_banco=b.id
+                            LEFT JOIN bancos c ON b.id_banco=c.id 
+                            GROUP BY a.id_cuenta_banco
+                            UNION ALL
+                            SELECT a.id,a.id_cuenta_banco,               
+                            IFNULL(b.id_banco,0) AS id_banco,        
+                            IFNULL(b.cuenta,'') AS cuenta,        
+                            IFNULL(c.descripcion,'') AS banco,        
+                            IFNULL(b.descripcion,'') AS descripcion,              
+                            a.fecha_aplicacion, 
+                            0 AS saldo_actual,
+                            IFNULL((SUM(IF(a.tipo='A',a.monto,0))+SUM(IF(a.tipo='I',a.monto,0))+SUM(IF(a.tipo='T' && a.transferencia >0,a.monto,0)))-(SUM(IF(a.tipo='C',a.monto,0))+SUM(IF(a.tipo='T' && a.transferencia = 0,a.monto,0))),0) AS saldo_fecha_inicio, 
+                            0 AS saldo_fecha_fin
+                            FROM movimientos_bancos a 
+                            LEFT JOIN cuentas_bancos b ON a.id_cuenta_banco=b.id
+                            LEFT JOIN bancos c ON b.id_banco=c.id
+                            WHERE DATE(a.fecha_aplicacion) < '$fechaInicio'
+                            GROUP BY a.id_cuenta_banco
+                            UNION ALL
+                            SELECT a.id,a.id_cuenta_banco,               
+                            IFNULL(b.id_banco,0) AS id_banco,        
+                            IFNULL(b.cuenta,'') AS cuenta,        
+                            IFNULL(c.descripcion,'') AS banco,        
+                            IFNULL(b.descripcion,'') AS descripcion,              
+                            a.fecha_aplicacion, 
+                            0 AS saldo_actual,
+                            0 AS saldo_fecha_inicio, 
+                            IFNULL((SUM(IF(a.tipo='A',a.monto,0))+SUM(IF(a.tipo='I',a.monto,0))+SUM(IF(a.tipo='T' && a.transferencia >0,a.monto,0)))-(SUM(IF(a.tipo='C',a.monto,0))+SUM(IF(a.tipo='T' && a.transferencia = 0,a.monto,0))),0) AS saldo_fecha_fin
+                            FROM movimientos_bancos a 
+                            LEFT JOIN cuentas_bancos b ON a.id_cuenta_banco=b.id
+                            LEFT JOIN bancos c ON b.id_banco=c.id
+                            WHERE DATE(a.fecha_aplicacion) < '$fechaFin'
+                            GROUP BY a.id_cuenta_banco
+                        ) AS pre 
+                        GROUP BY pre.id_cuenta_banco
+                        ORDER BY pre.fecha_aplicacion DESC";
+
+            // $resultado = $this->link->query($query);
 
         }else{
             $condicionCuenta=" AND  a.id_cuenta_banco=$idCuenta ";
@@ -358,57 +371,63 @@ class MovimientosCuentas
                 $condicionFechaDetalle=" AND DATE(a.fecha_aplicacion) BETWEEN '$fechaInicio' AND '$fechaFin'";
             }
 
+            $query = "SELECT a.id,
+                        IFNULL(sucursales.descr,'') AS sucursal,
+                        a.id_cuenta_banco,
+                        IFNULL(a.observaciones,'') as observaciones,
+                        b.id_banco,
+                        b.cuenta as cuenta,
+                        c.descripcion AS banco,
+                        b.descripcion,
+                        CASE
+                            WHEN a.tipo = 'T' THEN 'Transferencia'
+                            WHEN a.tipo = 'I' THEN 'Monto Inicial'
+                            WHEN a.tipo = 'C' THEN 'Cargo'
+                            ELSE 'Abono'
+                        END AS tipo,
+                        CASE
+                            WHEN a.tipo = 'I' THEN 'Ingreso'
+                            WHEN a.tipo = 'A' THEN 'Ingreso'
+                            WHEN a.tipo = 'C' THEN 'Egreso'
+                            WHEN a.tipo = 'T' AND a.transferencia = 0 THEN 'Egreso'
+                            ELSE 'Ingreso'
+                        END AS movimiento,
+                        a.monto,
+                        a.fecha_aplicacion,
+                        a.monto AS saldo,
+                        a.id_cxc,
+                        d.id_pago_d,
+                        e.id_factura,
+                        e.id_pago_e,
+                        IFNULL(d.folio_pago,'') AS folio_pago,
+                        IFNULL(e.folio_factura,'') AS folio_factura,
+                        IFNULL(orden_compra.folio,'No aplica') AS folio_oc,
+                        IFNULL(IF(cxp.id_requisicion > 0,requisiciones.folio,orden_compra.requisiciones),'No aplica') AS folio_requi
+                        FROM movimientos_bancos a
+                        LEFT JOIN cuentas_bancos b ON a.id_cuenta_banco=b.id
+                        LEFT JOIN bancos c ON b.id_banco=c.id
+                        LEFT JOIN cxc d ON a.id_cxc=d.id
+                        LEFT JOIN pagos_d e ON d.id_pago_d=e.id
+                        LEFT JOIN cxp ON a.id_cxp=cxp.id
+                        LEFT JOIN almacen_e ON cxp.id_entrada_compra=almacen_e.id
+                        LEFT JOIN orden_compra ON almacen_e.id_oc=orden_compra.id
+                        LEFT JOIN sucursales ON cxp.id_sucursal=sucursales.id_sucursal
+                        LEFT JOIN requisiciones ON cxp.id_requisicion=requisiciones.id
+                        WHERE 1 $condicionCuenta 
+                        $condicionFechaDetalle 
+                        ORDER BY a.fecha_aplicacion DESC,a.id DESC";
             //-->NJES October/09/2020 mostrar folio de pago y folio factura para los casos de los movimientos que se generaron al hacer pagos a facturas multiples
             //para que sea mas faci el rastreo de finanzas
-            $resultado = $this->link->query("SELECT a.id,
-                                            IFNULL(sucursales.descr,'') AS sucursal,
-                                            a.id_cuenta_banco,
-                                            IFNULL(a.observaciones,'') as observaciones,
-                                            b.id_banco,
-                                            b.cuenta as cuenta,
-                                            c.descripcion AS banco,
-                                            b.descripcion,
-                                            CASE
-                                                WHEN a.tipo = 'T' THEN 'Transferencia'
-                                                WHEN a.tipo = 'I' THEN 'Monto Inicial'
-                                                WHEN a.tipo = 'C' THEN 'Cargo'
-                                                ELSE 'Abono'
-                                            END AS tipo,
-                                            CASE
-                                                WHEN a.tipo = 'I' THEN 'Ingreso'
-                                                WHEN a.tipo = 'A' THEN 'Ingreso'
-                                                WHEN a.tipo = 'C' THEN 'Egreso'
-                                                WHEN a.tipo = 'T' AND a.transferencia = 0 THEN 'Egreso'
-                                                ELSE 'Ingreso'
-                                            END AS movimiento,
-                                            a.monto,
-                                            a.fecha_aplicacion,
-                                            a.monto AS saldo,
-                                            a.id_cxc,
-                                            d.id_pago_d,
-                                            e.id_factura,
-                                            e.id_pago_e,
-                                            IFNULL(d.folio_pago,'') AS folio_pago,
-                                            IFNULL(e.folio_factura,'') AS folio_factura,
-                                            IFNULL(orden_compra.folio,'No aplica') AS folio_oc,
-                                            IFNULL(IF(cxp.id_requisicion > 0,requisiciones.folio,orden_compra.requisiciones),'No aplica') AS folio_requi
-                                            FROM movimientos_bancos a
-                                            LEFT JOIN cuentas_bancos b ON a.id_cuenta_banco=b.id
-                                            LEFT JOIN bancos c ON b.id_banco=c.id
-                                            LEFT JOIN cxc d ON a.id_cxc=d.id
-                                            LEFT JOIN pagos_d e ON d.id_pago_d=e.id
-                                            LEFT JOIN cxp ON a.id_cxp=cxp.id
-                                            LEFT JOIN almacen_e ON cxp.id_entrada_compra=almacen_e.id
-                                            LEFT JOIN orden_compra ON almacen_e.id_oc=orden_compra.id
-                                            LEFT JOIN sucursales ON cxp.id_sucursal=sucursales.id_sucursal
-                                            LEFT JOIN requisiciones ON cxp.id_requisicion=requisiciones.id
-                                            WHERE 1 $condicionCuenta 
-                                            $condicionFechaDetalle 
-                                            ORDER BY a.fecha_aplicacion DESC,a.id DESC");
-                                        //-->NJES January/26/2021 hice la relacion a cxp.id porque en este caso solo queriamos los folios, 
-                                        //y como tal los folio solo estan en el cargo inicial, no en los abonos
-                                        //se muestra sucursales de los movimientos cuentas relacionados a las compras
+            
+            //-->NJES January/26/2021 hice la relacion a cxp.id porque en este caso solo queriamos los folios, 
+            //y como tal los folio solo estan en el cargo inicial, no en los abonos
+            //se muestra sucursales de los movimientos cuentas relacionados a las compras
         }
+
+        // echo $query;
+        // exit();
+
+        $resultado = $this->link->query($query);
 
         return query2json($resultado);
     }//- fin function buscarMovimientosReporte
@@ -442,18 +461,27 @@ class MovimientosCuentas
                         c.descripcion AS banco,
                         b.descripcion,
                         CASE
-                            WHEN a.tipo = 'T' THEN 'Transferencia'
-                            WHEN a.tipo = 'I' THEN 'Monto Inicial'
-                            WHEN a.tipo = 'C' THEN 'Cargo'
-                            ELSE 'Abono'
+                            WHEN a.tipo = 'A' THEN 'Abono'
+                            WHEN a.tipo = 'I' THEN 'Ingreso'
+                            WHEN a.tipo = 'T' AND a.transferencia <> 0 THEN 'Transferencia'
+                            ELSE ''
                         END AS tipo,
                         CASE
-                            WHEN a.tipo = 'I' THEN 'Ingreso'
                             WHEN a.tipo = 'A' THEN 'Ingreso'
+                            WHEN a.tipo = 'I' THEN 'Ingreso'
+                            WHEN a.tipo = 'T' AND a.transferencia <> 0 THEN 'Ingreso'
+                            ELSE ''
+                        END AS movimiento,
+                        CASE
+                            WHEN a.tipo = 'C' THEN 'Cargo'
+                            WHEN a.tipo = 'T' AND a.transferencia = 0 THEN 'Transferencia'
+                            ELSE ''
+                        END AS tipo2,
+                        CASE
                             WHEN a.tipo = 'C' THEN 'Egreso'
                             WHEN a.tipo = 'T' AND a.transferencia = 0 THEN 'Egreso'
-                            ELSE 'Ingreso'
-                        END AS movimiento,
+                            ELSE ''
+                        END AS movimiento2,
                         a.monto,
                         a.fecha_aplicacion,
                         a.monto AS saldo,
@@ -509,6 +537,152 @@ class MovimientosCuentas
         
         return query2json($resultado);
     }//- fin function buscarSaldosCuentasBancos
+
+    function buscarMovimientosReporteDetalle($idCuenta, $fechaInicio, $fechaFin){
+
+        $condicionCuenta = "";
+
+        if($idCuenta != 0 && $idCuenta != ""){
+            $condicionCuenta = " AND a.id_cuenta_banco =$idCuenta ";
+        }else{
+            $idUsuario = $_SESSION["id_usuario"];
+
+            $condicionCuenta = " AND b.id_unidad_negocio IN (
+                                        SELECT DISTINCT(id_unidad_negocio)
+                                        FROM permisos
+                                        WHERE id_usuario = $idUsuario)";
+        }
+
+        $condicionFecha = " AND MONTH(a.fecha) = MONTH(NOW()) AND YEAR(a.fecha) = YEAR(NOW()) ";
+
+        if($fechaInicio != "" && $fechaFin != ""){
+            $condicionFecha = " AND DATE(a.fecha) BETWEEN DATE('$fechaInicio') AND DATE('$fechaFin') ";
+        }
+
+        $query = "SELECT 
+                        a.id_cuenta_banco,
+                        IFNULL(sucursales.descr,IFNULL(s2.descr,IFNULL(s3.descr,IFNULL(s4.descr,IFNULL(s5.descr,''))))) AS sucursal,
+                        IFNULL(a.observaciones,'') as observaciones,
+                        b.cuenta as cuenta,
+                        c.descripcion AS banco,
+                        b.descripcion,
+                        CASE
+                            WHEN a.tipo = 'A' THEN 'Ingreso'
+                            WHEN a.tipo = 'I' THEN 'Ingreso'
+                            WHEN a.tipo = 'T' AND a.transferencia <> 0 THEN 'Ingreso'
+                            WHEN a.tipo = 'C' THEN 'Egreso'
+                            WHEN a.tipo = 'T' AND a.transferencia = 0 THEN 'Egreso'
+                            ELSE ''
+                        END AS movimiento,
+                        CASE
+                            WHEN a.tipo = 'A' THEN a.monto
+                            WHEN a.tipo = 'I' THEN a.monto
+                            WHEN a.tipo = 'T' AND a.transferencia <> 0 THEN a.monto
+                            ELSE ''
+                        END AS montoIngreso,
+                        CASE
+                            WHEN a.tipo = 'C' THEN a.monto
+                            WHEN a.tipo = 'T' AND a.transferencia = 0 THEN a.monto
+                            ELSE ''
+                        END AS montoEgreso,
+                        a.fecha_aplicacion,
+                        a.fecha,
+                        a.monto AS saldo,
+                        IFNULL(d.folio_pago,psf.folio) AS folio_pago,
+                        IFNULL(e.folio_factura,'') AS folio_factura,
+                        IFNULL(orden_compra.folio,'No aplica') AS folio_oc,
+                        IFNULL(IF(cxp.id_requisicion > 0,requisiciones.folio,orden_compra.requisiciones),'No aplica') AS folio_requi,
+                        IFNULL(gas.folio_requisicion,'') AS folio_gasto,
+                        IFNULL(vi.folio,'') AS folio_viatico
+                    FROM movimientos_bancos a
+                    LEFT JOIN pagos_sin_factura psf ON psf.id = a.id_psf
+                    LEFT JOIN cuentas_bancos b ON a.id_cuenta_banco=b.id
+                    LEFT JOIN bancos c ON b.id_banco=c.id
+                    LEFT JOIN cxc d ON a.id_cxc=d.id
+                    LEFT JOIN pagos_d e ON d.id_pago_d=e.id
+                    LEFT JOIN cxp ON a.id_cxp=cxp.id
+                    LEFT JOIN almacen_e ON cxp.id_entrada_compra=almacen_e.id
+                    LEFT JOIN orden_compra ON almacen_e.id_oc=orden_compra.id
+                    LEFT JOIN sucursales ON cxp.id_sucursal=sucursales.id_sucursal
+                    LEFT JOIN requisiciones ON cxp.id_requisicion=requisiciones.id
+                    LEFT JOIN gastos gas ON gas.id = a.id_gasto
+                    LEFT JOIN sucursales s2 ON gas.id_sucursal=s2.id_sucursal
+                    LEFT JOIN sucursales s3 ON d.id_sucursal=s3.id_sucursal
+                    LEFT JOIN viaticos vi ON vi.id= a.id_viatico
+                    LEFT JOIN sucursales s4 ON vi.id_sucursal=s4.id_sucursal
+                    LEFT JOIN sucursales s5 ON psf.id_sucursal=s5.id_sucursal
+                    WHERE 1 
+                    $condicionFecha 
+                    $condicionCuenta 
+                    ORDER BY a.id_cuenta_banco, a.fecha_aplicacion DESC,a.id DESC";
+
+                // echo $query;
+                // exit();
+
+        $resultado = $this->link->query($query);
+        
+        return query2json($resultado);
+    }
+
+    function buscarCuentasBanco(){
+        $idUsuario = $_SESSION["id_usuario"];
+
+        $query = "SELECT cb.id, cb.cuenta, cb.descripcion descr, ba.descripcion banco
+                    FROM cuentas_bancos cb
+                    INNER JOIN bancos ba ON cb.id_banco = ba.id
+                    WHERE cb.id_unidad_negocio IN (
+                                        SELECT DISTINCT(id_unidad_negocio)
+                                        FROM permisos
+                                        WHERE id_usuario = $idUsuario)
+                            AND cb.tipo = 0
+                            AND cb.activa = 1";
+
+        $resultado = $this->link->query($query);
+        
+        return query2json($resultado);
+    }
+
+    function buscarCuentasSaldos($idCuenta, $fechaInicio, $fechaFin){
+
+        $condicionCuenta = "";
+        $condicionFecha1 = " AND MONTH(a.fecha_aplicacion) = MONTH(NOW()) AND YEAR(a.fecha_aplicacion) = YEAR(NOW()) ";
+
+        if($fechaInicio != "" && $fechaFin != ""){
+            $condicionFecha1 = " AND DATE(a.fecha_aplicacion) BETWEEN '$fechaInicio' AND '$fechaFin' ";
+        }
+
+        if($idCuenta != 0 && $idCuenta != ""){
+            $condicionCuenta = " AND a.id_cuenta_banco = $idCuenta ";
+        }else{
+            $idUsuario = $_SESSION["id_usuario"];
+
+            $condicionCuenta = " AND b.id_unidad_negocio IN (
+                                        SELECT DISTINCT(id_unidad_negocio)
+                                        FROM permisos
+                                        WHERE id_usuario = $idUsuario)";
+        }
+
+        $query = "SELECT
+                        b.id AS id_cuenta_banco,
+                        b.descripcion,
+                        b.cuenta,
+                        SUM(IF(a.tipo = 'I' OR a.tipo = 'A' OR (a.tipo = 'T' AND a.transferencia <> 0),a.monto,0)) as ingresos,
+                        SUM(IF(a.tipo = 'C' OR (a.tipo = 'T' AND a.transferencia = 0),a.monto,0)) as egresos,
+                        SUM(IF(a.tipo = 'I' OR a.tipo = 'A' OR (a.tipo = 'T' AND a.transferencia <> 0),a.monto,0)) - SUM(IF(a.tipo = 'C' OR (a.tipo = 'T' AND a.transferencia = 0),a.monto,0)) AS saldo
+                    FROM movimientos_bancos a
+                    INNER JOIN cuentas_bancos b ON b.id = a.id_cuenta_banco
+                    WHERE 1=1
+                    $condicionFecha1
+                    $condicionCuenta
+                    GROUP BY a.id_cuenta_banco;";
+
+                    // echo $query;
+                    // exit();
+
+        $resultado = $this->link->query($query);
+                
+        return query2json($resultado);
+    }
 
 }//--fin de class MovimientosCuentas
     

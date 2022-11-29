@@ -6797,7 +6797,9 @@ function imprimirSalidaActivoFijo(tipo){
     {
       var fileSize = document.getElementById(input).files;
 
-			if(fileSize[0].size <= 2000000)
+      //se cambia de 2000000 a 5000000 para que acepte archivos mas grandes
+      //GCM - 4/Abril/2022
+			if(fileSize[0].size <= 5000000)
 			{
         jQuery.ajax({
           url: 'php/activos_guardar_pdf_responsiva_firmada.php',

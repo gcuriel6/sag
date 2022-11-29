@@ -37,6 +37,7 @@ class EntradasCompra
       $importe = $entradaA['importe'];
       $foliosRequis = $entradaA['foliosRequis'];
       $idsRequis = $entradaA['idsRequis'];
+      $montoIsr = $entradaA["montoIsr"];
 
       $noPartidas = $entradaA['noPartidas'];
       
@@ -62,45 +63,47 @@ class EntradasCompra
 
           if($this->actualizarFolio($idUnidad, $folio))
           {
-            if($this->guardarDetalles($idUnidad, $idEntradaCompra, $entradaD, $tipoOC))
+            if($this->guardarDetalles($idUnidad, $idEntradaCompra, $entradaD, $tipoOC, $montoIsr))
             {
               //-->NJES Feb/13/2020 si es de tipo mantenimiento afectar presupuesto al generar la entrada almacen
               if($tipoOC==2)
               {
                 if($this->guardaBitacoraActivos($idOrden,$noEconomico,$foliosRequis,$idsRequis))
                 {
-                  //-->NJES June/19/2020 DEN18-2760 Se quita el area y departamento al hacer la afectación a presupuesto egreso (movimientos_presupuesto)
-                  //se crea un modelo y funcion para afectar el presupuesto egresos y no se encuentre el insert en varios archivos
+                  // //-->NJES June/19/2020 DEN18-2760 Se quita el area y departamento al hacer la afectación a presupuesto egreso (movimientos_presupuesto)
+                  // //se crea un modelo y funcion para afectar el presupuesto egresos y no se encuentre el insert en varios archivos
                   
-                  $afectarPresupuesto = new MovimientosPresupuesto();
+                  // $afectarPresupuesto = new MovimientosPresupuesto();
 
-                  //-->NJES November/11/2020 afecatr presupuesto por la cantidad del importe total menos el importe del flete de la requi 
-                  //en caso de que tenga partidas con familia fletes y logistica (id 104), ya que se afecta al generar los detalles de almacen
-                  $buscaTF = "SELECT IFNULL(SUM(orden_compra_d.costo_total),0) AS total_flete
-                    FROM orden_compra_d
-                    LEFT JOIN productos  ON orden_compra_d.id_producto=productos.id
-                    LEFT JOIN familias ON productos.id_familia=familias.id
-                    WHERE orden_compra_d.id_orden_compra=$idOrden AND familias.id_familia_gasto=104";
+                  // //-->NJES November/11/2020 afecatr presupuesto por la cantidad del importe total menos el importe del flete de la requi 
+                  // //en caso de que tenga partidas con familia fletes y logistica (id 104), ya que se afecta al generar los detalles de almacen
+                  // $buscaTF = "SELECT IFNULL(SUM(orden_compra_d.costo_total),0) AS total_flete
+                  //   FROM orden_compra_d
+                  //   LEFT JOIN productos  ON orden_compra_d.id_producto=productos.id
+                  //   LEFT JOIN familias ON productos.id_familia=familias.id
+                  //   WHERE orden_compra_d.id_orden_compra=$idOrden AND familias.id_familia_gasto=104";
 
-                  $resultTF = mysqli_query($this->link, $buscaTF) or die(mysqli_error());
-                  $rowTF = mysqli_fetch_array($resultTF);
-                  $total_flete = $rowTF['total_flete'];
+                  // $resultTF = mysqli_query($this->link, $buscaTF) or die(mysqli_error());
+                  // $rowTF = mysqli_fetch_array($resultTF);
+                  // $total_flete = $rowTF['total_flete'];
 
-                  $arr = array(
-                            'total'=>$importe-$total_flete, 
-                            'idUnidadNegocio'=>$idUnidad,
-                            'idSucursal'=>$idSucursal,
-                            'idFamiliaGasto'=>27, //--> familia gasto (MANTENIMIENTO)
-                            'clasificacionGasto'=>88, //--> id clasificacion gasto (EQUIPO DE TRANSPORTE)
-                            'idEntradaCompra'=>$idE01,
-                            'tipo'=>'C');
+                  // $arr = array(
+                  //           'total'=>$importe-$total_flete, 
+                  //           'idUnidadNegocio'=>$idUnidad,
+                  //           'idSucursal'=>$idSucursal,
+                  //           'idFamiliaGasto'=>27, //--> familia gasto (MANTENIMIENTO)
+                  //           'clasificacionGasto'=>88, //--> id clasificacion gasto (EQUIPO DE TRANSPORTE)
+                  //           'idEntradaCompra'=>$idE01,
+                  //           'tipo'=>'C');
 
-                  $movP = $afectarPresupuesto->guardarMovimientoPresupuesto($arr);
+                  // $movP = $afectarPresupuesto->guardarMovimientoPresupuesto($arr);
 
-                  if($movP > 0)
-                    $verifica = $folio;
-                  else
-                    $verifica = 0;
+                  // if($movP > 0)
+                  //   $verifica = $folio;
+                  // else
+                  //   $verifica = 0;
+                  //19/Julio/2022 GCM se comenta todo lo de afectar presupuesto
+                  $verifica = $folio;
 
                 }else
                   $verifica = 0;
@@ -161,8 +164,7 @@ class EntradasCompra
       * @param array $entradaD
       *
       **/
-    function guardarDetalles($idUnidad, $idEntradaCompra, $entradaD, $tipoOC)
-    {
+    function guardarDetalles($idUnidad, $idEntradaCompra, $entradaD, $tipoOC, $montoIsr){
 
       $verifica = 0;
 
@@ -197,23 +199,25 @@ class EntradasCompra
           $actulizaDetalleOc="UPDATE orden_compra_d SET cantidad_entrega=(cantidad_entrega+'$cantidad') WHERE id=".$idAlmacenD; 
           $resultActuializaOc = mysqli_query($this->link, $actulizaDetalleOc) or die(mysqli_error());
 
-          $query = " INSERT INTO almacen_d (id_almacen_e, cve_concepto, id_producto, cantidad, precio, id_oc, partida, iva, lleva_talla, id_oc_d,porcentaje_descuento) 
-            VALUES ($idEntradaCompra,'E01', '$idProducto', '$cantidad', '$precio', '$idOrden', '$partida', '$iva', '$llevaTallas', '$idAlmacenD', '$descuento')";
+          $query = " INSERT INTO almacen_d (id_almacen_e, cve_concepto, id_producto, cantidad, precio, id_oc, partida, iva, lleva_talla, id_oc_d,porcentaje_descuento, isr) 
+            VALUES ($idEntradaCompra,'E01', '$idProducto', '$cantidad', '$precio', '$idOrden', '$partida', '$iva', '$llevaTallas', '$idAlmacenD', '$descuento', $montoIsr)";
 
           $result = mysqli_query($this->link, $query) or die(mysqli_error());
           $idDetalle = mysqli_insert_id($this->link);
 
           if($result)
           {
-              $arr = array(
-                        'total'=>$importe, 
-                        'idUnidadNegocio'=>$idUnidad,
-                        'idSucursal'=>$idSucursal,
-                        'idFamiliaGasto'=>104, //--> familia gasto (FLETES Y LOGISTICA)
-                        'clasificacionGasto'=>295, //--> id clasificacion gasto (NO APLICA)
-                        'idEntradaCompra'=>$idEntradaCompra,
-                        'idAlmacenD'=>$idDetalle,
-                        'tipo'=>'C');
+
+            $montoIsr = 0.00;
+            $arr = array(
+                      'total'=>$importe, 
+                      'idUnidadNegocio'=>$idUnidad,
+                      'idSucursal'=>$idSucursal,
+                      'idFamiliaGasto'=>104, //--> familia gasto (FLETES Y LOGISTICA)
+                      'clasificacionGasto'=>295, //--> id clasificacion gasto (NO APLICA)
+                      'idEntradaCompra'=>$idEntradaCompra,
+                      'idAlmacenD'=>$idDetalle,
+                      'tipo'=>'C');
 
             if($tallas != '')
             {
@@ -330,33 +334,32 @@ class EntradasCompra
       * @param int $idRequisicin
       *
       **/
-      function buscarDetallesEntradaCompra($idEntradaCompra)
-      {
+      function buscarDetallesEntradaCompra($idEntradaCompra){
         
-        $resultado = $this->link->query("SELECT 
-          almacen_d.id,
-          almacen_d.id_oc_d,
-          almacen_d.id_producto,
-          almacen_d.cantidad,
-          orden_compra_d.cantidad AS cantidad_oc,
-          almacen_d.iva,
-          orden_compra_d.costo_unitario AS precio_oc,
-          almacen_d.precio,
-          almacen_d.partida,
-          almacen_d.lleva_talla,
-          almacen_d.porcentaje_descuento AS descuento,
-          productos.concepto,
-          lineas.descripcion AS linea,
-          familias.descripcion AS familia
-          FROM almacen_d 
-          INNER JOIN productos ON almacen_d.id_producto=productos.id
-          INNER JOIN lineas ON productos.id_linea=lineas.id
-          INNER JOIN familias ON productos.id_familia=familias.id
-          LEFT JOIN orden_compra_d ON almacen_d.id_oc_d = orden_compra_d.id
-          WHERE almacen_d.id_almacen_e=".$idEntradaCompra."
-          ORDER BY almacen_d.id desc");
-          return query2json($resultado);
-  
+          $resultado = $this->link->query("SELECT 
+                almacen_d.id,
+                almacen_d.id_oc_d,
+                almacen_d.id_producto,
+                almacen_d.cantidad,
+                orden_compra_d.cantidad AS cantidad_oc,
+                almacen_d.iva,
+                orden_compra_d.costo_unitario AS precio_oc,
+                almacen_d.precio,
+                almacen_d.partida,
+                almacen_d.lleva_talla,
+                almacen_d.porcentaje_descuento AS descuento,
+                productos.concepto,
+                lineas.descripcion AS linea,
+                familias.descripcion AS familia,
+                isr
+                FROM almacen_d 
+                INNER JOIN productos ON almacen_d.id_producto=productos.id
+                INNER JOIN lineas ON productos.id_linea=lineas.id
+                INNER JOIN familias ON productos.id_familia=familias.id
+                LEFT JOIN orden_compra_d ON almacen_d.id_oc_d = orden_compra_d.id
+                WHERE almacen_d.id_almacen_e=$idEntradaCompra
+                ORDER BY almacen_d.id DESC");
+                return query2json($resultado);  
       }
   
       /**

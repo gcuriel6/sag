@@ -225,12 +225,15 @@ class Cobranza
                     SUM(cxc.total) total,
                     pd.importe_pagado totalPagado,
                     COUNT(cxc.id) registrosCXC,
-                    SUM(cxc.total) - pd.importe_pagado saldo
+                    SUM(cxc.total) - pd.importe_pagado saldo,
+                    IFNULL(ne.vendedor, IFNULL(ne2.vendedor, '')) vendedor
                 FROM cxc as cxc
                 INNER JOIN sucursales suc ON suc.id_sucursal = cxc.id_sucursal
                 INNER JOIN pagos_d pd ON pd.id = cxc.id_pago_d
                 INNER JOIN pagos_e pe ON pe.id = pd.id_pago_e
                 LEFT JOIN servicios ser ON ser.id = pe.id_razon_social
+                LEFT JOIN notas_e ne ON ne.id=cxc.id_venta
+                LEFT JOIN notas_e ne2 ON ne.id=cxc.id_plan
                 WHERE cxc.id_factura = 0
                     AND cxc.id_cxc_pago <> 0
                     AND cxc.id_unidad_negocio = 2
@@ -254,13 +257,16 @@ class Cobranza
                     fac.total total,
                     pd.importe_pagado totalPagado,
                     COUNT(cxc.id) registrosCXC,
-                    fac.total - pd.importe_pagado saldo
+                    fac.total - pd.importe_pagado saldo,
+                    IFNULL(ne.vendedor, IFNULL(ne2.vendedor, '')) vendedor
                 FROM cxc as cxc
                 INNER JOIN facturas fac ON fac.id = cxc.id_factura
                 INNER JOIN sucursales suc ON suc.id_sucursal = cxc.id_sucursal
                 INNER JOIN pagos_d pd ON pd.id_factura = fac.id
                 INNER JOIN pagos_e pe ON pe.id = pd.id_pago_e
                 LEFT JOIN servicios ser ON ser.id = pe.id_razon_social
+                LEFT JOIN notas_e ne ON ne.id=cxc.id_venta
+                LEFT JOIN notas_e ne2 ON ne.id=cxc.id_plan
                 WHERE cxc.id_unidad_negocio = 2
                     $condSucursales
                     AND cxc.fecha BETWEEN '$fechaInicio' AND '$fechaFin'

@@ -81,6 +81,10 @@ session_start();
                                 <div class="col-sm-12 col-md-3">
                                     <input type="text" class="form-control validate[required,custom[number],min[0.01]]" id="i_monto" name="i_monto" autocomplete="off">
                                 </div>
+                                <div class="col-md-3">
+                                    <label >Es fondeo</label>
+                                    <input type="checkbox" id="ch_fondeo">
+                                </div>
                             </div>
                             <div class="form-group row">
                                 <label for="s_id_unidad_d" class="col-sm-3 col-md-3 col-form-label requerido">Unidad de Negocio </label>
@@ -209,12 +213,21 @@ session_start();
                     for(var i=0;i<arreglo.length;i++)
                     {
                         var dato=arreglo[i];
+
+                        let saldo = 999999999;
+
+                        if(dato.saldo_disponible > 0){
+                            saldo = dato.saldo_disponible;
+                        }
+                        
+                        // saldoDisponibleCuentaB = saldo;
+
                         $('#i_saldo_disponible').val(formatearNumero(dato.saldo_disponible));
-                        saldoDisponible = dato.saldo_disponible;
+                        saldoDisponible = saldo;
               
-                        if(parseFloat(dato.saldo_disponible) > 0)
+                        if(parseFloat(saldo) > 0)
                         {
-                            $('#i_monto').removeClass(anteriorClase).addClass('form-control validate[required,custom[number],min[0.01],max['+dato.saldo_disponible+']]');
+                            $('#i_monto').removeClass(anteriorClase).addClass('form-control validate[required,custom[number],min[0.01],max['+saldo+']]');
                         }
                     }
                 },
@@ -304,6 +317,12 @@ session_start();
         /* funcion que manda a generar la insecion o actualizacion de un registro */    
         function guardar(){
 
+            let fondeo = 0;
+
+            if ($('#ch_fondeo').is(':checked')){
+                fondeo = 1;
+            }
+
             var info = {
                 'idCuentaOrigen' : $('#s_cuenta_origen').val(),
                 'idCuentaDestino' : $('#s_cuenta_destino').val(),
@@ -316,7 +335,8 @@ session_start();
                 'cuentaOrigen' : $('#s_cuenta_origen option:selected').text(),
                 //--> NJES Jan/20/2020 obtiene los nombre de cuentas caja chica para la observacion al momento de hacer una tranferencia de caja chica a caja chica
                 'cuentaDestino' : $('#s_cuenta_destino option:selected').text(),
-                'fechaAplicacion' : $('#i_fecha').val()
+                'fechaAplicacion' : $('#i_fecha').val(),
+                fondeo
             };
             
             $.ajax({
@@ -370,6 +390,7 @@ session_start();
             $('#i_monto').removeClass('form-control validate[required,custom[number],min[0.01],max['+saldoDisponible+']]').addClass('form-control validate[required,custom[number],min[0.01]]');            
             $('#i_fecha').val(hoy);
 
+            $("#ch_fondeo").prop("checked", false);
 
         }
 

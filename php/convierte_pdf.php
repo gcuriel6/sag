@@ -23,6 +23,8 @@ if($vp=='vp_requi'){
 	@unlink('../formatosPdf/formato_vp_requisicion_'.$idRegistro.'.pdf');
 }
 
+// include('conectar.php');
+
 ob_start();
 include('../formatosPdf/'.$path.'.php');
 $content = ob_get_clean();
@@ -69,6 +71,82 @@ try
 		$html2pdf = new HTML2PDF('P', 'A4', 'en', true, 'UTF-8');
 		$html2pdf->writeHTML($content, isset($_GET['vuehtml']));
 		$html2pdf->Output($nombreArchivo.'.pdf','D');
+	}
+
+	//GCM - 28/04/2022
+	//Se agrega tipo 5 para las cotizaciones en pdf de vision
+	if($tipo == 5){
+
+		$link = Conectarse();
+		$pdf = '';
+
+		$idCotiz = $arreglo["idCotiz"];
+		$enviar = $arreglo["enviar"];
+
+		$rutaCompleta = '../vision/cotizaciones/vision_cotiz_'.$idCotiz.'.pdf';
+		
+		$html2pdf = new HTML2PDF('P', 'Letter', 'fr');
+		$html2pdf->writeHTML($content, isset($_GET['vuehtml']));
+		$html2pdf->Output($rutaCompleta,'f');
+
+		$query = "SELECT 
+                    IF(vc.fk_idcliente = 0,
+                    (SELECT correo FROM vision_prospectos WHERE fk_cotizacion = vc.id),
+                    (SELECT correo_factura FROM vision_clientes WHERE id_cliente = vc.fk_idcliente)) correo
+                FROM vision_cotizacion vc
+                WHERE id = $idCotiz;";
+
+		$result = $link->query($query);
+
+		if($result){
+
+			$datos=mysqli_fetch_array($result);
+
+			if($enviar == 1){
+				if(isset($datos['correo']) && $datos['correo'] != '' && filter_var($datos['correo'], FILTER_VALIDATE_EMAIL)){
+
+					$pdf = $html2pdf->Output('', true);
+					
+					include("../vendor/lib_mail/class.phpmailer.php");
+					include("../vendor/lib_mail/class.smtp.php");
+	
+					$correo = $datos['correo'];
+	
+					$mail = new PHPMailer();
+					$mail->CharSet = 'UTF-8';
+					$mail->IsSMTP();
+					$mail->IsHTML(true);	
+					$mail->SMTPSecure = "ssl";
+					$mail->SMTPAuth = true;
+					$mail->Host = "mail.ginthercorp.com";
+					$mail->Port = 465;
+					$mail->Username = "contacto@visionpublicidad.mx"; 
+					$mail->Password = "vision2022.";
+	
+					$mail->SetFrom("contacto@visionpublicidad.mx","Cotización");
+	
+					$mail->Subject = "Cotización Visión";
+					$mail->MsgHTML("Cotización Visión");
+					$mail->AddAddress($correo, "Cliente");	
+					
+					$mail->addStringAttachment($pdf, 'file.pdf');
+	
+					if(!$mail->Send()){
+						error_log($mail->ErrorInfo);
+					}else{
+						$html2pdf->Output($rutaCompleta);
+					}
+				}else{
+					error_log("sin correo");
+					$html2pdf->Output($rutaCompleta);
+				}
+			}else{
+				$html2pdf->Output($rutaCompleta);
+			}
+			
+		}else{
+			error_log("Fallando");
+		}
 	}
 
 	echo "OK";

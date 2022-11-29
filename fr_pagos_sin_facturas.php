@@ -177,11 +177,11 @@ session_start();
                             <div class="row">
                                 <div class="col-md-6">
                                     <label for="s_id_unidades" class="col-form-label requerido">Unidad de Negocio </label>
-                                    <select id="s_id_unidades" name="s_id_unidades" class="form-control form-control-sm validate[required]" autocomplete="off" style="width:100%;"></select>
+                                    <select id="s_id_unidades" name="s_id_unidades" class="form-control form-control-sm" autocomplete="off" style="width:100%;"></select>
                                 </div>
                                 <div class="col-md-6">
                                     <label for="s_id_sucursales" class="col-form-label requerido">Sucursal </label>
-                                    <select id="s_id_sucursales" name="s_id_sucursales" class="form-control form-control-sm validate[required]" autocomplete="off" style="width:100%;"></select>
+                                    <select id="s_id_sucursales" name="s_id_sucursales" class="form-control form-control-sm" autocomplete="off" style="width:100%;"></select>
                                 </div>
                                 <div class="col-md-5">
                                     <label for="i_folio" class="col-form-label">Folio</label>
@@ -822,14 +822,15 @@ session_start();
                 let cliente = $("#s_clientes").val();
                 let razones = $("#s_razones").val();
 
-                if(razones != null && razones != 0){
-                    if(verificaLlaves(unidad,sucursal) != ''){
-                        mandarMensaje('Alguna de las partidas no cohincide con los datos principales.'); 
-                        $('#b_guardar').prop('disabled',false);
-                    }else{
-                        guardar('pago');
-                    }    
-                }            
+                // if(razones != null && razones != 0){
+                //     if(verificaLlaves(unidad,sucursal) != ''){
+                //         mandarMensaje('Alguna de las partidas no cohincide con los datos principales.'); 
+                //         $('#b_guardar').prop('disabled',false);
+                //     }else{
+                //         guardar('pago');
+                //     }    
+                // }            
+                guardar('pago');
             }else{
                 mandarMensaje('Debe existir por lo menos una factura para generar el pago.');
                 $('#b_guardar').prop('disabled',false);
@@ -867,18 +868,48 @@ session_start();
         }
 
         function guardar(tipo){
+            let unidad = 0;
+            let sucursal = 0;
+            let cliente = 0;
+            let razon = 0;
+            let rfc = 0;
+
+            campo = '#s_id_unidades';
+            if($(campo).val() > 0 && $(campo).val() != ""){
+                unidad = $(campo).val();
+            }
+
+            campo = '#s_id_sucursales';
+            if($(campo).val() > 0 && $(campo).val() != ""){
+                sucursal = $(campo).val();
+            }
+            
+            campo = '#s_clientes';
+            if($(campo).val() > 0 && $(campo).val() != ""){
+                cliente = $(campo).val();
+            }
+
+            campo = '#s_razones';
+            if($(campo).val() > 0 && $(campo).val() != ""){
+                razon = $(campo).val();
+            }
+
+            campo = '#i_rfc';
+            if($(campo).val() > 0 && $(campo).val() != ""){
+                razon = $(campo).val();
+            }
             
             var info={
-                'idUnidadNegocio' : $('#s_id_unidades').val(),
-                'idSucursal' : $('#s_id_sucursales').val(),
+                'idUnidadNegocio' : unidad,
+                'idSucursal' : sucursal,
                 'importe' : quitaComa($('#i_importe').val()),
                 'idCuentaBanco' : $('#s_banco').val(),
                 'fecha' : $('#i_fecha').val(),
                 'concepto' : $('#i_concepto_ingreso').val(),
                 'descripcion' : $('#i_descripcion').val(),
-                'cliente' : $("#s_clientes").val(),
-                'razon' : $("#s_razones").val(),
-                'rfc' : $("#i_rfc").val()
+                cliente,
+                razon,
+                rfc
             };
 
             $.ajax({

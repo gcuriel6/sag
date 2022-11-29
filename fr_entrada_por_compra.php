@@ -174,16 +174,18 @@ session_start();
                 <hr><!--LInea gris -->
 
                 
-                <div class="row">
-                    <div class="col-sm-4 col-md-1"></div>
-                    <label for="i_oc" class="col-sm-12 col-md-1 col-form-label"><strong>OC </strong></label>
-                    <div class="col-sm-12 col-md-2">
+                <div class="row mb-3">
+                    <div class="col-md-3">
+                        <label for="i_oc"><strong>OC </strong></label>
                         <input type="text" id="i_oc" name="i_oc" class="form-control form-control-sm" autocomplete="off" readonly>
                         <input type="hidden" name="i_id_orden" id="i_id_orden">
                     </div>
-                    <div class="col-sm-4 col-md-1"></div>
-                    <div class="col-sm-4 col-md-4">
-                        <button type="button" data-toggle="tooltip" data-placement="top" title="Importar Ordenes de Compra " class="btn btn-success btn-sm form-control" id="b_importar_oc"><i class="fa fa-download" aria-hidden="true"></i> Importar Orden Compra</button>
+                    <div class="col-md-6 align-self-end">
+                        <button type="button" data-toggle="tooltip" data-placement="top" title="Importar Ordenes de Compra " class="btn btn-success btn-sm w-100" id="b_importar_oc"><i class="fa fa-download" aria-hidden="true"></i> Importar Orden Compra</button>
+                    </div>
+                    <div class="col-md-3">
+                        <label for="i_isr"><strong>ISR</strong></label>
+                        <input type="text" id="i_isr" name="i_isr" class="form-control form-control-sm" autocomplete="off" value="0.00">
                     </div>
                 </div> 
 
@@ -192,19 +194,20 @@ session_start();
                         <table class="tablon" id="t_partidas" border="2">
                             <thead>
                                 <tr class="renglon">
-                                    <th scope="col" width="5%">Partida</th>
-                                    <th scope="col" width="5%">Catálogo</th>
-                                    <th scope="col" width="10%">Familia</th>
-                                    <th scope="col" width="20%">Concepto</th>
-                                    <th scope="col" width="10%">Cantidad</th>
-                                    <th scope="col" width="10%">Recibiendo</th>
-                                    <th scope="col" width="10%">Costo Unit<br> OC</th>
-                                    <th scope="col" width="10%">Costo Unit<br> Factura</th>
-                                    <th scope="col" width="5%">Des%</th>
-                                    <th scope="col" width="5%">IVA%</th>
-                                    <th scope="col" width="9%">Importe sin/IVA</th>
-                                    <th scope="col" width="5%"></th>
-                                    <th scope="col" width="5%"></th>
+                                    <th scope="col">Partida</th>
+                                    <th scope="col">Catálogo</th>
+                                    <th scope="col">Familia</th>
+                                    <th scope="col">Concepto</th>
+                                    <th scope="col">Cantidad</th>
+                                    <th scope="col">Recibiendo</th>
+                                    <th scope="col">Costo Unit<br> OC</th>
+                                    <th scope="col">Costo Unit<br> Factura</th>
+                                    <th scope="col">Des%</th>
+                                    <th scope="col">IVA%</th>
+                                    <th scope="col">Importe sin/IVA</th>
+                                    <!-- <th scope="col">ISR</th> -->
+                                    <th scope="col"></th>
+                                    <th scope="col"></th>
                                 </tr>
                             </thead>
                             <tbody>
@@ -235,6 +238,14 @@ session_start();
                                     <th scope="col" colspan="2"  width="10%">IVA</th>
                                     <th scope="col" width="9%">
                                         <input type="text" id="i_total_iva" name="i_total_iva" readonly class="validate[required] i_t" autocomplete="off"/>
+                                    </th>
+                                    <th scope="col" colspan="2" width="10%"></th>
+                                </tr>
+                                <tr  class="tr_totales">
+                                    <th scope="col" width="70%"></th>
+                                    <th scope="col" colspan="2"  width="10%">ISR</th>
+                                    <th scope="col" width="9%">
+                                        <input type="text" id="i_total_isr" name="i_total_isr" readonly class="validate[required] i_t" autocomplete="off"/>
                                     </th>
                                     <th scope="col" colspan="2" width="10%"></th>
                                 </tr>
@@ -296,7 +307,7 @@ session_start();
 </div>
 
 <div id="dialog_importar_oc" class="modal fade bd-example-modal-lg" tabindex="-1" role="dialog" aria-labelledby="myLargeModalLabel" aria-hidden="true">
-    <div class="modal-dialog">
+    <div class="modal-dialog modal-lg">
         <div class="modal-content">
         <div class="modal-header">
             <h5 class="modal-title">Ordenes Pendientes</h5>
@@ -860,27 +871,29 @@ session_start();
 
                     var inputCantidadRecibida='<input '+disabled+' type="text" style="width:100%;" class="validate[min[1],max['+ocD.faltante+']] form-control form-control-sm  cantidad_recibida dato_input" id="i_cantidad_'+totalPartidas+'" value="'+cant+'" alt="' + ocD.id_producto + '" alt3="' + totalPartidas + '" alt4="' + ocD.descuento + '" />';
                     var inputPrecioFactura='<input type="text" style="width:100%;" class="validate[required,min[0.01],max['+ocD.costo+']] numeroMoneda form-control  form-control-sm costo_factura dato_input" id="i_costo_'+totalPartidas+'" alt3="' + totalPartidas + '" alt4="' + ocD.descuento + '" value="' + formatearNumero(ocD.costo) + '"/>';
-            
+                    // var inputISR ='<input type="text" style="width:100%;" class="form-control form-control-sm isr_factura" id="i_isr_'+totalPartidas+'" value="0.00"/>';
+
                     var html = "<tr class='renglon_partida' alt='"+totalPartidas+"' idAlmacenD='"+ocD.id+"' verificaTallas='"+ocD.verifica_talla+"' idOrden='"+idOrden+"'  idProducto='" + ocD.id_producto + "' concepto='" + ocD.concepto+ "' idFamilia='" + ocD.id_familia + "' id_familia_gasto='"+ocD.id_familia_gasto+"'>";
-                        html += "<td width='5%'>" +totalPartidas+ "</td>";
-                        html += "<td width='5%'>" + ocD.id_producto + "</td>";
-                        html += "<td width='10%'>" + ocD.familia + "</td>";
-                        html += "<td width='20%'>" + ocD.concepto + "</td>";
-                        html += "<td align='right' width='10%'>" + ocD.faltante + "</td>";
-                        html += "<td align='right' width='10%' class='editar'>" + inputCantidadRecibida + "</td>";
-                        html += "<td align='right' width='10%'>" + formatearNumero(ocD.costo) + "</td>";
-                        html += "<td align='right' width='10%' class='editar'>" + inputPrecioFactura + "</td>";
-                        html += "<td align='right' width='5%' class='descuento'>" + ocD.descuento + "</td>";
-                        html += "<td align='right' width='5%' class='iva'>" + ocD.iva + "</td>";
-                        html += "<td align='right' width='10%' class='editar importe' id='importe_" +totalPartidas+ "'>" + total + "</td>";
+                        html += "<td>" +totalPartidas+ "</td>";
+                        html += "<td>" + ocD.id_producto + "</td>";
+                        html += "<td>" + ocD.familia + "</td>";
+                        html += "<td>" + ocD.concepto + "</td>";
+                        html += "<td align='right'>" + ocD.faltante + "</td>";
+                        html += "<td align='right' class='editar'>" + inputCantidadRecibida + "</td>";
+                        html += "<td align='right'>" + formatearNumero(ocD.costo) + "</td>";
+                        html += "<td align='right' class='editar'>" + inputPrecioFactura + "</td>";
+                        html += "<td align='right' class='descuento'>" + ocD.descuento + "</td>";
+                        html += "<td align='right' class='iva'>" + ocD.iva + "</td>";
+                        html += "<td align='right' class='editar importe' id='importe_" +totalPartidas+ "'>" + total + "</td>";
+                        // html += "<td align='right' class='editar'>" + inputISR + "</td>";
                       
                         var botonTalla = '';
                        
                         if(ocD.verifica_talla == 1)
                         botonTalla = "<button type='button' class='btn btn-primary btn-sm form-control class-" + totalPartidas + "  b_talla' id='b_talla_" + totalPartidas + "' alt='" + ocD.id_producto + "'  alt2='" + ocD.faltante + "'  alt3='" + totalPartidas + "' ><i class='fa fa-list' aria-hidden='true'></i></button><input  class='tallas-i' type='hidden' id='i_talla" + totalPartidas + "'  name='i_talla" + totalPartidas + "' tallas_solicitadas='"+ocD.tallas_solicitadas+"'>";
 
-                        html += "<td width='5%'>" + botonTalla + "</td>";
-                        html += "<td width='5%'><button "+disabled+" type='button' class='btn btn-danger btn-sm b_eliminar' id='b_eliminar' alt='" + ocD.id_producto + "'><i class='fa fa-remove' style='font-size:10px;' aria-hidden='true'></i></button></td>";
+                        html += "<td>" + botonTalla + "</td>";
+                        html += "<td><button "+disabled+" type='button' class='btn btn-danger btn-sm b_eliminar' id='b_eliminar' alt='" + ocD.id_producto + "'><i class='fa fa-remove' style='font-size:10px;' aria-hidden='true'></i></button></td>";
                         html += "</tr>";
 
                         // aqui
@@ -952,85 +965,93 @@ session_start();
 
     function calculaTotales(){
           
-          var subtotal=0;
-          var totalIva=0;
-          var total=0;
+        var subtotal=0;
+        var totalIva=0;
+        var total=0;
+        let isr = 0.00;
 
-          $("#t_registros > tbody tr").each(function() {
-             
-              var cantidad = $(this).find('.cantidad_recibida').val();
-              var costo = quitaComa($(this).find('.costo_factura').val());
-              var iva = $(this).find('.iva').text();
-              var importe = quitaComa($(this).find('.importe').text());
-              var descuento = $(this).find('.descuento').text();
-              //alert(cantidad+"--"+costo+"--"+iva+"--"+importe+"--"+descuento);
+        if($("#i_isr").val() != ""){
+            isr = $("#i_isr").val();
+        }
 
-              if(descuento > 0){
-                  
-                  var subtotalP=parseInt(cantidad)*parseFloat(costo);
-                  var descuentoTotal=((parseFloat(descuento)*subtotalP)/100);
-                  
-                  subtotal+=(subtotalP-descuentoTotal);
+        $("#t_registros > tbody tr").each(function() {
+            
+            var cantidad = $(this).find('.cantidad_recibida').val();
+            var costo = quitaComa($(this).find('.costo_factura').val());
+            var iva = $(this).find('.iva').text();
+            var importe = quitaComa($(this).find('.importe').text());
+            var descuento = $(this).find('.descuento').text();
+            //alert(cantidad+"--"+costo+"--"+iva+"--"+importe+"--"+descuento);
 
-                  totalIva+=((parseInt(cantidad)*parseFloat(costo))-descuentoTotal)*(iva/100);
+            if(descuento > 0){                
+                var subtotalP=parseInt(cantidad)*parseFloat(costo);
+                var descuentoTotal=((parseFloat(descuento)*subtotalP)/100);
+                
+                subtotal+=(subtotalP-descuentoTotal);
 
-              }else{
+                totalIva+=((parseInt(cantidad)*parseFloat(costo))-descuentoTotal)*(iva/100);
 
-                  subtotal+=parseInt(cantidad)*parseFloat(costo);
-                  totalIva+=(parseInt(cantidad)*parseFloat(costo))*(iva/100);
-              }
-              
-          
-              
-          });
-         
-            $('#i_subtotal').val(formatearNumero(subtotal));
-            $('#i_total_iva').val(formatearNumero(totalIva));
-            $('#i_total').val(formatearNumero(subtotal+totalIva));
+            }else{
+                subtotal+=parseInt(cantidad)*parseFloat(costo);
+                totalIva+=(parseInt(cantidad)*parseFloat(costo))*(iva/100);
+            }            
+        });
+        
+        $('#i_subtotal').val(formatearNumero(subtotal));
+        $('#i_total_iva').val(formatearNumero(totalIva));
+        $("#i_total_isr").val(formatearNumero(isr));
+        $('#i_total').val(formatearNumero((subtotal+totalIva) - isr));
            
-      }
+    }
 
-      function calculaTotal(){
+    function calculaTotal(){
           
-          var subtotal=0;
-          var totalIva=0;
-          var total=0;
+        var subtotal=0;
+        var totalIva=0;
+        var total=0;
+        let isr = 0.00;
 
-          $("#t_registros > tbody tr").each(function() {
-             
-              var cantidad = $(this).attr('cantidad');
-              var costo = $(this).attr('precio');
-              var iva = $(this).attr('iva');
-              var importe = parseFloat(cantidad) * parseFloat(costo);
-              var descuento = $(this).attr('descuento');
-             
-              if(descuento > 0){
-                  
-                  var subtotalP=parseInt(cantidad)*parseFloat(costo);
-                  var descuentoTotal=((parseFloat(descuento)*subtotalP)/100);
-                  
-                  subtotal+=(subtotalP-descuentoTotal);
+        if($("#i_isr").val() != ""){
+            isr = $("#i_isr").val();
+        }
 
-                  totalIva+=((parseInt(cantidad)*parseFloat(costo))-descuentoTotal)*(iva/100);
+        $("#t_registros > tbody tr").each(function() {
+            
+            var cantidad = $(this).attr('cantidad');
+            var costo = $(this).attr('precio');
+            var iva = $(this).attr('iva');
+            var importe = parseFloat(cantidad) * parseFloat(costo);
+            var descuento = $(this).attr('descuento');
+            
+            if(descuento > 0){
+                
+                var subtotalP=parseInt(cantidad)*parseFloat(costo);
+                var descuentoTotal=((parseFloat(descuento)*subtotalP)/100);
+                
+                subtotal+=(subtotalP-descuentoTotal);
 
-              }else{
+                totalIva+=((parseInt(cantidad)*parseFloat(costo))-descuentoTotal)*(iva/100);
 
-                  subtotal+=parseInt(cantidad)*parseFloat(costo);
-                  totalIva+=(parseInt(cantidad)*parseFloat(costo))*(iva/100);
-              }
-              
-          
-              
-          });
-         
-            $('#i_subtotal').val(formatearNumero(subtotal));
-            $('#i_total_iva').val(formatearNumero(totalIva));
-            $('#i_total').val(formatearNumero(subtotal+totalIva));
+            }else{
+
+                subtotal+=parseInt(cantidad)*parseFloat(costo);
+                totalIva+=(parseInt(cantidad)*parseFloat(costo))*(iva/100);
+            }
+            
+        
+            
+        });
+        
+        $('#i_subtotal').val(formatearNumero(subtotal));
+        $('#i_total_iva').val(formatearNumero(totalIva));
+        $("#i_total_isr").val(formatearNumero(isr));
+        $('#i_total').val(formatearNumero((subtotal+totalIva) - isr));
            
       }
 
         $('#b_guardar').on('click',function(){
             $('#b_guardar').prop('disabled',true);
+            calculaTotales();
             
             //--MGFS 21-01-2020 SE AGREGA VALIDACION PARA QUE TODAS LAS PARTIDAS LLEVEN POR LO MENOS CANTIDAD 1
             //-- YA QUE SE GUARDO UNA ENTRADA PARA CAUIDILLO EN 0--
@@ -1056,6 +1077,12 @@ session_start();
 
 
         function guardar(){
+
+            let isr = 0.00;
+
+            if($("#i_isr").val() != ""){
+                isr = $("#i_isr").val();
+            }
             
             var datos = {
                 'tipoMov' : tipoMov,
@@ -1079,7 +1106,8 @@ session_start();
                 'importe' : quitaComa($('#i_total').val()),
                 //-->NJES March/23/2020 se agrega folios y id de requis de la oc importada en la entrada compra para guardar en la bitacora de activos
                 'foliosRequis' : $('#i_oc').attr('folios_requis'),
-                'idsRequis' : $('#i_oc').attr('ids_requis')
+                'idsRequis' : $('#i_oc').attr('ids_requis'),
+                'montoIsr': isr
             };
             
             $.ajax({
@@ -1295,8 +1323,7 @@ session_start();
 
         });
 
-        $('#b_guardar_talla').click(function()
-        {
+        $('#b_guardar_talla').click(function(){
             $('#b_guardar_talla').prop('disabled',true);
 
             var totalProdutos = $('#i_t_total').val();
@@ -1461,13 +1488,11 @@ session_start();
                               
                         }
                     }else{
-
-                            mandarMensaje('No se encontró información');
+                        mandarMensaje('No se encontró información');
                     }
 
                 },
-                error: function (xhr) 
-                {
+                error: function (xhr){
                     console.log('php/entradas_compra_buscar.php --> '+JSON.stringify(xhr));
                     mandarMensaje('* Error en el sistema');
                 }
@@ -1542,9 +1567,7 @@ session_start();
                 type: 'POST',
                 url: 'php/entradas_compra_buscar_detalle.php',
                 dataType:"json", 
-                data:{
-                    'idEntradaCompra':idEntradaCompra
-                },
+                data:{idEntradaCompra},
                 success: function(data)
                 {
                     var totalPartidas = 0;
@@ -1555,6 +1578,10 @@ session_start();
                         var detalle = data[i];
 
                         totalPartidas++;
+
+                        if(detalle.isr != 0){
+                            $("#i_isr").val(detalle.isr);
+                        }
 
                         var html = "<tr class='renglon_partida' alt='" + totalPartidas +  "' producto='" + detalle.id_producto + "' concepto='" + detalle.concepto+ "' id_familia='" + detalle.id_familia + "' familia='" + detalle.familia + "' id_linea='" + detalle.id_linea + "' linea='" + detalle.linea + "' precio='" + detalle.precio + "' cantidad='" +  detalle.cantidad + "' costo='" + redondear(parseFloat(detalle.costo_unitario) * parseInt(detalle.cantidad)) + "' descripcion='" + detalle.descripcion + "' justificacion='" + detalle.justificacion + "' iva='" + detalle.iva + "' descuento='" + detalle.descuento + "' >";
                         html += "<td width='5%'>" + detalle.partida + "</td>";
@@ -1572,20 +1599,13 @@ session_start();
                         html += "<td width='9%' align='right' class='editar'>" + formatearNumero( detalle.precio * detalle.cantidad )+ "</td>";
                                     
                         var botonTalla = '';
-                        if(detalle.verifica_talla == 1)
-                        {
-
+                        if(detalle.verifica_talla == 1){
                             botonTalla = "<button type='button' class='btn btn-success btn-sm form-control b_talla' id='b_talla_" + detalle.id_producto + "' alt='" + detalle.id_producto + "'  alt2='" + detalle.cantidad + "'  alt3='" + totalPartidas + "' ><i class='fa fa-list' aria-hidden='true'></i></button><input  class='tallas-i' type='hidden' id='i_talla" + totalPartidas + "'  name='i_talla" + totalPartidas + "' value='" + detalle.tallas + "' tallas_solicitadas='" + detalle.tallas_solicitadas + "'>";
-
                         }
 
                         html += "<td width='5%'>" + botonTalla + "</td>";
-
                         html += "<td width='5%'><button type='button' class='btn btn-danger btn-sm form-control' id='b_eliminar' alt='" + detalle.id_producto + "' disabled><i class='fa fa-remove' aria-hidden='true'></i></button></td>";
-
                         html += "</tr>";
-
-                        // aqui
 
                         $('#t_registros tbody').append(html);
                        
@@ -1685,7 +1705,6 @@ session_start();
             }else{
                 mandarMensaje('Debes selecionar una Recepción de mercancías y Servicios');
             }
-
         });
 
         /**** MODULO DE NO ECONOMICO QUE VIENE DE ACTIVOS */

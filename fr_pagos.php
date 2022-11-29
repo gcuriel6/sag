@@ -110,6 +110,10 @@ session_start();
         display:none;
     }
 
+    .select2-container {
+        width: 100% !important;
+    }
+
     /* Responsive Web Design */
 	@media only screen and (max-width:768px){
         .tablon{
@@ -1610,7 +1614,7 @@ session_start();
 
             if(tipo == "pagoSF"){
                 idCuentaBanco = $("#s_pagos_psf option:selected").attr("alt2");
-                fecha = $("#s_pagos_psf option:selected").attr("alt1");
+                // fecha = $("#s_pagos_psf option:selected").attr("alt1");
                 tipoCuenta = 0;
             }
 
@@ -2229,40 +2233,33 @@ session_start();
                 type: 'GET',
                 url: '../cfdi_corporativo/php/verifica_status_pago.php',
                 data : {'empresa':idEmpresa, 'registro': idCFDI},
-                success: function(data)
-                {
-                    if(data == 1)
-                    {  //bajamos xml y actualizamos estatus a cancelada en ginther
+                success: function(data){
+                    // mandarMensaje(data);
+                    if(data == 1){  //bajamos xml y actualizamos estatus a cancelada en ginther
                         $.ajax({
                             type: 'POST',
                             url: 'php/pagos_descargar_acuse.php',
                             data : {'idPago':id, 'idCFDI': idCFDI},
-                            success: function(data)
-                            {
+                            success: function(data){
                                 //console.log('*'+data+'*');
-                                if(data > 0)
-                                {
+                                if(data > 0){
                                     muestraRegistro(data);
                                     muestraRegistroDetalle(data);
                                     mandarMensaje('Se aprobó la cancelación.');
                                 }else{
                                     mandarMensaje('Error al descargar acuse y actualizar');
                                 }
-
                             },
-                            error: function (xhr) {
+                            error: function (xhr){
                                 //console.log('php/pagos_descargar_acuse.php --> '+JSON.stringify(xhr));
                                 mandarMensaje('* Error al descargar acuse y actualizar');
                             }
                         });
-                    }else if(data == 2)
-                    {
+                    }else if(data == 2){
                         mandarMensaje('El pago no ha sido aprobada por el cliente favor de intentarlo mas tarde');
                     }else{
-                        ///actualizamos estatus a timbrado 
-
-                        if(parseInt(actualizarEstatusPago(id,'T')) == parseInt(id))
-                        {
+                        ///actualizamos estatus a timbrado
+                        if(parseInt(actualizarEstatusPago(id,'T')) == parseInt(id)){
                             muestraRegistro(id);
                             muestraRegistroDetalle(id);
                             mandarMensaje('Rechazada. Se actualizó estatus a timbrado.');
@@ -2273,7 +2270,7 @@ session_start();
 
                     $('#fondo_cargando').hide();   
                 },
-                error: function (xhr) {
+                error: function (xhr){
                     //console.log('php/verifica_status_pago.php --> '+JSON.stringify(xhr));
                     mandarMensaje('* Error al generar timbre');
                 }
@@ -2332,7 +2329,13 @@ session_start();
 
             $('#r_MXN').prop('checked',true);
             $('.div_tipo_cambio').hide();
-            $('#i_tipo_cambio').val('15.00');                
+            $('#i_tipo_cambio').val('15.00');      
+            
+            $("#dialog_pagos_psf").modal("hide");
+            
+            $("#ch_psf").prop("checked", false);
+            $("#ch_psf").trigger("change");
+            $("#s_banco").attr("disabled", false)
         }
 
         $('#b_descargar_pdf').click(function(){
@@ -2399,8 +2402,7 @@ session_start();
             mandaCorreo(idPago,folioPago,ruta,tipo);
         });
 
-        function generaPdf(id,folio,nombreArchivo,tipo,tipoAr)
-        {
+        function generaPdf(id,folio,nombreArchivo,tipo,tipoAr){
             var ruta = '../pagos/archivos/'+tipoAr+'_'+folio+'_'+id;
 
             var datos = {
@@ -2415,13 +2417,12 @@ session_start();
             let objJsonStr = JSON.stringify(datos);
             let datosJ = datosUrl(objJsonStr);
 
-            $.get('php/convierte_pdf.php',{'D':datosJ},function(data)
-            {
-                
-                if(data=='OK')
+            $.get('php/convierte_pdf.php',{'D':datosJ},function(data){                
+                if(data=='OK'){
                     generaXml(id,folio,ruta,nombreArchivo,tipoAr);
-                else
+                }else{
                     mandarMensaje(data);
+                }    
             });
 
         }
@@ -2716,11 +2717,13 @@ session_start();
 
         $('#ch_psf').change(function() {
             let inputs = "#i_banco_cliente, #s_banco, #i_cuenta_cliente, #i_fecha";
-            if(this.checked) {
-                $(inputs).attr("disabled", true).removeClass("validate[required]");
-            }else{
-                $(inputs).attr("disabled", false).addClass("validate[required]");
-            }  
+            // if(this.checked) {
+            //     $(inputs).attr("disabled", true).removeClass("validate[required]");
+            // }else{
+            //     $(inputs).attr("disabled", false).addClass("validate[required]");
+            // }  
+            $(inputs).attr("disabled", false)/*.addClass("validate[required]")*/;
+            $("#s_banco").attr("disabled", true).removeClass("validate[required]");
         });
 
         function mostrarModalPSF(){
@@ -2739,10 +2742,14 @@ session_start();
                         $("#s_pagos_psf").html("<option value='0' disabled selected>...</option>");
 
                         data.map(function(x, y) {
-                            $("#s_pagos_psf").append(`<option value="${x.idPsf}" alt1="${x.fecha}" alt2="${x.id_cuenta_banco}">${x.monto} - ${x.folio} - ${x.concepto}</option>`);
+                            $("#s_pagos_psf").append(`<option value="${x.idPsf}" alt1="${x.fecha}" alt2="${x.id_cuenta_banco}">${x.monto} - ${x.folio} - ${x.concepto} - ${x.fecha}</option>`);
                         });
 
                         $("#dialog_pagos_psf").modal("toggle");
+
+                        $('#s_pagos_psf').select2(
+                            {dropdownParent: $("#dialog_pagos_psf")}
+                        );
                     }else{
                         mandarMensaje("No hay pagos sin factura para esta razón social");
                     }

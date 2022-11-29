@@ -572,8 +572,14 @@ session_start();
                     for(var i=0;i<arreglo.length;i++)
                     {
                         var dato=arreglo[i];
+
+                        let saldo = 999999999;
+
+                        if(dato.saldo_disponible > 0){
+                            saldo = dato.saldo_disponible;
+                        }
                         
-                        saldoDisponibleCuentaB = dato.saldo_disponible;
+                        saldoDisponibleCuentaB = saldo;
               
                     }
                 },
@@ -1137,8 +1143,9 @@ session_start();
 
             if($('#forma').validationEngine('validate'))
             {
-                if(parseFloat(saldoDisponibleCuentaB) >= parseFloat(quitaComa($('#i_monto').val())))
-                {
+                // if(parseFloat(saldoDisponibleCuentaB) >= parseFloat(quitaComa($('#i_monto').val())))
+                // {
+                    //2022-06-03 GCM - Se quita validador de saldo disponible para que siempre deje hacer el movimiento aun que no tenga saldo disponible
                     //--MGFS SE AGREGA VALIDACION PARA QUE SE SELECCIONES FOLIOS DE MISMO PROVVEDOR
                     if(verificarProveedor(opcionTab())==0){
                         guardar();
@@ -1147,10 +1154,10 @@ session_start();
                         $('#b_guardar').prop('disabled',false);
                     }
                    
-                }else{
-                    mandarMensaje('El saldo actual de la cuenta banco '+$('#s_cuenta_banco option:selected').text()+' es insuficiente para realizar el pago.');
-                    $('#b_guardar').prop('disabled',false);
-                }
+                // }else{
+                //     mandarMensaje('El saldo actual de la cuenta banco '+$('#s_cuenta_banco option:selected').text()+' es insuficiente para realizar el pago.');
+                //     $('#b_guardar').prop('disabled',false);
+                // }
             }else{
                 $('#b_guardar').prop('disabled',false);
             }

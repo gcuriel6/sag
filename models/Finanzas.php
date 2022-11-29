@@ -470,6 +470,9 @@ class Finanzas
                         LEFT JOIN sucursales o ON k.id_sucursal=o.id_sucursal
                         GROUP BY pre.id
                         ORDER BY pre.id DESC";
+
+                        // echo $query;
+                        // exit();
                 }else{
 
 

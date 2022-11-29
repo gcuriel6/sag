@@ -158,7 +158,14 @@ class CargarDatos
 
       $xml= file_get_contents($_FILES['xml']['tmp_name']);
       $sxml = simplexml_load_string($xml);
-      $sxml->registerXPathNamespace('c','http://www.sat.gob.mx/cfd/3');
+      //GCM 14 marzo 2022 se agrega validar version 4
+      $version = $sxml["Version"];
+      if($version >= 4){
+        $sxml->registerXPathNamespace('c','http://www.sat.gob.mx/cfd/4');
+      }else{
+        $sxml->registerXPathNamespace('c','http://www.sat.gob.mx/cfd/3');
+      }
+      
       $comprobante = (array)$sxml->xpath('//c:Comprobante');
       $comprobanteData = $comprobante[0];
 
@@ -347,7 +354,12 @@ class CargarDatos
           $xml= file_get_contents($rutaXML);   //--- obtengo el contenido del xml y lo convierto a string para insertarlo en almacen
           $sxml = simplexml_load_string($xml); //-- se carga el string generado para obtener la informacion de sus nodos
 
-          $sxml->registerXPathNamespace('c','http://www.sat.gob.mx/cfd/3');//Declaramos el Name Space cfdi como c
+          $version = $sxml["Version"];
+          if($version >= 4){
+            $sxml->registerXPathNamespace('c','http://www.sat.gob.mx/cfd/4');
+          }else{
+            $sxml->registerXPathNamespace('c','http://www.sat.gob.mx/cfd/3');
+          }
 
           $comprobante = (array)$sxml->xpath('//c:Comprobante');//Obtenemos el array de cfdi:Comprobante
           $comprobante_data = $comprobante[0];
@@ -615,7 +627,12 @@ class CargarDatos
       $xml= file_get_contents($rutaXML);   //--- obtengo el contenido del xml y lo convierto a string para insertarlo en almacen
       $sxml = simplexml_load_string($xml); //-- se carga el string generado para obtener la informacion de sus nodos 
 
-      $sxml->registerXPathNamespace('c','http://www.sat.gob.mx/cfd/3');//Declaramos el Name Space cfdi como c
+      $version = $sxml["Version"];
+      if($version >= 4){
+        $sxml->registerXPathNamespace('c','http://www.sat.gob.mx/cfd/4');
+      }else{
+        $sxml->registerXPathNamespace('c','http://www.sat.gob.mx/cfd/3');
+      }
       
       $receptor = (array)$sxml->xpath('//c:Receptor');
       $receptorData = $receptor[0];
@@ -796,7 +813,13 @@ class CargarDatos
 
       $xml= file_get_contents($_FILES['xml']['tmp_name']);
       $sxml = simplexml_load_string($xml);
-      $sxml->registerXPathNamespace('c','http://www.sat.gob.mx/cfd/3');
+
+      $version = $sxml["Version"];
+      if($version >= 4){
+        $sxml->registerXPathNamespace('c','http://www.sat.gob.mx/cfd/4');
+      }else{
+        $sxml->registerXPathNamespace('c','http://www.sat.gob.mx/cfd/3');
+      }
       
       $receptor = (array)$sxml->xpath('//c:Receptor');
       $receptorData = $receptor[0];
@@ -905,7 +928,13 @@ class CargarDatos
 
       $xml= file_get_contents($_FILES['xml']['tmp_name']);
       $sxml = simplexml_load_string($xml);
-      $sxml->registerXPathNamespace('c','http://www.sat.gob.mx/cfd/3');
+      
+      $version = $sxml["Version"];
+      if($version >= 4){
+        $sxml->registerXPathNamespace('c','http://www.sat.gob.mx/cfd/4');
+      }else{
+        $sxml->registerXPathNamespace('c','http://www.sat.gob.mx/cfd/3');
+      }
 
       $comprobante = (array)$sxml->xpath('//c:Comprobante');
       $comprobanteData = $comprobante[0];
@@ -965,7 +994,12 @@ class CargarDatos
                 $xml= file_get_contents($rutaXML);   //--- obtengo el contenido del xml y lo convierto a string para insertarlo en almacen
                 $sxml = simplexml_load_string($xml); //-- se carga el string generado para obtener la informacion de sus nodos
       
-                $sxml->registerXPathNamespace('c','http://www.sat.gob.mx/cfd/3');//Declaramos el Name Space cfdi como c
+                $version = $sxml["Version"];
+                if($version >= 4){
+                  $sxml->registerXPathNamespace('c','http://www.sat.gob.mx/cfd/4');
+                }else{
+                  $sxml->registerXPathNamespace('c','http://www.sat.gob.mx/cfd/3');
+                }
                 
                 $actualizaRuta = "UPDATE cxp_complementos_pagos SET ruta_xml='$rutaC'";
                 $resultA = mysqli_query($this->link, $actualizaRuta) or die(mysqli_error());

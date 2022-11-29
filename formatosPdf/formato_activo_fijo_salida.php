@@ -20,7 +20,7 @@ else
 
 // Informacion de la empresa 
 $query = "SELECT a.id,
-            a.folio,
+            n.folio_recepcion folio,
             a.cve_concepto,
             a.id_unidad_negocio,
             d.nombre AS unidad,
@@ -28,7 +28,7 @@ $query = "SELECT a.id,
             d.clave as clave_unidad,
             a.id_sucursal,
             e.descr AS sucursal,
-            DATE(a.fecha) AS fecha,
+            DATE(n.fecha_adquisicion) AS fecha,
             a.observacion,
             a.id_clasificacion,
             f.nombre AS clasificacion,
@@ -138,9 +138,9 @@ table td{
 	font-size:13px;
 	text-transform: capitalize;
 }
-.borde_negro_tabla{
+/* .borde_negro_tabla{
     border: 1px solid black;
-}
+} */
 .borde_negro_tabla td{
     padding:5px;
 }
@@ -489,42 +489,119 @@ table td{
 <br>
 <br>
 <table class="borde_negro_tabla">
-<tr>
-        <td width="750" style="border-bottom: 1px solid black;">
-            1- SE HACE ENTREGA DEL ACTIVO ARRIBA MENCIONADO, PARA EL USO EXCLUSIVO DE LA OPERACIÓN, DE ACUERDO A
-            SU PUESTO DE TRABAJO. QUEDA PROHIBIDO EL USO INADECUADO, MANEJO EN EXCESO DE VELOCIDAD (PERMITIDO
-            EN CIUDAD 70KM MÁXIMO, 100KM EN CARRETERA MÁXIMO), NO USAR EN ESTADO DE EBRIEDAD, NO ACUDIR A
-            BARES, ANTROS O EVENTOS POLÍTICOS CON EL VEHÍCULO. EL FALTAR ALGUNO DE LOS PUNTOS MENCIONADOS
-            ARRIBA SERÁ MOTIVO PARA RETIRO DEL VEHÍCULO. MANTENER SIEMPRE LIMPIO.
-        </td>
-    </tr>
     <tr>
-        <td width="750" style="border-bottom: 1px solid black;">
-            2. DEBERÁ ENTREGAR SEMANALMENTE BITÁCORAS DE VISITAS PARA RECIBIR EL APOYO DE GASOLINA OTORGADO,
-            DEPENDIENDO EL CARGO.
-        </td>
-    </tr>
-    <tr>
-        <td width="750" style="border-bottom: 1px solid black;">
-            3.- EN CASO DE SINIESTRO LLAMAR AL 01-800 MARCADO EN LA PÓLIZA DE SEGURO ENTREGADA, DAR AVISO
-            INMEDIATAMENTE AL GERENTE A CARGO Y HACER DEL CONOCIMIENTO AL DEPARTAMENTO DE ACTIVO FIJO.
-        </td>
-    </tr>
-    <tr>
-        <td width="750" style="border-bottom: 1px solid black;">
-            4.- EN CASO DE QUE UN INCIDENTE HAYA SIDO POR DESCUIDO O NEGLIGENCIA DE EMPLEADO, LOS DAÑOS
-            CORRERÁN 100% POR PARTE DEL USUARIO, SI NO, SE HARÁ UN ANÁLISIS POR PARTE DEL DEPARTAMENTO DE
-            ACTIVO FIJO, CON EL DICTAMEN ENTREGADO POR LA ASEGURADORA.
-        </td>
-    </tr>
-    <tr>
-        <td width="750" style="border-bottom: 1px solid black;">
-            5.- LAS DESPONCHADURAS CORREN POR PARTE DEL USUARIO. EN CASO DE LA SUCURSAL ATT, NO APLICA.
+        <td width="750">
+            El suscrito, en mi carácter de responsable, manifiesto que recibo bajo mi resguardo y responsabilidad, como herramienta de trabajo para el desarrollo de mis actividades, el vehículo descrito en el presente documento, propiedad de SEGURIDAD PRIVADA GINTHER DE OCCIDENTE, S. DE R.L. DE C.V.
         </td>
     </tr>
     <tr>
         <td width="750">
-            6.- LOS USUARIOS, SON RESPONSABLES DEL PAGO DE MULTAS. ESTAS SERÁN MONITOREADAS CADA MES Y SERÁN DESCONTADAS VÍA NÓMINA.
+            En ese tenor, enterado de su alcance, expreso mi aceptación a cumplir con las obligaciones siguientes:
+        </td>
+    </tr>
+    <tr>
+        <td width="750">
+            1.- Usar el vehículo única y exclusivamente para el desarrollo de las actividades laborales que me sean encomendadas, salvo excepción expresamente autorizada por el coordinador o la gerencia, sin que dicha excepción pueda ser para trasladarse a bares, centros nocturnos o eventos políticos no relacionados con la actividad de la empresa.
+        </td>
+    </tr>
+    <tr>
+        <td width="750">
+            2.- Revisar la unidad antes y después de conducirla, elaborando el check-list correspondiente y remitiéndolo al personal de operaciones y activo fijo diariamente, en el entendido de que las cuestiones no reportadas al momento de tomar la unidad serán responsabilidad del suscrito.
+        </td>
+    </tr>
+    <tr>
+        <td width="750">
+            3.- Responder por cualquier desperfecto, daños, siniestro o falla mecánica causada por mi negligencia, mal uso o descuido del vehículo o relacionado con éste, para lo cual autorizo mediante este documento su descuento vía nómina, en caso de ser necesario; respondiendo la empresa únicamente por las reparaciones y daños por caso fortuito, fuerza mayor o circunstancias no imputables al suscrito, previo análisis del Departamento de Activo Fijo con base en el dictamen entregado por la compañía de seguros respectiva.
+        </td>
+    </tr>
+    <tr>
+        <td width="750">
+            4.- Asumir por mi cuenta la reparación de neumáticos perforados (no aplica en el caso de ATT).
+        </td>
+    </tr>
+    <tr>
+        <td width="750">
+            5.- Mantener la unidad en buen estado, limpia y funcional para el servicio.
+        </td>
+    </tr>
+    <tr>
+        <td width="750">
+            6.- Reportar las necesidades de aditamentos como torreta, extintor, atrapa birlos, pértiga, faros de reversa, luces, reflejante, calzas, eslinga, pala, barras de amacice y cualquier aditamento solicitado por el Departamento de Seguridad Industrial al personal de seguridad industrial de la empresa o, en su defecto, al líder operativo para su reparación.
+        </td>
+    </tr>
+    <tr>
+        <td width="750">
+            7.- Entregar semanalmente bitácoras de visitas para recibir suministro de gasolina, a juicio del Departamento de Activo Fijo.
+        </td>
+    </tr>
+    <tr>
+        <td width="750">
+            8.- Respetar los límites de velocidad establecidos por el Departamento de Seguridad Industrial (ciudad 70 km máximo, salvo disposición expresa en contrario en la señalización vial correspondiente;100 km máximo en carretera salvo disposición expresa en contrario en la señalización vial correspondiente).
+        </td>
+    </tr>
+    <tr>
+        <td width="750">
+            9.- Acatar todas las reglas y límites establecidos por el Departamento de Seguridad Industrial de las diferentes UDN.
+        </td>
+    </tr>
+    <tr>
+        <td width="750">
+            10.- Asumir el costo de las infracciones viales ocasionadas mientras se tenga el resguardo de la unidad, autorizando mediante este acto el descuento del importe vía nómina, de ser necesario.
+        </td>
+    </tr>
+    <tr>
+        <td width="750">
+            11.- No prestar la unidad a personal ajeno a la empresa o a personas no autorizadas para su manejo, salvo previa autorización expresa del coordinador o gerencia.
+        </td>
+    </tr>
+    <tr>
+        <td width="750">
+            12.- No trasladar a personal ajeno a la empresa, salvo previa autorización expresa del coordinador o gerencia.
+        </td>
+    </tr>
+    <tr>
+        <td width="750">
+            13.- No fumar dentro de la unidad.
+        </td>
+    </tr>
+    <tr>
+        <td width="750">
+            14.- No ingerir alimentos dentro de la unidad.
+        </td>
+    </tr>
+    <tr>
+        <td width="750">
+            15.- No rebasar el límite de personas a bordo conforme a las características técnicas del vehículo.
+        </td>
+    </tr>
+    <tr>
+        <td width="750">
+            16.- No trasladar a personas en espacios del vehículo que no se encuentren destinados o habilitados para ello.
+        </td>
+    </tr>
+    <tr>
+        <td width="750">
+            17.- No conducir en estado de ebriedad ni consumir bebidas alcohólicas dentro de la unidad.
+        </td>
+    </tr>
+    <tr>
+        <td width="750">
+            18.- Contar con todos los documentos legales para la circulación del vehículo, tales como póliza de seguro vigente, tarjeta de circulación vigente y licencia de conducir vigente; debiendo, en su caso, solicitar los primeros dos documentos al coordinador o personal de activo fijo.
+        </td>
+    </tr>
+    <tr>
+        <td width="750">
+            19.- En caso de siniestro llamar al 01-800 marcado en la póliza de seguro entregada, dar aviso inmediatamente al gerente a cargo y hacer del conocimiento al Departamento de Activo Fijo.
+        </td>
+    </tr>
+    <tr>
+        <td width="750">
+            Así mismo, manifiesto que tengo conocimiento de que el incumplimiento a las obligaciones asumidas son motivo de sanción conforme a la legislación laboral vigente.
+        </td>
+    </tr>
+    <tr>
+        <td width="750">
+            Así lo asumo y dejo constancia de mi voluntad libre de toda coacción con mi firma que obra en la parte superior de la presente responsiva.
         </td>
     </tr>
 </table>
@@ -535,8 +612,63 @@ table td{
 </page_footer>
 
 </page>
+
+<page backtop="3mm"  backbottom="5mm">
+    <table class="borde_negro_tabla">
+        <tr>
+            <td width="750" align="center">
+            <h1>PAGARÉ</h1>
+            </td>
+        </tr>
+        <tr>
+            <td width="750" align="justify">
+            Por este pagaré me obligo incondicionalmente a pagar a la orden de Seguridad Privada Ginther de Occidente, S. de R.L. de C.V., en el domicilio ubicado en Cerrada de Barroca No. 6106, Colonia Plaza Barroca, Chihuahua, Chihuahua, C.P. 31215, o en cualquier otro que se me requiera, la cantidad de $________________________(___________________________M.N.) que me obligo a cubrir en ____ pagos mensuales, vencidos y sucesivos, cada uno por la cantidad que en moneda nacional sea equivalente a  ___________ veces el salario mínimo general vigente en la ciudad de Chihuahua, Chih., en la fecha de cada pago, debiendo realizar el primer pago el día __ de ____ de 20__.
+            </td>
+        </tr>
+        <tr>
+            <td width="750" align="justify">
+            Lo anterior, implica que la cantidad mencionada en moneda nacional en este pagaré se incrementará en forma proporcional a los cambios que experimente el salario mínimo general vigente en la ciudad de Chihuahua, Chih., entre la fecha de firma de este documento y la fecha de cada pago mensual, tomando como base que el monto del salario mínimo general a la fecha de firma de este pagaré es de $___________ (_________________M.N.).
+            </td>
+        </tr>
+        <tr>
+            <td width="750" align="justify">
+            El incumplimiento en el pago de dos mensualidades como máximo, da derecho a Seguridad Privada Ginther de Occidente, S. de R.L. de C.V. o a su tenedor, a exigir el cumplimiento del saldo insoluto.
+            </td>
+        </tr>
+        <tr>
+            <td width="750" align="justify">
+            Este pagaré sólo perderá su ejecutividad mediante su destrucción, que podrá ocurrir: cuando el deudor cumpla con todas y cada una de sus obligaciones contraídas con Seguridad Privada Ginther de Occidente, S. de R.L. de C.V. a juicio de ésta última; en caso de liquidación del monto total consignado en este documento; en caso de sustitución por un nuevo documento por razones de reestructuración, en virtud de un nuevo plan de pago que acuerde Seguridad Privada Ginther de Occidente, S. de R.L. de C.V. con el deudor.
+            </td>
+        </tr>
+        <tr>
+            <td width="750" align="justify">
+            Suscrito en la ciudad de Chihuahua, Chih., a los ___ días del mes de ______________ de 20__.
+            </td>
+        </tr>
+    </table>
+    <table>
+        <tr>
+            <td width="375" style="border: 1px solid black;">
+                <p align="center">ACEPTO</p>
+                <p align="center">EL SUSCRIPTOR</p>
+                <p>Nombre:</p>
+                <p>Domicilio:</p>
+                <p>Teléfono:</p>
+            </td>
+            <td width="375" style="border: 1px solid black;">
+                <p align="center">ACEPTO</p>
+                <p align="center">EL AVAL</p>
+                <p>Nombre:</p>
+                <p>Domicilio:</p>
+                <p>Teléfono:</p>
+            </td>
+        </tr>
+    </table>
+</page>
           
 <?php 
+
+// exit();
 
 function fecha($fecha) {
     list($anyo, $mes, $dia) = explode("-", $fecha);

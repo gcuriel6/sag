@@ -124,9 +124,10 @@ session_start();
                                         4 - emanuel garcia
                                         32 - paola barraza
                                         237 - despacho contable
+                                        494 - angel martinez
                                     */
 
-                                    $permisos = array(3, 316, 404, 4, 32, 237);
+                                    $permisos = array(3, 316, 404, 4, 32, 237, 494);
 
                                     if(in_array($_SESSION['id_usuario'], $permisos)){
                                         echo '<input type="checkbox" id="ch_todas" name="ch_todas" value=""> Mostrar todas';

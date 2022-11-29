@@ -1670,6 +1670,77 @@
                 
         }
 
+        function verificarRequisitados(){
+
+            var verificaP = false;
+
+            $("#t_partidas tbody tr").each(function()
+            { 
+                var idFamiliaT = $(this).attr('id_familia');
+                let idClas = $(this).attr("id_clas");
+                //---- verifico el presupesto para este producto 
+                $.ajax({
+                        type: 'POST',
+                        url: 'php/requisiciones_verifica_requisitados.php',
+                    
+                        data:{
+                            'idFamilia' : idFamiliaT,
+                            'idUnidad' :  $('#s_id_unidad').val(),
+                            'idSucursal' : $('#s_id_sucursal').val(),
+                            idClas
+                            //-->NJES June/16/2020 DEN18-2769 Modificar la validación de presupuesto en el modulo de requisiciones
+                            //'idArea' : $('#s_id_area').val(),
+                            //'idDepto' : $('#s_id_departamento').val()
+                        },
+                        async: false,
+                        success: function(data)
+                        {
+                            var costoTotal = 0; 
+
+                            $("#t_partidas tbody tr").each(function()
+                            { 
+                                var idFamilia = $(this).attr('id_familia');
+                                var costo = $(this).attr('costo');
+
+                                if(parseInt(idFamiliaT) == parseInt(idFamilia)){
+                                    $(this).removeClass('excede');
+                                    $(this).removeAttr('excedePresupuesto');
+
+                                    costoTotal = costoTotal+ parseFloat(costo);
+                            
+                                }else{
+                                    costoTotal = costoTotal+ parseFloat(0);
+                                }
+
+                                if(parseFloat(costoTotal)<= parseFloat(data))
+                                {
+                                    $(this).attr('excedePresupuesto',0);
+                                    verificaP = verificaP;
+                                }else{
+                                    verificaP = true;
+                                    $(this).attr('excedePresupuesto',1);
+                                    $(this).addClass('excede');
+                                }
+
+
+                            });
+                                
+                            
+                            
+                        },
+                        error: function (xhr)
+                        {
+                            console.log('php/verifica_presupuesto_producto.php --->'+ JSON.stringify(xhr));
+                            mandarMensaje('* Ocurrio un error al verificar el presupuesto');//xhr.responseText
+                        }
+                });
+            
+            });
+
+            return verificaP;
+                
+        }
+
         $(document).on('click','#modal_alerta2 .b_cancelar',function(){
             mandarMensaje('No se guardo la requisición, </br>modificala para que no exceda el presupuesto ó indica que si deseas continuar y exceda el presupuesto al guardar.');
         });
@@ -2029,6 +2100,12 @@
                         {
                             if($('#i_anticipo').val() != '' && parseFloat(quitaComa($('#i_anticipo').val())) > 0 && parseFloat(quitaComa($('#i_anticipo').val())) <= parseFloat(quitaComa($('#i_total').val())))
                             {
+
+                                let verificaRequisitadas = verificarRequisitados();
+                                if(verificaRequisitadas == true){
+                                    mandarMensaje("Productos en amarillo exceden presupuesto");
+                                }
+                                
                                 var yaVerfico=verificarPresupuesto();
                     
                                 if( yaVerfico == true){
@@ -2045,6 +2122,11 @@
                         }
                         else
                         {
+
+                            let verificaRequisitadas = verificarRequisitados();
+                            if(verificaRequisitadas == true){
+                                mandarMensaje("Productos en amarillo exceden presupuesto");
+                            }
 
                             var yaVerfico=verificarPresupuesto();
                     

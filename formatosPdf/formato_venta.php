@@ -8,7 +8,7 @@ $datosD = base64_decode($datosO);
 $arreglo = json_decode($datosD, true); //estoy recibiendo un json string, entonces lo tengo que decodificar y
 
 $idRegistro = $arreglo['idRegistro'];
-$conceptoAlmacen = $arreglo['concepto'];
+$conceptoAlmacen = isset($arreglo['concepto']) ? $arreglo['concepto'] : "";
 //(a.costo_instalacion+a.costo_administrativo+a.comision_venta)
 // Informacion de la empresa 
 $query = "SELECT 
@@ -39,7 +39,13 @@ CONCAT(b.calle,' No. Ext ' ,b.no_exterior,(IF(b.no_interior!='','No. Int ','')),
 b.codigopostal AS cp_sucursal,
 b.colonia AS colonia_sucursal,
 g.estado AS estado_sucursal,
-h.municipio AS municipio_sucursal
+h.municipio AS municipio_sucursal,
+d.latitud,
+d.longitud,
+d.cuenta,
+d.telefonos,
+a.facturar,
+a.observaciones_cotizacion as observ
 FROM notas_e a
 LEFT JOIN sucursales b ON a.id_sucursal=b.id_sucursal
 LEFT JOIN cat_unidades_negocio c ON b.id_unidad_negocio=c.id
@@ -86,6 +92,13 @@ $municipio_sucursal = $row['municipio_sucursal'];
 $estado_sucursal = $row['estado_sucursal'];
 
 $id_sucursal = $row['id_sucursal'];
+
+$latitud = $row['latitud'];
+$longitud = $row['longitud'];
+$cuenta = $row['cuenta'];
+$telefonos = $row["telefonos"];
+$facturar = $row["facturar"] == 1 ? "Si" : "No";
+$observ = $row["observ"];
       
 ?>
 <style>
@@ -181,35 +194,46 @@ table td{
     </tr>
 </table>
 <br>
-<table class="borde_tabla" width="100%">
-  
 
-    <?php //si tiene Proveedor se agrega
-    if($cliente != ''){ 
-    ?>
+<table width="100%">
     <tr>
-        <td colspan="2"><strong>Cliente: </strong><?php echo $cliente;?></td>
-    </tr>
-    <tr>
-        <td colspan="2"><strong>Domicilio: </strong><?php echo $domicilio_s;?></td>
-    </tr>
-    <?php
-    }
-    ?>
+        <!-- parte de la info -->
+        <td>
+            <table class="borde_tabla" width="100%">
+                <?php if($vendedor != ''){ ?>
+                    <tr><td><strong>Vendedor: </strong></td></tr>
+                    <tr><td><?php echo $vendedor;?></td></tr>
+                <?php } ?>
 
-  
-    <?php if($tipo_cotizacion != ''){ ?>
-    <tr>
-        <td colspan="2"><strong>Tipo Cotización: </strong><?php echo $tipo_cotizacion;?></td>
+                <?php //si tiene Proveedor se agrega
+                if($cliente != ''){ 
+                ?>
+                    <tr><td><strong>Cliente: </strong></td></tr>
+                    <tr><td><?php echo $cliente;?></td></tr>
+                    <tr><td><strong>Cuenta: </strong></td></tr>
+                    <tr><td><?php echo $cuenta;?></td></tr>
+                    <tr><td><strong>Domicilio: </strong></td></tr>
+                    <tr><td><?php echo $domicilio_s;?></td></tr>
+                    <tr><td><strong>Telefonos: </strong></td></tr>
+                    <tr><td><?php echo $telefonos;?></td></tr>
+                    <tr><td><strong>Factura: </strong></td></tr>
+                    <tr><td><?php echo $facturar;?></td></tr>
+                <?php
+                }
+                ?>
+            
+                <?php if($tipo_cotizacion != ''){ ?>
+                    <tr><td><strong>Tipo Cotización: </strong></td></tr>
+                    <tr><td><?php echo $tipo_cotizacion;?></td></tr>
+                <?php } ?>
+                
+            </table>
+        </td>
+        <!-- mapa va aqui -->
+        <td>
+            <img src="<?php echo "https://maps.googleapis.com/maps/api/staticmap?center=$latitud,$longitud&zoom=16&size=500x250&key=AIzaSyBoD4mBMwf4boXGnAKMeC_-VK9NaON_W2w&markers=$latitud,$longitud";?>">
+        </td>
     </tr>
-    <?php } ?>
-    
-    <?php if($vendedor != ''){ ?>
-    <tr>
-        <td colspan="2"><strong>Vendedor: </strong><?php echo $vendedor;?></td>
-    </tr>
-    <?php } ?>
-
 </table>
 
 <!---- Productos---->
@@ -341,6 +365,36 @@ $prorrateo = $proratear/$totalProductos;*/
     </tr>
 </table>
 <?php }?>
+
+<table width="750">
+    <tr>
+        <th>Observaciones</th>
+    </tr>
+    <tr>
+        <td>
+            <div style="border: solid 1px black; height: 100px; background-color: #f4f4f4; width: 100%;">
+                <?php echo $observ; ?>
+            </div>
+        </td>
+    </tr>
+</table>
+<br>
+<table>
+    <tr>
+        <td width="50"></td>
+        <td width="300"><div style="border-bottom: solid 1px black; width:100%; height:120px;"></div></td>
+        <td width="50"></td>
+        <td width="300"><div style="border-bottom: solid 1px black; width:100%; height:120px;"></div></td>
+        <td width="50"></td>
+    </tr>
+    <tr>
+        <td width="50"></td>
+        <td width="300"><div style="width: 100%; text-align: center;">Firma Cliente</div></td>
+        <td width="50"></td>
+        <td width="300"><div style="width: 100%; text-align: center;">Firma Técnico</div></td>
+        <td width="50"></td>
+    </tr>
+</table>
 
 <!--</page_footer>-->
 </page>

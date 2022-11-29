@@ -68,14 +68,15 @@ class Almacenes
                     familias.descripcion AS familia,
                     productos.id_linea AS id_linea,
                     lineas.descripcion AS linea,
-                    productos.costo,
-                    IFNULL(productos_unidades.ultimo_precio_compra, 0) AS precio,
+                    IFNULL(productos_sucursales.costo_compra, productos.costo) costo,
+                    IFNULL(productos_sucursales.costo_compra, IFNULL(productos_unidades.ultimo_precio_compra, 0)) AS precio,
                     SUM(IF(SUBSTR(almacen_d.cve_concepto,1,1) = 'E', almacen_d.cantidad, almacen_d.cantidad*-1)) AS existencia,
-                    productos.precio_venta
+                    IFNULL(productos_sucursales.precio_venta, productos.precio_venta) precio_venta
                   FROM productos
                   INNER JOIN familias ON productos.id_familia = familias.id
                   INNER JOIN lineas ON productos.id_linea = lineas.id
                   LEFT JOIN productos_unidades ON productos.id = productos_unidades.id_producto
+                  LEFT JOIN productos_sucursales ON productos.id = productos_sucursales.fk_id_producto AND productos_sucursales.fk_id_sucursal = $idSucursal
                   INNER JOIN almacen_d ON productos.id = almacen_d.id_producto
                   INNER JOIN almacen_e ON almacen_d.id_almacen_e = almacen_e.id  AND almacen_e.id_unidad_negocio=productos_unidades.id_unidades
                   WHERE almacen_e.id_sucursal = $idSucursal AND familias.tipo NOT IN (0,2) AND almacen_e.estatus != 'C'
@@ -93,15 +94,16 @@ class Almacenes
                     familias.descripcion AS familia,
                     productos.id_linea AS id_linea,
                     lineas.descripcion AS linea,
-                    productos.costo,
-                    IFNULL(productos_unidades.ultimo_precio_compra, 0) AS precio,
+                    IFNULL(productos_sucursales.costo_compra, productos.costo) costo,
+                    IFNULL(productos_sucursales.costo_compra, IFNULL(productos_unidades.ultimo_precio_compra, 0)) AS precio,
                     SUM( IF(SUBSTR(almacen_d.cve_concepto, 1, 1) = 'E', almacen_d.cantidad, almacen_d.cantidad*-1)) AS existencia,
-                    productos.precio_venta
+                    IFNULL(productos_sucursales.precio_venta, productos.precio_venta) precio_venta
                   FROM productos
                   INNER JOIN familias ON productos.id_familia = familias.id
                   INNER JOIN lineas ON productos.id_linea = lineas.id
+                  LEFT JOIN productos_sucursales ON productos.id = productos_sucursales.fk_id_producto AND productos_sucursales.fk_id_sucursal = $idSucursal
                   LEFT JOIN 
-                  (                  
+                  (
                     SELECT 
                     pr.id AS id_original,
                     pr.equivalente_usado AS id_equivalente
@@ -257,9 +259,7 @@ class Almacenes
 
     }
 
-    function reporteDetallado($idUnidad, $idSucursal, $idFamilia, $idLinea, $idProducto, $concepto, $fechaDe, $fechaA)
-    {
-
+    function reporteDetallado($idUnidad, $idSucursal, $idFamilia, $idLinea, $idProducto, $concepto, $fechaDe, $fechaA){
 
       $and = " ";
 
@@ -284,54 +284,57 @@ class Almacenes
       if($fechaA != '')
         $and .= " AND almacen_e.fecha <= '$fechaA'";
 
-      $resultado = $this->link->query("
-        
-        SELECT
-        almacen_e.id AS no_movimiento,
-        almacen_d.cve_concepto AS cve_concepto,
-        IFNULL(CASE almacen_d.cve_concepto 
-            WHEN 'E01' THEN CONCAT(almacen_d.cve_concepto, ' - ','RECEPCIÓN DE MERCANCÍAS Y SERVICIOS')
-            WHEN 'E02' THEN CONCAT(almacen_d.cve_concepto, ' - ','ENTRADA DE UNIFORMES') 
-            WHEN 'E03' THEN CONCAT(almacen_d.cve_concepto, ' - ','ENTRADA POR TRANSFERENCIA SUCURSAL')
-            WHEN 'E05' THEN CONCAT(almacen_d.cve_concepto, ' - ','ENTRADA POR RESPONSIVA')
-            WHEN 'E06' THEN CONCAT(almacen_d.cve_concepto, ' - ','ENTRADA POR COMODATO')
-            WHEN 'E07' THEN CONCAT(almacen_d.cve_concepto, ' - ','ENTRADA POR STOCK')
-            WHEN 'E08' THEN CONCAT(almacen_d.cve_concepto, ' - ','ENTRADA POR PRODUCCION')
-            WHEN 'E09' THEN CONCAT(almacen_d.cve_concepto, ' - ','ENTRADA POR RECICLAJE')
-            WHEN 'E99' THEN CONCAT(almacen_d.cve_concepto, ' - ','ENTRADA POR AJUSTE')
-            WHEN 'S01' THEN CONCAT(almacen_d.cve_concepto, ' - ','SALIDA POR STOCK')
-            WHEN 'S02' THEN CONCAT(almacen_d.cve_concepto, ' - ','SALIDA DE UNIFORMES') 
-            WHEN 'S03' THEN CONCAT(almacen_d.cve_concepto, ' - ','SALIDA POR TRANSFERENCIA SUCURSAL')
-            WHEN 'S04' THEN CONCAT(almacen_d.cve_concepto, ' - ','SALIDA POR DEVOLUCION A PROVEEDOR')
-            WHEN 'S05' THEN CONCAT(almacen_d.cve_concepto, ' - ','SALIDA POR RESPONSIVA')
-            WHEN 'S06' THEN CONCAT(almacen_d.cve_concepto, ' - ','SALIDA POR COMODATO')
-            WHEN 'S07' THEN CONCAT(almacen_d.cve_concepto, ' - ','SALIDA POR VENTA')
-            WHEN 'S08' THEN CONCAT(almacen_d.cve_concepto, ' - ','SALIDA POR PRODUCCION')
-            WHEN 'S10' THEN CONCAT(almacen_d.cve_concepto, ' - ','SALIDA POR ACTIVO FIJO')
-            WHEN 'S12' THEN CONCAT(almacen_d.cve_concepto, ' - ','SALIDA POR ACTIVO CONSUMO')
-            WHEN 'S99' THEN CONCAT(almacen_d.cve_concepto, ' - ','SALIDA POR AJUSTE') 
-        END,'') AS concepto_mov,
-        DATE(almacen_e.fecha) AS fecha,
-        IFNULL(familias.descripcion,'') AS familia,
-        IFNULL(lineas.descripcion,'') AS linea,
-        IFNULL(productos.id,'') AS id_producto,
-        IFNULL(productos.concepto,'') as concepto,
-        IFNULL(IF(almacen_e.id_trabajador = 0, proveedores.nombre, CONCAT_WS(' ' , TRIM(trabajadores.nombre), TRIM(trabajadores.apellido_p), TRIM(trabajadores.apellido_m))),'') AS ref,
-        almacen_d.cantidad AS cantidad,
-        almacen_d.precio AS precio,
-        IFNULL(productos_unidades.ultimo_precio_compra, 0) AS ultimo_precio,
-        IFNULL(productos_unidades.ultima_fecha_compra, '0000-00-00') AS ultima_fecha
-        FROM productos
-        INNER JOIN almacen_d ON productos.id = almacen_d.id_producto
-        INNER JOIN almacen_e ON almacen_d.id_almacen_e = almacen_e.id
-        INNER JOIN familias ON productos.id_familia = familias.id
-        INNER JOIN lineas ON productos.id_linea = lineas.id
-        LEFT JOIN productos_unidades ON productos.id = productos_unidades.id_producto AND productos_unidades.id_unidades = $idUnidad
-        LEFT JOIN proveedores ON almacen_e.id_proveedor = proveedores.id
-        LEFT JOIN trabajadores ON almacen_e.id_trabajador =  trabajadores.id_trabajador
-        WHERE almacen_e.id_unidad_negocio = $idUnidad and almacen_e.estatus != 'C'
-                $and
-        ORDER BY productos.id ASC,almacen_e.id ASC");
+      $query = "SELECT
+                  almacen_e.id AS no_movimiento,
+                  almacen_d.cve_concepto AS cve_concepto,
+                  IFNULL(CASE almacen_d.cve_concepto 
+                    WHEN 'E01' THEN CONCAT(almacen_d.cve_concepto, ' - ','RECEPCIÓN DE MERCANCÍAS Y SERVICIOS')
+                    WHEN 'E02' THEN CONCAT(almacen_d.cve_concepto, ' - ','ENTRADA DE UNIFORMES') 
+                    WHEN 'E03' THEN CONCAT(almacen_d.cve_concepto, ' - ','ENTRADA POR TRANSFERENCIA SUCURSAL')
+                    WHEN 'E05' THEN CONCAT(almacen_d.cve_concepto, ' - ','ENTRADA POR RESPONSIVA')
+                    WHEN 'E06' THEN CONCAT(almacen_d.cve_concepto, ' - ','ENTRADA POR COMODATO')
+                    WHEN 'E07' THEN CONCAT(almacen_d.cve_concepto, ' - ','ENTRADA POR STOCK')
+                    WHEN 'E08' THEN CONCAT(almacen_d.cve_concepto, ' - ','ENTRADA POR PRODUCCION')
+                    WHEN 'E09' THEN CONCAT(almacen_d.cve_concepto, ' - ','ENTRADA POR RECICLAJE')
+                    WHEN 'E99' THEN CONCAT(almacen_d.cve_concepto, ' - ','ENTRADA POR AJUSTE')
+                    WHEN 'S01' THEN CONCAT(almacen_d.cve_concepto, ' - ','SALIDA POR STOCK')
+                    WHEN 'S02' THEN CONCAT(almacen_d.cve_concepto, ' - ','SALIDA DE UNIFORMES') 
+                    WHEN 'S03' THEN CONCAT(almacen_d.cve_concepto, ' - ','SALIDA POR TRANSFERENCIA SUCURSAL')
+                    WHEN 'S04' THEN CONCAT(almacen_d.cve_concepto, ' - ','SALIDA POR DEVOLUCION A PROVEEDOR')
+                    WHEN 'S05' THEN CONCAT(almacen_d.cve_concepto, ' - ','SALIDA POR RESPONSIVA')
+                    WHEN 'S06' THEN CONCAT(almacen_d.cve_concepto, ' - ','SALIDA POR COMODATO')
+                    WHEN 'S07' THEN CONCAT(almacen_d.cve_concepto, ' - ','SALIDA POR VENTA')
+                    WHEN 'S08' THEN CONCAT(almacen_d.cve_concepto, ' - ','SALIDA POR PRODUCCION')
+                    WHEN 'S10' THEN CONCAT(almacen_d.cve_concepto, ' - ','SALIDA POR ACTIVO FIJO')
+                    WHEN 'S12' THEN CONCAT(almacen_d.cve_concepto, ' - ','SALIDA POR ACTIVO CONSUMO')
+                    WHEN 'S99' THEN CONCAT(almacen_d.cve_concepto, ' - ','SALIDA POR AJUSTE') 
+                  END,'') AS concepto_mov,
+                  DATE(almacen_e.fecha) AS fecha,
+                  IFNULL(familias.descripcion,'') AS familia,
+                  IFNULL(lineas.descripcion,'') AS linea,
+                  IFNULL(productos.id,'') AS id_producto,
+                  IFNULL(productos.concepto,'') as concepto,
+                  IFNULL(IF(almacen_e.id_trabajador = 0, proveedores.nombre, CONCAT_WS(' ' , TRIM(trabajadores.nombre), TRIM(trabajadores.apellido_p), TRIM(trabajadores.apellido_m))),'') AS ref,
+                  almacen_d.cantidad AS cantidad,
+                  almacen_d.precio AS precio,
+                  IF('$idSucursal' = '', IFNULL(productos_unidades.ultimo_precio_compra, 0),IFNULL((SELECT costo_compra FROM productos_sucursales WHERE fk_id_producto = productos.id AND fk_id_sucursal = '$idSucursal'), IFNULL(productos_unidades.ultimo_precio_compra, 0))) AS ultimo_precio,
+                  IFNULL(productos_unidades.ultima_fecha_compra, '0000-00-00') AS ultima_fecha
+                FROM productos
+                INNER JOIN almacen_d ON productos.id = almacen_d.id_producto
+                INNER JOIN almacen_e ON almacen_d.id_almacen_e = almacen_e.id
+                INNER JOIN familias ON productos.id_familia = familias.id
+                INNER JOIN lineas ON productos.id_linea = lineas.id
+                LEFT JOIN productos_unidades ON productos.id = productos_unidades.id_producto AND productos_unidades.id_unidades = $idUnidad
+                LEFT JOIN proveedores ON almacen_e.id_proveedor = proveedores.id
+                LEFT JOIN trabajadores ON almacen_e.id_trabajador =  trabajadores.id_trabajador
+                WHERE almacen_e.id_unidad_negocio = $idUnidad and almacen_e.estatus != 'C'
+                        $and
+                ORDER BY productos.id ASC,almacen_e.id ASC";
+                
+                // error_log( $query);
+                // exit();
+
+      $resultado = $this->link->query($query);
       
       return query2json($resultado);
 
@@ -405,7 +408,8 @@ class Almacenes
             existencias_finales.existencia_f AS existencia_final,
 
             IFNULL(productos_unidades.ultimo_precio_compra, 0) AS ultimo_precio,
-            IFNULL(productos_unidades.ultima_fecha_compra, '0000-00-00') AS ultima_fecha
+            IFNULL(productos_unidades.ultima_fecha_compra, '0000-00-00') AS ultima_fecha,
+            IFNULL((existencias_finales.existencia_f*productos_unidades.ultimo_precio_compra),0) AS valor_inventario
             FROM productos
             INNER JOIN almacen_d ON productos.id = almacen_d.id_producto
             INNER JOIN almacen_e ON almacen_d.id_almacen_e = almacen_e.id

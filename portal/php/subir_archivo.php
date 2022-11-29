@@ -43,6 +43,8 @@
 		{
 			$query = "UPDATE documentos_fijos SET $doctype = '$path' WHERE id_trabajador = $id";
 			$Consulta=mysqli_query($link,$query);
+			chmod($dir, 0777);
+			chmod($path, 0777);
 			//echo $query;
 			echo "<script language='javascript'>alert('archivo guardado'); window.open('detalle_trabajador.php?id=$id','_self');</script>";
 		}
