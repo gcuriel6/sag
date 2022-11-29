@@ -1281,7 +1281,7 @@ session_start();
                 descuentoTotal += descuento;
             });
 
-            var total = parseFloat(subtotal)+parseFloat(totalIva);
+            var total = parseFloat(subtotal)+parseFloat(totalIva)-parseFloat(descuentoTotal);
 
             $('#i_total_iva').val(formatearNumero(totalIva));
             $('#i_descuento_total').val(formatearNumero(descuentoTotal));
@@ -1612,7 +1612,8 @@ session_start();
                     for(var i=0; data.length>i; i++)
                     {
                         var importe= parseFloat(data[i].cantidad)*parseFloat(data[i].precio_venta);
-                        var html = "<tr class='partida_SA' producto='" + data[i].id_producto + "' concepto='" + data[i].concepto+ "' id_familia='" + data[i].id_familia + "' familia='" + data[i].familia + "' id_linea='" + data[i].id_linea + "' linea='" + data[i].linea + "' precio='" + data[i].precio + "' precioVenta='" + data[i].precioVenta + "' descuento='"+data[i].descuento+"' iva='"+data[i].iva+"' cantidad='" +  data[i].cantidad + "' descripcion='" + data[i].descripcion + "' importe='" + importe + "' marca='"+data[i].marca+"'>";
+                        var descuentoTotal = parseFloat(data[i].cantidad)*parseFloat(data[i].descuento);
+                        var html = "<tr class='partida' producto='" + data[i].id_producto + "' concepto='" + data[i].concepto+ "' id_familia='" + data[i].id_familia + "' familia='" + data[i].familia + "' id_linea='" + data[i].id_linea + "' linea='" + data[i].linea + "' precio='" + data[i].precio + "' precioVenta='" + data[i].precioVenta + "' descuento='"+data[i].descuento+"' descuento_total='"+descuentoTotal+"' iva='"+data[i].iva+"' cantidad='" +  data[i].cantidad + "' descripcion='" + data[i].descripcion + "' importe='" + importe + "' marca='"+data[i].marca+"'>";
                             html += "<td data-label='CATÁLOGO'>" + data[i].id_producto + "</td>";
                             html += "<td data-label='FAMILIA'>" + data[i].familia + "</td>";
                             html += "<td data-label='LÍNEA'>" + data[i].linea + "</td>";

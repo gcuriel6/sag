@@ -60,7 +60,9 @@ CONCAT(l.municipio,', ',m.estado,', México.',' C.P. ', b.cp) AS lugar_exp,
 a.lleva_descripcion_alterna,a.descripcion_alterna,a.clave_unidad_sat,a.unidad_sat,a.clave_producto_sat,a.producto_sat,
 a.cliente_alterno,
 a.id_cliente,
-b.regimenfiscal
+b.regimenfiscal,
+c.desc_regimen AS regimenreceptor,
+c.id AS idServicio
 FROM facturas a
 LEFT JOIN empresas_fiscales b ON a.id_empresa_fiscal=b.id_empresa
 LEFT JOIN servicios c ON a.id_cliente=c.id
@@ -112,7 +114,9 @@ $lugar_exp = $row['lugar_exp'];
 $xml = $row['xml_timbre'];
 
 $regimenfiscal = $row['regimenfiscal'];
+$regimenreceptor = $row["regimenreceptor"];
 $sEmisor = substr($row['sello_cfdi'], -8); 
+$idServicio = $row["idServicio"];
 
 $llevaDescripcionAlterna = $row['lleva_descripcion_alterna'];
 $descripcionAlterna = $row['descripcion_alterna'];
@@ -334,8 +338,23 @@ if($xml != NULL){
                 <label class="font_light"><?php echo $cliente_alterno; ?></label><br>
             <?php }else{ ?>
                 <label class="font_light"><?php echo $razon_social_receptor; ?></label><br>
-            <?php } ?>
-            <label class="font_light"><?php echo strtoupper($rfc_receptor) == 'XAXX010101000' ? 'Cerrada de Barroca 6106 Col. Plaza Barroca C.P. 31215' : $direccion_receptor; ?></label>
+            <?php } 
+            
+            //se agrega arreglo para servicios que no tome la direccion default GCM 12/Abr/2022
+            $serviciosConDireccion = [2775];
+            // $direccionDefault = 'Cerrada de Barroca 6106 Col. Plaza Barroca C.P. 31215';
+            $direccionMostrar = 'Cerrada de Barroca 6106 Col. Plaza Barroca C.P. 31215';
+            if(in_array($idServicio,$serviciosConDireccion)){
+                $direccionMostrar = $direccion_receptor;
+            }else{
+                if(strtoupper($rfc_receptor) != 'XAXX010101000'){
+                    $direccionMostrar = $direccion_receptor;
+                }
+            }
+
+            ?>
+            <label class="font_light"><?php echo $direccionMostrar ?></label><br>
+            <label class="font_light">Régimen: <?php echo $regimenreceptor ?></label>
         </td>
         <td width="305" class="bordePad">
         <?php if($tipo_factura != 'Prefactura') { ?>

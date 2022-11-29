@@ -307,6 +307,7 @@
                                     
                                     <th>Ult. F.C.</th>
                                     <th>Ult. P.C.</th>
+                                    <th>ValorInventario</th>
                                 </tr>
                             </thead>
                             <tbody>
@@ -647,6 +648,7 @@
                         html += "<td align='right'>" + detalle.existencia_final + "</td>";
                         html += "<td align='center'>" + detalle.ultima_fecha + "</td>"; // align='right'
                         html += "<td align='right'>" + detalle.ultimo_precio + "</td>"; // align='right'
+                        html += "<td align='right'>" + detalle.valor_inventario + "</td>";
                         html += "</tr>";
 
                         $('#t_acumulado tbody').append(html);

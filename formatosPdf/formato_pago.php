@@ -41,7 +41,7 @@ p.fecha_pago,
 n.xml_timbre AS xml_timbre,
 b.razon_social AS empresa_fiscal,
 CONCAT(b.calle,' ',b.num_ext,', ',b.colonia,' C.P.',b.cp,'. ',i.municipio,', ',j.estado,', México.') AS direccion_emisor,
-IF(e.nombre='ALARMAS',CONCAT(q.domicilio,' ',q.no_exterior,' ',IF(q.no_interior != '',CONCAT('Int.',q.no_exterior),' '),', ',q.colonia,' ',' C.P.',q.codigo_postal,'. ',r.municipio,', ',s.estado,', México.'),CONCAT(k.domicilio,' ',k.no_exterior,' ',IF(k.no_interior != '',CONCAT('Int.',k.no_exterior),' '),', ',k.colonia,' ',' C.P.',k.codigo_postal,'. ',l.municipio,', ',m.estado,', México.')) AS direccion_receptor,
+IF(e.nombre='ALARMAS',CONCAT(q.domicilio,' ',q.no_exterior,' ',IF(q.no_interior != '',CONCAT('Int.',q.no_interior),' '),', ',q.colonia,' ',' C.P.',q.codigo_postal,'. ',r.municipio,', ',s.estado,', México.'),CONCAT(k.domicilio,' ',k.no_exterior,' ',IF(k.no_interior != '',CONCAT('Int.',k.no_exterior),' '),', ',k.colonia,' ',' C.P.',k.codigo_postal,'. ',l.municipio,', ',m.estado,', México.')) AS direccion_receptor,
 IF(e.nombre='ALARMAS',CONCAT(r.municipio,', ',s.estado,', México.',' C.P. ',q.codigo_postal),CONCAT(l.municipio,', ',m.estado,', México.',' C.P. ',k.codigo_postal)) AS lugar_exp,
 o.folio_factura,p.monto_pago,p.monto_pago_usd,p.moneda,p.tipo_cambio,
 a.id_sucursal,
@@ -165,6 +165,18 @@ QRcode::png($cbb,'../pagos/qr/'.$idPago.'.png');
     }
     .border_top{
         border-top:1pt solid black;
+    }
+
+    #tableDetalle,
+    #tableDetalle th,
+    #tableDetalle td{
+        border: 1px solid black;
+        border-collapse: collapse;
+    }
+
+    #tableDetalle th{
+        background-color:#aaa;
+        text-align:center;
     }
 </style>
 <!-- se usa para poner  marca de agua backimg="../images/logo_marca2.png" backimgy="380"-->
@@ -447,49 +459,66 @@ QRcode::png($cbb,'../pagos/qr/'.$idPago.'.png');
 <?php }?>
 
 <div id="div_detalle">
-    <table>
+    <table id="tableDetalle">
         <tr>
-            <td colspan="8" style="border-bottom:1px solid black; font-weight:bold; padding:5px 2px 10px 2px;">CFDI relacionado</td>
-        </tr>
-        <tr class="border_bottom">
-            <th width="213" class="borde_right">UUID</th>
-            <th width="75" class="borde_right">FOLIO</th>
-            <th width="75" class="borde_right">METODO</th>
-            <th width="75" class="borde_right">TOTAL</th>
-            <th width="75" class="borde_right">PARCIALIDAD</th>
-            <th width="75" class="borde_right">SALDO ANTERIOR</th>
-            <th width="75" class="borde_right">SALDO PENDIENTE</th>
-            <th width="75">MONTO PAGADO</th>
+            <th colspan="8">CFDI relacionado</th>
         </tr>
         <tbody>
         <?php
             $query_detalle="SELECT a.id,a.uuid_factura,a.folio_factura,a.metodo_pago,a.num_parcialidad,
-            IF(a.moneda='MXN',if(b.retencion=1,b.total-b.importe_retencion,b.total),
-            if(b.retencion=1,b.total_usd-b.importe_retencion_usd,b.total_usd)) AS total,
-            IF(a.moneda='MXN',a.importe_saldo_anterior,a.importe_saldo_anterior_usd) AS importe_saldo_anterior,
-            IF(a.moneda='MXN',a.importe_saldo_insoluto,a.importe_saldo_insoluto_usd) AS importe_saldo_insoluto,
-            IF(a.moneda='MXN',a.importe_pagado,a.importe_pagado_usd) AS importe_pagado            
-            FROM pagos_d a
-            INNER JOIN facturas b ON a.id_factura=b.id
-            WHERE a.id_pago_e=$idPago
-            ORDER BY a.id ASC";
+                            IF(a.moneda='MXN',if(b.retencion=1,b.total-b.importe_retencion,b.total),
+                            if(b.retencion=1,b.total_usd-b.importe_retencion_usd,b.total_usd)) AS total,
+                            IF(a.moneda='MXN',a.importe_saldo_anterior,a.importe_saldo_anterior_usd) AS importe_saldo_anterior,
+                            IF(a.moneda='MXN',a.importe_saldo_insoluto,a.importe_saldo_insoluto_usd) AS importe_saldo_insoluto,
+                            IF(a.moneda='MXN',a.importe_pagado,a.importe_pagado_usd) AS importe_pagado,
+                            IF((b.iva/b.subtotal) > 0,IF((b.iva/b.subtotal)> 0.10, 0.16, 0.08),0) as porciento
+                            FROM pagos_d a
+                            INNER JOIN facturas b ON a.id_factura=b.id
+                            WHERE a.id_pago_e=$idPago
+                            ORDER BY a.id ASC";
+
             $result = mysqli_query($link,$query_detalle);
             $num_rows = mysqli_num_rows($result);
-            if($num_rows > 0)
-            {
-                while ($dato = mysqli_fetch_array($result))
-                {
+
+            if($num_rows > 0){
+                while ($dato = mysqli_fetch_array($result)){
+
+                    $impTraslados = $dato["importe_pagado"]-($dato["importe_pagado"] / (1+$dato["porciento"]));
             
-                echo "<tr>
-                    <td width='213' class='borde_right'>".normaliza($dato['uuid_factura'],33)."</td>
-                    <td width='70' class='borde_right'>".$dato['folio_factura']."</td>
-                    <td width='70' class='borde_right'>".$dato['metodo_pago']."</td>
-                    <td width='70' class='borde_right'>".dos_decimales($dato['total'])."</td>
-                    <td width='70'  class='borde_right'>".$dato['num_parcialidad']."</td>
-                    <td width='70' class='borde_right' align='right'>".dos_decimales($dato['importe_saldo_anterior'])."</td>
-                    <td width='70' class='borde_right' align='right'>".dos_decimales($dato['importe_saldo_insoluto'])."</td>
-                    <td width='70' align='right'>".dos_decimales($dato['importe_pagado'])."</td>
-                </tr>";
+                    echo "<tr>
+                            <th width='213'>UUID</th>
+                            <th width='75'>FOLIO</th>
+                            <th width='75'>METODO</th>
+                            <th width='75'>TOTAL</th>
+                            <th width='75'>PARCIALIDAD</th>
+                            <th width='75'>SALDO ANTERIOR</th>
+                            <th width='75'>SALDO PENDIENTE</th>
+                            <th width='75'>MONTO PAGADO</th>
+                        </tr>
+                        <tr>
+                            <td width='213'>".normaliza($dato['uuid_factura'],33)."</td>
+                            <td width='70'>".$dato['folio_factura']."</td>
+                            <td width='70'>".$dato['metodo_pago']."</td>
+                            <td width='70'>".dos_decimales($dato['total'])."</td>
+                            <td width='70' >".$dato['num_parcialidad']."</td>
+                            <td width='70' align='right'>".dos_decimales($dato['importe_saldo_anterior'])."</td>
+                            <td width='70' align='right'>".dos_decimales($dato['importe_saldo_insoluto'])."</td>
+                            <td width='70' align='right'>".dos_decimales($dato['importe_pagado'])."</td>
+                        </tr>
+                        <tr>
+                            <th colspan='2'>IMP. TRASLADO</th>
+                            <th colspan='2'>TASA/CUOTA</th>
+                            <th colspan='2'>TIPO IMPUESTO</th>
+                            <th>TASA</th>
+                            <th>IMPORTE</th>
+                        </tr>
+                        <tr>
+                            <td colspan='2'></td>
+                            <td colspan='2'>Tasa</td>
+                            <td colspan='2'>002</td>
+                            <td>".$dato["porciento"]."</td>
+                            <td>".$impTraslados."</td>
+                        </tr>";
             
                 }
             }

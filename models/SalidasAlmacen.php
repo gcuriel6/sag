@@ -878,6 +878,7 @@ class SalidasAlmacen
                 AND a.id_sucursal=$idSucursal
                 AND a.estatus='A'
                 AND e.id_almacen_e IS NULL
+                AND a.id NOT IN (SELECT DISTINCT(id_almacen_e) FROM facturas_ventas)
                 GROUP BY a.id
                 ORDER BY a.id";
 

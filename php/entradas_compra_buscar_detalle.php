@@ -29,6 +29,7 @@
                 'familia'=>$detalle['familia'],  
                 'verifica_talla'=>$detalle['lleva_talla'],  
                 'descuento'=>$detalle['descuento'],
+                'isr'=>$detalle['isr'],
                 'tallas_solicitadas'=>$modeloTallas->obtenerTallasDetalle($detalle['id_oc_d'], 2),
                 'tallas'=>$modeloTallas->obtenerTallasDetalle($detalle['id'], 3)
             ]);

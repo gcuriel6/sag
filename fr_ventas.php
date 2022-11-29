@@ -552,6 +552,7 @@ session_start();
                           <th scope="col">Cliente</th>
                           <th scope="col">Total</th>
                           <th scope="col">Estatus</th>
+                          <th scope="col">Vendedor</th>
                           <th scope="col" id="th_folio_cotizacion">Folio Cotización</th>
                         </tr>
                       </thead>
@@ -924,6 +925,7 @@ session_start();
                         {
 
                             var producto = data[i];
+                            // console.log(producto);
                             
                             var html = "<tr class='tr_producto' alt='" + producto.id + "'  alt2='" + producto.clave+ "' alt3='" + producto.concepto + "' alt4='" + producto.cantidad + "' alt5='" + producto.costo + "' alt6='" + producto.existencia + "' alt7='" + producto.descripcion + "' alt8='" + producto.id_familia_gasto + "' servicio='"+producto.servicio+"'>";
                                 html += "<td data-label='Familia'>" + producto.familia + "</td>";
@@ -1547,6 +1549,7 @@ session_start();
                                     <td data-label="Cliente">' + data[i].cliente+ '</td>\
                                     <td data-label="Total">' + formatearNumero(data[i].total)+ '</td>\
                                     <td data-label="Estatus">' + estatus + '</td>\
+                                    <td data-label="Vendedor">' + data[i].vendedor + '</td>\
                                     <td data-label="Folio Cotización">' +data[i].folio_cotizacion+ '</td>\
                                 </tr>';
                         }else{
@@ -1558,6 +1561,7 @@ session_start();
                                     <td data-label="Cliente">' + data[i].cliente+ '</td>\
                                     <td data-label="Total">' + formatearNumero(data[i].total)+ '</td>\
                                     <td data-label="Estatus">' + estatus + '</td>\
+                                    <td data-label="Vendedor">' + data[i].vendedor + '</td>\
                                 </tr>';
                         }
 

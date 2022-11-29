@@ -28,13 +28,15 @@ e.codigopostal,
 f.municipio,
 g.estado,
 h.nombre_comp as usuario_captura,
-h.usuario
+h.usuario,
+c.folio folio_oc
 FROM almacen_e a
 LEFT JOIN proveedores b ON a.id_proveedor=b.id
 LEFT JOIN cat_unidades_negocio d ON a.id_unidad_negocio=d.id
 LEFT JOIN sucursales e ON a.id_sucursal=e.id_sucursal
 LEFT JOIN municipios f ON e.id_municipio = f.id
 LEFT JOIN estados g ON e.id_estado=g.id
+LEFT JOIN orden_compra c ON c.id = a.id_oc 
 LEFT JOIN usuarios h ON a.id_usuario_captura= h.id_usuario
 WHERE a.id=".$idRegistro;
 
@@ -46,6 +48,7 @@ $fecha = $row['fecha'];
 $logo = $row['logo'];
 $claveUnidad = $row['clave_unidad'];
 $folio = $row['folio'];
+$folio_oc = $row["folio_oc"];
 
 $unidad = $row['unidad'];
 $sucursal = $row['sucursal'];
@@ -119,6 +122,17 @@ table td{
                 	<td class="verde">Página</td>
                 	<td class="dato"> [[page_cu]] de [[page_nb]]</td>
                 </tr>
+                <?php
+                    if($folio_oc != NULL && $folio_oc != ""){
+                ?>
+                <tr>
+                	<td class="verde">OC</td>
+                	<td class="dato"> <?php echo $folio_oc ?></td>
+                </tr>
+                <?php
+                    }
+                ?>
+
             </table>
         </td>
     </tr>
@@ -145,28 +159,30 @@ table td{
 <?php  
   
     $queryE="SELECT a.id_producto,
-    a.precio,
-    a.cantidad,
-    a.iva,
-    a.porcentaje_descuento AS descuento,
-    a.lleva_talla AS lleva_tallas,
-    b.concepto,
-    b.descripcion,
-    c.descripcion AS familia,
-    c.id AS id_familia, 
-    d.descripcion AS linea,
-    d.id AS id_linea,
-    (a.precio * a.cantidad) AS importe,
-    IFNULL(IF(a.lleva_talla=1,(SELECT GROUP_CONCAT(' - ', cantidad ,' ', talla) FROM tallas WHERE tipo=3 AND id_detalle=a.id),'NA'),'NA') AS tallas
-    FROM almacen_d a
-    LEFT JOIN productos b ON a.id_producto=b.id
-    LEFT JOIN familias c ON b.id_familia = c.id
-    LEFT JOIN lineas d ON b.id_linea = d.id
-    WHERE a.id_almacen_e=".$idRegistro."
-    ORDER BY a.id";
+                    a.precio,
+                    a.cantidad,
+                    a.iva,
+                    a.porcentaje_descuento AS descuento,
+                    a.lleva_talla AS lleva_tallas,
+                    b.concepto,
+                    b.descripcion,
+                    c.descripcion AS familia,
+                    c.id AS id_familia, 
+                    d.descripcion AS linea,
+                    d.id AS id_linea,
+                    (a.precio * a.cantidad) AS importe,
+                    IFNULL(IF(a.lleva_talla=1,(SELECT GROUP_CONCAT(' - ', cantidad ,' ', talla) FROM tallas WHERE tipo=3 AND id_detalle=a.id),'NA'),'NA') AS tallas,
+                    a.isr
+                FROM almacen_d a
+                LEFT JOIN productos b ON a.id_producto=b.id
+                LEFT JOIN familias c ON b.id_familia = c.id
+                LEFT JOIN lineas d ON b.id_linea = d.id
+                WHERE a.id_almacen_e=$idRegistro
+                ORDER BY a.id";
+
     $consultaE = mysqli_query($link,$queryE);
-    $numeroFilasE = mysqli_num_rows($consultaE); 
-    if($numeroFilasE>0){    
+    $numeroFilasE = mysqli_num_rows($consultaE);
+    if($numeroFilasE>0){
 ?>
 <h4>Productos </h4>
 <table class="borde_tabla" width="710">
@@ -187,9 +203,14 @@ table td{
     $tPrecioTotal=0;
     $subtotal=0;
     $totalIva=0;
+    $totalIsr = 0;
     while ($rowE = mysqli_fetch_array($consultaE)){
        //$tCantidad = $tCantidad + $rowE['cantidad'];
        //$tPrecio = $tPrecio + $rowE['costo_unitario'];
+
+       if($rowE["isr"] > 0){
+           $totalIsr = $rowE["isr"];
+       }
        
        if($rowE['descuento'] > 0){
                     
@@ -224,14 +245,17 @@ table td{
             <td class="dato"  align="right"><?php echo dos_decimales($subtotal)?></td>    
         </tr>
         <tr>
-            
             <td class="verde" colspan="2">Iva </td>
             <td class="dato"  align="right"><?php echo dos_decimales($totalIva)?></td>    
         </tr>
         <tr>
-            
+            <td class="verde" colspan="2">ISR </td>
+            <td class="dato"  align="right"><?php echo dos_decimales($totalIsr)?></td>    
+        </tr>
+        <tr>
+            <td colspan="3"></td>
             <td class="verde" colspan="2">Total </td>
-            <td class="dato" align="right"><?php echo dos_decimales($subtotal+$totalIva)?></td>    
+            <td class="dato" align="right"><?php echo dos_decimales(($subtotal+$totalIva)-$totalIsr)?></td>    
         </tr>
     </tfoot>
 </table>

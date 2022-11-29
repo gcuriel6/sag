@@ -59,7 +59,8 @@ $query = "SELECT a.id,
             CONCAT(b.calle,' ',b.num_ext,', ',b.colonia,' C.P.',b.cp,'. ',i.municipio,', ',j.estado,', México.') AS direccion_emisor,
             CONCAT_WS('' , k.domicilio, ' ', k.no_exterior, IF( k.no_interior != '',CONCAT_WS(' ', 'Int.',k.no_interior),' '), k.colonia,' ',' C.P.',k.codigo_postal,'. ', IF(l.municipio != ' ', CONCAT_WS(' ', l.municipio, ', ') , ' ' ), IF(m.estado != ' ', CONCAT_WS(' ', m.estado, ', ') , ' ' ), p.pais) AS direccion_receptor,
             CONCAT(i.municipio,', ',j.estado,', México., C.P. ', b.cp) AS lugar_exp,
-            b.regimenfiscal
+            b.regimenfiscal,
+            k.desc_regimen as regimenCliente
         FROM facturas a
         LEFT JOIN empresas_fiscales b ON a.id_empresa_fiscal=b.id_empresa
         LEFT JOIN cat_clientes c ON a.id_cliente=c.id
@@ -118,7 +119,8 @@ $lugar_exp = $row['lugar_exp'];
 $xml = $row['xml_timbre'];
 $porcentaje_iva = $row['porcentaje_iva'];
 $regimenfiscal = $row['regimenfiscal'];
-$sEmisor = substr($row['sello_cfdi'], -8); 
+$sEmisor = substr($row['sello_cfdi'], -8);
+$regimenCliente = $row["regimenCliente"];
 
 if($porcentaje_iva == 16)
     $porcentaje_retencion = 6;
@@ -180,20 +182,32 @@ if($xml != null){
     .lab_bold{
         font-weight:bold;
     }
-    .borde_right{
+    /* .borde_right{
         border-right:1px;
     }
-    .border_bottom th {
+    .border_bottom th,
+    .border_bottom td{
         border-bottom:1pt solid black;
-    }
+    } */
     .font_light_sello{
         font-weight:lighter;
         text-align:justify;
         font-size:8px;
     }
+    #table_detalle,
+    #table_detalle th,
+    #table_detalle td{
+        border: 1px solid black;
+        border-collapse: collapse;
+    }
+    #table_detalle th{
+        background-color:#ccc;
+        text-align:center;
+    }
+    
 </style>
 <!-- se usa para poner  marca de agua backimg="../images/logo_marca2.png" backimgy="380"-->
-<page backtop="23mm"  backbottom="2mm">
+<page backtop="28mm"  backbottom="2mm">
 <page_header footer='page'>
 <table>
     <tr>
@@ -349,7 +363,8 @@ if($xml != null){
         <td width="432" class="bordePad">DATOS DEL RECEPTOR<br>
             <label class="font_light"><?php echo strtoupper($rfc_receptor); ?></label><br>
             <label class="font_light"><?php echo $razon_social_receptor; ?></label><br>
-            <label class="font_light"><?php echo $direccion_receptor; ?></label>
+            <label class="font_light"><?php echo $direccion_receptor; ?></label><br>
+            <label class="font_light">Regimen Fiscal: <?php echo $regimenCliente; ?></label>
         </td>
         <td width="305" class="bordePad">
         <?php if($tipo_factura != 'Prefactura') { ?>
@@ -386,32 +401,28 @@ if($xml != null){
 </table>
 <?php }?>
 <div id="div_detalle">
-    <table>
-        <tr class="border_bottom">
-            <th width="85" class="borde_right">CLAVE PRODUCTO</th>
-            <th width="80" class="borde_right">CANTIDAD</th>
-            <th width="105" class="borde_right">UNIDAD</th>
-            <th width="246" class="borde_right">DESCRIPCIÓN</th>
-            <th width="90" class="borde_right">PRECIO UNITARIO</th>
-            <th width="110">IMPORTE</th>
-        </tr>
+    <table id="table_detalle">
         <tbody>
         <?php
-            /*$query_detalle="SELECT a.id,a.cantidad,a.precio_unitario,(((a.cantidad*a.precio_unitario)*b.porcentaje_iva)/100) AS iva,
-                            ((a.importe*6)/100) AS importe_retencion,
-                            (((a.importe*b.porcentaje_iva)/100)+a.importe) AS importeII,
-                            (a.importe) AS importe,
-                            a.descripcion,a.clave_unidad_sat,a.unidad_sat,
-                            a.clave_producto_sat,a.producto_sat,a.id_cxc
-                            FROM facturas_d a
-                            INNER JOIN facturas b ON a.id_factura=b.id 
-                            WHERE a.id_factura=$idFactura
-                            ORDER BY a.id ASC";*/
-            $query_detalle="SELECT clave_prod_serv AS clave_producto_sat,
-                            clave_unidad AS clave_unidad_sat,unidad AS unidad_sat,
-                            concepto AS descripcion,
-                            precio_unitario,cantidad,
-                            precio_unitario*cantidad AS importe
+            // $query_detalle="SELECT a.id,a.cantidad,a.precio_unitario,(((a.cantidad*a.precio_unitario)*b.porcentaje_iva)/100) AS iva,
+            //                 ((a.importe*6)/100) AS importe_retencion,
+            //                 (((a.importe*b.porcentaje_iva)/100)+a.importe) AS importeII,
+            //                 (a.importe) AS importe,
+            //                 a.descripcion,a.clave_unidad_sat,a.unidad_sat,
+            //                 a.clave_producto_sat,a.producto_sat,a.id_cxc
+            //                 FROM facturas_d a
+            //                 INNER JOIN facturas b ON a.id_factura=b.id 
+            //                 WHERE a.id_factura=$idFactura
+            //                 ORDER BY a.id ASC";
+            $query_detalle="SELECT
+                                clave_prod_serv AS clave_producto_sat,
+                                clave_unidad AS clave_unidad_sat,
+                                unidad AS unidad_sat,
+                                concepto AS descripcion,
+                                precio_unitario,
+                                cantidad,
+                                precio_unitario*cantidad AS importe,
+                                tasa_iva
                             FROM factura_d
                             WHERE registro_e=".$idFacturaCFDI;
 
@@ -422,16 +433,43 @@ if($xml != null){
                 while ($dato = mysqli_fetch_array($result))
                 {
 
-                    $importe = num_2dec($dato['precio_unitario'])*$dato['cantidad'];
+                    $importe = num_2dec($dato['importe']);
+                    $tipoFactor = tasaocuota($dato["tasa_iva"],"IVA");
             
-                echo "<tr>
-                    <td width='80' class='borde_right'>".normaliza($dato['clave_producto_sat'],12)."</td>
-                    <td width='85' class='borde_right' align='right'>".seis_decimales_cant($dato['cantidad'])."</td>
-                    <td width='113' class='borde_right'>".normaliza($dato['clave_unidad_sat'].' '.$dato['unidad_sat'],17)."</td>
-                    <td width='246' class='borde_right'>".normaliza(strtoupper($dato['descripcion']),36)."</td>
-                    <td width='80'  class='borde_right' align='right'>".seis_decimales(num_2dec($dato['precio_unitario']))."</td>
-                    <td width='110' align='right'>".seis_decimales(num_2dec($importe))."</td>
-                </tr>";
+                    echo "<tr>
+                            <th width='75'>CLAVE PRODUCTO</th>
+                            <th width='75'>CANTIDAD</th>
+                            <th width='90'>UNIDAD</th>
+                            <th width='315' colspan='2'>DESCRIPCIÓN</th>
+                            <th width='80'>PRECIO UNITARIO</th>
+                            <th width='90'>IMPORTE</th>
+                        </tr>
+                        <tr>
+                            <td width='75'>".normaliza($dato['clave_producto_sat'],12)."</td>
+                            <td width='75' align='right'>".num_2dec($dato['cantidad'])."</td>
+                            <td width='90'>".normaliza($dato['clave_unidad_sat'].' '.$dato['unidad_sat'],14)."</td>
+                            <td width='315' colspan='2'>".normaliza(strtoupper($dato['descripcion']),28)."</td>
+                            <td width='80' align='right'>".num_2dec(num_2dec($dato['precio_unitario']))."</td>
+                            <td width='90' align='right'>".num_2dec(num_2dec($importe))."</td>
+                        </tr>
+                        <tr>
+                            <th width='75'>IMPUESTO</th>
+                            <th width='75'>TIPO</th>
+                            <th width='90'>TIPOFACTOR</th>
+                            <th width='225'>OBJETO IMPUESTO</th>
+                            <th width='80'>TASA/CUOTA</th>
+                            <th width='90'>IMPORTE</th>
+                            <th width='90'>BASE</th>
+                        </tr>
+                        <tr>
+                            <td width='75'>IVA</td>
+                            <td width='75'>Traslado</td>
+                            <td width='90'>$tipoFactor</td>
+                            <td width='225'>Sí objeto de impuesto.</td>
+                            <td width='80'>".num_2dec(100*$dato["tasa_iva"])."</td>
+                            <td width='90'>".num_2dec($importe * $dato["tasa_iva"])."</td>
+                            <td width='90'>".num_2dec($dato['precio_unitario'])."</td>
+                        </tr>";
 
                 }
             }
@@ -485,6 +523,7 @@ if($xml != null){
 </table>
 <?php if($tipo_factura == 'Factura') { ?>
 <label class="font_light_sello" style="font-size:11px;">Este documento es una representación impresa de un CFDI</label>
+<br><br>
 <table>
     <tr>
         <td width="165" align="center" style="vertical-align:middle;">
@@ -526,6 +565,7 @@ function fecha($fecha) {
     $fechamod = $dia . "/" . $mes . "/" . $anyo;
     return $fechamod;
 }
+
 function dos_decimales($number, $fractional=true) { 
     if ($fractional) { 
         $number = sprintf('%.2f', $number); 
@@ -577,21 +617,39 @@ function seis_decimales_cant($number, $fractional=true) {
     return $numero.''.$decimal; 
 }
 
-function normaliza($texto,$longitud)
-  {
+function normaliza($texto,$longitud) {
     $ntexto='';
     $aux = str_split($texto,$longitud);
     $cont=0;
     while($cont < sizeof($aux))
     {
-      $ntexto.=$aux[$cont]."<br> &nbsp;&nbsp;&nbsp;";
-      $cont++;
+        $ntexto.=$aux[$cont]."<br> &nbsp;&nbsp;&nbsp;";
+        $cont++;
     }
     return $ntexto;
-  }
+}
 
-function num_2dec($numero)
-{
+function num_2dec($numero) {
     return number_format($numero, 2, '.', '');
 }
+
+function tasaocuota($factor,$impuesto) {
+    $hilo=ConectarseCFDI();
+
+    $query_t = "SELECT factor
+                FROM cat_tasa_cuota
+                WHERE impuesto ='$impuesto'
+                    AND ((rango_fijo = 'F' AND valor_maximo = $factor) OR (rango_fijo = 'R' AND valor_minimo <=$factor AND valor_maximo>= $factor))";
+
+    $res=mysqli_query($hilo, $query_t) or die(mysqli_error($link));
+    $renglon = mysqli_fetch_array($res);
+    $tasacuota = $renglon["factor"];
+
+    if($tasacuota=='T')
+        $toc = "Tasa";
+    else
+        $toc= "Cuota";
+
+    return $toc;
+ }
 ?>

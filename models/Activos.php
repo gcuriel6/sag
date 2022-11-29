@@ -12,7 +12,7 @@ class Activos
     **/
     public $link;
 
-    function Activos(){
+    function __construct(){
       $this->link = Conectarse();
     }
 
@@ -142,6 +142,7 @@ class Activos
       if($resultD){
         
         $this->link->query("commit;");
+        error_log("si hizo commit: $query");
       
         $verifica = $idActivo;
 
@@ -1502,43 +1503,45 @@ class Activos
       VALUES ($unidad,$sucursal,$area,$dpto,$no_empleado, $no_cliente,$activo,NOW(), '$vehNoLicencia', '$vehVigenciaLicencia',1,'$idUsuario','$cuip','$responsable_externo')";
       $result = mysqli_query($this->link, $query) or die(mysqli_error());
       if ($result) {
+
+        $this->link->query("commit;");
+        $verifica = true;
         //return true;
-        if($idS10 > 0)
-        {
-          $arr = array('idAlmacenD'=>$idAlmacenDN,
-                    'total'=>$importe,
-                    'idUnidadNegocio'=>$unidad,
-                    'idSucursal'=>$sucursal,
-                    'idFamiliaGasto'=>$idFamiliaGasto,
-                    'clasificacionGasto'=>$idClasificacionGasto,
-                    'idActivo'=>$activo,
-                    'tipo'=>'C');
+        // if($idS10 > 0)
+        // {
+        //   $arr = array('idAlmacenD'=>$idAlmacenDN,
+        //             'total'=>$importe,
+        //             'idUnidadNegocio'=>$unidad,
+        //             'idSucursal'=>$sucursal,
+        //             'idFamiliaGasto'=>$idFamiliaGasto,
+        //             'clasificacionGasto'=>$idClasificacionGasto,
+        //             'idActivo'=>$activo,
+        //             'tipo'=>'C');
 
-          //-->NJES June/18/2020 DEN18-2760 Se quita el area y departamento al hacer la afectación a presupuesto egreso (movimientos_presupuesto)
-          //se crea un modelo y funcion para afectar el presupuesto egresos y no se encuentre el insert en varios archivos
-          //afecta movimiento presupuesto solo la primera vez que se asigna por responsiva o por comodato, 
-          //si el activo ya esta ligado aunque haya sido devuelto ya no afectará presupuesto la siguiente vez que se asigne
-          //No es necesario verificar si esta ligado ya que cada vez que se reasigna se usa otra funcion en la que no se afecta el presupuesto
-          $afectarPresupuesto = new MovimientosPresupuesto();
+        //   //-->NJES June/18/2020 DEN18-2760 Se quita el area y departamento al hacer la afectación a presupuesto egreso (movimientos_presupuesto)
+        //   //se crea un modelo y funcion para afectar el presupuesto egresos y no se encuentre el insert en varios archivos
+        //   //afecta movimiento presupuesto solo la primera vez que se asigna por responsiva o por comodato, 
+        //   //si el activo ya esta ligado aunque haya sido devuelto ya no afectará presupuesto la siguiente vez que se asigne
+        //   //No es necesario verificar si esta ligado ya que cada vez que se reasigna se usa otra funcion en la que no se afecta el presupuesto
+        //   $afectarPresupuesto = new MovimientosPresupuesto();
 
-          $movP = $afectarPresupuesto->guardarMovimientoPresupuesto($arr);
+        //   $movP = $afectarPresupuesto->guardarMovimientoPresupuesto($arr);
 
-          if($movP > 0)
-          {
-            $this->link->query("commit;");
-            $verifica = true;
-          }else{
-            $this->link->query('rollback;');
-            $verifica = false;
-          }
+        //   if($movP > 0)
+        //   {
+        //     $this->link->query("commit;");
+        //     $verifica = true;
+        //   }else{
+        //     $this->link->query('rollback;');
+        //     $verifica = false;
+        //   }
 
-          //$verifica = $this -> guardaMovimientoPresupuesto($arr);
-        }else{
-          $this->link->query("commit;");
-          $verifica = true;
-        }          
-      }
-      else {
+        //   //$verifica = $this -> guardaMovimientoPresupuesto($arr);
+        // }else{
+        //   $this->link->query("commit;");
+        //   $verifica = true;
+        // }          
+      }else {
         $this->link->query('rollback;');
         $verifica = false;
       }
@@ -1751,7 +1754,7 @@ class Activos
            */
     function devolverActivoSelectedResponsable($idResponsable){
         $verifica = 0;
-        $query = "UPDATE activos_responsables SET devolucion=1, responsable=0  WHERE id=".$idResponsable;     
+        $query = "UPDATE activos_responsables SET devolucion=1, responsable=0, fecha_fin=CURDATE()  WHERE id=".$idResponsable;     
         $result = mysqli_query($this->link, $query) or die(mysqli_error());
         if ($result) {
           $verifica = 1;

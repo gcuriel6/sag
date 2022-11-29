@@ -12,7 +12,7 @@ class Ventas
     **/
     public $link;
 
-    function Ventas()
+    function __construct()
     {
   
       $this->link = Conectarse();
@@ -290,33 +290,34 @@ class Ventas
         }  
 
         $resultado = $this->link->query("SELECT 
-        a.id,
-        a.folio,
-        a.cotizacion,
-        a.id_sucursal,
-        a.id_cliente,
-        DATE(a.fecha_captura) AS fecha,
-        a.total,
-        a.estatus,
-        a.costo_instalacion,
-        a.costo_administrativo,
-        a.comision_venta,
-        a.costo_total,
-        b.descr AS sucursal,
-        IFNULL(c.nombre_corto,'') AS nombre_corto,
-        TRIM(IF(a.id_cliente=0,a.cliente_cotizacion,c.nombre_corto)) AS cliente,
-        IFNULL(c.razon_social,'') AS razon_social,
-        IFNULL(d.folio,'') AS folio_cotizacion,
-        IFNULL(f.id, 0) AS id_venta
-        FROM notas_e a
-        LEFT JOIN sucursales b ON a.id_sucursal=b.id_sucursal
-        LEFT JOIN servicios c ON a.id_cliente=c.id
-        LEFT JOIN notas_e d ON a.id_cotizacion=d.id
-        LEFT JOIN notas_e f ON a.id = f.id_cotizacion
-        $condCotizacion $condFecha $condCliente $sucursal
-        GROUP BY a.id
-        ORDER BY a.id DESC");
-        return query2json($resultado);
+                          a.id,
+                          a.folio,
+                          a.cotizacion,
+                          a.id_sucursal,
+                          a.id_cliente,
+                          DATE(a.fecha_captura) AS fecha,
+                          a.total,
+                          a.estatus,
+                          a.costo_instalacion,
+                          a.costo_administrativo,
+                          a.comision_venta,
+                          a.costo_total,
+                          b.descr AS sucursal,
+                          IFNULL(c.nombre_corto,'') AS nombre_corto,
+                          TRIM(IF(a.id_cliente=0,a.cliente_cotizacion,c.nombre_corto)) AS cliente,
+                          IFNULL(c.razon_social,'') AS razon_social,
+                          IFNULL(d.folio,'') AS folio_cotizacion,
+                          IFNULL(f.id, 0) AS id_venta,
+                          a.vendedor
+                      FROM notas_e a
+                      LEFT JOIN sucursales b ON a.id_sucursal=b.id_sucursal
+                      LEFT JOIN servicios c ON a.id_cliente=c.id
+                      LEFT JOIN notas_e d ON a.id_cotizacion=d.id
+                      LEFT JOIN notas_e f ON a.id = f.id_cotizacion
+                      $condCotizacion $condFecha $condCliente $sucursal
+                      GROUP BY a.id
+                      ORDER BY a.id DESC");
+                      return query2json($resultado);
 
       }//- fin function buscarVentas
 
@@ -328,10 +329,11 @@ class Ventas
 
         $permisoCancelarAnteriores = $permisoModel -> buscarPermisosBotones($idUsuario,'CANCELAR_VENTAS_ANTERIORES',0,$idSucursal,$idUnidadNegocio);
 
-        if($permisoCancelarAnteriores == 0)
+        if($permisoCancelarAnteriores == 0){
           $condicion = "IF(a.estatus='C','no',IF(MONTH(a.fecha_captura)=MONTH(CURDATE()),IF(a.total=IFNULL(SUM(IF(e.estatus NOT IN('C','P'),IF((SUBSTR(e.cve_concepto,1,1) = 'C'),(e.subtotal + e.iva - a.descuento),((e.subtotal + e.iva - a.descuento) * -(1))),0)),0),'si','no'),'no')) AS cancelar,";
-        else
+        }else{
           $condicion = "IF(a.estatus='C','no',IF(a.total=IFNULL(SUM(IF(e.estatus NOT IN('C','P'),IF((SUBSTR(e.cve_concepto,1,1) = 'C'),(e.subtotal + e.iva - a.descuento),((e.subtotal + e.iva - a.descuento) * -(1))),0)),0),'si','no')) AS cancelar,";
+        }
 
         $resultado = $this->link->query("SELECT 
         a.id,
@@ -415,8 +417,8 @@ class Ventas
     
         $verifica = 0;
 
-       $this->link->begin_transaction();
-       $this->link->query("START TRANSACTION;");
+        $this->link->begin_transaction();
+        $this->link->query("START TRANSACTION;");
 
         if($tipoR==1){//--CANCELA COTIZACION-----
           
@@ -458,6 +460,8 @@ class Ventas
 
 
       function cancelarVentasAlamcenCXC($idVenta){
+        // error_reporting(E_ALL);
+
         $verificar=0;
 
         $resultVenta = mysqli_query($this->link, "UPDATE notas_e SET estatus = 'C' WHERE id = $idVenta");
@@ -515,6 +519,7 @@ class Ventas
                                   FROM movimientos_presupuesto WHERE id_almacen_d IN ($idsD)";
                     $resultDatos = mysqli_query($this->link, $buscaDatos) or die(mysqli_error());
                     $num=mysqli_num_rows($resultDatos);
+                    
                     if($num > 0)
                     {
                       for ($i=1; $i <=$num ; $i++) { 
@@ -549,6 +554,9 @@ class Ventas
                         }
                         
                       }
+                    }else{
+                      //GCM - 2022-05-17 Se le agrega el return 1 por que no estaba cancelando ventas cuando no tenian movimientos en presup.
+                      return 1;
                     }
                   
                     if($resultMP > 0){

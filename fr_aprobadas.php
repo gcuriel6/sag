@@ -122,6 +122,61 @@
   </div>
 </div>
 
+<div class="modal" tabindex="-1" role="dialog" id="modalTerminarPedido">
+  <div class="modal-dialog modal-lg" role="document">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h5 class="modal-title">Terminar Pedido</h5>
+        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+          <span aria-hidden="true">&times;</span>
+        </button>
+      </div>
+      <div class="modal-body">
+        <div class="row">
+          <div class="col-12">
+            <form id="formSelectMateria">
+              <div class="form-row">
+                <div class="form-group col-md-6">
+                  <label>Materia Prima</label>
+                  <select type="text" class="form-control" id="nombreMateriaExistente"></select>
+                </div>
+                <div class="form-group col-md-6">
+                  <label>Cantidad</label>
+                  <input type="number" class="form-control" id="cantidadMateriaExistente">
+                  <div class="invalid-feedback">
+                    Campo con informacion no valida. 
+                  </div>
+                </div>
+              </div>
+            </form>
+            <div class="text-center">
+              <button class="btn btn-success" id="btnAgregarMateriaExistente">Agregar</button>
+            </div>
+          </div>
+          <div class="col-12">
+            <label>Materias Primas</label>
+            <table class="table table-striped table-bordered" id="tableListadoMaterias">
+              <thead>
+                <tr>
+                  <th scope="col">Descripcion</th>
+                  <th scope="col">Clave</th>
+                  <th scope="col">Cantidad</th>
+                  <th></th>
+                </tr>
+              </thead>
+              <tbody>
+              </tbody>
+            </table>
+          </div>
+        </div>
+      </div>
+      <div class="modal-footer">
+        <button class="btn btn-success" id="btnAprobarCotizacion">Guardar</button>
+      </div>
+    </div>
+  </div>
+</div>
+
 </body>
 
 <div id="fondo_cargando"></div>
@@ -151,7 +206,7 @@
     $("#tableDetalleMaterias tbody").html("");
     
     let prodFilter = objProductos.filter(x => x.idCotiz == id);
-    let matsFilter = objMaterias.filter(x => x.idCotiz == id);
+    // let matsFilter = objMaterias.filter(x => x.idCotiz == id);
 
     prodFilter.map((k,v, i)=>{
       $("#tableDetalleProductos tbody").append(
@@ -163,37 +218,89 @@
       );
     });
 
-    matsFilter.map((k,v, i)=>{
-      $("#tableDetalleMaterias tbody").append(
-        `<tr>
-          <th scope="col">${k.materia}</th>
-          <th scope="col">${k.clave}</th>
-          <th scope="col">${k.cantidad}</th>
-        </tr>`
-      );
-    });
+    // matsFilter.map((k,v, i)=>{
+    //   $("#tableDetalleMaterias tbody").append(
+    //     `<tr>
+    //       <th scope="col">${k.materia}</th>
+    //       <th scope="col">${k.clave}</th>
+    //       <th scope="col">${k.cantidad}</th>
+    //     </tr>`
+    //   );
+    // });
 
     $("#modalDetalle").modal("toggle");
 
   });
 
   $("#tableCotizacionesAprobadas").on("click",".btnTerminar",function(){
-    if (window.confirm("Cerrar Cotización?")) {
+    // if (window.confirm("Cerrar Cotización?")) {
       let id = $( this ).closest( "tr" ).attr("alt");
 
-      $.ajax({
-        type: 'POST',
-        url: 'php/vision_terminar_cotizacion.php',
-        data: {id},
-        dataType:"json"
-      }).done(function(data) {
-        if(data>0){
-          $('.modal').modal('hide');
-          traerProductos();
-          mandarMensaje("Cotizacion cerrada correctamente");
+      $("#btnAprobarCotizacion").val(id);
+      $("#modalTerminarPedido").modal("toggle");
+
+      // $.ajax({
+      //   type: 'POST',
+      //   url: 'php/vision_terminar_cotizacion.php',
+      //   data: {id},
+      //   dataType:"json"
+      // }).done(function(data) {
+      //   if(data>0){
+      //     $('.modal').modal('hide');
+      //     traerProductos();
+      //     mandarMensaje("Cotizacion cerrada correctamente");
+      //   }
+      // });
+    // }
+  });
+
+  $("#btnAgregarMateriaExistente").on("click",()=>{
+    let nombre = $('option:selected', "#nombreMateriaExistente").attr('alt1');
+    let clave = $('option:selected', "#nombreMateriaExistente").attr('alt2');
+    let restante = $('option:selected', "#nombreMateriaExistente").attr('alt3');
+
+    let idMat = $("#nombreMateriaExistente").val();
+
+    if(idMat == null){
+      mandarMensaje("No hay materia prima seleccionada");
+    }else{
+      if(isNaN($("#cantidadMateriaExistente").val()) || $("#cantidadMateriaExistente").val()==""){
+        $("#cantidadMateriaExistente").addClass("is-invalid");
+      }else{
+        $("#cantidadMateriaExistente").removeClass("is-invalid");
+        let cantidad = $("#cantidadMateriaExistente").val();
+        if(cantidad > restante){
+          mandarMensaje("No hay suficiente materia prima, stock: "+restante);
+        }else{
+          agregarMateriaTabla([nombre, clave, cantidad, idMat]);
+          $("#nombreMateriaExistente").val(0);
+          $("#cantidadMateriaExistente").val("");
         }
-      });
-    }
+      }      
+    }    
+  });
+
+  $("#btnAprobarCotizacion").on("click",()=>{
+      let id = $("#btnAprobarCotizacion").val();
+
+      let materia = obtenerMaterias();
+
+      if(materia){
+        $.ajax({
+          type: 'POST',
+          url: 'php/vision_terminar_cotizacion.php',
+          data: {id, materia},
+          dataType:"json"
+        }).done(function(data) {
+          if(data>0){
+            $('.modal').modal('hide');
+            traerProductos();
+            mandarMensaje("Cotizacion cerrada correctamente");
+          }
+        });
+      }else{
+        mandarMensaje("Hay que agregar por lo menos una materia prima");
+      }
   });
 
   let validarForm = form => {
@@ -240,7 +347,13 @@
                     dataType:"json"
                   });
 
-    $.when(prods,maters,aprobadas).done(function(p1, m1, a1) {
+    let maters2 = $.ajax({
+                  type: 'POST',
+                  url: 'php/vision_traer_materiasprimas.php',
+                  dataType:"json"
+                });
+
+    $.when(prods,maters,aprobadas,maters2).done(function(p1, m1, a1, m2) {
       $("#nombreProductoExistente").html("<option value='0' selected disabled>...</option>");
       $("#nombreMateriaExistente").html("<option value='0' selected disabled>...</option>");
       $("#nombreClienteCotizacion").html("<option value='0' selected disabled>...</option>");
@@ -269,6 +382,10 @@
         $("#tableCotizacionesAprobadas tbody").append(row);
       });
 
+      m2[0].map((k,v, i)=>{
+        $("#nombreMateriaExistente").append(`<option value="${k.idMateria}" alt1="${k.descr}" alt2="${k.clave}" alt3="${k.restante}" >${k.descr} - ${k.clave}</option>`);
+      });
+
       $('#fondo_cargando').hide();
     });
   }
@@ -281,6 +398,40 @@
     });
 
     $(primer).modal("toggle");
+  }
+
+  let obtenerMaterias = () => {
+    let materia = $("#tableListadoMaterias tbody tr");
+    let resultado = [];
+
+    if(materia.length > 0){
+      materia.map((k,v,i)=>{
+        let id = $(v).attr("alt");
+        let canti = $(v).attr("alt2");
+        resultado.push([id, canti]);
+      });
+      return resultado;
+    }else{
+      return false;
+    }
+  }
+
+  let agregarMateriaTabla = arreglo =>{
+
+    let nombre = arreglo[0];
+    let clave = arreglo[1];
+    let cantidad = arreglo[2];
+    let id = arreglo[3];
+
+    let html = `<tr alt="${id}" alt2="${cantidad}">
+              <th>${nombre}</th>
+              <td>${clave}</td>
+              <td>${cantidad}</td>
+              <td><button class="btn btn-danger btn-sm quitarProducto">X</button></td>
+            </tr>`;
+
+    $("#tableListadoMaterias tbody").append(html);
+
   }
 
   traerProductos();

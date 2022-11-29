@@ -37,10 +37,10 @@ function queryResult($query){
 function generaExcelDashFinanzas($query){
 
     // $servername = "ginthersoft.com";
-    $servername = "localhost";
-    $username = "sistemas";
-    $password = "Pass123#$%";
-    $dbname = "ginthercorp";
+    $servername = "gintestcorp.com";
+    $username = "pruebagi_sistemas";
+    $password = "Pass123#$%.";
+    $dbname = "pruebagi_ginthercorp";
 
 
     // $servername = "gintestcorp.com";

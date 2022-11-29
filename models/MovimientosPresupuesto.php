@@ -10,11 +10,9 @@ class MovimientosPresupuesto
     **/
     public $link;
 
-    function MovimientosPresupuesto()
-    {
-  
+    function __construct()
+    {  
       $this->link = Conectarse();
-
     }
      
     function guardarMovimientoPresupuesto($datos){

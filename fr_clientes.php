@@ -300,7 +300,7 @@ if(isset($_GET['idCliente'])!=0 && isset($_GET['regresar'])==1){
 
                                                         <label for="i_num_int" class="col-sm-12 col-md-3 col-form-label requerido">Num. Int </label><br>
                                                         <div class="col-sm-12 col-md-3">
-                                                            <input type="text" class="form-control validate[required]" id="i_num_int" autocomplete="off">
+                                                            <input type="text" class="form-control" id="i_num_int" autocomplete="off">
                                                         </div>
                                                     </div>
                                                 </div>
@@ -380,7 +380,7 @@ if(isset($_GET['idCliente'])!=0 && isset($_GET['regresar'])==1){
 
                                                         <label for="i_num_int" class="col-sm-12 col-md-3 col-form-label requerido">Num. Int </label><br>
                                                         <div class="col-sm-12 col-md-3">
-                                                            <input type="text" class="form-control validate[required]" id="i_num_int2" autocomplete="off">
+                                                            <input type="text" class="form-control" id="i_num_int2" autocomplete="off">
                                                         </div>
                                                     </div>
                                                 </div>
@@ -558,7 +558,7 @@ if(isset($_GET['idCliente'])!=0 && isset($_GET['regresar'])==1){
                                                     <input type="text" class="form-control validate[custom[integer]]" id="i_credito_activo" autocomplete="off">
                                                 </div>
                                             </div>
-                                            <div class="row">
+                                            <div class="row mb-3">
                                                 <label for="s_tipo_facturacion" class="col-sm-2 col-md-2 col-form-label">Tipo de Facturación</label>
                                                 <div class="col-sm-2 col-md-2">
                                                     <select class="form-control coti" id="s_tipo_facturacion" name="s_tipo_facturacion" autocomplete="off">
@@ -581,6 +581,12 @@ if(isset($_GET['idCliente'])!=0 && isset($_GET['regresar'])==1){
                                                 <label for="i_dia" class="col-sm-2 col-md-2 col-form-label">Día</label>
                                                 <div class="col-sm-1 col-md-1" id="contenedor_dia">
                                                     <input type="text" id="i_dia" name="i_dia"  class="form-control coti" autocomplete="off"  readonly>
+                                                </div>
+                                            </div>
+                                            <div class="row">
+                                                <label for="s_regimen" class="col-sm-2 col-md-2 col-form-label">Régimen</label>
+                                                <div class="col-sm-6 col-md-6">
+                                                    <select class="form-control coti validate[required]" id="s_regimen" name="s_regimen" autocomplete="off"></select>
                                                 </div>
                                             </div>
 
@@ -1242,6 +1248,7 @@ if(isset($_GET['idCliente'])!=0 && isset($_GET['regresar'])==1){
             $('#b_asignar_unidades').prop('disabled',true);
             muestraSelectPaises('s_pais');
             muestraSelectPaises('s_pais2');
+            muestraSelectRegimen("s_regimen");
         });
         $('#b_regresar').on('click',function(){
            
@@ -1584,6 +1591,7 @@ if(isset($_GET['idCliente'])!=0 && isset($_GET['regresar'])==1){
             $('#b_asignar_unidades').prop('disabled',false);
             muestraSelectPaises('s_pais');
             muestraSelectPaises('s_pais2');
+            muestraSelectRegimen("s_regimen");
             muestraRegistroRazonSocial();
             muestraContratos();
         });
@@ -1665,6 +1673,10 @@ if(isset($_GET['idCliente'])!=0 && isset($_GET['regresar'])==1){
                     $('#s_periodicidad').val(data[0].periodicidad);
                     $('#s_tipo_facturacion').val(data[0].tipo_facturacion);
                     $('#i_dia').val(data[0].dia);
+                    if(data[0].regimen != ""){
+                        $('#s_regimen').val(data[0].regimen);
+                        $('#s_regimen').select2({placeholder: $(this).data('elemento')});
+                    }
                 
                     if (data[0].activo == 1) {
                         $('#ch_activo').prop('checked', true);
@@ -1738,7 +1750,6 @@ if(isset($_GET['idCliente'])!=0 && isset($_GET['regresar'])==1){
                 dataType:"json", 
                 data: {
                         'datos':obtenerDatosRazonesSociales()
-
                 },
                 //una vez finalizado correctamente
                 success: function(data){
@@ -1829,6 +1840,7 @@ if(isset($_GET['idCliente'])!=0 && isset($_GET['regresar'])==1){
                 'periodicidad' : $('#s_periodicidad').val(),
                 'tipo_facturacion':$('#s_tipo_facturacion').val(),
                 'dia' : $('#i_dia').val(),
+                'regimen' : $("#s_regimen").val(),
 
                 'activo' : $("#ch_activo").is(':checked') ? 1 : 0
                     

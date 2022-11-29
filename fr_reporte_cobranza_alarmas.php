@@ -150,7 +150,7 @@ session_start();
                                     <th scope="col" width="5%">Tipo</th>
                                     <th scope="col" width="5%">Folio<br>CXC</th>
                                     <th scope="col" width="5%">Folio<br> Factura</th>
-                                    <th scope="col" width="10%">Origen</th>
+                                    <th scope="col" width="5%">Origen</th>
                                     <th scope="col" width="5%">Folio<br>Origen</th>
                                     <th scope="col" width="8%">Periodo <br> Inicio</th>
                                     <!-- <th scope="col" width="8%">Periodo <br> Fin</th> -->
@@ -158,6 +158,7 @@ session_start();
                                     <th scope="col" width="5%">Cargos</th>
                                     <th scope="col" width="5%">Abonos</th>
                                     <th scope="col" width="5%">Saldo</th>
+                                    <th scope="col" width="5%">Vende</th>
                                 </tr>
                             </thead>
                             <tbody>
@@ -339,13 +340,14 @@ session_start();
                                         <td aling="top" width="5%" data-label="Tipo">'+data[i].tipo+'</td>\
                                         <td aling="top" width="5%" data-label="Folio CxC">'+foliosCxc+'</td>\
                                         <td aling="top" width="5%" data-label="Folio Factura">'+data[i].folioFactura+'</td>\
-                                        <td aling="top" width="10%" data-label="Origen">'+origenes+'</td>\
+                                        <td aling="top" width="5%" data-label="Origen">'+origenes+'</td>\
                                         <td aling="top" width="8%" data-label="Folio Origen">'+foliosOrigen+'</td>\
                                         <td aling="top" width="8%" data-label="Periodo Inicio">'+data[i].fechaInicio+'</td>\
                                         <td aling="top" width="8%" data-label="Periodo Fin">'+data[i].fechaVencimiento+'</td>\
                                         <td aling="top" width="5%" data-label="Cargos">'+formatearNumero(data[i].total)+'</td>\
                                         <td aling="top" width="5%" data-label="Abonos">'+formatearNumero(data[i].totalPagado)+'</td>\
                                         <td aling="top" width="5%" data-label="Saldo">'+formatearNumero(data[i].saldo)+'</td>\
+                                        <td aling="top" width="5%" data-label="Vendedor">'+data[i].vendedor+'</td>\
                                     </tr>';
                             ///agrega la tabla creada al div 
                             

@@ -167,6 +167,9 @@ session_start();
                     <div class="col-sm-12 col-md-2 secundarios botones_factura">
                         <button type="button" class="btn btn-dark btn-sm form-control" id="b_guardar_nota_credito"><i class="fa fa-floppy-o" aria-hidden="true"></i> Nota Crédito</button>
                     </div>
+                    <div class="col-sm-12 col-md-2">
+                        <button type="button" class="btn btn-dark btn-sm form-control" id="b_sin_factura"><i class="fa fa-search" aria-hidden="true"></i> Sin Factura</button>
+                    </div>
                     <div class="col-sm-12 col-md-2" id="div_b_guardar_prefactura">
                         <button type="button" class="btn btn-dark btn-sm form-control" id="b_guardar_prefactura"><i class="fa fa-floppy-o" aria-hidden="true"></i> Guardar Prefactura</button>
                     </div>
@@ -258,15 +261,19 @@ session_start();
                                 </div>
                             </div>
                             <div class="row">
-                                <label for="i_cliente" class="col-sm-12 col-md-12 col-form-label requerido">Cliente</label>
-                                <div class="input-group col-sm-12 col-md-12">
-                                    <input type="text" id="i_cliente" name="i_cliente" class="form-control form-control-sm validate[required]" readonly autocomplete="off">
-                                    <div class="input-group-btn">
-                                        <button class="btn btn-primary" type="button" id="b_buscar_clientes" style="margin:0px;">
-                                            <i class="fa fa-search" aria-hidden="true"></i>
-                                        </button>
+                                <div class="col-12">
+                                    <label for="i_cliente" class="form-label requerido">Cliente</label>
+                                    <div class="input-group">
+                                        <input type="text" id="i_cliente" name="i_cliente" class="form-control form-control-sm validate[required]" readonly autocomplete="off">
+                                        <div class="input-group-btn">
+                                            <button class="btn btn-primary" type="button" id="b_buscar_clientes" style="margin:0px;">
+                                                <i class="fa fa-search" aria-hidden="true"></i>
+                                            </button>
+                                        </div>
                                     </div>
-                                </div>
+                                    <label for="i_descripcion_alterna_pg" class="form-label cliente_alterno_pg" style="display:none;">Descripción alterna de Venta al Público en General</label>
+                                    <input type="text" id="i_descripcion_alterna_pg" name="i_descripcion_alterna_pg" class="cliente_alterno_pg form-control form-control-sm" autocomplete="off" style="display:none;">
+                                </div>                                
                             </div>
                             <!--<div class="row">
                                 <div class="col-md-12">
@@ -406,9 +413,21 @@ session_start();
                         </div>
                     </div>
                     <div class="row">
-                        <div class="col-md-7">
+                        <div class="col-md-4">
                             <label for="i_observaciones" class="col-form-label requerido">Observaciones</label>
                             <input type="text" id="i_observaciones" name="i_observaciones" class="form-control form-control-sm validate[required]"  autocomplete="off">
+                        </div>
+
+                        <div class="col-md-3">
+                            <label for="i_depto" class="col-form-label">Departamento</label>
+                            <div class="input-group">
+                                <input type="text" id="i_depto" name="i_depto" class="form-control form-control-sm" readonly autocomplete="off">
+                                <div class="input-group-btn">
+                                    <button class="btn btn-primary" type="button" id="b_buscar_deptos" style="margin:0px;">
+                                        <i class="fa fa-search" aria-hidden="true"></i>
+                                    </button>
+                                </div>
+                            </div>
                         </div>
                         <div class="col-md-3">
                             <div class="row">
@@ -458,7 +477,7 @@ session_start();
                                 </div>
                             </div>
                         </div>
-                        <!-- <div class="col-sm-12 col-md-3">
+                        <div class="col-sm-12 col-md-3">
                             <div class="row">
                                 <label for="i_salida_por_venta_masivo" class="col-md-12 col-form-label requerido">Salida por venta de almacén Masivo</label>
                                 <div class="input-group col-sm-12 col-md-12">
@@ -470,7 +489,7 @@ session_start();
                                     </div>
                                 </div>
                             </div>
-                        </div> -->
+                        </div>
                     </div>
                 </form><!--div forma_general-->
                 <br>
@@ -1014,6 +1033,8 @@ session_start();
                         <div class="col-md-4">
                             <label for="s_forma_pago_nc" class="col-form-label requerido">Forma de Pago</label>
                             <select id="s_forma_pago_nc" name="s_forma_pago_nc" class="form-control form-control-sm validate[required]" autocomplete="off" style="width:100%;"></select>
+                            <label for="s_uso_cfdi_nc" class="col-form-label">Uso CFDI</label>
+                            <select id="s_uso_cfdi_nc" name="s_uso_cfdi_nc" class="form-control form-control-sm" autocomplete="off" style="width:100%;"></select>
                         </div>
                         <div class="col-md-2">
                             <div class="row">
@@ -1231,7 +1252,46 @@ session_start();
     </div>
 </div>
 
-<!-- <div id="dialog_salida_venta_masivo" class="modal fade" tabindex="-1" role="dialog" aria-labelledby="myLargeModalLabel" aria-hidden="true">
+<div id="dialog_deptos" class="modal fade bd-example-modal-lg" tabindex="-1" role="dialog" aria-labelledby="myLargeModalLabel" aria-hidden="true">
+    <div class="modal-dialog modal-lg">
+        <div class="modal-content">
+        <div class="modal-header">
+            <h5 class="modal-title">Búsqueda de Departamentos</h5>
+            <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                <span aria-hidden="true">&times;</span>
+            </button>
+        </div>
+        <div class="modal-body">
+            <div class="row">
+                <div class="col-sm-12 col-md-10"><input type="text" name="i_filtro_depto" id="i_filtro_depto" alt="renglon_depto" class="filtrar_renglones form-control filtrar_renglones" placeholder="Filtrar" autocomplete="off"></div>
+            </div>    
+            <br>
+            <div class="row">
+                <div class="col-sm-12 col-md-12">
+                    <table class="table"  id="t_deptos">
+                        <thead>
+                            <tr class="renglon">
+                                <th scope="col">#</th>
+                                <th scope="col">Departamento</th>
+                                <th scope="col">Seleccionar <input id="checkAllCh" type="checkbox"></th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            
+                        </tbody>
+                    </table>  
+                </div>
+            </div>
+        </div>
+        <div class="modal-footer">
+            <button type="button" class="btn btn-secondary btn-sm" data-dismiss="modal">Cerrar</button>
+            <button type="button" class="btn btn-primary btn-sm" id="btnGuardarDeptos">Guardar</button>
+        </div>
+        </div>
+    </div>
+</div>
+
+<div id="dialog_salida_venta_masivo" class="modal fade" tabindex="-1" role="dialog" aria-labelledby="myLargeModalLabel" aria-hidden="true">
     <div class="modal-dialog modal-lg">
         <div class="modal-content">
         <div class="modal-header">
@@ -1270,7 +1330,7 @@ session_start();
         </div>
         </div>
     </div>
-</div> -->
+</div>
 
 <script src="js/jquery3.3.1/jquery-3.3.1.js"></script>
 <script src="js/popper.min.js"></script>
@@ -1288,6 +1348,7 @@ session_start();
     var idUsuario=<?php echo $_SESSION['id_usuario']?>;
     var usuario='<?php echo $_SESSION['usuario']?>';
     var idFactura = 0;
+    var deptos = [];
 
     var matriz = <?php echo $_SESSION['sucursales']?>;
 
@@ -1321,6 +1382,7 @@ session_start();
         muestraSucursalesPermiso('s_id_sucursales',idUnidadActual,modulo,idUsuario);
         generaFecha('s_mes');
         muestraSelectUsoCFDI('s_cfdi');
+        muestraSelectUsoCFDI('s_uso_cfdi_nc');
         muestraSelectMetodoPago('s_metodo_pago');
         muestraSelectClaveProductoSAT('s_clave_sat_s');
         muestraSelectClaveUnidadesSAT('s_id_unidades_s');
@@ -1358,8 +1420,7 @@ session_start();
         $('#i_fecha_inicio').val(primerDiaMes);
         $('#i_fecha_fin').val(ultimoDiaMes);
         
-        $('#b_buscar_clientes').click(function()
-        {
+        $('#b_buscar_clientes').click(function(){
             $('#b_adenda').prop('disabled', true);
             $('#i_rfc').val('');
             $('#i_filtro_cliente').val('');
@@ -1379,8 +1440,7 @@ session_start();
             }
         });
 
-        $('#b_buscar_empresa_fiscal').click(function()
-        {
+        $('#b_buscar_empresa_fiscal').click(function(){
             $('#i_filtro_empresa_fiscal').val('');
             muestraModalEmpresasFiscalesCFDI('renglon_empresa_fiscal','t_empresa_fiscal tbody','dialog_empresa_fiscal');
         });
@@ -1393,8 +1453,7 @@ session_start();
             $('#dialog_empresa_fiscal').modal('hide');
         });
 
-        $('#s_razon_social').change(function()
-        {
+        $('#s_razon_social').change(function(){
 
             var rfc = $('#s_razon_social option:selected').attr('alt2');
             var dias_credito = $('#s_razon_social option:selected').attr('alt');
@@ -1410,8 +1469,7 @@ session_start();
 
         });
 
-        $('#b_adenda').click(function()
-        {
+        $('#b_adenda').click(function(){
 
             //verificando adenda
             $('#i_purchase_d').val($('#i_purchase').val());
@@ -1423,10 +1481,7 @@ session_start();
 
         });
 
-        $('#b_asignar_adenda').click(function()
-        {
-
-            //verificando adenda
+        $('#b_asignar_adenda').click(function(){
 
             var cont = 0;
 
@@ -1648,6 +1703,7 @@ session_start();
 
             muestraRegistro(idFactura);
             muestraRegistroDetalle(idFactura);
+            muestraDeptosFactura(idFactura);
         });
 
         function muestraRegistro(idFactura){
@@ -1711,7 +1767,12 @@ session_start();
                             $('#div_relacion_facturas').css('display','none');
                         }
 
-                        $('#i_cliente').attr('alt',dato.id_cliente).val(dato.cliente);
+                        if(dato.id_cliente != 0){
+                            $('#i_cliente').attr('alt',dato.id_cliente).val(dato.cliente);
+                        }else{
+                            $('#i_cliente').attr('alt',dato.id_cliente).val("PUBLICO EN GENERAL");
+                        }
+                        
                         $('#i_empresa_fiscal').attr('alt', dato.id_empresa_fiscal).val(dato.empresa_fiscal);
                         $('#i_empresa_fiscal').attr('alt2', dato.id_cfdi);
                         $('#i_rfc').val(dato.rfc_razon_social);
@@ -1760,8 +1821,14 @@ session_start();
                         $('#s_id_sucursales').val(dato.id_sucursal);
                         $('#s_id_sucursales').select2({placeholder: $(this).data('elemento')});
                         
-                        $('#s_razon_social').val(dato.id_razon_social);
-                        $('#s_razon_social').select2({placeholder: $(this).data('elemento')});
+                        if(dato.id_razon_social != 0){
+                            $('#s_razon_social').val(dato.id_razon_social);
+                            $('#s_razon_social').select2({placeholder: $(this).data('elemento')});
+                        }else{
+                            $("#s_razon_social").append(`<option value="${dato.id_razon_social}" selected>PUBLICO EN GENERAL</option>`);
+                            $('#s_razon_social').select2();
+                        }
+
 
                         $('#s_cfdi').val(dato.uso_cfdi);
                         $('#s_cfdi').select2({placeholder: $(this).data('elemento')});
@@ -1776,7 +1843,19 @@ session_start();
                         $('#s_mes').select2({placeholder: $(this).data('elemento')});
 
                         //-->NJES Sep/10/2020 mostrar folio salida por venta almacen si esta ligada a la factura
-                        $('#i_salida_por_venta').attr('alt',dato.id_almacen_e).val(dato.folio_venta);
+                        if(dato.id_almacen_e != null){
+                            const splitIdAlmacen = dato.id_almacen_e.split(",");
+                            const splitFolioAlmacen = dato.folio_venta.split(",");
+
+                            if(splitIdAlmacen.length > 1){
+                                $('#i_salida_por_venta_masivo').attr('alt',dato.id_almacen_e).val(dato.folio_venta);
+                                $('#i_salida_por_venta').attr('alt',"").val("");
+                            }else{
+                                $('#i_salida_por_venta').attr('alt',dato.id_almacen_e).val(dato.folio_venta);
+                                $('#i_salida_por_venta_masivo').attr('alt',"").val("");
+                            }
+                        }
+                        
 
                         //-->NJES May/25/2021 agregar moneda y tipo de cambio, 
                         //en guinthercorp se cuarda el quivalente en pesos y en cfdi_denken2 se guarda el monto original
@@ -1802,7 +1881,7 @@ session_start();
                         mandarMensaje('No se encontro Información de la factura');
                     }
 
-                    $('#s_metodo_pago_nc,#s_forma_pago_nc').prop('disabled',false);
+                    $('#s_metodo_pago_nc,#s_forma_pago_nc,#s_uso_cfdi_nc').prop('disabled',false);
                 },
                 error: function (xhr) {
                     console.log('php/facturacion_buscar_id.php --> '+JSON.stringify(xhr));
@@ -1947,10 +2026,20 @@ session_start();
 
         }
 
-        $('#b_guardar_prefactura').click(function()
-        {
+        $('#b_guardar_prefactura').click(function(){
 
             $('#b_guardar_prefactura').prop('disabled',true);
+
+            if($("#i_salida_por_venta_masivo").val() != ""){
+                console.log("pongo required a masivo y quito al normal");
+                $("#i_salida_por_venta_masivo").addClass("validate[required]");
+                $("#i_salida_por_venta").removeClass("validate[required]");
+            }else{
+                console.log("quito required a masivo y pongo al normal");
+                $("#i_salida_por_venta_masivo").removeClass("validate[required]");
+                $("#i_salida_por_venta").addClass("validate[required]");
+            }
+
             if ($('#forma_general').validationEngine('validate'))
             {
 
@@ -2024,6 +2113,12 @@ session_start();
             //-->NJES May/05/2020 si el iva es de 16 la retención es 6, si el iva es de 8 la retención es 3
             var ivaR = $('input[name=radio_iva]:checked').val();
 
+            let idSalidaVenta = $("#i_salida_por_venta").attr("alt");
+
+            if($("#i_salida_por_venta").val() == ""){
+                idSalidaVenta = $("#i_salida_por_venta_masivo").attr("alt");
+            }
+
             if(parseInt(ivaR) == 16)
                 var porcentajeR = 6;
             else
@@ -2061,7 +2156,7 @@ session_start();
                 'importeRetencion' : quitaComa($('#i_retencion').val()),
                 'porcentajeRetencion' : porcentajeR,
                 'tipo' : tipo,
-                'id_salida_venta' : $('#i_salida_por_venta').attr('alt'),
+                'id_salida_venta' : idSalidaVenta,
                 'adenda': parseInt($('#s_razon_social option:selected').attr('alt7')),
                 'adenda_file': $('#i_file').val(),
                 'adenda_purchase': $('#i_purchase').val(),
@@ -2074,7 +2169,9 @@ session_start();
                 'total_original' : parseFloat($('#i_total_original').val())+parseFloat($('#i_retencion_original').val()),
                 'importe_retencion_original' : $('#i_retencion_original').val(),
                 'moneda' : $('input[name=radio_moneda]:checked').val(),
-                'tipo_cambio' : quitaComa($('#i_tipo_cambio').val())
+                'tipo_cambio' : quitaComa($('#i_tipo_cambio').val()),
+                'deptos':$("#i_depto").val(),
+                'regimen_fiscal': $('#s_razon_social option:selected').attr('alt8')
             };
 
             $.ajax({
@@ -2256,8 +2353,7 @@ session_start();
             }
         }
 
-        $('#b_timbrar').click(function()
-        {
+        $('#b_timbrar').click(function(){
 
             $('#b_timbrar').prop('disabled', true);
 
@@ -2371,8 +2467,6 @@ session_start();
             var id = $('#i_id').val();
             var idCFDI = $('#i_id_cfdi').val();
             var idEmpresa = $('#i_empresa_fiscal').attr('alt2');
-            console.log('CFDI ' + idCFDI);
-            console.log('E ' + idEmpresa);
             $('#fondo_cargando').show();
             $.ajax({
                 type: 'GET',
@@ -2386,11 +2480,8 @@ session_start();
                             type: 'POST',
                             url: 'php/facturacion_descargar_acuse.php',
                             data : {'idFactura':id, 'idCFDI': idCFDI},
-                            success: function(data)
-                            {
-                                console.log('*'+data+'*');
-                                if(data > 0)
-                                {
+                            success: function(data){
+                                if(data > 0){
                                     limpiarGuardar();
                                     muestraRegistro(data);
                                     muestraRegistroDetalle(data);
@@ -2405,13 +2496,12 @@ session_start();
                                 mandarMensaje('* Error al descargar acuse y actualizar');
                             }
                         });
-                    }else if(data == 2)
+                    }else if(data == 2){
                         mandarMensaje('La factura no ha sido aprobada por el cliente favor de intentarlo mas tarde');
-                    else{
+                    }else{
                         ///actualizamos estatus a timbrado 
 
-                        if(parseInt(actualizarEstatusFactura(id,'T')) == parseInt(id))
-                        {
+                        if(parseInt(actualizarEstatusFactura(id,'T')) == parseInt(id)){
                             limpiarGuardar();
                             idFactura = id;
                             muestraRegistro(id);
@@ -2551,6 +2641,7 @@ session_start();
             verificarPermisosShowHide(idUsuario,idUnidadActual);
             generaFecha('s_mes');
             muestraSelectUsoCFDI('s_cfdi');
+            muestraSelectUsoCFDI('s_uso_cfdi_nc');
             muestraSelectMetodoPago('s_metodo_pago');
             $('#s_razon_social').html('').val('');
             $('#s_forma_pago').html('').val('');
@@ -2570,6 +2661,9 @@ session_start();
             $('#r_MXN').prop('checked',true);
             $('#div_tipo_cambio').hide();
             $('#i_tipo_cambio').val('15.00');
+
+            $("#i_salida_por_venta_masivo").val();
+            $("#i_salida_por_venta").val("");
         }
 
         $('#b_nuevo').click(function(){
@@ -2730,8 +2824,7 @@ session_start();
 
         //-->NJES May/25/2021 agregar moneda y tipo de cambio, 
         //en guinthercorp se cuarda el quivalente en pesos y en cfdi_denken2 se guarda el monto original
-        function calculaTotales()
-        {
+        function calculaTotales(){
 
             var subtotal = 0;
             var iva = 0;
@@ -3111,7 +3204,7 @@ session_start();
 
         $('#b_guardar_nota_credito').click(function(){
             muestraNotasCreditoIdFactura(idFactura);
-            $('#s_metodo_pago_nc,#s_forma_pago_nc').prop('disabled',false);
+            $('#s_metodo_pago_nc,#s_forma_pago_nc,#s_uso_cfdi_nc').prop('disabled',false);
             $('#dialog_notas_credito').modal('show');
 
             //-->NJES Jun/08/2021 si la moneda de la factura es en dolares, la nota de credito puede ser en dolares o pesos
@@ -3162,6 +3255,13 @@ session_start();
             else
                 var porcentajeR = 3;
 
+            let usoCFDI = $("#s_cfdi").val();
+
+            if($('#s_uso_cfdi_nc').val() != null && $('#s_uso_cfdi_nc').val() != undefined){
+                usoCFDI = $('#s_uso_cfdi_nc').val();
+            }
+            
+
             var info={
                 'descripcion' : $('#i_descripcion_nc').val(),
                 'tasaIva' : $('input[name=radio_iva_nc]:checked').val(),
@@ -3177,7 +3277,7 @@ session_start();
                 'razonSocialReceptor' : $('#s_razon_social option:selected').attr('alt6'),
                 'codigoPostal' : $('#s_razon_social option:selected').attr('alt3'),
                 'rfc' : $('#i_rfc').val(),
-                'idUsoCFDI' : $('#s_cfdi').val(),
+                'idUsoCFDI' : usoCFDI,
                 //-->NJES July/14/2020 se puede seleccionar el metodo y forma pago (anteriormente estaba como metodo: PUE y forma: 01)
                 'idMetodoPago' : $('#s_metodo_pago_nc').val(),
                 'idFormaPago' : $('#s_forma_pago_nc').val(),
@@ -3237,8 +3337,9 @@ session_start();
 
                         //-->NJES July/14/2020 agregar metodo y forma de pago a notas de credito
                         muestraSelectFormaPago('TODOS','s_forma_pago_nc');
+                        muestraSelectUsoCFDI('s_uso_cfdi_nc');
                         muestraSelectMetodoPago('s_metodo_pago_nc');
-                        $('#s_metodo_pago_nc,#s_forma_pago_nc').prop('disabled',false);
+                        $('#s_metodo_pago_nc,#s_forma_pago_nc,#s_uso_cfdi_nc').prop('disabled',false);
 
                         var id=data.idFactura;
                         var idCFDI = data.idCFDI;
@@ -3408,7 +3509,7 @@ session_start();
 
                     }
 
-                    $('#s_metodo_pago_nc,#s_forma_pago_nc').prop('disabled',false);
+                    $('#s_metodo_pago_nc,#s_forma_pago_nc,#s_uso_cfdi_nc').prop('disabled',false);
                 },
                 error: function (xhr) 
                 {
@@ -3885,14 +3986,13 @@ session_start();
                 mandarMensaje('Es necesario seleccionar Unidad de Negocio y Sucursal para comenzar la busqueda.');
         });
 
-        // $('#b_salida_por_venta_masivo').click(function(){
-        //     if($('#s_id_unidades').val() != null && $('#s_id_sucursales').val() != null)
-        //     {
-        //         $('#i_filtro_salida_venta_masivo').val('');
-        //         muestraModalSalidasVentasAlmacenMasivo('renglon_salida_venta_masivo','t_salida_venta_masivo tbody','dialog_salida_venta_masivo');
-        //     }else
-        //         mandarMensaje('Es necesario seleccionar Unidad de Negocio y Sucursal para comenzar la busqueda.');
-        // });
+        $('#b_salida_por_venta_masivo').click(function(){
+            if($('#s_id_unidades').val() != null && $('#s_id_sucursales').val() != null){
+                $('#i_filtro_salida_venta_masivo').val('');
+                muestraModalSalidasVentasAlmacenMasivo('renglon_salida_venta_masivo','t_salida_venta_masivo tbody','dialog_salida_venta_masivo');
+            }else
+                mandarMensaje('Es necesario seleccionar Unidad de Negocio y Sucursal para comenzar la busqueda.');
+        });
 
         $('#t_salida_venta').on('click', '.renglon_salida_venta', function() {
             var id = $(this).attr('alt');
@@ -3902,14 +4002,20 @@ session_start();
             $('#dialog_salida_venta').modal('hide');
         });
 
-        $("#i_salida_por_venta").on("change",function(){
+        $("#i_salida_por_venta, #i_salida_por_venta_masivo").on("change",function(){
             let folio = $(this).val();
             let sucursal = $('#s_id_sucursales').val();
             traerPartidas(folio, sucursal);
         });
 
+        // $("#i_salida_por_venta_masivo").on("change",function(){
+        //     let folio = $(this).val();
+        //     let sucursal = $('#s_id_sucursales').val();
+        //     traerPartidas(folio, sucursal);
+        // });
+
         $("#btnGuardarSalidasMasivas").on("click",()=>{
-            let rows = $("#t_salida_venta").find(".checkMasivo:checked").parents(".renglon_salida_venta");
+            let rows = $("#t_salida_venta_masivo").find(".checkMasivo:checked").parents(".renglon_salida_venta_masivo");
 
             let cadenaAlt ="";
             let cadenaFolio = "";
@@ -3927,8 +4033,8 @@ session_start();
             cadenaFolio = cadenaFolio.slice(0, -1);
 
             console.log(cadenaAlt, cadenaFolio);
-            $('#i_salida_por_venta').attr('alt',cadenaAlt).val(cadenaFolio);
-            $('#i_salida_por_venta').trigger("change");
+            $('#i_salida_por_venta_masivo').attr('alt',cadenaAlt).val(cadenaFolio);
+            $('#i_salida_por_venta_masivo').trigger("change");
         });
 
         function muestraModalSalidasVentasAlmacen(renglon,tabla,modal){
@@ -4201,6 +4307,198 @@ session_start();
                 error: function (xhr) {
                     console.log('almacen_salidas_busca_ventas_libres.php --> '+JSON.stringify(xhr));
                     mandarMensaje('* No se encontró información de Ventas Almacén');
+                }
+            });
+        }
+
+        $("#b_buscar_deptos").on("click",()=>{
+            if($("#s_id_sucursales").val() != "" && $("#s_id_sucursales").val() != 0 && $("#s_id_sucursales").val() != null){
+                
+                let idSuc = $("#s_id_sucursales").val();
+
+                $.ajax({
+                    type: 'POST',
+                    url: 'php/buscar_deptos_por_sucursal.php',
+                    dataType:"json", 
+                    data:{idSuc},
+                    success: function(data) {
+                    
+                        if(data.length != 0){
+
+                                $("#t_deptos tbody").html("");
+                        
+                                for(var i=0;data.length>i;i++){
+
+                                    let checked = "";
+
+                                    if(deptos.includes(data[i].id_depto)){
+                                        checked = 'checked="checked"';
+                                    }
+
+                                    var html='<tr class="renglon_depto">\
+                                                <td data-label="Id">' + data[i].id_depto+ '</td>\
+                                                <td data-label="Nombre">' + data[i].nombre+ '</td>\
+                                                <td><input class="checkMasivo" value="'+data[i].id_depto+'" type="checkbox" '+checked+'></td>\
+                                            </tr>';
+                                    $("#t_deptos tbody").append(html);   
+                                }
+                        }else{
+                            $("#t_deptos tbody").html('<tr><td colspan="2">No se encontró información</td></tr>');
+                        }
+
+                        // $('#'+modal).modal('show'); 
+
+                    },
+                    error: function (xhr) {
+                        console.log('buscar_deptos_por_sucursal.php --> '+JSON.stringify(xhr));
+                        mandarMensaje('* No se encontró información de Ventas Almacén');
+                    }
+                });
+
+                $("#dialog_deptos").modal("toggle");
+            }else{
+                mandarMensaje("No se ha seleccionado sucursal");
+            }
+        });
+
+        $("#t_deptos").on("change",".checkMasivo",function(){
+            let id = $(this).val();
+
+            if ($(this).is(':checked')){
+                $(this).closest("tr").addClass("table-success");
+            }else{
+                $(this).closest("tr").removeClass("table-success");
+            }
+            
+        });
+
+        $("#btnGuardarDeptos").on("click",()=>{
+            var selected = [];
+            let primera = true;
+            $("#i_depto").val("");
+            $('#t_deptos tbody input:checked').each(function() {
+                let id = $(this).val();
+                selected.push();
+
+                $("#i_depto").val(function() {
+                    if(primera){
+                        primera = false;
+                        return this.value + id;                        
+                    }else{
+                        return this.value + ", " + id;
+                    }
+                    
+                });
+            });
+            // console.log(selected);
+
+            $("#dialog_deptos").modal("toggle");
+        });
+
+        function muestraDeptosFactura(idFactura){
+
+            $.ajax({
+                type: 'POST',
+                url: 'php/buscar_deptos_por_factura.php',
+                dataType:"json", 
+                data : {idFactura},
+                success: function(data) {
+                    if(data.length >0){
+                        if(data[0].deptos != null){
+                            $("#i_depto").val(data[0].deptos);
+
+                            deptos = data[0].deptos.split(',');
+                        }
+                    }
+                },
+                error: function (xhr) {
+                    console.log('php/buscar_deptos_por_factura.php --> '+JSON.stringify(xhr));
+                    mandarMensaje('* No se encontró información al buscar factura.');
+                }
+            });
+        }
+
+        $("#checkAllCh").on("change",function(){
+            $('#t_deptos .checkMasivo').prop('checked', this.checked);
+        });
+
+        $('#b_sin_factura').on('click',function(){
+            $('.cliente_alterno_pg').show();
+            $("#div_salida_por_venta").show();
+            //-->NJES May/07/2020 el servicio para venta publico en egeneral es 0, 
+            //porque el uno en producción ya se esta usando y es para otro servicio
+            var idServicio = 0;
+            var razonSocial = 'PUBLICO EN GENERAL';
+            var rfc = 'XAXX010101000';
+            var porcentajeIva = 16;
+            
+            $('#i_email').val('');
+            //-->NJES Feb/19/2020 se asigna atributo codigo_postal del servicio
+            $('#i_cliente').val(razonSocial).attr('alt',idServicio).attr('alt2',razonSocial).attr('codigo_postal','');
+            let html = `<option value="${idServicio}" alt6="${razonSocial}" alt3="" selected>${razonSocial}</option>`;
+            $("#s_razon_social").append(html);
+            // 'idRazonSocialReceptor' : $('#s_razon_social').val(),
+            // 'razonSocialReceptor' : $('#s_razon_social option:selected').attr('alt6'),//$('#s_razon_social option:selected').text(),
+            // 'codigoPostal' : $('#s_razon_social option:selected').attr('alt3'),
+            $('#i_rfc').val(rfc);
+            $('#ch_factura_por_rfc').prop('checked',false).prop('disabled',true);
+            $('input[name=radio_iva]').prop('checked',false);
+            if(parseInt(porcentajeIva) == 16){
+                $('#r_16').prop('checked',true);
+            }else if(porcentajeIva == 8){
+                $('#r_8').prop('checked',true);
+            }
+           
+            // obtenerTickets(0,'');
+        });
+
+        function obtenerTickets(idServicio,rfcA){
+
+            $('.renglon_tickets').remove();
+            //-->NJES Feb/27/2020 se limpian las partidas para facturas
+            $('#t_facturas tbody').empty();
+
+            $.ajax({
+
+                type: 'POST',
+                url: 'php/servicios_buscar_tickets_por_facturar.php',
+                dataType:"json", 
+                data:{'idServicio':idServicio,
+                        'rfc':rfcA
+                },
+
+                success: function(data) {
+            
+                    if(data.length != 0){
+
+                        $('.renglon_tickets').remove();
+                        for(var i=0;data.length>i;i++){
+                            var html='<tr class="renglon_tickets ' + data[i].tipo+ ' TICKET_'+data[i].id_cxc+'" idCXC="'+data[i].id_cxc+'" idServicio="'+data[i].id_servicio+'" alt="'+data[i].id_registro+'" alt2="'+data[i].tipo+'" alt3="'+data[i].porcentaje_iva+'" alt4="'+data[i].vencimiento+'" alt5="'+data[i].fecha_corte_recibo+'">\
+                                        <td data-label="Servicio">' + data[i].servicio+ '</td>\
+                                        <td data-label="Ticket">' + data[i].tipo+ '</td>\
+                                        <td data-label="Ticket">' + data[i].folio+ '</td>\
+                                        <td data-label="Fecha">' + data[i].fecha+ '</td>\
+                                        <td data-label="% IVA">' + data[i].porcentaje_iva + '%</td>\
+                                        <td data-label="Total">' + formatearNumeroCSS(data[i].total + '')+ '</td>\
+                                        <td data-label="Total">' + formatearNumeroCSS(data[i].total + '')+ '</td>\
+                                    </tr>';
+                            ///agrega la tabla creada al div 
+                            $('#t_tickets tbody').append(html);   
+                        }
+
+                    }else{
+                        if(idServicio>0 && rfcA!=''){
+                            mandarMensaje('No tiene ticket pendientes, con diferentes Clientes con mismo rfc');
+                            $('#ch_factura_por_rfc').prop('checked',false).prop('disabled',true); 
+                        }else{
+                            mandarMensaje('No tiene ticket pendientes');
+                        }
+                    }
+
+                },
+                error: function (xhr) {
+                    console.log('php/servicios_buscar.php-->'+JSON.stringify(xhr));
+                    mandarMensaje('* Error en el sistema');
                 }
             });
         }

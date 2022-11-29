@@ -79,12 +79,13 @@ class IngresosSinFactura
         $idSucursal = $datos[1]['idSucursal'];
         $idArea = $datos[1]['idArea'];
         $idDepartamento = $datos[1]['idDepartamento'];
+        $fondeo = $datos[1]['fondeo'];
 
         //---- se hace la insercion  
         if($tipoMov==0){
 
-          $query = "INSERT INTO ingresos_sin_factura(id_tipo_ingreso, fecha, observaciones, id_banco, id_cuenta_banco, importe, id_empresa_fiscal,id_unidad_negocio,id_sucursal,id_area,id_departamento) 
-          VALUES ('$idTipoIngreso','$fecha','$observaciones','$idBanco','$cuenta','$importe','$idEmpresa','$idUnidadNegocio','$idSucursal','$idArea','$idDepartamento')";
+          $query = "INSERT INTO ingresos_sin_factura(id_tipo_ingreso, fecha, observaciones, id_banco, id_cuenta_banco, importe, id_empresa_fiscal,id_unidad_negocio,id_sucursal,id_area,id_departamento, fondeo) 
+          VALUES ('$idTipoIngreso','$fecha','$observaciones','$idBanco','$cuenta','$importe','$idEmpresa','$idUnidadNegocio','$idSucursal','$idArea','$idDepartamento', $fondeo)";
           $result = mysqli_query($this->link, $query) or die(mysqli_error());
           $idRegistro = mysqli_insert_id($this->link);
 

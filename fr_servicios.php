@@ -37,6 +37,10 @@ if(isset($_GET['idServicio'])!=0 && $_GET['regresar']==1){
     .div_datos_facturas{
         display:none;
     }
+    #mapDetalleServicio{
+        height: 450px;
+        width: 100%;
+    }
     
 </style>
 
@@ -49,7 +53,7 @@ if(isset($_GET['idServicio'])!=0 && $_GET['regresar']==1){
             <br>
                 <div class="row">
                     <div class="col-sm-12 col-md-3">
-                        <div class="titulo_ban">Servicios</div>
+                        <div class="titulo_ban">Clientes</div>
                     </div>
                     <div class="col-sm-12 col-md-7"></div>
                 </div>
@@ -317,6 +321,16 @@ if(isset($_GET['idServicio'])!=0 && $_GET['regresar']==1){
                                         </div>
                                     </div>
                                     </form>
+                                    <div class="row">
+                                        <div class="col-12">
+                                            <div id="mapDetalleServicio"></div>   
+                                        </div>
+                                        <div class="col-12">
+                                            <div class="text-center w-100">
+                                                <button class="btn btn-warning" id="btnHabilitarMapa">Habilitar Mapa</button>
+                                            </div>
+                                        </div>
+                                    </div>
                                  </div>   
                             </div>   
                             <br>
@@ -424,6 +438,13 @@ if(isset($_GET['idServicio'])!=0 && $_GET['regresar']==1){
                                 <textarea type="text" id="i_descripcion_s" name="i_descripcion_s" class="form-control form-control-sm validate[]"  autocomplete="off"></textarea>
                             </div>
                         </div>
+
+                        <div class="row">
+                            <label for="s_regimen" class="col-sm-2 col-md-2 col-form-label">Régimen</label>
+                            <div class="col-sm-6 col-md-6">
+                                <select class="form-control coti validate[required]" id="s_regimen" name="s_regimen" autocomplete="off"></select>
+                            </div>
+                        </div>
                     </div>
 
                     <div class="form-group row">
@@ -446,6 +467,11 @@ if(isset($_GET['idServicio'])!=0 && $_GET['regresar']==1){
                         <label for="i_fecha_corte" id="label_fecha_corte" class="col-sm-12 col-md-1 col-form-label requerido">Día </label>
                         <div class="col-sm-12 col-md-1" id="contenedor_dia">
                             <input type="text" class="form-control validate[required,custom[integer],min[1],max[31]]" id="i_fecha_corte" autocomplete="off">
+                        </div>
+
+                        <label for="i_dias_credito" class="col-sm-12 col-md-1 col-form-label requerido">Dias Credito </label>
+                        <div class="col-sm-12 col-md-1">
+                            <input type="text" class="form-control validate[required,custom[integer],min[30],max[60]]" id="i_dias_credito" autocomplete="off">
                         </div>
                     </div>
 
@@ -682,6 +708,7 @@ if(isset($_GET['idServicio'])!=0 && $_GET['regresar']==1){
                           <th scope="col">Concepto</th>
                           <th scope="col">Subtotal</th>
                           <th scope="col">Cargos</th>
+                          <th scope="col">Descuentos</th>
                           <th scope="col">Abonos</th>
                         </tr>
                       </thead>
@@ -734,6 +761,11 @@ if(isset($_GET['idServicio'])!=0 && $_GET['regresar']==1){
 <script src="js/bootstrap-datepicker.min.js"></script>
 <script src="vendor/select2/js/select2.js"></script>
 
+<script
+    src="https://maps.googleapis.com/maps/api/js?key=AIzaSyBoD4mBMwf4boXGnAKMeC_-VK9NaON_W2w"
+    defer
+></script>
+
 <script>
   
     var idServicio=<?php echo $idServicio?>;
@@ -744,6 +776,11 @@ if(isset($_GET['idServicio'])!=0 && $_GET['regresar']==1){
     var idUsuario=<?php echo $_SESSION['id_usuario']?>;
     var regresar=<?php echo $regresar?>;
     var buscarCPF=0;
+    let coordsDefault = { "lat": 28.63052782762811, "lng": -106.11877312264313 };
+    let tituloDefault = "Secorp";
+    let map;
+    let marker;
+
     $(function(){
 
         mostrarBotonAyuda(modulo);
@@ -756,6 +793,7 @@ if(isset($_GET['idServicio'])!=0 && $_GET['regresar']==1){
         muestraSelectMetodoPago('s_metodo_pago');
         muestraSelectClaveProductoSAT('s_clave_sat_s');
         muestraSelectClaveUnidadesSAT('s_id_unidades_s');
+        muestraSelectRegimen("s_regimen");
 
         //-->NJES December/15/2020 agregar combo tipo de panel
         muestraSelectTipoPanel('s_tipo_panel');
@@ -782,8 +820,7 @@ if(isset($_GET['idServicio'])!=0 && $_GET['regresar']==1){
 
                 type: 'POST',
                 url: 'php/servicios_buscar_cuenta.php',
-                data:{'estatus':2
-                },
+                data:{'estatus':2},
                 success: function(data) {
                     $('#i_cuenta').val(data);
                 },
@@ -1021,6 +1058,7 @@ if(isset($_GET['idServicio'])!=0 && $_GET['regresar']==1){
                             $('.renglon_saldos').remove();
                             let totalCargos = 0;
                             let totalAbonos = 0;
+                            let totalDescuentos = 0;
                     
                             for(var i=0;data.length>i;i++){
 
@@ -1052,6 +1090,7 @@ if(isset($_GET['idServicio'])!=0 && $_GET['regresar']==1){
                                     totalCargos += parseFloat(data[i].cargos);
                                 }
                                 totalAbonos += parseFloat(data[i].abonos);
+                                totalDescuentos += parseFloat(data[i].descuentos);
 
                                 // console.log(totalCargos, totalAbonos);
 
@@ -1064,13 +1103,14 @@ if(isset($_GET['idServicio'])!=0 && $_GET['regresar']==1){
                                             <td data-label="Concepto">' + data[i].concepto+ '</td>\
                                             <td data-label="Subtotal">' + data[i].subtotal+ '</td>\
                                             <td data-label="Cargos">' + data[i].cargos+ '</td>\
+                                            <td data-label="Descuentos">' + data[i].descuentos+ '</td>\
                                             <td data-label="Abonos">' + data[i].abonos+ '</td>\
                                         </tr>';
                                 ///agrega la tabla creada al div 
                                 $('#t_saldos_pendientes tbody').append(html);   
                             }
 
-                            let saldo = totalCargos - totalAbonos;
+                            let saldo = (totalCargos - totalAbonos) - totalDescuentos;
 
                             var html='<tr class="renglon_saldos">\
                                             <th data-label=""></th>\
@@ -1081,9 +1121,11 @@ if(isset($_GET['idServicio'])!=0 && $_GET['regresar']==1){
                                             <th data-label=""></th>\
                                             <th data-label="">TOTALES</th>\
                                             <th data-label="Cargos">' + formatearNumero(totalCargos) + '</th>\
+                                            <th data-label="Descuentos">' + formatearNumero(totalDescuentos) + '</th>\
                                             <th data-label="Abonos">' + formatearNumero(totalAbonos) + '</th>\
                                         </tr>\
                                         <tr class="renglon_saldos">\
+                                            <th data-label=""></th>\
                                             <th data-label=""></th>\
                                             <th data-label=""></th>\
                                             <th data-label=""></th>\
@@ -1117,8 +1159,7 @@ if(isset($_GET['idServicio'])!=0 && $_GET['regresar']==1){
             });
         });
 
-        function muestraRegistro()
-        {
+        function muestraRegistro(){
             
             $.ajax({
                 type: 'POST',
@@ -1153,6 +1194,23 @@ if(isset($_GET['idServicio'])!=0 && $_GET['regresar']==1){
                         $('#s_id_sucursales').val('');
                         $('#s_id_sucursales').select2({placeholder: 'Selecciona'});
                     }
+
+                    coordsDefault.lat = parseFloat(data[0].latitud);
+                    coordsDefault.lng = parseFloat(data[0].longitud);
+                    
+                    tituloDefault = data[0].nombre_corto;
+
+                    map = new google.maps.Map(document.getElementById("mapDetalleServicio"), {
+                        zoom: 14,
+                        center: coordsDefault,
+                        draggableCursor:'pointer'
+                    });
+                    
+                    marker = new google.maps.Marker({
+                        position: coordsDefault,
+                        map,
+                        title: tituloDefault,
+                    });
 
                     muestraSelectPlanes('s_plan', data[0].id_sucursal); 
 
@@ -1277,6 +1335,8 @@ if(isset($_GET['idServicio'])!=0 && $_GET['regresar']==1){
                         $('#ch_fisico').prop('checked', true);
                         $('#ch_correo').prop('checked', true);
                     }
+
+                    $("#s_regimen").val(data[0].regimen_fiscal).trigger("change");
 
                     //$('#i_fecha_corte').val(data[0].dia_corte);
                     generaCampoDia(data[0].tipo_plan,data[0].dia_corte);
@@ -1465,7 +1525,10 @@ if(isset($_GET['idServicio'])!=0 && $_GET['regresar']==1){
                 if($("#ch_correo").is(':checked')){
                     entrega=1;
                 }
-
+            }
+            let regimen = 0;
+            if($('input[name=r_recibo_factura]:checked').val()=='F'){               
+               regimen = $("#s_regimen").val();
             }
 
             var paq = {
@@ -1525,7 +1588,12 @@ if(isset($_GET['idServicio'])!=0 && $_GET['regresar']==1){
                     'activo' : $('#ch_activo').is(':checked') ? 1 : 0,
                     'especificacionesCobranza' : $('#ta_especificaciones').val(),
 
-                    'idTipoPanel' : $('#s_tipo_panel').val()
+                    'idTipoPanel' : $('#s_tipo_panel').val(),
+
+                    'regimen': regimen,
+                    "latitud":coordsDefault.lat,
+                    "longitud":coordsDefault.lng,
+                    "diasCredito": $("#i_dias_credito").val()
                 }
 
                 paquete.push(paq);
@@ -1701,12 +1769,7 @@ if(isset($_GET['idServicio'])!=0 && $_GET['regresar']==1){
                
             $('#dialog_buscar_banco').modal('hide');
 
-        });
-
-         
-        
-       
-        
+        });        
 
         $('#b_nuevo').on('click',function(){
             limpiar();
@@ -1742,6 +1805,23 @@ if(isset($_GET['idServicio'])!=0 && $_GET['regresar']==1){
             $('.div_datos_facturas').css('display','none');
 
             muestraSelectTipoPanel('s_tipo_panel');
+
+            coordsDefault = { "lat": 28.63052782762811, "lng": -106.11877312264313 };
+            tituloDefault = "Secorp";
+
+            map = new google.maps.Map(document.getElementById("mapDetalleServicio"), {
+                zoom: 14,
+                center: coordsDefault,
+                draggableCursor:'pointer'
+            });
+                    
+            marker = new google.maps.Marker({
+                position: coordsDefault,
+                map,
+                title: tituloDefault,
+            });
+
+            $("#btnHabilitarMapa").trigger("click");
         }
 
         $('#b_excel').click(function(){
@@ -1769,6 +1849,23 @@ if(isset($_GET['idServicio'])!=0 && $_GET['regresar']==1){
         $('#b_instalacion').on('click',function(){
             var idServicio=$(this).attr('alt');
             window.open("fr_servicios_ordenes.php?idServicio="+idServicio+"&razonSocial="+$('#i_razon_social').val()+"&nombreCorto="+$('#i_nombre_corto').val()+"&cuenta="+$('#i_cuenta').val()+"&idSucursal="+$('#s_id_sucursales').val()+"&regresar=1"+"&tipo=instalacion","_self");
+        });
+
+        $("#btnHabilitarMapa").on("click",()=>{
+                // Configure the click listener.
+                map.addListener("click", (mapsMouseEvent) => {
+                    // Close the current InfoWindow.
+                    marker.setMap(null);
+                    // Create a new InfoWindow.
+                    marker = new google.maps.Marker({
+                        position: mapsMouseEvent.latLng,
+                        title: JSON.stringify(mapsMouseEvent.latLng.toJSON(), null, 2)
+                    });
+                    
+                    marker.setMap(map);
+                    
+                    coordsDefault = mapsMouseEvent.latLng.toJSON();
+                });
         });
     });
 

@@ -24,6 +24,8 @@ class CFDIDenken
     function guardaFactura($facturaE,$facturaD)
     {
         // error_log(json_encode($facturaE));
+        // print_r($facturaE);
+        // exit();
         
         $verifica = 0;
 
@@ -48,6 +50,11 @@ class CFDIDenken
         $importeRetencion = isset($facturaE['importeRetencion']) ? $facturaE['importeRetencion'] : 0;
         $porcentajeRetencion = isset($facturaE['porcentajeRetencion']) ? $facturaE['porcentajeRetencion'] : 0;
 
+        $regimen_fiscal = isset($facturaE['regimen_fiscal']) ? $facturaE['regimen_fiscal'] : 0;
+
+        // echo $regimen_fiscal;
+        // exit();
+
         //-->NJES Feb/20/2020 se obtiene el descuento porque en ventas alarmas pueden traer descuento y se prorratea para las partidas al guardar prefactura
         $descuento = isset($facturaE['descuento']) ? $facturaE['descuento'] : 0;
         
@@ -58,11 +65,11 @@ class CFDIDenken
         $query = "INSERT INTO factura_e(id_empresa,tipo_cfd,folio,nota_credito,fecha,subtotal,iva,
                     moneda,tcambio,usuario_captura,metodo_pago,forma_pago,uso_cfdi,rfc_cliente,
                     razon_cliente,pais_cliente,cod_pos_cliente,retencion,importe_retencion,
-                    porcentaje_retencion,descuento) 
+                    porcentaje_retencion,descuento, regimenfiscal) 
                     VALUES ('$idCFDIEmpresaFiscal','$tipo_cfd','$folio','$folioNotaCredito','$fecha',
                     '$subtotal','$iva','$moneda',$tipoCambio,'$usuario','$idMetodoPago','$idFormaPago','$idUsoCFDI',
                     '$rfc','$razonSocialReceptor','MX','$codigoPostal','$retencion','$importeRetencion',
-                    '$porcentajeRetencion','$descuento')";
+                    '$porcentajeRetencion','$descuento', $regimen_fiscal)";
         // echo $query;
         // exit();
         // error_log("tercer insert");

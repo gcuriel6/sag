@@ -20,7 +20,8 @@
 					mu2.municipio as mun2,
 					es2.estado as es2,
 					pa2.pais as pa2,
-					GROUP_CONCAT(su.descr) sucursales
+					GROUP_CONCAT(su.descr) sucursales,
+					regimen_fiscal as regimen
 				FROM razones_sociales rs
 				INNER JOIN razones_sociales_unidades rsu ON rsu.id_razon_social = rs.id
 				INNER JOIN sucursales su ON su.id_sucursal = rsu.id_sucursal
@@ -248,6 +249,14 @@
 												<div class="form-group">
 													<label>Representante</label>
 													<input type="text" class="form-control" readonly value="<?php echo $registro["r_legal"]; ?>">
+												</div>
+											</div>
+										</div>
+										<div class="row">
+											<div class="col-md-6">
+												<div class="form-group">
+													<label>Régimen Fiscal</label>
+													<input type="text" class="form-control" readonly value="<?php echo $registro["regimen"]; ?>">
 												</div>
 											</div>
 										</div>

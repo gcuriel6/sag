@@ -175,6 +175,7 @@ class RazonesSociales
         $periodicidad = $datos[1]['periodicidad'];
         $tipo_facturacion = $datos[1]['tipo_facturacion'];
         $dia = $datos[1]['dia'];
+        $regimen = $datos[1]['regimen'];
 
         $activo = $datos[1]['activo'];
 
@@ -205,6 +206,7 @@ class RazonesSociales
                                         tipo_facturacion,
                                         periodicidad,
                                         dia,
+                                        regimen_fiscal,
 
                                         correo_r_legal,
                                         telefono_r_legal,
@@ -248,7 +250,8 @@ class RazonesSociales
                             '$tipo_facturacion',
                             '$periodicidad',
                             '$dia',
-                            
+                            '$regimen',
+
                             '$correoRepresentanteLegal',
                             '$telefonoRepresentanteLegal',
                             '$domicilio2',
@@ -298,6 +301,7 @@ class RazonesSociales
                           tipo_facturacion='$tipo_facturacion',
                           periodicidad='$periodicidad',
                           dia='$dia',
+                          regimen_fiscal='$regimen',
                           correo_r_legal='$correoRepresentanteLegal',
                           telefono_r_legal='$telefonoRepresentanteLegal',
                           domicilio_servicio='$domicilio2',
@@ -425,7 +429,8 @@ class RazonesSociales
                     rs.telefono_operativo,
                     rs.colonia_servicio,
                     rs.ext_operativo,
-                    rs.entrecalle_servicio
+                    rs.entrecalle_servicio,
+                    rs.regimen_fiscal regimen
                   FROM razones_sociales rs
                   LEFT JOIN municipios m1 ON rs.id_municipio=m1.id
                   LEFT JOIN estados e1 ON rs.id_estado=e1.id

@@ -73,6 +73,8 @@ class Vision
     **/
     function guardar($arreglo){
 
+      // print_r($arreglo);
+
         $nombre = $arreglo[0];
         $descr = $arreglo[1];
         $clave = $arreglo[3];
@@ -82,6 +84,8 @@ class Vision
 
         $query="INSERT INTO vision_productos(descripcion, nombre, clave, url_imagen, usuario_alta)
                 VALUES ('$descr', '$nombre', '$clave', '$image', '$usuario');";
+
+                // echo $query;
 
         $result=mysqli_query($this->link, $query)or die(mysqli_error());
         
@@ -114,10 +118,11 @@ class Vision
     function guardarCotiz($prospecto, $materias, $productos){
 
       $usuario = $_SESSION["usuario"];
-      $cotizTotal = $prospecto[3];
+      $cotizTotal = $prospecto[4];
+      $prospectoDias = $prospecto[3];
 
-      $query="INSERT INTO vision_cotizacion (total, fk_idcliente, usuario)
-              VALUES ($cotizTotal, '0', '$usuario');";
+      $query="INSERT INTO vision_cotizacion (total, fk_idcliente, usuario, tiempo_entrega)
+              VALUES ($cotizTotal, '0', '$usuario', $prospectoDias);";
 
       $result=mysqli_query($this->link, $query)or die(mysqli_error());
 
@@ -153,6 +158,7 @@ class Vision
           $result3=mysqli_query($this->link, $query3)or die(mysqli_error());
 
           if($result3){
+            // enviarCorreoPdfCotizacion($idCotiz);
 
             return $idCotiz;
             
@@ -204,37 +210,33 @@ class Vision
 
         $rows = mysqli_affected_rows($this->link);
 
-        if($estatus == 1){
-          $materias = $arreglo["materias"];
+        // if($estatus == 1){
+        //   $materias = $arreglo["materias"];
 
-          $cadenaMaterials = "";
-          foreach ($materias as $valor) {
-            $matId = $valor[0];
-            $matCanti = $valor[1];
+        //   $cadenaMaterials = "";
+        //   foreach ($materias as $valor) {
+        //     $matId = $valor[0];
+        //     $matCanti = $valor[1];
 
-            $cadenaMaterials .= "($matId, $idCotiz, $matCanti),";
-          }
+        //     $cadenaMaterials .= "($matId, $idCotiz, $matCanti),";
+        //   }
 
-          $cadenaMaterias = substr($cadenaMaterials, 0, -1);
+        //   $cadenaMaterias = substr($cadenaMaterials, 0, -1);
 
-          $query4 = "INSERT INTO vision_cotizacion_matprim (fk_matprim, fk_cotizacion, cantidad)
-                      VALUES $cadenaMaterias;";
+        //   $query4 = "INSERT INTO vision_cotizacion_matprim (fk_matprim, fk_cotizacion, cantidad)
+        //               VALUES $cadenaMaterias;";
 
-          $result4=mysqli_query($this->link, $query4)or die(mysqli_error());
+        //   $result4=mysqli_query($this->link, $query4)or die(mysqli_error());
 
-          if($result4){
-            // return $idCotiz;
-            return $rows;
-          }else{
-            return 0;
-          }
-        }else{
-          return $rows;
-        }
-
-        
-
-        
+        //   if($result4){
+        //     // return $idCotiz;
+        //     return $rows;
+        //   }else{
+        //     return 0;
+        //   }
+        // }else{
+        //   return $rows;
+        // }
 
         return $rows;
       }else{
@@ -246,6 +248,7 @@ class Vision
 
       $idCotiz = $arreglo["id"];
       $usuario = $_SESSION["usuario"];
+      $materias = $arreglo["materia"];
 
       $query="UPDATE vision_cotizacion
               SET estatus = 3, usuario_finalizo = '$usuario'
@@ -256,7 +259,28 @@ class Vision
       if($result){
         $rows = mysqli_affected_rows($this->link);
 
-        return $rows;
+        $cadenaMaterials = "";
+        foreach ($materias as $valor) {
+          $matId = $valor[0];
+          $matCanti = $valor[1];
+
+          $cadenaMaterials .= "($matId, $idCotiz, $matCanti),";
+        }
+
+        $cadenaMaterias = substr($cadenaMaterials, 0, -1);
+
+        $query4 = "INSERT INTO vision_cotizacion_matprim (fk_matprim, fk_cotizacion, cantidad)
+                    VALUES $cadenaMaterias;";
+
+        $result4=mysqli_query($this->link, $query4)or die(mysqli_error());
+
+        if($result4){
+          // return $idCotiz;
+          return $rows;
+        }else{
+          return 0;
+        }
+        
       }else{
         return 0;
       }
@@ -537,6 +561,8 @@ class Vision
                         (SELECT nombre_corto FROM vision_clientes WHERE id_cliente = vc.fk_idcliente)) cliente,
                       total
                 FROM vision_cotizacion vc";
+      // echo $query;
+      // exit();
 
       $result = $this->link->query($query);
 
@@ -590,6 +616,9 @@ class Vision
                 FROM vision_prospectos vp
                 INNER JOIN vision_cotizacion vc ON vc.id = vp.fk_cotizacion;";
 
+                // $query = "SELECT DATABASE();";
+                // $query = "show databases";
+
       $result = $this->link->query($query);
 
       return query2json($result);
@@ -601,6 +630,9 @@ class Vision
                 INNER JOIN vision_cotizacion vc ON vc.id = vcmp.fk_cotizacion
                 INNER JOIN vision_materiaprima vmp ON vmp.id = vcmp.fk_matprim
                 WHERE vc.estatus = 1";
+
+      // echo $query;
+      // exit();
 
       $result = $this->link->query($query);
 
@@ -635,10 +667,84 @@ class Vision
       $query = "SELECT vcp.cantidad, vcp.fk_cotizacion idCotiz, vcp.costo, vp.nombre, vp.descripcion, vp.id, vp.clave
                 FROM vision_cotizacion_productos vcp
                 INNER JOIN vision_productos vp ON vp.id=vcp.fk_productos;";
+      // echo $query;
+      // exit();
 
       $result = $this->link->query($query);
 
       return query2json($result);
+    }
+
+    function enviarCorreoPdfCotizacion($idCotiz){
+      // error_log("holi1");
+      // include_once("../vendor/lib_mail/class.phpmailer.php");
+      include("../vendor/lib_mail/class.phpmailer.php");
+      // include_once("../vendor/lib_mail/class.smtp.php");
+      include("../vendor/lib_mail/class.smtp.php");
+      // error_log("holi2");
+
+      $verifica = 0;
+
+      $query = "SELECT 
+                    IF(vc.fk_idcliente = 0,
+                    (SELECT correo FROM vision_prospectos WHERE fk_cotizacion = vc.id),
+                    (SELECT correo_factura FROM vision_clientes WHERE id_cliente = vc.fk_idcliente)) correo
+                FROM vision_cotizacion vc
+                WHERE id = $idCotiz;";
+      // error_log( $query);
+      // exit();
+
+      $result = $this->link->query($query);
+
+      if($result){
+          $datos=mysqli_fetch_array($result);
+
+          if(isset($datos['correo']) && $datos['correo'] != ''){
+              $correo = $datos['correo'];
+
+              error_log($correo);
+
+              $mail = new PHPMailer();
+              $mail->CharSet = 'UTF-8';
+              $mail->IsSMTP();
+              $mail->IsHTML(true);	
+              // $mail->SMTPSecure = "STARTTLS";
+              $mail->SMTPSecure = "ssl";
+              $mail->SMTPAuth = true;
+              // $mail->Host = "smtp.gmail.com";
+              // $mail->Port = 587;
+              // $mail->Username = "ginthercorp.info@gmail.com"; 
+              // $mail->Password = "secorp2022";
+              $mail->Host = "mail.ginthercorp.com";
+              $mail->Port = 465;
+              $mail->Username = "facturas@ginthercorp.com"; 
+              $mail->Password = "secorp2022";
+
+
+              $mail->SetFrom("facturas@ginthercorp.com","FACTURACIÓN");
+              // $mail->From = "test@curiel.com";
+              // $mail->FromName = "TEST2CURIEL";
+
+              $mail->Subject = "Cotización Visión";
+              $mail->MsgHTML("Cotización Visión");
+              $mail->AddAddress($correo, "Contacto");	
+
+              $rutaCompleta = '../vision/cotizaciones/vision_cotiz_'.$idCotiz.'.pdf';
+
+              $mail->AddAttachment($rutaCompleta);
+
+              $verifica = false;
+
+              if(!$mail->Send()){
+                $verifica = 0; //Intento Fallido;
+                error_log($mail->ErrorInfo);
+              }else{
+                $verifica = 1; //exito
+              }
+          }
+      }
+
+      return $verifica;
     }
     
 }//--fin de class ValesGasolina

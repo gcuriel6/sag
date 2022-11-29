@@ -207,6 +207,7 @@ session_start();
                                     <th scope="col">Id Razón Social</th>
                                     <th scope="col">Razón Social</th>
                                     <th scope="col">RFC Receptor</th>
+                                    <th scope="col">Deptos</th>
                                     <th scope="col">Folio CXC</th>
                                     <th scope="col">Factura</th>
                                     <th scope="col">Nota Credito</th>
@@ -757,6 +758,7 @@ session_start();
                                         <td data-label="Id Razón Social">'+data[i].id_razon_social+'</td>\
                                         <td data-label="Razón Social (receptor)">'+data[i].razon_social+'</td>\
                                         <td data-label="RFC Receptor">'+data[i].rfc_receptor+'</td>\
+                                        <td data-label="Deptos">'+data[i].deptos+'</td>\
                                         <td data-label="Folio cxc">'+data[i].id+'</td>\
                                         <td data-label="Factura">'+data[i].factura+'</td>\
                                         <td data-label="Nota">'+data[i].nota+'</td>\

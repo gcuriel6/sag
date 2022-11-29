@@ -131,12 +131,19 @@ class Servicios
         $digitosCuenta = $datos[1]['digitos_cuenta'];
         $especificacionesCobranza = $datos[1]['especificacionesCobranza'];
 
+        $regimen = $datos[1]['regimen'];
+
+        $latitud = $datos[1]['latitud'];
+        $longitud = $datos[1]['longitud'];
+
+        $diasCredito = $datos[1]["diasCredito"];
+
         $id_tipo_panel = isset($datos[1]['idTipoPanel']) ? $datos[1]['idTipoPanel'] : 0;
 
         if($tipoMov==0){
 
-          $query = "INSERT INTO servicios(id_sucursal, cuenta, rfc, nombre_corto, razon_social,domicilio,no_exterior,no_interior,colonia,id_municipio,id_estado,id_pais,codigo_postal,otros_contactos,contacto,correos,telefonos,celular,ext,r_legal,id_plan,tipo_recibo_facura,entrega,dia_corte,pago,porcentaje_iva,id_usuario_captura,digitos_cuenta,domicilio_s,no_exterior_s,no_interior_s,colonia_s,id_municipio_s,id_estado_s,id_pais_s,codigo_postal_s,entre_calles_s,id_tipo_panel) 
-          VALUES ('$idSucursal','$cuenta','$rfc','$nombreCorto', '$razonSocial','$domicilio','$numExt','$numInt','$colonia','$idMunicipio','$idEstado','$idPais','$codigoPostal','$otrosContactos','$contacto','$correos','$telefonos','$celular','$extension','$representanteLegal','$idPlan','$tipoReciboFactura','$tipoEntrega','$fechaCorte','$tipoPago','$tasaIva','$idUsuario','$digitosCuenta','$domicilioS','$numExtS','$numIntS','$coloniaS','$idMunicipioS','$idEstadoS','$idPaisS','$codigoPostalS','$entreCallesS','$id_tipo_panel')";
+          $query = "INSERT INTO servicios(id_sucursal, cuenta, rfc, nombre_corto, razon_social,domicilio,no_exterior,no_interior,colonia,id_municipio,id_estado,id_pais,codigo_postal,otros_contactos,contacto,correos,telefonos,celular,ext,r_legal,id_plan,tipo_recibo_facura,entrega,dia_corte,pago,porcentaje_iva,id_usuario_captura,digitos_cuenta,domicilio_s,no_exterior_s,no_interior_s,colonia_s,id_municipio_s,id_estado_s,id_pais_s,codigo_postal_s,entre_calles_s,id_tipo_panel, regimen_fiscal, latitud, longitud, dias_credito) 
+          VALUES ('$idSucursal','$cuenta','$rfc','$nombreCorto', '$razonSocial','$domicilio','$numExt','$numInt','$colonia','$idMunicipio','$idEstado','$idPais','$codigoPostal','$otrosContactos','$contacto','$correos','$telefonos','$celular','$extension','$representanteLegal','$idPlan','$tipoReciboFactura','$tipoEntrega','$fechaCorte','$tipoPago','$tasaIva','$idUsuario','$digitosCuenta','$domicilioS','$numExtS','$numIntS','$coloniaS','$idMunicipioS','$idEstadoS','$idPaisS','$codigoPostalS','$entreCallesS','$id_tipo_panel',$regimen, $latitud, $longitud, $diasCredito)";
           $result = mysqli_query($this->link, $query) or die(mysqli_error());
           $idServicio = mysqli_insert_id($this->link);
 
@@ -181,7 +188,11 @@ class Servicios
           pago= '$tipoPago',
           porcentaje_iva = '$tasaIva',
           digitos_cuenta = '$digitosCuenta',
-          id_tipo_panel = '$id_tipo_panel'
+          id_tipo_panel = '$id_tipo_panel',
+          regimen_fiscal = $regimen,
+          latitud = $latitud,
+          longitud = $longitud,
+          dias_credito = $diasCredito
           WHERE id=".$idServicio;
           $result = mysqli_query($this->link, $query) or die(mysqli_error());
     
@@ -410,59 +421,62 @@ class Servicios
       function buscarServiciosId($idServicio){
 
         $resultado = $this->link->query("SELECT 
-        servicios.id,
-        servicios.id_sucursal, 
-        servicios.cuenta, 
-        servicios.rfc, 
-        servicios.nombre_corto, 
-        IFNULL(servicios.razon_social,'') AS razon_social,
-        servicios.domicilio,
-        servicios.no_exterior,
-        servicios.no_interior,
-        servicios.colonia,
-        servicios.id_municipio,
-        servicios.id_estado,
-        servicios.id_pais,
-        servicios.codigo_postal,
+          servicios.id,
+          servicios.id_sucursal, 
+          servicios.cuenta, 
+          servicios.rfc, 
+          servicios.nombre_corto, 
+          IFNULL(servicios.razon_social,'') AS razon_social,
+          servicios.domicilio,
+          servicios.no_exterior,
+          servicios.no_interior,
+          servicios.colonia,
+          servicios.id_municipio,
+          servicios.id_estado,
+          servicios.id_pais,
+          servicios.codigo_postal,
 
-        servicios.domicilio_s,
-        servicios.no_exterior_s,
-        servicios.no_interior_s,
-        servicios.colonia_s,
-        servicios.id_municipio_s,
-        servicios.id_estado_s,
-        servicios.id_pais_s,
-        servicios.codigo_postal_s,
-        servicios.entre_calles_s,
-        ms.municipio AS municipio_s,
-        es.estado AS estado_s,
-        ps.pais AS pais_s,
+          servicios.domicilio_s,
+          servicios.no_exterior_s,
+          servicios.no_interior_s,
+          servicios.colonia_s,
+          servicios.id_municipio_s,
+          servicios.id_estado_s,
+          servicios.id_pais_s,
+          servicios.codigo_postal_s,
+          servicios.entre_calles_s,
+          ms.municipio AS municipio_s,
+          es.estado AS estado_s,
+          ps.pais AS pais_s,
 
-        servicios.otros_contactos,
-        servicios.contacto,
-        servicios.correos,
-        servicios.telefonos,
-        servicios.celular,
-        servicios.ext,
+          servicios.otros_contactos,
+          servicios.contacto,
+          servicios.correos,
+          servicios.telefonos,
+          servicios.celular,
+          servicios.ext,
 
-        servicios.r_legal,
-        servicios.activo,
+          servicios.r_legal,
+          servicios.activo,
 
-        servicios.id_plan,
-        servicios_cat_planes.tipo AS tipo_plan,
-        servicios.entrega,
-        servicios.pago,
-        servicios.porcentaje_iva,
-        servicios.dia_corte,
-        servicios.tipo_recibo_facura,
-        servicios.digitos_cuenta,
-        servicios.id_tipo_panel,
+          servicios.id_plan,
+          servicios_cat_planes.tipo AS tipo_plan,
+          servicios.entrega,
+          servicios.pago,
+          servicios.porcentaje_iva,
+          servicios.dia_corte,
+          servicios.tipo_recibo_facura,
+          servicios.digitos_cuenta,
+          servicios.id_tipo_panel,
 
-        municipios.municipio,
-        estados.estado,
-        paises.pais,
-        c.uso_cfdi,c.metodo_pago,c.forma_pago,c.producto_sat,c.unidad_sat,c.descripcion,
-        IFNULL(c.especificaciones_cobranza,'') AS especificaciones_cobranza
+          municipios.municipio,
+          estados.estado,
+          paises.pais,
+          c.uso_cfdi,c.metodo_pago,c.forma_pago,c.producto_sat,c.unidad_sat,c.descripcion,
+          IFNULL(c.especificaciones_cobranza,'') AS especificaciones_cobranza,
+          servicios.regimen_fiscal,
+          servicios.latitud,
+          servicios.longitud
         FROM servicios 
         LEFT JOIN municipios  ON servicios.id_municipio=municipios.id
         LEFT JOIN estados  ON servicios.id_estado=estados.id
@@ -558,34 +572,39 @@ class Servicios
             ORDER BY a.id DESC"
         */
 
-        $resultado = $this->link->query("
-          SELECT 
-            a.id AS id_cxc,
-            IF(a.id_venta>0,'VENTA',IF(a.id_plan>0,'PLAN',IF(a.id_orden_servicio>0,'ORDEN','')))AS tipo,
-            IF(a.folio_venta>0,a.folio_venta,IF(a.id_plan>0,a.folio_recibo,a.id_orden_servicio))AS folio,
-            IF(a.id_venta>0,a.id_venta,IF(a.id_plan>0,a.id_plan,a.id_orden_servicio))AS id_registro,
-            IF(a.id_plan>0,a.fecha_corte_recibo,a.fecha) AS fecha,
-            a.total AS total,
-            a.subtotal AS subtotal, 
-            a.tasa_iva AS porcentaje_iva,
-            a.vencimiento,
-            a.fecha_corte_recibo,
-            folios.registros AS registros,
-            d.factura,
-            e.nombre_corto AS servicio,
-            e.id AS id_servicio
-            FROM cxc a
-            LEFT JOIN notas_e b ON a.id_venta=b.id  
-            LEFT JOIN servicios_ordenes c ON a.id_orden_servicio=c.id 
-            LEFT JOIN servicios_bitacora_planes d ON a.id_plan=d.id
-            LEFT JOIN servicios e ON a.id_razon_social_servicio=e.id
-            LEFT JOIN 
-            (
-              SELECT folio_cxc AS folio, COUNT(id)AS registros FROM cxc WHERE estatus NOT IN('P','C') GROUP BY folio_cxc
-            ) folios ON a.folio_cxc = folios.folio
-            WHERE  $condicion 
-            HAVING folios.registros=1
-            ORDER BY a.id DESC");
+        $query = "SELECT 
+                    a.id AS id_cxc,
+                    IF(a.id_venta>0,'VENTA',IF(a.id_plan>0,'PLAN',IF(a.id_orden_servicio>0,'ORDEN','')))AS tipo,
+                    IF(a.folio_venta>0,a.folio_venta,IF(a.id_plan>0,a.folio_recibo,a.id_orden_servicio))AS folio,
+                    IF(a.id_venta>0,a.id_venta,IF(a.id_plan>0,a.id_plan,a.id_orden_servicio))AS id_registro,
+                    IF(a.id_plan>0,a.fecha_corte_recibo,a.fecha) AS fecha,
+                    a.total AS total,
+                    a.subtotal AS subtotal, 
+                    a.tasa_iva AS porcentaje_iva,
+                    a.vencimiento,
+                    a.fecha_corte_recibo,
+                    folios.registros AS registros,
+                    d.factura,
+                    e.nombre_corto AS servicio,
+                    e.id AS id_servicio
+                  FROM cxc a
+                  LEFT JOIN notas_e b ON a.id_venta=b.id  
+                  LEFT JOIN servicios_ordenes c ON a.id_orden_servicio=c.id 
+                  LEFT JOIN servicios_bitacora_planes d ON a.id_plan=d.id
+                  LEFT JOIN servicios e ON a.id_razon_social_servicio=e.id
+                  LEFT JOIN 
+                  (
+                    SELECT folio_cxc AS folio, COUNT(id)AS registros FROM cxc WHERE estatus NOT IN('P','C') GROUP BY folio_cxc
+                  ) folios ON a.folio_cxc = folios.folio
+                  WHERE  $condicion 
+                  HAVING folios.registros=1
+                  ORDER BY a.id DESC";
+
+                  // echo $query;
+                  // exit();
+
+        $resultado = $this->link->query($query);
+
         return query2json($resultado);
       }
 
@@ -733,6 +752,7 @@ class Servicios
                   cxc.subtotal,
                   cxc.iva,
                   IF((SUBSTR(cxc.cve_concepto,1,1) = 'C'),(cxc.subtotal + cxc.iva),0) AS cargos,
+                  IF((SUBSTR(cxc.cve_concepto,1,1) = 'C'),(cxc.descuento),0) AS descuentos,
                   IF((SUBSTR(cxc.cve_concepto,1,1) = 'A'),(cxc.subtotal + cxc.iva),0) AS abonos,    
                   SUBSTR(cxc.cve_concepto,1,1) AS tipo,
                   IFNULL(IF(facturas.es_plan=1,cxc.vencimiento,DATE_ADD(facturas.fecha, INTERVAL facturas.dias_credito DAY)),'') AS fecha_vencimiento,
@@ -759,6 +779,7 @@ class Servicios
                   cxc.subtotal,
                   cxc.iva,
                   IF((SUBSTR(cxc.cve_concepto,1,1) = 'C'),(cxc.subtotal + cxc.iva),0) AS cargos,
+                  IF((SUBSTR(cxc.cve_concepto,1,1) = 'C'),(cxc.descuento),0) AS descuentos,
                   IF((SUBSTR(cxc.cve_concepto,1,1) = 'A'),(cxc.subtotal + cxc.iva),0) AS abonos,    
                   SUBSTR(cxc.cve_concepto,1,1) AS tipo,
                   IFNULL(IF(facturas.es_plan=1,cxc.vencimiento,DATE_ADD(facturas.fecha, INTERVAL facturas.dias_credito DAY)),'') AS fecha_vencimiento,

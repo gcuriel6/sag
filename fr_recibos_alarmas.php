@@ -134,6 +134,9 @@ session_start();
                                             <th scope="col">Orden de Servicio</th>
                                             <th scope="col">Observaciones</th>
                                             <th scope="col">Servicio</th>
+                                            <th scope="col">Vendedor</th>
+                                            <th scope="col">Técnico</th>
+                                            <th scope="col">UsuarioCreacion</th>
                                             <th scope="col">Importe CxC</th>
                                             <th scope="col">Importe Factura</th>
                                             <th scope="col">Abonos</th>
@@ -364,6 +367,9 @@ session_start();
                                         <td data-label="Orden de Servicio">'+data[i].soid+'</td>\
                                         <td data-label="Observaciones">'+data[i].observaciones+'</td>\
                                         <td data-label="Servicio">'+data[i].descServicio+'</td>\
+                                        <td data-label="Vendedor">'+data[i].vendedor+'</td>\
+                                        <td data-label="Tecnico">'+data[i].tecnico+'</td>\
+                                        <td data-label="USuarioCreacion">'+data[i].usuarioCreacion+'</td>\
                                         <td data-label="Importe CxC">'+formatearNumero(data[i].importeCxc)+'</td>\
                                         <td data-label="Importe Factura">'+formatearNumero(data[i].importeFac)+' '+botonMultiple+'</td>\
                                         <td data-label="Abonos">'+formatearNumero(data[i].abono)+'</td>\

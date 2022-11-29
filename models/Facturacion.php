@@ -94,6 +94,8 @@ class Facturacion
         $retencion = isset($datos['retencion']) ? $datos['retencion'] : 0;
         $importeRetencion = isset($datos['importeRetencion']) ? $datos['importeRetencion'] : 0;
         $porcentajeRetencion = isset($datos['porcentajeRetencion']) ? $datos['porcentajeRetencion'] : 0;
+
+        $regimen_fiscal = isset($datos["regimen_fiscal"]) ? $datos["regimen_fiscal"] : 0;
         
         $idCxC = isset($datos['idCxC']) ?  $datos['idCxC'] : 0;
         
@@ -108,7 +110,22 @@ class Facturacion
         $unidadA = isset($datos['unidadA']) ? $datos['unidadA'] : '';
         $descripcionA = isset($datos['descripcionA']) ? $datos['descripcionA'] : '';
 
+        // print_r($datos);
+        // exit();
+
         $id_salida_venta = isset($datos['id_salida_venta']) ? $datos['id_salida_venta'] : 0;
+
+        if($id_salida_venta != 0 && $id_salida_venta != ""){
+            $exploded = explode(",", $id_salida_venta);
+
+            if(count($exploded) > 1){
+                $id_salida_venta_insertar = 0;
+            }else{
+                $id_salida_venta_insertar = $id_salida_venta;
+            }
+        }else{
+            $id_salida_venta_insertar = 0;
+        }
 
         $clienteAlternoPG = isset($datos['cliente_alterno_pg']) ? $datos['cliente_alterno_pg'] : '';
 
@@ -140,6 +157,8 @@ class Facturacion
         $moneda = isset($datos['moneda']) ? $datos['moneda'] : 'MXN';
 
         $monedaFactura = isset($datos['moneda_factura']) ? $datos['moneda_factura'] : 'MXN';
+
+        $deptos = $datos["deptos"];
 
         //-->NJES Jun/16/2021 guardar en ginthercorp los datos de pagos en dolares,
         //para cuando es una nota de credito y la moneda de la factura es USD se debe calcular el equivalente 
@@ -192,16 +211,47 @@ class Facturacion
                 '$mes','$observaciones','$diasCredito','$tasaIva','$subtotal','$iva','$total','$fechaInicioPeriodo',
                 '$fechaFinPeriodo','$rfc','$razonSocialReceptor','$idContrato','$esPlan','$esVentaOrden','$idCxC',
                 '$retencion','$importeRetencion','$llevaDescripcionAlterna','$descripcionA','$claveUnidadA','$unidadA',
-                '$claveProductoA','$productoA','$descuento','$facturaRfc','$id_salida_venta','$clienteAlternoPG',
+                '$claveProductoA','$productoA','$descuento','$facturaRfc', $id_salida_venta_insertar, '$clienteAlternoPG',
                 '$moneda','$tipoCambioC','$subtotalUsd','$ivaUsd','$importeRetencionUsd','$totalUsd',$idUsuario)";
         
         // echo $query;
         // exit();
         
-        $result = mysqli_query($this->link, $query) or die(mysqli_error());
+        $result = mysqli_query($this->link, $query) or die(mysqli_error($this->link));
         $idFactura = mysqli_insert_id($this->link);
 
         $porcentajeIva = $tasaIva;
+
+        /*
+        GCM- 2022-05-12 Se agrega el insert para la tabla de facturas_deptos para saber a cual departamento fue la factura
+        GCM- 2022-06-22 Se agrega el insert para salidas ventas a tabla facturas_ventas
+        */
+
+        if($deptos != ""){
+            $exploded = explode(", ", $deptos);
+
+            foreach($exploded as $dept){
+
+                $query = "INSERT INTO facturas_deptos (id_factura, id_depto)
+                            VALUES($idFactura, $dept);";
+                
+                $result = mysqli_query($this->link, $query) or die(mysqli_error($this->link));
+            }
+        }
+
+        if($id_salida_venta != 0 && $id_salida_venta != ""){
+            $exploded = explode(",", $id_salida_venta);
+
+            if(count($exploded) > 1){
+                foreach($exploded as $venta){
+
+                    $query = "INSERT INTO facturas_ventas (id_factura, id_almacen_e)
+                                VALUES($idFactura, $venta);";
+                    
+                    $result = mysqli_query($this->link, $query) or die(mysqli_error($this->link));
+                }
+            }
+        }
 
         $facturaE = array('folio'=>$folio,
                             'fecha'=>$fecha,
@@ -234,7 +284,8 @@ class Facturacion
                             'adenda_t'=>$adendaT,
                             'adenda_b'=>$adendaB,
                             'moneda'=>$moneda,
-                            'tipo_cambio'=>$tipoCambio
+                            'tipo_cambio'=>$tipoCambio,
+                            'regimen_fiscal'=>$regimen_fiscal
                         );
 
         if ($result) 
@@ -313,6 +364,7 @@ class Facturacion
                 VALUES ('$idFactura','$cantidad','$precio','$importe','$descripcion','$idClaveSATUnidad',
                 '$nombreUnidadSAT','$idClaveSATProducto','$nombreProductoSAT','$idVenta','$idOrden',
                 '$idCXC','$idPlan','$fechaRecibo','$montoDescuento','$porcentajeDescuento','$idServicio')";
+                
             $result = mysqli_query($this->link, $query) or die(mysqli_error());
 
             //->le voy agregando al array los registros
@@ -473,50 +525,57 @@ class Facturacion
     }//- fin function buscarFacturas
 
     function buscarFacturasId($idFactura){
-        $result = mysqli_query($this->link,"SELECT a.id, a.id_factura_cfdi, a.id_unidad_negocio,a.id_sucursal,a.folio,a.id_empresa_fiscal,
-                                        a.id_razon_social,a.razon_social,a.rfc_razon_social,a.id_cliente,
-                                        a.uso_cfdi,a.metodo_pago,a.forma_pago,r.correo_facturas AS email, a.digitos_cuenta,
-                                        a.fecha,a.anio,a.mes,a.observaciones,a.dias_credito,a.porcentaje_iva,
-                                        a.subtotal,a.iva,a.total,a.fecha_inicio,a.fecha_fin,
-                                        IFNULL(d.estatus, 'A') AS estatus,b.razon_social AS empresa_fiscal, b.id_cfdi AS id_cfdi , c.nombre_comercial AS cliente,
-                                        IFNULL(d.uuid_timbre,'') AS folio_fiscal,IFNULL(GROUP_CONCAT(f.uuid_timbre),'') AS facturas_relacionadas,
-                                        (IFNULL(total_pagos.total_facturas, 0) + IFNULL(total_notas.total_facturas, 0)) AS num_notas_credito,
-                                        a.retencion,a.importe_retencion, (a.total - a.importe_retencion) AS ret,
-                                        a.id_almacen_e,h.folio_venta_stock AS folio_venta,
-                                        a.cliente_alterno
-                                        FROM facturas a
-                                        INNER JOIN empresas_fiscales b ON a.id_empresa_fiscal=b.id_empresa
-                                        INNER JOIN razones_sociales r ON a.id_razon_social = r.id
-                                        LEFT JOIN cat_clientes c ON a.id_cliente=c.id
-                                        LEFT JOIN facturas_cfdi d ON a.id=d.id_factura
-                                        LEFT JOIN facturas_r e ON a.id=e.id_factura
-                                        LEFT JOIN facturas_cfdi f ON e.id_factura_sustituida=f.id_factura
-                                        LEFT JOIN facturas g ON a.id=g.id_factura_nota_credito AND g.estatus!='C'
-                                        LEFT JOIN almacen_e h ON a.id_almacen_e=h.id
-                                        LEFT JOIN 
-                                        (
-                                            SELECT 
-                                            pagos_d.id_factura AS id_factura,
-                                            COUNT(pagos_d.id_factura) AS total_facturas
-                                            FROM pagos_d
-                                            INNER JOIN pagos_e ON pagos_d.id_pago_e = pagos_e.id
-                                            INNER JOIN pagos_cfdi ON pagos_e.id = pagos_cfdi.id_pago_e
-                                            WHERE pagos_cfdi.estatus_cfdi != 'C'
-                                            GROUP BY pagos_d.id_factura
-                                        ) total_pagos ON a.id = total_pagos.id_factura
-                                        LEFT JOIN 
-                                        (
 
-                                            SELECT 
-                                            facturas.id_factura_nota_credito AS id_factura,
-                                            COUNT(facturas.id_factura_nota_credito) AS total_facturas
-                                            FROM facturas
-                                            INNER JOIN facturas_cfdi ON facturas.id = facturas_cfdi.id_factura
-                                            WHERE facturas_cfdi.estatus != 'C'
-                                            GROUP BY facturas.id_factura_nota_credito
-                                            
-                                        ) total_notas ON a.id = total_notas.id_factura
-                                        WHERE a.id=".$idFactura);
+        $query = "SELECT a.id, a.id_factura_cfdi, a.id_unidad_negocio,a.id_sucursal,a.folio,a.id_empresa_fiscal,
+        a.id_razon_social,a.razon_social,a.rfc_razon_social,a.id_cliente,
+        a.uso_cfdi,a.metodo_pago,a.forma_pago,r.correo_facturas AS email, a.digitos_cuenta,
+        a.fecha,a.anio,a.mes,a.observaciones,a.dias_credito,a.porcentaje_iva,
+        a.subtotal,a.iva,a.total,a.fecha_inicio,a.fecha_fin,
+        IFNULL(d.estatus, 'A') AS estatus,b.razon_social AS empresa_fiscal, b.id_cfdi AS id_cfdi , c.nombre_comercial AS cliente,
+        IFNULL(d.uuid_timbre,'') AS folio_fiscal,IFNULL(GROUP_CONCAT(f.uuid_timbre),'') AS facturas_relacionadas,
+        (IFNULL(total_pagos.total_facturas, 0) + IFNULL(total_notas.total_facturas, 0)) AS num_notas_credito,
+        a.retencion,a.importe_retencion, (a.total - a.importe_retencion) AS ret,
+        IF(a.id_almacen_e IS NULL OR a.id_almacen_e = 0, (SELECT GROUP_CONCAT(id_almacen_e) FROM facturas_ventas WHERE id_factura = a.id GROUP BY id_factura), a.id_almacen_e) AS id_almacen_e,
+        IF(h.folio_venta_stock = 0 OR h.folio_venta_stock IS NULL,(SELECT GROUP_CONCAT(h.folio_venta_stock) FROM almacen_e h WHERE h.id IN (SELECT id_almacen_e FROM facturas_ventas WHERE id_factura = a.id)), h.folio_venta_stock) AS folio_venta,
+        a.cliente_alterno, r.regimen_fiscal
+        FROM facturas a
+        INNER JOIN empresas_fiscales b ON a.id_empresa_fiscal=b.id_empresa
+        LEFT JOIN razones_sociales r ON a.id_razon_social = r.id
+        LEFT JOIN cat_clientes c ON a.id_cliente=c.id
+        LEFT JOIN facturas_cfdi d ON a.id=d.id_factura
+        LEFT JOIN facturas_r e ON a.id=e.id_factura
+        LEFT JOIN facturas_cfdi f ON e.id_factura_sustituida=f.id_factura
+        LEFT JOIN facturas g ON a.id=g.id_factura_nota_credito AND g.estatus!='C'
+        LEFT JOIN almacen_e h ON a.id_almacen_e=h.id
+        LEFT JOIN 
+        (
+            SELECT 
+            pagos_d.id_factura AS id_factura,
+            COUNT(pagos_d.id_factura) AS total_facturas
+            FROM pagos_d
+            INNER JOIN pagos_e ON pagos_d.id_pago_e = pagos_e.id
+            INNER JOIN pagos_cfdi ON pagos_e.id = pagos_cfdi.id_pago_e
+            WHERE pagos_cfdi.estatus_cfdi != 'C'
+            GROUP BY pagos_d.id_factura
+        ) total_pagos ON a.id = total_pagos.id_factura
+        LEFT JOIN 
+        (
+
+            SELECT 
+            facturas.id_factura_nota_credito AS id_factura,
+            COUNT(facturas.id_factura_nota_credito) AS total_facturas
+            FROM facturas
+            INNER JOIN facturas_cfdi ON facturas.id = facturas_cfdi.id_factura
+            WHERE facturas_cfdi.estatus != 'C'
+            GROUP BY facturas.id_factura_nota_credito
+            
+        ) total_notas ON a.id = total_notas.id_factura
+        WHERE a.id=".$idFactura;
+
+        // echo $query;
+        // exit();
+
+        $result = mysqli_query($this->link,$query);
         
         //return query2json($result);
 
@@ -821,15 +880,22 @@ class Facturacion
         $mail->CharSet = 'UTF-8';
 		$mail->IsSMTP();
 		$mail->IsHTML(true);	
-		$mail->SMTPSecure = "STARTTLS";
+		// $mail->SMTPSecure = "STARTTLS";
+        $mail->SMTPSecure = "ssl";
 		$mail->SMTPAuth = true;
-		$mail->Host = "mail.ginthercorp.com";
-		$mail->Port = 587;
-		$mail->Username = "info@ginthercorp.com"; 
-		$mail->Password = "secorp.01";
+		// $mail->Host = "smtp.gmail.com";
+		// $mail->Port = 587;
+		// $mail->Username = "ginthercorp.info@gmail.com"; 
+		// $mail->Password = "secorp2022";
+        $mail->Host = "mail.ginthercorp.com";
+		$mail->Port = 465;
+		$mail->Username = "facturas@ginthercorp.com"; 
+		$mail->Password = "secorp2022";
 		
 
-		$mail->SetFrom("info@ginthercorp.com","Facturacion");
+		$mail->SetFrom("facturas@ginthercorp.com","FACTURACIÓN");
+        // $mail->From = "test@curiel.com";
+        // $mail->FromName = "TEST2CURIEL";
 		
 		$mail->Subject = $asunto;
 		$mail->MsgHTML($mensaje);
@@ -845,10 +911,12 @@ class Facturacion
 
 		$verifica = false;
 		
-		if(!$mail->Send()) 	
+        if(!$mail->Send()){
 			$verifica = 0; //Intento Fallido;
-		else
+            error_log($mail->ErrorInfo);
+		}else{
 			$verifica = 1; //exito
+        }
 
         return $verifica;
     }

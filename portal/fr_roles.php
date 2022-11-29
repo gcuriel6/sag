@@ -32,7 +32,25 @@
 	var id_registro=0;
 	var roles_depto={};
 	var id_empleado = 0;
-	let arregloPuedenEditar = [38,41,404,16,19,316,47,62,138,69,25,66,281,4,37,428,72];
+	let arregloPuedenEditar = [
+		38, //Alejandro Hurtado
+		41, //Federico Rodriguez
+		404, //Gabriel Curiel
+		16, //Iris Cano
+		316, //Jessica Limas
+		47, //Jose Rodriguez
+		62, //Judith Soto
+		138, //Laura Escobedo
+		69, //Luis Herrera
+		25, //Marco Sanchez
+		66, //Monica Rios
+		4, //Emanuel Garcia
+		37, //Zayra
+		140, //Jorge Herrera
+		419, //Samantha Anguiano,
+		394, //Omar Chavez
+		548 //Fernanda Gonzalez
+	];
 	
 	function difDates(fecha1,fecha2){
 		var diff = Math.abs(new Date(fecha1)-new Date(fecha2));

@@ -20,7 +20,8 @@ $queryInfo = "SELECT vc.id idCotiz,
             IF(vc.fk_idcliente = 0,
             (SELECT nombre_cliente FROM vision_prospectos WHERE fk_cotizacion = vc.id),
             (SELECT nombre_corto FROM vision_clientes WHERE id_cliente = vc.fk_idcliente)) cliente,
-            total
+            total,
+            tiempo_entrega AS diasEntrega
             FROM vision_cotizacion vc
             WHERE vc.id = $idCotiz";
 
@@ -32,6 +33,7 @@ $fecha = $rowInfo['fecha'];
 $estatus = $rowInfo['estatus'];
 $cliente = $rowInfo['cliente'];
 $total = $rowInfo['total'];
+$diasEntrega = $rowInfo["diasEntrega"];
 
 $queryProductos = "SELECT vcp.cantidad, vp.nombre, vp.descripcion, vcp.costo, vp.clave, vp.url_imagen imagen
                     FROM vision_cotizacion_productos vcp
@@ -57,150 +59,127 @@ $consultaMaterias = mysqli_query($link, $queryMaterias);
         box-sizing: border-box;
         font-family: 'Lato', sans-serif;
     }
-    .principal{
-        /* background-color: red; */
+
+    table{        
         width:100%;
-    }
-    .principal th{
-        width: 100%;
-    }
-
-    .secundaria{
-        border: none;
-    }
-
-    .secundaria th,
-    .secundaria td{
-        border: 1px solid black;
-    }
-
-    .secundaria th{
-        padding: 4px 1px;
-    }
-
-    .secundaria .header th{
-        text-align: center;
-        background-color: #444;
-        color: white;
-        padding: 4px 1px;
-    }
-
-    table{
-        color: #444;
     }
 </style>
 
+<?php
+    $amarillo = "#f8c915";
+    $azul = "#16446c";
+    $totalCotiz = 0;
+?>
+
 <!-- se usa para poner  marca de agua backimg="../images/logo_marca2.png" backimgy="380"-->
-<page backtop="3mm"  backbottom="5mm">
+<page backtop="5mm"  backbottom="5mm" backright="5mm" backleft="5mm">
 <!--<img src="../imagenes/'.$rowU['logo'].'"  width="150"/>-->
 <page_footer style="text-align:right;font-size:10px;">
     [[page_cu]] de [[page_nb]]
 </page_footer>
 <!-- <td class="dato"> [[page_cu]] de [[page_nb]]</td> -->
-    <table class="principal" width=771>
-        <tbody>
+    <div class="cuadroPrincipal" style="width:100%;">
+        <table style="width:100%;background-color:#f8c915;border:2px solid black;padding: 20px;">
             <tr>
-                <th width=351 style="padding-left:10px; line-height: 1.4;">
-                    <label>SVP1102043U5</label><br>
-                    <label>SECORP VISION PUBLICITARIAS. DE R.L. DE C.V</label><br>
-                    <label>CERRADA DE BARROCA NO. 6106</label><br>
-                    <label>PLAZABARROCA</label><br>
-                    <label>C.P. 31215</label><br>
-                    <label>CHIHUAHUA, CHIH.</label><br>
-                    <label>TEL (614) 415-0252</label><br><br>
-
-                    <label style="font-size: 18px;">Fecha: <?php echo  $fecha ?></label><br>
-                    <label style="font-size: 18px;">Para: <?php echo  $cliente ?></label>
+                <th style="width:50%;">
+                    <label>DATOS FISCALES:</label><br>
+                    <label>SECORP VISION PUBLICITARIA S DE RL DE CV</label><br>
+                    <label>RFC SVP1102043U5</label><br>
+                    <label>DIRECCION: CERRADA DE BARROCA #6106</label><br>
+                    <label>COL. PLAZA BARROCA CP. 31215 CHIHUAHUA,CHIH</label><br>
+                    <label>TEL (614) 222 90 44</label>
                 </th>
-                <th width=400><img src="../imagenes/logo_vision2021.png"  width="400"/></th>
+                <td style="width:50%;">
+                    <img src='../vision/visionlogoblanco.png' style="width:100%;">
+                </td>
             </tr>
-        </tbody>
-    </table>
-    <table width=771>
-        <tbody>
+        </table>
+        <table style="width:100%;border:2px solid black;padding: 20px;">
             <tr>
-                <th width=751 style="padding-left:10px;">
-                    <label style="font-size: 38px;">COTIZACIÓN</label>
+                <th style="width:100%;">
+                    <label>FECHA <?php echo $fecha; ?></label><br>
+                    <label>CON ATENCIÓN A: <?php echo $cliente; ?></label>
                 </th>
             </tr>
-        </tbody>
-    </table>
-    <table width=700 class="secundaria" >
-        <tbody>
-            <tr class="header">
-                <th width=100 style="padding-left:10px;">Foto</th>
-                <th width=120>Descripción</th>
-                <th width=120>Decorado</th>
-                <th width=120>Escala</th>
-                <th width=120>Precio Unidad</th>
-                <th width=120>Total sin IVA</th>
+        </table>
+        <table style="width:100%;background-color:#f8c915;border:2px solid black;padding: 5px;">
+            <tr>
+                <th style="width:100%;text-align:center;font-size:30px;">
+                    COTIZACIÓN
+                </th>
             </tr>
-
+        </table>
+        <table style="width:100%;border:2px solid black;border-collapse: collapse;">
+            <tr>
+                <th style="width:16.666%;text-align:center;border:2px solid black;padding:10px 0;">FOTO</th>
+                <th style="width:16.666%;text-align:center;border:2px solid black;padding:10px 0;">DESCRIPCION</th>
+                <th style="width:16.666%;text-align:center;border:2px solid black;padding:10px 0;">DECORADO</th>
+                <th style="width:16.666%;text-align:center;border:2px solid black;padding:10px 0;">CANTIDAD</th>
+                <th style="width:16.666%;text-align:center;border:2px solid black;padding:10px 0;">PRECIO UNITARIO</th>
+                <th style="width:16.666%;text-align:center;border:2px solid black;padding:10px 0;">TOTAL (CON IVA)</th>
+            </tr>
+            <!-- aqui van productos -->
             <?php
-                while($row = mysqli_fetch_array($consultaProductos)){
+                while($row = mysqli_fetch_assoc($consultaProductos)){
                     $imagen = $row["imagen"];
-                    $descr = $row["descripcion"];
-                    $costo = ($row["costo"]);
+                    $descripcion = $row["descripcion"];
                     $cantidad = $row["cantidad"];
+                    $costo = $row["costo"];
+                    $total = $cantidad * $costo;
+                    $totalCotiz+=$total;
 
-                    $total = $costo * $cantidad;
-                    $total = dos_decimales($total);
+                    //<img src='../vision/$imagen' style='width:100%;' >
 
-                    echo "<tr>
-                            <th width=100 height=100 style='padding-left:10px; text-align:center;'><img src='../vision/$imagen' width='100' height='100'/></th>
-                            <th width=120 height=100 style='text-align:left;'>$descr</th>
-                            <th width=120 height=100 style='text-align:center;'></th>
-                            <th width=120 height=100 style='text-align:center;'></th>
-                            <th width=120 height=100 style='text-align:center;'>$$costo</th>
-                            <th width=120 height=100 style='text-align:center;'>$total</th>
-                        </tr>";
+                    echo "<tr>";
+                        echo "<td style='width:16.666%;text-align:center;border:2px solid black;padding:10px 0;'><img src='../vision/$imagen' style='width:100%;' ></td>";
+                        echo "<td style='width:16.666%;text-align:center;border:2px solid black;padding:10px 0;'>$descripcion</td>";
+                        echo "<td style='width:16.666%;text-align:center;border:2px solid black;padding:10px 0;'></td>";
+                        echo "<td style='width:16.666%;text-align:center;border:2px solid black;padding:10px 0;'>$cantidad</td>";
+                        echo "<td style='width:16.666%;text-align:center;border:2px solid black;padding:10px 0;'>$costo</td>";
+                        echo "<td style='width:16.666%;text-align:center;border:2px solid black;padding:10px 0;'>$total</td>";
+                    echo "</tr>";
                 }
             ?>
-
-        </tbody>
-    </table>
-    <br>
-    <table>
-        <tbody>
+        </table>
+        <table style="width:100%;background-color:#16446c;border:2px solid black;padding: 5px;">
             <tr>
-                <th width=400 valign="top" style="font-size: 13px; font-weight: 600; line-height: 1.4;">
-                    <label style="font-weight: bold; font-size: 16px;">DATOS FISCALES:</label><br>
-                    <label>RAZON SOCIAL: SECORP VISION PUBLICITARIA S DE RL DE CV</label><br>
-                    <label>RFC: SVP1102043U5</label><br>
-                    <label>DIRECCION: CERRADA DE BARROCA 6106 C.P. 31215</label><br>
-                    <label>CHIHUAHUA, CHHUAHUA</label>
+                <th style="width:50%;text-align:left;font-size:30px;">
                 </th>
-                <th width=300 valign="top" style="font-size: 13px; font-weight: 600; padding-left:10px; line-height: 1.4;">
-                    <label style="font-weight: bold; font-size: 16px;">DATOS DE TRANSFERENCIA:</label><br>
-                    <label>BANCO: BANORTE</label><br>
-                    <label>No. CUENTA: 0314750716</label><br>
-                    <label>CLAVE INTERBANCARIA: 072 150 00314750716 3</label>
+                <th style="width:50%;text-align:right;font-size:30px;background-color:#f8c915;">
+                    <?php 
+                        echo "Total: $totalCotiz";
+                    ?>
                 </th>
             </tr>
-        </tbody>
-    </table>
-    <br>
-    <table>
-        <tbody>
             <tr>
-                <th width=350 valign="top" style="font-size: 15px; font-weight: bold; line-height: 1.4;">
-                    <label>- Precios unitarios en MN mas IVA</label><br>
-                    <label>- Se requiere una orden de compra para hacer pedido</label><br>
-                    <label>- Precios sujetos a existencias</label><br>
-                    <label>- Tiempo de entrega de __ a __ días hábiles</label><br>
-                    <label>- Se requiere un anticipo de 50% para inicio de pedido y OC</label><br>
-                    <label>- Vigencia de la cotización 8 días hábiles</label>
+                <th style="width:50%;text-align:left;font-size:15px;color:white;">
+                    <label>Precios unitarios en MXN mas IVA</label><br>
+                    <label>Se requiere una orden de compra para hacer pedido</label><br>
+                    <label>Precios sujetos a existencias</label><br>
+                    <label>Tiempo de entrega estimado: <?php echo $diasEntrega; ?> días habiles</label><br>
+                    <label>Se requiere un anticipo de 50% para inicio de pedido y OC</label><br>
+                    <label>Vigencia de la cotización 8 días hábiles</label> 
                 </th>
-                <th width=350 valign="top" style="padding-left:20px; text-align: right; font-size: 17px; font-weight: 600; line-height: 1.2;">
-                    <label style="font-size: 30px; font-weight: bold;">VISIONPUBLICIDAD.MX</label><br>
-                    <label style="font-size: 20px; font-weight: bold;">Aténtamente:</label><br>
-                    <label>José Luis Ramos</label><br>
-                    <label>614.176.78.04</label><br>
-                    <label>creativo@secorp.mx</label>
+                <th style="width:50%;text-align:center;font-size:15px;color:white;">
+                    <span>DATOS DE TRANSFERENCIA</span><br>
+                    <span>BANCO: BANORTE</span><br>
+                    <span>CLABE INTERBANCARIA:</span><br>
+                    <span>072 150 00314750716 3</span>
                 </th>
             </tr>
-        </tbody>
-    </table>
+        </table>
+        <table style="width:100%;margin-top:10px;">
+            <tr>
+                <th style="width:50%;text-align:left;font-size:15px;">
+                    <label>VISIONPUBLICIDAD.MX</label><br>
+                </th>
+                <th style="width:50%;text-align:right;font-size:15px;">
+                    <label>Suheyt Holguín (614) 494 2232 </label>
+                </th>
+            </tr>
+        </table>
+        
+    </div>
 
 </page>
           
@@ -213,6 +192,7 @@ function fecha($fecha) {
     $fechamod = $dia . "/" . $mes . "/" . $anyo;
     return $fechamod;
 }
+
 function dos_decimales($number, $fractional=true) { 
     if ($fractional) { 
         $number = sprintf('%.2f', $number); 

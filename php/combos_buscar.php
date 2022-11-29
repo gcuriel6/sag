@@ -85,6 +85,17 @@
         }
     }
 
+    if($tipoSelect=='REGIMEN'){
+        $modeloCombos= new Combos();
+
+        if (isset($_SESSION['usuario'])){
+
+            echo $resultado = $modeloCombos->buscarRegimenes();
+        }else{
+            echo json_encode("sesion");
+        }
+    }
+
     if($tipoSelect=='DEPARTAMENTOS'){
 
         $idSucursal = $_REQUEST['idSucursal'];

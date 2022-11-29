@@ -169,6 +169,13 @@ ORDER BY unidades.nombre,sucursales.descr ASC");
 
   }//-- fin function buscarMunicipios
 
+  function buscarRegimenes(){
+
+    $result1 = $this->linkCFDI->query("SELECT c_regimen_fiscal as id, descripcion as descr FROM cat_regimen_fiscal ORDER BY c_regimen_fiscal ASC");
+    return query2json($result1);
+
+  }//-- fin function buscarRegimenes
+
   /**
    * Obtiene los registros de deptos para generar combo
    * @param int $idSucursal dato que indica que solo se buscaran los departamentos que pertenecen a ese $idCompañia
@@ -557,7 +564,7 @@ ORDER BY unidades.nombre,sucursales.descr ASC");
 
 
         $queryP = "SELECT permisos.id_sucursal,permisos.permiso,sucursales.descr as nombre FROM permisos LEFT JOIN sucursales ON permisos.id_sucursal=sucursales.id_sucursal WHERE $unidades AND permisos.id_usuario=$idUsuario AND permisos.pantalla='$pantallaM' AND sucursales.activo=1 ORDER BY sucursales.descr";
-        $resultP = mysqli_query($this->link, $queryP)or die(mysqli_error());
+        $resultP = mysqli_query($this->link, $queryP)or die(mysqli_error($this->link));
         $numP = mysqli_num_rows($resultP);
 
         if($numP > 0){
@@ -614,7 +621,7 @@ ORDER BY unidades.nombre,sucursales.descr ASC");
   function buscarRazonesSocialesCliente($idCliente,$idUnidadNegocio)
   {
 
-    $result = $this->link->query("SELECT a.id,a.razon_social,a.nombre_corto,a.dias_cred,a.rfc,a.codigo_postal,a.id_pais, ifnull(a.correo_facturas,'') as correo_facturas, a.adenda AS adenda
+    $result = $this->link->query("SELECT a.id,a.razon_social,a.nombre_corto,a.dias_cred,a.rfc,a.codigo_postal,a.id_pais, ifnull(a.correo_facturas,'') as correo_facturas, a.adenda AS adenda, regimen_fiscal
                                   FROM razones_sociales a
                                   LEFT JOIN razones_sociales_unidades b ON a.id=b.id_razon_social
                                   WHERE a.id_cliente=$idCliente AND a.activo=1 AND b.id_unidad=$idUnidadNegocio
@@ -933,12 +940,21 @@ ORDER BY unidades.nombre,sucursales.descr ASC");
                 a.descripcion AS cuenta,
                 a.tipo,
                 a.id_sucursal,
-                IF(a.tipo=1,(IFNULL(SUM(IF(c.clave_concepto IN('C01','D01'),c.importe,c.importe*(-1))),0)),
-                (IFNULL((SUM(IF(d.tipo='A',monto,0))+SUM(IF(d.tipo='I',d.monto,0))+SUM(IF(d.tipo='T' && d.transferencia >0,d.monto,0)))-(SUM(IF(d.tipo='C',d.monto,0))+SUM(IF(d.tipo='T' && d.transferencia = 0,d.monto,0))),0))) AS saldo_disponible
+                IFNULL(tabla.saldo_disponible, 0) AS saldo_disponible
               FROM cuentas_bancos a
               LEFT JOIN bancos b ON a.id_banco=b.id
               LEFT JOIN caja_chica c ON a.id_sucursal=c.id_sucursal
               LEFT JOIN movimientos_bancos d ON a.id = d.id_cuenta_banco
+              LEFT JOIN (
+                SELECT cb.id, sd.cantidad + (SUM(IF(mb.tipo = 'I' OR mb.tipo = 'A' OR (mb.tipo = 'T' AND mb.transferencia <> 0),mb.monto,0)) - SUM(IF(mb.tipo = 'C' OR (mb.tipo = 'T' AND mb.transferencia = 0),mb.monto,0))) as saldo_disponible
+                FROM saldos_diarios sd
+                INNER JOIN cuentas_bancos cb ON cb.id = sd.id_cuenta_banco
+                LEFT JOIN movimientos_bancos mb ON mb.id_cuenta_banco = cb.id AND DATE(mb.fecha) = DATE(NOW())
+                WHERE sd.fecha = (SELECT MAX(t2.fecha)
+                                        FROM saldos_diarios t2
+                                        WHERE t2.id_cuenta_banco = sd.id_cuenta_banco)
+                GROUP BY sd.id_cuenta_banco
+              ) as tabla ON tabla.id = a.id
               WHERE a.activa=1 $cuenta $cond $condicionUnidades
               GROUP BY a.id
               ORDER BY b.clave ASC";
@@ -1084,12 +1100,20 @@ ORDER BY unidades.nombre,sucursales.descr ASC");
                 a.descripcion AS cuenta,
                 a.tipo,
                 a.id_sucursal,
-                IF(a.tipo=1,(IFNULL(SUM(IF(c.clave_concepto IN('C01','D01'),c.importe,c.importe*(-1))),0)),
-                (IFNULL((SUM(IF(d.tipo='A',monto,0))+SUM(IF(d.tipo='I',d.monto,0))+SUM(IF(d.tipo='T' && d.transferencia >0,d.monto,0)))-(SUM(IF(d.tipo='C',d.monto,0))+SUM(IF(d.tipo='T' && d.transferencia = 0,d.monto,0))),0))) AS saldo_disponible
+                IFNULL(tabla.saldo_disponible, 0) AS saldo_disponible
               FROM cuentas_bancos a
               LEFT JOIN bancos b ON a.id_banco=b.id
               LEFT JOIN caja_chica c ON a.id_sucursal=c.id_sucursal
               LEFT JOIN movimientos_bancos d ON a.id = d.id_cuenta_banco
+              LEFT JOIN (SELECT cb.id, sd.cantidad + (SUM(IF(mb.tipo = 'I' OR mb.tipo = 'A' OR (mb.tipo = 'T' AND mb.transferencia <> 0),mb.monto,0)) - SUM(IF(mb.tipo = 'C' OR (mb.tipo = 'T' AND mb.transferencia = 0),mb.monto,0))) as saldo_disponible
+                          FROM saldos_diarios sd
+                          INNER JOIN cuentas_bancos cb ON cb.id = sd.id_cuenta_banco
+                          LEFT JOIN movimientos_bancos mb ON mb.id_cuenta_banco = cb.id AND DATE(mb.fecha) = DATE(NOW())
+                          WHERE sd.fecha = (SELECT MAX(t2.fecha)
+                                          FROM saldos_diarios t2
+                                          WHERE t2.id_cuenta_banco = sd.id_cuenta_banco)
+                          GROUP BY sd.id_cuenta_banco
+                          ) AS tabla ON tabla.id = a.id
               WHERE a.activa=1 $cuenta $cond  $condicionUnidades 
               GROUP BY a.id
               ORDER BY b.clave ASC";

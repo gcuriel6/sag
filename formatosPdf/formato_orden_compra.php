@@ -49,6 +49,9 @@ LEFT JOIN deptos h ON a.id_departamento=h.id_depto
 LEFT JOIN cat_areas i ON h.id_area=i.id
 WHERE a.id=".$idRegistro;
 
+// echo $query;
+// exit();
+
 $consulta = mysqli_query($link,$query);
 $row = mysqli_fetch_array($consulta);
 
@@ -253,6 +256,9 @@ table td{
     LEFT JOIN requisiciones_d ON a.id_requi_d=requisiciones_d.id
     WHERE a.id_orden_compra=".$idRegistro."
     ORDER BY a.id";
+
+    // echo $queryE;
+    // exit();
     $consultaE = mysqli_query($link,$queryE);
     $numeroFilasE = mysqli_num_rows($consultaE); 
     if($numeroFilasE>0){    
@@ -277,13 +283,14 @@ table td{
     $subtotal=0;
     $totalIva=0;
     $descuentoTRequis = 0;
+    // error_reporting(E_ALL);
     while ($rowE = mysqli_fetch_array($consultaE)){
        $tCantidad = $tCantidad + $rowE['cantidad'];
        $tPrecio = $tPrecio + $rowE['costo_unitario'];
        
        if($rowE['descuento'] > 0){
                     
-            $subtotalP=$rowE['cantidad']*parseFloat(costo);
+            $subtotalP=$rowE['cantidad']*floatval($rowE['costo_unitario']);
             $descuentoTotal=(($rowE['descuento']*$subtotalP)/100);
             
             $subtotal=$subtotal+($subtotalP-$descuentoTotal);

@@ -118,6 +118,7 @@ class Pagos
     function guardarPagos($datos){
         // error_log(json_encode($datos));
         // exit();
+        error_reporting(E_ALL);
         $verifica = 0;
 
         $this->link->begin_transaction();
@@ -231,7 +232,10 @@ class Pagos
                             'moneda'=>$moneda,
                             'monto_usd'=>$importe,
                             'tipo_cambio'=>$tipoCambio,
-                            'idPagoSF'=>$idPagoSF
+                            'idPagoSF'=>$idPagoSF,
+                            'idCliente'=>$idCliente,
+                            'rfcCliente'=>$rfcCliente,
+                            'idRazonSocialCliente'=>$idRazonSocialCliente
                             );
 
         if ($result) 
@@ -351,6 +355,11 @@ class Pagos
 
         $idUnidadNegocio = $datosInfo['idUnidadNegocio'];
         $idSucursal = $datosInfo['idSucursal'];
+
+        $idCliente = $datosInfo['idCliente'];
+        $rfcCliente = $datosInfo['rfcCliente'];
+        $idRazonSocialCliente = $datosInfo['idRazonSocialCliente'];
+
         $idCuentaBanco = $datosInfo['idCuentaBanco'];
         $tipoCuenta = $datosInfo['tipoCuenta'];
         $idUsuario = $datosInfo['idUsuario'];
@@ -443,16 +452,23 @@ class Pagos
         
                     $cxcModelo = new CxC();  //--> hago una instancia de la otra clase para poder usar las funciones de la otra en esta
                     $valor=0;
+                    /*
+                        $idCliente = $datosInfo['idCliente'];
+                        $rfcCliente = $datosInfo['rfcCliente'];
+                        $idRazonSocialCliente = $idRazonSocialCliente['idRazonSocialCliente'];
+                        $idUnidadNegocio = $datosInfo['idUnidadNegocio'];
+                        $idSucursal = $datosInfo['idSucursal'];
+                    */
                     if($tipoCuenta == 0)
                     {
                         if($tipo == "pagoSF"){
-                            $valor = $this->actualizarPagosSinFactura($idPagoSF, $importe, $idCxC, $fecha, $idFactura, $folioFactura);
+                            $valor = $this->actualizarPagosSinFactura($idPagoSF, $importe, $idCxC, $fecha, $idFactura, $folioFactura, $idCliente, $rfcCliente, $idRazonSocialCliente, $idUnidadNegocio, $idSucursal);
                         }else{
                             $valor = $cxcModelo-> guardarMovimientosBancos($idCxC,$arreglo);
                         }                            
                     }else{
                         if($tipo == "pagoSF"){
-                            $valor = $this->actualizarPagosSinFactura($idPagoSF, $importe, $idCxC, $fecha, $idFactura, $folioFactura);
+                            $valor = $this->actualizarPagosSinFactura($idPagoSF, $importe, $idCxC, $fecha, $idFactura, $folioFactura, $idCliente, $rfcCliente, $idRazonSocialCliente, $idUnidadNegocio, $idSucursal);
                         }else{
                             $valor = $cxcModelo-> guardarGastoCajaChica($idCxC,$arreglo);
                         }
@@ -940,15 +956,20 @@ class Pagos
         $mail->CharSet = 'UTF-8';
 		$mail->IsSMTP();
 		$mail->IsHTML(true);		
-		$mail->SMTPSecure = "STARTTLS";
+		// $mail->SMTPSecure = "STARTTLS";
+        $mail->SMTPSecure = "ssl";
 		$mail->SMTPAuth = true;
-		$mail->Host = "mail.ginthercorp.com";
-		$mail->Port = 587;
-		$mail->Username = "info@ginthercorp.com"; 
-		$mail->Password = "secorp.01";
+		// $mail->Host = "mail.ginthercorp.com";
+		// $mail->Port = 25;
+		// $mail->Username = "facturas@ginthercorp.com"; 
+		// $mail->Password = "secorp.01";
+        $mail->Host = "mail.ginthercorp.com";
+		$mail->Port = 465;
+		$mail->Username = "facturas@ginthercorp.com"; 
+		$mail->Password = "secorp2022";
 		
 
-		$mail->SetFrom("info@ginthercorp.com","Recibo de Pagos");
+		$mail->SetFrom("facturas@ginthercorp.com","Recibo de Pagos");
 		
 		$mail->Subject = $asunto;
 		$mail->MsgHTML($mensaje);
@@ -964,11 +985,12 @@ class Pagos
 
 		$verifica = false;
 		
-		if(!$mail->Send()) 	
+		if(!$mail->Send()){
 			$verifica = 0; //Intento Fallido;
-		else
+            error_log($mail->ErrorInfo);
+		}else{
 			$verifica = 1; //exito
-
+        }
         return $verifica;
     }
 
@@ -1296,10 +1318,10 @@ class Pagos
     // GCM 01/Mar/2022 se agrega funcion para traer PSF para el select en fr_pagos
     function buscarPagosPSF($idRazonSocial, $idCliente){
 
-        $query = "SELECT concepto, descripcion, fecha, folio, id as idPsf, id_cuenta_banco, monto 
+        $query = "SELECT concepto, descripcion, DATE(fecha) fecha, folio, id as idPsf, id_cuenta_banco, monto 
                     FROM pagos_sin_factura
-                    WHERE id_cliente = $idCliente
-                        AND id_razon_social = $idRazonSocial
+                    WHERE (id_cliente = $idCliente OR id_cliente = 0)
+                        AND (id_razon_social = $idRazonSocial OR id_razon_social = 0)
                         AND estatus = 0";
 
                     // echo $query;
@@ -1315,7 +1337,7 @@ class Pagos
         }
     }//- fin function buscarPagosPSF
 
-    function actualizarPagosSinFactura($idPagoSF, $importe, $idCxC, $fecha, $idFactura, $folioFactura){
+    function actualizarPagosSinFactura($idPagoSF, $importe, $idCxC, $fecha, $idFactura, $folioFactura, $idCliente, $rfcCliente, $idRazonSocialCliente, $idUnidadNegocio, $idSucursal){
         $verificar = 0;
 
         $idUsuario = $_SESSION["id_usuario"];
@@ -1338,16 +1360,20 @@ class Pagos
 
                 $result = mysqli_query($this->link, $query) or die(mysqli_error($this->link));
 
+                //, $idCliente, $rfcCliente, $idRazonSocialCliente
+
                 if($result){
                     $query2 = "UPDATE pagos_sin_factura
                                 SET monto = monto - $importe,
-                                    estatus = CASE
-                                                WHEN monto = 0 THEN 1
-                                                ELSE 0
-                                            END
+                                    estatus = CASE WHEN monto = 0 THEN 1 ELSE 0 END,
+                                    id_unidad_negocio = $idUnidadNegocio,
+                                    id_sucursal = IF(id_sucursal = 0, $idSucursal, id_sucursal),
+                                    id_cliente = IF(id_cliente = 0, $idCliente, id_cliente),
+                                    id_razon_social = IF(id_razon_social = 0, $idRazonSocialCliente, id_razon_social),
+                                    rfc_cliente = IF(rfc_cliente = '0', '$rfcCliente', rfc_cliente)
                                 WHERE id = $idPagoSF;";
 
-                                error_log($query2);
+                                // error_log($query2);
 
                     $result2 = mysqli_query($this->link, $query2) or die(mysqli_error($this->link));
 
@@ -1356,7 +1382,8 @@ class Pagos
                                     SET id_factura = $idFactura,
                                         folio_factura = '$folioFactura',
                                         mes = MONTH('$fecha'),
-                                        anio = YEAR('$fecha');";
+                                        anio = YEAR('$fecha')
+                                    WHERE id=$idCxC;";
 
                         $result4 = mysqli_query($this->link, $query4) or die(mysqli_error($this->link));
 

@@ -1176,7 +1176,13 @@
                     {
                         var dato=arreglo[i];
                         
-                        saldoDisponibleCuentaB = dato.saldo_disponible;
+                        let saldo = 999999999;
+
+                        if(dato.saldo_disponible > 0){
+                            saldo = dato.saldo_disponible;
+                        }
+                        
+                        saldoDisponibleCuentaB = saldo;
                     }
                 },
                 error: function (xhr) {
@@ -1306,8 +1312,9 @@
                 {
                     if(existeCajaChicaSucursal($('#s_id_sucursal').val()) == 1)
                     {
-                        if(parseFloat(saldoDisponibleCuentaB) >= parseFloat(quitaComa($('#i_total').val())))
-                        {  
+                        // if(parseFloat(saldoDisponibleCuentaB) >= parseFloat(quitaComa($('#i_total').val())))
+                        // {  
+                            //2022-06-03 GCM - Se quita validador de saldo disponible para que siempre deje hacer el movimiento aun que no tenga saldo disponible
                             if(diferentesFamilias == 0)
                                 guardar();
                             else{
@@ -1318,10 +1325,10 @@
                                     $('#b_guardar').prop('disabled',false);
                                 }
                             }
-                        }else{
-                            mandarMensaje('El saldo actual de la cuenta banco '+$('#s_cuenta option:selected').text()+' es insuficiente para realizar el movimiento.');
-                            $('#b_guardar').prop('disabled',false);
-                        }
+                        // }else{
+                        //     mandarMensaje('El saldo actual de la cuenta banco '+$('#s_cuenta option:selected').text()+' es insuficiente para realizar el movimiento.');
+                        //     $('#b_guardar').prop('disabled',false);
+                        // }
                     }else{
                         mandarMensaje('No existe una cuenta banco caja chica para la sucursal, solicita crearla o activarla.');
                         $('#b_guardar').prop('disabled',false);
@@ -1361,8 +1368,8 @@
                     }
                     else
                     {
-                        if(parseFloat(saldoDisponibleCuentaB) >= parseFloat(quitaComa($('#i_total').val())))
-                        {  
+                        // if(parseFloat(saldoDisponibleCuentaB) >= parseFloat(quitaComa($('#i_total').val())))
+                        // {  
 
                             if(diferentesFamilias == 0)
                                 guardar();
@@ -1385,12 +1392,12 @@
                                 }
                             }
 
-                        }
-                        else
-                        {
-                            mandarMensaje('El saldo actual de la cuenta banco '+$('#s_cuenta option:selected').text()+' es insuficiente para realizar el movimiento.');
-                            $('#b_guardar').prop('disabled',false);
-                        }
+                        // }
+                        // else
+                        // {
+                        //     mandarMensaje('El saldo actual de la cuenta banco '+$('#s_cuenta option:selected').text()+' es insuficiente para realizar el movimiento.');
+                        //     $('#b_guardar').prop('disabled',false);
+                        // }
 
                     }
                 }
@@ -1464,6 +1471,17 @@
             var paquete = [];
                 paquete[0]= 1;
             var cont = 0;
+
+            let clasifName = $('#s_clasificacion_gastos option:selected').text();
+            let clasifId = $('#s_clasificacion_gastos').val();
+
+            if(clasifId == null || clasifId == "" || clasifId == 0 || clasifId == undefined){
+                clasifName = $("#t_partidas_requis .renglon_requi:first").find('.s_clasificacion_p option:selected').text();
+                clasifId = $("#t_partidas_requis .renglon_requi:first").find('.s_clasificacion_p').val();
+            }
+
+            //.find('.s_clasificacion_p').val()
+
             var paq = {
                         'tipoMov'   : tipoMov,
                         'idUsuario' : idUsuario,
@@ -1478,8 +1496,8 @@
                         'tipoGasto':$('#s_tipo_gasto').val(),
                         'referencia':$('#i_referencia').val(),
                         'familiaGasto': $('#s_familia_gastos').val(),
-                        'clasificacionGasto': $('#s_clasificacion_gastos').val(),
-                        'nombreClasificacion': $('#s_clasificacion_gastos option:selected').text(),
+                        'clasificacionGasto': clasifId,
+                        'nombreClasificacion': clasifName,
                         'concepto': $('#i_concepto').val(),
                         'idCuenta': $('#s_cuenta').val(),
                         'idBanco':idBanco,
@@ -2751,9 +2769,14 @@
                             if(requisicion.contadorClas != 0){
                                 let clas = requisicion.contadorClas;
                                 setTimeout(function() {
-                                    $("#s_clasificacion_gastos").prop("disabled", true);
+                                    // $("#s_clasificacion_gastos").prop("disabled", true);
                                     $("#s_clasificacion_gastos").val(clas).trigger('change');
                                 }, 2000);
+                            }else{
+                                $('#s_clasificacion_gastos').prop('disabled',true);
+                                $("#s_clasificacion_gastos").removeClass('validate[required]')
+                                $('#div_requis_diferentes_fg').show();
+                                muestraPartidasRequisicion(requisicion.id);
                             }
                         }
 

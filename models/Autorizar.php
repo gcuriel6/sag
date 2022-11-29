@@ -77,20 +77,29 @@ class Autorizar
          *  EL ULTIMO PARENTECIS ES PARA COMPLETAR LA CADENA YA QUE SE ESTA EXTRAYENODO EL PRIMER 'OR' 
          * Y QUITA EL ULTIMO ELEMENTO DE LA CADENA QUE ES UN PARENTECIS  substr(trim($permisosTipo1), 2, -1);
          */
+
+        $query = "SELECT a.id_sucursal,a.id_unidad_negocio,a.tipo,a.id,a.folio,a.descripcion,a.total,IF(a.estatus=1,'Pendiente',IF(a.estatus=2,'Autorizada',IF(a.estatus=3,'Rechazada',IF(a.estatus=4,'Orden Compra',IF(a.estatus=5,'Por pagar','Pagada'))))) AS estatus,
+                  IF(a.tipo=0,'ACTIVOS FIJOS',IF(a.tipo=1,'GASTOS',IF(a.tipo=2,'MANTENIMIENTO',IF(a.tipo = 3,'STOCK', 'ORDEN DE SERVICIO'))))AS tipo,b.nombre AS unidad_negocio,c.clave AS clave_suc,c.descripcion AS sucursal,
+                  IF((a.total>d.monto_minimo OR a.total=d.monto_minimo) AND (a.total=d.monto_maximo OR a.total<d.monto_maximo),'si','no') AS editar,
+                  IFNULL(e.id,0) AS id_gasto,a.estatus AS estatus_numero, DATE(a.fecha_creacion) fechaCreacion, f.nombre_comp usuarioCapturo
+                          FROM requisiciones a
+                          LEFT JOIN cat_unidades_negocio b ON a.id_unidad_negocio=b.id
+                          LEFT JOIN sucursales c ON a.id_sucursal=c.id_sucursal
+                          LEFT JOIN cat_autorizaciones d ON d.id_usuario = $idUsuario AND d.activo=1
+                          LEFT JOIN gastos e ON a.id=e.id_requisicion
+                          INNER JOIN usuarios f ON f.id_usuario = a.id_capturo
+                          WHERE a.presupuesto_aprobado=1 $condicionSucursal AND a.estatus<=2 AND (a.id_orden_compra='' OR ISNULL(a.id_orden_compra) OR a.id_orden_compra=0) $condFecha
+                          $condicionPermisosTipos
+                          ORDER BY a.folio DESC";
       
-        $resultado = $this->link->query("SELECT a.id_sucursal,a.id_unidad_negocio,a.tipo,a.id,a.folio,a.descripcion,a.total,IF(a.estatus=1,'Pendiente',IF(a.estatus=2,'Autorizada',IF(a.estatus=3,'Rechazada',IF(a.estatus=4,'Orden Compra',IF(a.estatus=5,'Por pagar','Pagada'))))) AS estatus,
-        IF(a.tipo=0,'ACTIVOS FIJOS',IF(a.tipo=1,'GASTOS',IF(a.tipo=2,'MANTENIMIENTO',IF(a.tipo = 3,'STOCK', 'ORDEN DE SERVICIO'))))AS tipo,b.nombre AS unidad_negocio,c.clave AS clave_suc,c.descripcion AS sucursal,
-        IF((a.total>d.monto_minimo OR a.total=d.monto_minimo) AND (a.total=d.monto_maximo OR a.total<d.monto_maximo),'si','no') AS editar,
-        IFNULL(e.id,0) AS id_gasto,a.estatus AS estatus_numero, DATE(a.fecha_creacion) fechaCreacion, f.nombre_comp usuarioCapturo
-                FROM requisiciones a
-                LEFT JOIN cat_unidades_negocio b ON a.id_unidad_negocio=b.id
-                LEFT JOIN sucursales c ON a.id_sucursal=c.id_sucursal
-                LEFT JOIN cat_autorizaciones d ON d.id_usuario = $idUsuario AND d.activo=1
-                LEFT JOIN gastos e ON a.id=e.id_requisicion
-                INNER JOIN usuarios f ON f.id_usuario = a.id_capturo
-                WHERE a.presupuesto_aprobado=1 $condicionSucursal AND a.estatus<=2 AND (a.id_orden_compra='' OR ISNULL(a.id_orden_compra) OR a.id_orden_compra=0) $condFecha
-                $condicionPermisosTipos
-                ORDER BY a.folio DESC");
+        // echo $query;
+        // exit();
+
+        // error_log($query);
+        // print_r([$query]);
+        // exit();
+        
+        $resultado = $this->link->query($query);
         return query2json($resultado);
 
       }//- fin function buscarAutorizar

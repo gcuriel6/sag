@@ -2164,6 +2164,307 @@ class Cotizaciones
       return $verifica;
     }//-- fin function actualizaObservacionesSecciones
 
+    function buscarCotizaciones($fechaInicio, $fechaFin){
+      /*
+      Sucursales
+      23 - Secorp Alarmas
+      57 - Seycom
+      72 - Secorp IT
+      */
+
+      $query = "SELECT
+                  cxc.id,
+                  cxc.id_orden_servicio,
+                  cxc.folio_venta,
+                  cxc.id_venta,
+                  cxc.folio_recibo,
+                  (cxc.total - IFNULL(tabla.abonado, 0)) as total,
+                  se.nombre_corto,
+                  se.cuenta,
+                  se.telefonos,
+                  cxc.fecha
+                FROM cxc
+                LEFT JOIN servicios se ON cxc.id_razon_social_servicio = se.id
+                LEFT JOIN (
+                  SELECT SUM(monto_ingresado) AS abonado, folio_cxc
+                  FROM cxc_bitacora
+                  GROUP BY folio_cxc
+                ) AS tabla ON tabla.folio_cxc = cxc.folio_cxc 
+                WHERE cxc.id_sucursal IN (23, 57, 72)
+                AND cxc.fecha_captura BETWEEN '$fechaInicio' AND '$fechaFin'
+                AND (cxc.folio_venta <> 0 OR cxc.folio_recibo <> 0 OR cxc.id_orden_servicio <> 0)
+                AND cxc.estatus IN ('T', 'A')";
+
+      $result = $this->link->query($query);
+
+      return query2json($result);
+    }//--fin function buscarCotizaciones
+
+    function buscarCotizacionesCuenta($idCotiz){
+
+      $query = "SELECT
+                  se.nombre_corto AS cuentaNombre,
+                  se.cuenta AS cuentaNum,
+                  scp.descripcion AS cuentaPlan,
+                  se.telefonos cuentaTel,
+                  CONCAT_WS(' ', se.domicilio, se.no_exterior, se.codigo_postal) cuentaDirec,
+                  se.colonia cuentaCol,
+                  (cxc.total - IFNULL(tabla.abonado, 0)) as importe,
+                  se.latitud,
+                  se.longitud
+                FROM cxc
+                LEFT JOIN servicios se ON cxc.id_razon_social_servicio = se.id
+                LEFT JOIN servicios_cat_planes scp ON se.id_plan = scp.id
+                LEFT JOIN (
+                  SELECT SUM(monto_ingresado) AS abonado, folio_cxc
+                  FROM cxc_bitacora
+                  GROUP BY folio_cxc
+                ) AS tabla ON tabla.folio_cxc = cxc.folio_cxc 
+                WHERE cxc.id = $idCotiz";
+
+      $result = $this->link->query($query);
+
+      return query2json($result);
+    }//--fin function buscarCotizacionesCuenta
+
+    function buscarCotizacionesCuentaHistorial($idCotiz){
+
+      $query = "SELECT
+                  DATE(cxc.fecha_corte_recibo) AS fecha_corte_recibo,
+                  DATE(cxc.fecha_captura) AS fecha_captura,
+                  IFNULL(DATE(pe.fecha_captura), '-') AS fecha_pago,
+                  cxc.total AS importe
+                FROM cxc
+                LEFT JOIN pagos_e pe ON cxc.id_pago = pe.id
+                WHERE cxc.id_razon_social_servicio = (SELECT id_razon_social_servicio FROM cxc WHERE id = $idCotiz)";
+
+      $result = $this->link->query($query);
+
+      return query2json($result);
+    }//--fin function buscarCotizacionesCuentaHistorial
+
+    function buscarCotizacionesCuentaComentarios($idCotiz){
+
+      $query = "SELECT
+                  bc.fecha_captura AS fecha,
+                  us.usuario,
+                  bc.comentario
+                FROM bitacora_cobranza bc
+                INNER JOIN usuarios us ON us.id_usuario = bc.fk_usuario
+                WHERE fk_id_cxc = $idCotiz";
+
+      $result = $this->link->query($query);
+
+      return query2json($result);
+    }//--fin function buscarCotizacionesCuentaComentarios
+
+    function guardarCotizacionesCuentaComentarios($idCotiz, $comentario){
+
+      $idUsuario = $_SESSION["id_usuario"];
+
+      $query = "INSERT INTO bitacora_cobranza (comentario, fk_usuario, fk_id_cxc)
+                VALUES ('$comentario', $idUsuario, $idCotiz);";
+
+      $result = $this->link->query($query);
+
+      return ($result);
+    }//--fin function guardarCotizacionesCuentaComentarios
+
+    function pagarCotizacionesCuenta($idCotiz, $montoPago, $forma, $tipo, $cuenta, $referencia){
+
+      $query = "SELECT *
+                FROM cxc
+                WHERE id = $idCotiz";
+
+      $detalleCxc = $this->link->query($query);
+
+      $query = "SELECT *
+                FROM cuentas_bancos
+                WHERE id = $cuenta";
+
+      $detalleCuenta = $this->link->query($query);
+
+      $query = "SELECT *
+                FROM conceptos_cxp
+                WHERE id = $forma";
+
+      $detalleForma = $this->link->query($query);
+
+      $arregloBanco = $detalleCuenta->fetch_assoc();
+      $arregloForma = $detalleForma->fetch_assoc();
+
+      while($row = $detalleCxc->fetch_assoc()){
+        $verifica = 0;
+
+        $idCxC = $idCotiz;
+        $idUnidadNegocio = $row['id_unidad_negocio'];
+        $idSucursal = $row['id_sucursal'];
+        $idRazonSocialReceptor = $row['id_razon_social'];
+        $vencimiento = $row['vencimiento'];
+        $tasaIva = $row['tasa_iva'];
+        $mes = $row['mes'];
+        $anio = $row['anio'];
+        $idConcepto = $forma;
+        $cveConcepto = $arregloForma['clave'];
+        $fecha = $row['fecha'];
+        $importe = $row['subtotal'];
+        $totalIva = $row['iva'];
+        $total = $row['total'];
+        // $referencia = $row['referencia'];
+        $idBanco = $arregloBanco['id_banco'];
+        $idCuentaBanco = $cuenta;
+        $idUsuario = $_SESSION['id_usuario'];
+        $estatus = "S";
+        $cargoInicial = 0;
+        $idOrdenServicio = $row['id_orden_servicio'];
+        $idRazonSocialServicio = $row['id_razon_social_servicio'];
+        $facturar = isset($row['facturar']) ? $row['facturar'] : '0';
+        //-->NJES March/18/2020 se agrega concepto cobro al generar cobro de orden servicio
+        $conceptoCobro = isset($row['concepto_cobro']) ? $row['concepto_cobro'] : '';
+
+        $observaciones = 'Pago';
+
+        $query = "SELECT IFNULL(SUM(monto_ingresado), 0) AS yaPagado
+                  FROM cxc_bitacora
+                  WHERE folio_cxc = $idCotiz";
+
+        $sumaBitacora = $this->link->query($query);
+
+        if($sumaBitacora){
+          $arregloBitacora = $sumaBitacora->fetch_assoc();
+
+          $yaPagado = $arregloBitacora["yaPagado"];
+
+          $restante = ($total - $yaPagado);
+          $saldoDespues = ($restante - $montoPago);
+
+          //[$montoPago, $yaPagado, $total]
+          $query2 = "INSERT INTO cxc_bitacora(monto_inicial, monto_final, monto_ingresado, id_usuario_captura, folio_cxc, id_concepto, forma_pago, id_cuenta_banco, referencias)
+                    VALUES($restante, $saldoDespues, $montoPago, $idUsuario, $idCotiz, $forma, '$tipo', $cuenta, '$referencia');";
+          
+          $result = mysqli_query($this->link, $query2) or die(mysqli_error($this->link));
+
+          if($result){
+
+            $arr=array(
+              'idUnidadNegocio'=>$idUnidadNegocio,
+              'idSucursal'=>$idSucursal,
+              'importe'=>$montoPago,
+              'idCuentaBanco'=>$idCuentaBanco,
+              'idUsuario'=>$idUsuario,
+              'categoria'=>'Seguimiento a Cobranza',
+              'fechaAplicacion'=>$fecha
+            );
+            
+            $verifica = $this -> guardarMovimientosBancos($idCotiz,$arr);
+
+            if($montoPago == $restante){
+              $queryU = "UPDATE cxc SET estatus='S' WHERE id=".$idCxC;
+              $resultU = mysqli_query($this->link, $queryU) or die(mysqli_error());
+
+              if($resultU){
+                $query2 = "INSERT INTO cxc(id_unidad_negocio,id_sucursal,folio_cxc,id_razon_social,fecha,id_concepto,cve_concepto,tasa_iva,subtotal,iva,total,referencia,mes,anio,vencimiento,cargo_inicial,id_banco,id_cuenta_banco,estatus,usuario_captura,id_orden_servicio,id_razon_social_servicio,facturar,concepto_cobro,observaciones) 
+                          VALUES ('$idUnidadNegocio','$idSucursal','$idCxC','$idRazonSocialReceptor','$fecha','$idConcepto','$cveConcepto','$tasaIva','$importe','$totalIva','$total','$referencia','$mes','$anio','$vencimiento','$cargoInicial','$idBanco','$idCuentaBanco','$estatus','$idUsuario','$idOrdenServicio','$idRazonSocialServicio','$facturar','$conceptoCobro','$observaciones')";
+                
+                $result2 = mysqli_query($this->link, $query2) or die(mysqli_error());
+                if($result2){
+                  $verifica = 1;
+                }
+              }
+            }
+          }
+        }
+
+        
+        // $query2 = "INSERT INTO cxc(id_unidad_negocio,id_sucursal,folio_cxc,id_razon_social,fecha,id_concepto,cve_concepto,tasa_iva,subtotal,iva,total,referencia,mes,anio,vencimiento,cargo_inicial,id_banco,id_cuenta_banco,estatus,usuario_captura,id_orden_servicio,id_razon_social_servicio,facturar,concepto_cobro,observaciones) 
+        //         VALUES ('$idUnidadNegocio','$idSucursal','$idCxC','$idRazonSocialReceptor','$fecha','$idConcepto','$cveConcepto','$tasaIva','$importe','$totalIva','$total','$referencia','$mes','$anio','$vencimiento','$cargoInicial','$idBanco','$idCuentaBanco','$estatus','$idUsuario','$idOrdenServicio','$idRazonSocialServicio','$facturar','$conceptoCobro','$observaciones')";
+        
+        // $result2 = mysqli_query($this->link, $query2) or die(mysqli_error());
+        // $id = mysqli_insert_id($this->link);
+
+        // if ($result2){
+          
+        //   $query="SELECT    
+        //           IFNULL(SUM(IF(a.estatus NOT IN('C','P'),IF((SUBSTR(a.cve_concepto,1,1) = 'C'),(a.subtotal + a.iva),((a.subtotal + a.iva) * -(1))),0)),0) AS saldo            
+        //           FROM cxc a           
+        //           WHERE a.folio_cxc=".$idCxC;
+
+        //   $resultS=mysqli_query($this->link, $query);
+        //   $numRows=mysqli_num_rows($resultS);
+
+        //   if($numRows>0){
+
+        //       $datoS = mysqli_fetch_array($resultS);
+        //       $saldo= $datoS['saldo'];
+
+        //       $arr=array(
+        //           'idUnidadNegocio'=>$idUnidadNegocio,
+        //           'idSucursal'=>$idSucursal,
+        //           'importe'=>$total,
+        //           'idCuentaBanco'=>$idCuentaBanco,
+        //           'idUsuario'=>$idUsuario,
+        //           'categoria'=>'Seguimiento a Cobranza',
+        //           'fechaAplicacion'=>$fecha
+        //       );
+            
+        //       if($saldo==0){
+
+        //           $queryU = "UPDATE cxc SET estatus='S' WHERE id=".$idCxC;
+        //           $resultU = mysqli_query($this->link, $queryU) or die(mysqli_error());
+        //           if($resultU){
+        //               if(substr($cveConcepto,0,1)=='A')
+        //               {
+        //                 $verifica = $this -> guardarMovimientosBancos($id,$arr);
+
+        //               }else
+        //                   $verifica = $id; 
+        //           }else{
+        //               $verifica = 0;
+        //           }
+
+        //       }else{
+        //           if(substr($cveConcepto,0,1)=='A')
+        //           {
+        //             $verifica = $this -> guardarMovimientosBancos($id,$arr);
+
+        //           }else
+        //               $verifica = $id;                        
+        //       }
+        //   }else{
+        //       $verifica = $id;
+        //   }
+
+        // }else{
+        // $verifica = 0;
+        // }
+      }
+
+      return $verifica;
+    }
+
+    function guardarMovimientosBancos($idCxC,$datos){
+      $verifica = 0;
+
+      $idCuentaBanco = $datos['idCuentaBanco'];
+      $idUsuario = $datos['idUsuario'];
+      $importe = $datos['importe'];
+      $categoria = $datos['categoria'];
+      $fecha = $datos['fecha'];
+      $fechaAplicacion = $datos['fechaAplicacion'];
+      
+      $query = "INSERT INTO movimientos_bancos(id_cuenta_banco,monto,tipo,id_usuario,observaciones,id_cxc,fecha_aplicacion) 
+                VALUES ('$idCuentaBanco','$importe','A','$idUsuario','$categoria','$idCxC','$fechaAplicacion')";
+      $result = mysqli_query($this->link, $query) or die(mysqli_error());
+      
+      if($result)
+          $verifica = $idCxC;          
+      else
+        $verifica = 0;
+      
+
+      return $verifica;
+    }//- fin function guardarMovimientosBancos
+
 }//--fin de class Cotizaciones
     
 ?>

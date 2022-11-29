@@ -43,7 +43,12 @@ $query = "SELECT
     i.nombre_comp as nombre,
     f.tipo_recibo_facura AS facturar,
     h.descripcion AS clasificacion_servicio,
-    a.id_sucursal
+    a.id_sucursal,
+    f.latitud,
+    f.longitud,
+    f.cuenta,
+    f.telefonos,
+    a.facturar
 FROM servicios_ordenes a
 LEFT JOIN sucursales c ON a.id_sucursal = c.id_sucursal
 LEFT JOIN cat_unidades_negocio b ON c.id_unidad_negocio= b.id
@@ -66,6 +71,13 @@ $entre_calles_s = $rowU['entre_calles_s'];
 $municipio_s = $rowU['municipio_s'];
 
 $id_sucursal = $rowU['id_sucursal'];
+
+$latitud = $rowU['latitud'];
+$longitud = $rowU['longitud'];
+$cuenta = $rowU['cuenta'];
+$telefonos = $rowU["telefonos"];
+$facturar = $rowU["facturar"] == 1 ? "Si" : "No";
+
 ?>
 <style>
 table td{
@@ -177,51 +189,52 @@ table td{
 
 <br>
 
-<table width="710" class='borde_tabla'>
+<table width="100%">
     <tr>
-        <td width="100" class="verde" align="left" >USUARIO CAPTURÓ:</td>
-        <td  colspan="3" class="datos" align="left" ><?php echo $rowU['usuario'].'-'.$rowU['nombre'] ?></td>
-    </tr>
-    <tr>
-        <td colspan="4" width="710" class="verde" align="left" ><strong>DATOS DEL CLIENTE:</strong></td>
-
-    </tr>
-    <tr>
-        <td width="100" class="verde" align="left" >CUENTA - CLIENTE:</td>
-        <td  colspan="3" class="datos" align="left" ><?php echo $rowU['cuenta'].' - '.$rowU['nombre_corto'] ?></td>
-    </tr>
-    <tr>
-        <td width="100" class="verde" align="left" >DOMICILIO:</td>
-        <td colspan="3" class="datos" align="left" ><?php echo $domicilio_s ?> <br> ENTRE CALLES: <?php echo $entre_calles_s ?> <br> MUNICIPIO: <?php echo $municipio_s ?></td>
-    </tr>
-    <tr>
-        <td width="100" class="verde" align="left" >CONTACTO:</td>
-        <td class="datos" align="left" ><?php echo $rowU['contacto'] ?></td>
-        <td width="100" class="verde" align="left" >TELEFONO:</td>
-        <td class="datos" align="left" ><?php echo $rowU['telefonos'] ?></td>
-    </tr>
-
-    <tr style="border:none;"><td colspan="2" style="border:none;"><br></td></tr>
-    <tr>
-        <td width="100" style="border:none;"><strong>FECHA SERVICIO:</strong><br><br><br></td>
-        <td colspan="1"style="text-align:justify;"><?php echo $rowU['fecha_solicitud'] ?></td>
-   
-        <td width=100" style="border:none;"><strong>FECHA PROGRAMADA:</strong><br><br><br></td>
-        <td colspan="1"style="text-align:justify;"><?php echo $rowU['fecha_servicio'] ?></td>
-    </tr>
-    <tr>
-        <td width="100" style="border:none;"><strong>SERVICIO:</strong><br><br><br></td>
-        <td colspan="3"style="text-align:justify;"><?php echo normaliza($rowU['servicio'],70) ?></td>
-    </tr>
-    <tr>
-        <td width="100" style="border:none;"><strong>CLASIFICACIÓN:</strong><br><br><br></td>
-        <td colspan="3"style="text-align:justify;"><?php echo normaliza($rowU['clasificacion_servicio'],70) ?></td>
-    </tr>
-    <tr>
-        <td width="100" style="border:none;"><strong>DESCRIPCIÓN:</strong><br><br><br></td>
-        <td colspan="3" style="text-align:justify;"><?php echo normaliza($rowU['descripcion'],70) ?></td>
+        <td>
+            <table width="100%">
+                <tr><th>USUARIO CAPTURÓ:</th></tr>
+                <tr><td><?php echo $rowU['usuario'].'-'.$rowU['nombre'] ?></td></tr>
+                <tr><th>CLIENTE:</th></tr>
+                <tr><td><?php echo $rowU['nombre_corto'] ?></td></tr>
+                <tr><th>CUENTA:</th></tr>
+                <tr><td><?php echo $rowU['cuenta'] ?></td></tr>
+                <tr><th>DOMICILIO:</th></tr>
+                <tr><td><?php echo $domicilio_s ?></td></tr>
+                <tr><th>CONTACTO:</th></tr>
+                <tr><td><?php echo $rowU['contacto'] ?></td></tr>
+                <tr><th>TELEFONO:</th></tr>
+                <tr><td><?php echo $rowU['telefonos'] ?></td></tr>
+            </table>
+        </td>
+        <td>
+            <img src="<?php echo "https://maps.googleapis.com/maps/api/staticmap?center=$latitud,$longitud&zoom=16&size=500x250&key=AIzaSyBoD4mBMwf4boXGnAKMeC_-VK9NaON_W2w&markers=$latitud,$longitud";?>">
+        </td>
     </tr>
 </table>
+<table width="100%">
+    <tr>
+        <th>FECHA SERVICIO:</th>
+        <td><?php echo $rowU['fecha_solicitud'] ?></td>
+    </tr>
+    <tr>
+        <th>FECHA PROGRAMADA:</th>
+        <td><?php echo $rowU['fecha_servicio'] ?></td>
+    </tr>
+    <tr>
+        <th>SERVICIO:</th>
+        <td><?php echo normaliza($rowU['servicio'],70) ?></td>
+    </tr>
+    <tr>
+        <th>CLASIFICACIÓN:</th>
+        <td><?php echo normaliza($rowU['clasificacion_servicio'],70) ?></td>
+    </tr>
+    <tr>
+        <th>DESCRIPCIÓN:</th>
+        <td><?php echo normaliza($rowU['descripcion'],70) ?></td>
+    </tr>
+</table>
+<hr>
 
 <?php if($modulo == 'orden_servicio')
 { ?>

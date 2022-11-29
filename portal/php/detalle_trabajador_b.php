@@ -638,7 +638,63 @@ $(function()
 						<td class="etiqueta">Carátula Finiquito:</td>
 						<td class="datos"><?php if(trim($row["caratula_finiquito"])!="no")echo "Capturada"; else echo "Sin Capturar"; ?></td>
 						<td><?php if(trim($row["caratula_finiquito"])!="no") echo "<img class='docs' src='../images/icono-pdf.png' width='40' alt='../../../Portal/".  substr($row["caratula_finiquito"], strpos($row["caratula_finiquito"], 'docs'))  ."' /><button class='boton entradas borrar' title='caratula_finiquito'>borrar</button>"; ?></td>
-						</tr>	
+						</tr>
+
+						
+						<!-- 14/Julio/2022 GCM se agregan 7 campos -->
+						<tr class='trDocs <?php if(($nivel_user == '2') && (trim($row["renuncia_firmada"])=="no")) echo "no_mostrar";?>'>
+						<td class="etiqueta">Renuncia Firmada:</td>
+						<td class="datos"><?php if(trim($row["renuncia_firmada"])!="no")echo "Capturada"; else echo "Sin Capturar"; ?></td>
+						<td><?php if(trim($row["renuncia_firmada"])!="no") echo "<img class='docs' src='../images/icono-pdf.png' width='40' alt='../../../Portal/".  substr($row["renuncia_firmada"], strpos($row["renuncia_firmada"], 'docs'))  ."' /><button class='boton entradas borrar' title='renuncia_firmada'>borrar</button>"; ?></td>
+						</tr>
+
+						<tr class='trDocs <?php if(($nivel_user == '2') && (trim($row["convenios"])=="no")) echo "no_mostrar";?>'>
+						<td class="etiqueta">Convenios:</td>
+						<td class="datos"><?php if(trim($row["convenios"])!="no")echo "Capturada"; else echo "Sin Capturar"; ?></td>
+						<td><?php if(trim($row["convenios"])!="no") echo "<img class='docs' src='../images/icono-pdf.png' width='40' alt='../../../Portal/".  substr($row["convenios"], strpos($row["convenios"], 'docs'))  ."' /><button class='boton entradas borrar' title='convenios'>borrar</button>"; ?></td>
+						</tr>
+
+						<tr class='trDocs <?php if(($nivel_user == '2') && (trim($row["reingreso"])=="no")) echo "no_mostrar";?>'>
+						<td class="etiqueta">Reingreso:</td>
+						<td class="datos"><?php if(trim($row["reingreso"])!="no")echo "Capturada"; else echo "Sin Capturar"; ?></td>
+						<td><?php if(trim($row["reingreso"])!="no") echo "<img class='docs' src='../images/icono-pdf.png' width='40' alt='../../../Portal/".  substr($row["reingreso"], strpos($row["reingreso"], 'docs'))  ."' /><button class='boton entradas borrar' title='reingreso'>borrar</button>"; ?></td>
+						</tr>
+
+						<tr class='trDocs <?php if(($nivel_user == '2') && (trim($row["constancia_situacion_fiscal"])=="no")) echo "no_mostrar";?>'>
+						<td class="etiqueta">Constancia Situación Fiscal:</td>
+						<td class="datos"><?php if(trim($row["constancia_situacion_fiscal"])!="no")echo "Capturada"; else echo "Sin Capturar"; ?></td>
+						<td><?php if(trim($row["constancia_situacion_fiscal"])!="no") echo "<img class='docs' src='../images/icono-pdf.png' width='40' alt='../../../Portal/".  substr($row["constancia_situacion_fiscal"], strpos($row["constancia_situacion_fiscal"], 'docs'))  ."' /><button class='boton entradas borrar' title='constancia_situacion_fiscal'>borrar</button>"; ?></td>
+						</tr>
+
+						<tr class='trDocs <?php if(($nivel_user == '2') && (trim($row["caratula_finiquito_1"])=="no")) echo "no_mostrar";?>'>
+						<td class="etiqueta">Caratula Finiquito 1:</td>
+						<td class="datos"><?php if(trim($row["caratula_finiquito_1"])!="no")echo "Capturada"; else echo "Sin Capturar"; ?></td>
+						<td><?php if(trim($row["caratula_finiquito_1"])!="no") echo "<img class='docs' src='../images/icono-pdf.png' width='40' alt='../../../Portal/".  substr($row["caratula_finiquito_1"], strpos($row["caratula_finiquito_1"], 'docs'))  ."' /><button class='boton entradas borrar' title='caratula_finiquito_1'>borrar</button>"; ?></td>
+						</tr>
+
+						<tr class='trDocs <?php if(($nivel_user == '2') && (trim($row["reingreso_2"])=="no")) echo "no_mostrar";?>'>
+						<td class="etiqueta">Reingreso 2:</td>
+						<td class="datos"><?php if(trim($row["reingreso_2"])!="no")echo "Capturada"; else echo "Sin Capturar"; ?></td>
+						<td><?php if(trim($row["reingreso_2"])!="no") echo "<img class='docs' src='../images/icono-pdf.png' width='40' alt='../../../Portal/".  substr($row["reingreso_2"], strpos($row["reingreso_2"], 'docs'))  ."' /><button class='boton entradas borrar' title='reingreso_2'>borrar</button>"; ?></td>
+						</tr>
+
+						<tr class='trDocs <?php if(($nivel_user == '2') && (trim($row["caratula_finiquito_2"])=="no")) echo "no_mostrar";?>'>
+						<td class="etiqueta">Caratula Finiquito 2:</td>
+						<td class="datos"><?php if(trim($row["caratula_finiquito_2"])!="no")echo "Capturada"; else echo "Sin Capturar"; ?></td>
+						<td><?php if(trim($row["caratula_finiquito_2"])!="no") echo "<img class='docs' src='../images/icono-pdf.png' width='40' alt='../../../Portal/".  substr($row["caratula_finiquito_2"], strpos($row["caratula_finiquito_2"], 'docs'))  ."' /><button class='boton entradas borrar' title='caratula_finiquito_2'>borrar</button>"; ?></td>
+						</tr>
+
+						<tr class='trDocs <?php if(($nivel_user == '2') && (trim($row["carta_no_policiacos"])=="no")) echo "no_mostrar";?>'>
+						<td class="etiqueta">Carta No Policiacos:</td>
+						<td class="datos"><?php if(trim($row["carta_no_policiacos"])!="no")echo "Capturada"; else echo "Sin Capturar"; ?></td>
+						<td><?php if(trim($row["carta_no_policiacos"])!="no") echo "<img class='docs' src='../images/icono-pdf.png' width='40' alt='../../../Portal/".  substr($row["carta_no_policiacos"], strpos($row["carta_no_policiacos"], 'docs'))  ."' /><button class='boton entradas borrar' title='carta_no_policiacos'>borrar</button>"; ?></td>
+						</tr>
+
+						<tr class='trDocs <?php if(($nivel_user == '2') && (trim($row["esquema_vacunacion_covid"])=="no")) echo "no_mostrar";?>'>
+						<td class="etiqueta">Esquema Vacunacion Covid:</td>
+						<td class="datos"><?php if(trim($row["esquema_vacunacion_covid"])!="no")echo "Capturada"; else echo "Sin Capturar"; ?></td>
+						<td><?php if(trim($row["esquema_vacunacion_covid"])!="no") echo "<img class='docs' src='../images/icono-pdf.png' width='40' alt='../../../Portal/".  substr($row["esquema_vacunacion_covid"], strpos($row["esquema_vacunacion_covid"], 'docs'))  ."' /><button class='boton entradas borrar' title='esquema_vacunacion_covid'>borrar</button>"; ?></td>
+						</tr>
 						
 					</table>
 				</div>

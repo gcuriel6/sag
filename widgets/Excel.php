@@ -749,66 +749,65 @@ class Excel
                         produ.precio_venta AS PRECIOVENTA,
                         produ.existencia  AS EXISTENCIA,
                         FORMAT((produ.precio*produ.existencia),2) AS IMPORTE
-                        FROM
-                        (
+                        FROM(
 
-                        SELECT
-                        productos.id AS id_producto,
-                        productos.clave AS clave_producto,
-                        productos.concepto AS concepto,
-                        productos.descripcion AS descripcion_producto,
-                        productos.id_familia AS id_familia,
-                        familias.descripcion AS familia,
-                        productos.id_linea AS id_linea,
-                        lineas.descripcion AS linea,
-                        productos.costo,
-                        IFNULL(productos_unidades.ultimo_precio_compra, 0) AS precio,
-                        SUM( IF(SUBSTR(almacen_d.cve_concepto, 1, 1) = 'E', almacen_d.cantidad, almacen_d.cantidad*-1)) AS existencia,
-                        productos.precio_venta
-                        FROM productos
-                        INNER JOIN familias ON productos.id_familia = familias.id
-                        INNER JOIN lineas ON productos.id_linea = lineas.id
-                        LEFT JOIN productos_unidades ON productos.id = productos_unidades.id_producto
-                        INNER JOIN almacen_d ON productos.id = almacen_d.id_producto
-                        INNER JOIN almacen_e ON almacen_d.id_almacen_e = almacen_e.id  AND almacen_e.id_unidad_negocio=productos_unidades.id_unidades
-                        WHERE almacen_e.id_sucursal = $idSucursal AND familias.tipo NOT IN (0,2)  AND almacen_e.estatus != 'C'
-                        AND productos.servicio = 0
-                        GROUP BY productos.id
+                            SELECT
+                            productos.id AS id_producto,
+                            productos.clave AS clave_producto,
+                            productos.concepto AS concepto,
+                            productos.descripcion AS descripcion_producto,
+                            productos.id_familia AS id_familia,
+                            familias.descripcion AS familia,
+                            productos.id_linea AS id_linea,
+                            lineas.descripcion AS linea,
+                            IFNULL(productos_sucursales.costo_compra, productos.costo) costo,
+                            IFNULL(productos_sucursales.costo_compra, IFNULL(productos_unidades.ultimo_precio_compra, 0)) AS precio,
+                            SUM( IF(SUBSTR(almacen_d.cve_concepto, 1, 1) = 'E', almacen_d.cantidad, almacen_d.cantidad*-1)) AS existencia,
+                            IFNULL(productos_sucursales.precio_venta, productos.precio_venta) precio_venta
+                            FROM productos
+                            INNER JOIN familias ON productos.id_familia = familias.id
+                            INNER JOIN lineas ON productos.id_linea = lineas.id
+                            LEFT JOIN productos_unidades ON productos.id = productos_unidades.id_producto
+                            LEFT JOIN productos_sucursales ON productos.id = productos_sucursales.fk_id_producto AND productos_sucursales.fk_id_sucursal = $idSucursal
+                            INNER JOIN almacen_d ON productos.id = almacen_d.id_producto
+                            INNER JOIN almacen_e ON almacen_d.id_almacen_e = almacen_e.id  AND almacen_e.id_unidad_negocio=productos_unidades.id_unidades
+                            WHERE almacen_e.id_sucursal = $idSucursal AND familias.tipo NOT IN (0,2)  AND almacen_e.estatus != 'C'
+                            AND productos.servicio = 0
+                            GROUP BY productos.id
 
-                        UNION ALL
+                            UNION ALL
 
-                        SELECT
-                        productos.id AS id_producto,
-                        productos.clave AS clave_producto,
-                        productos.concepto AS concepto,
-                        productos.descripcion AS descripcion_producto,
-                        productos.id_familia AS id_familia,
-                        familias.descripcion AS familia,
-                        productos.id_linea AS id_linea,
-                        lineas.descripcion AS linea,
-                        productos.costo,
-                        IFNULL(productos_unidades.ultimo_precio_compra, 0) AS precio,
-                        SUM( IF(SUBSTR(almacen_d.cve_concepto, 1, 1) = 'E', almacen_d.cantidad, almacen_d.cantidad*-1)) AS existencia,
-                        productos.precio_venta
-                        FROM productos
-                        INNER JOIN familias ON productos.id_familia = familias.id
-                        INNER JOIN lineas ON productos.id_linea = lineas.id
-                        LEFT JOIN 
-                        (
-                        
-                        SELECT 
-                        pr.id AS id_original,
-                        pr.equivalente_usado AS id_equivalente
-                        FROM productos pr
+                            SELECT
+                            productos.id AS id_producto,
+                            productos.clave AS clave_producto,
+                            productos.concepto AS concepto,
+                            productos.descripcion AS descripcion_producto,
+                            productos.id_familia AS id_familia,
+                            familias.descripcion AS familia,
+                            productos.id_linea AS id_linea,
+                            lineas.descripcion AS linea,
+                            IFNULL(productos_sucursales.costo_compra, productos.costo) costo,
+                            IFNULL(productos_sucursales.costo_compra, IFNULL(productos_unidades.ultimo_precio_compra, 0)) AS precio,
+                            SUM( IF(SUBSTR(almacen_d.cve_concepto, 1, 1) = 'E', almacen_d.cantidad, almacen_d.cantidad*-1)) AS existencia,
+                            IFNULL(productos_sucursales.precio_venta, productos.precio_venta) precio_venta
+                            FROM productos
+                            INNER JOIN familias ON productos.id_familia = familias.id
+                            INNER JOIN lineas ON productos.id_linea = lineas.id
+                            LEFT JOIN productos_sucursales ON productos.id = productos_sucursales.fk_id_producto AND productos_sucursales.fk_id_sucursal = $idSucursal
+                            LEFT JOIN(
+                            
+                                SELECT 
+                                pr.id AS id_original,
+                                pr.equivalente_usado AS id_equivalente
+                                FROM productos pr
 
-                        ) po ON productos.id = po.id_equivalente
-                        INNER JOIN productos_unidades ON  po.id_original = productos_unidades.id_producto
-                        INNER JOIN almacen_d ON productos.id = almacen_d.id_producto
-                        INNER JOIN almacen_e ON almacen_d.id_almacen_e = almacen_e.id  AND almacen_e.id_unidad_negocio=productos_unidades.id_unidades
-                        WHERE almacen_e.id_sucursal = $idSucursal AND familias.tipo NOT IN (0,2)  AND almacen_e.estatus != 'C'
-                        AND productos.servicio = 0
-                        GROUP BY productos.id
-
+                            ) po ON productos.id = po.id_equivalente
+                            INNER JOIN productos_unidades ON  po.id_original = productos_unidades.id_producto
+                            INNER JOIN almacen_d ON productos.id = almacen_d.id_producto
+                            INNER JOIN almacen_e ON almacen_d.id_almacen_e = almacen_e.id  AND almacen_e.id_unidad_negocio=productos_unidades.id_unidades
+                            WHERE almacen_e.id_sucursal = $idSucursal AND familias.tipo NOT IN (0,2)  AND almacen_e.estatus != 'C'
+                            AND productos.servicio = 0
+                            GROUP BY productos.id
 
                         ) AS produ
                         GROUP BY produ.id_producto";
@@ -848,6 +847,48 @@ class Excel
                 WHERE almacen_e.id_sucursal = $idSucursal and almacen_e.estatus != 'C'
                 AND productos.id = $idProducto
                 $and";
+
+            $resultado = mysqli_query($this->link, $query)or die(mysqli_error());
+
+        }
+
+        if($modulo == 'DETALLE_MOV_2')
+        {
+
+            $arreglo = json_decode($datos, true);
+            $idSucursal = $arreglo['id_sucursal'];
+            $idProducto = $arreglo['id_producto'];
+
+            $and = " ";
+            if($arreglo['fecha_de'] != '')
+                $and .= " AND almacen_e.fecha >= '" . $arreglo['fecha_de'] . "'";      
+
+            if($arreglo['fecha_a'] != '')
+                $and .= " AND almacen_e.fecha <= '" . $arreglo['fecha_a'] . "'"; 
+
+            $query = "SELECT
+                        almacen_e.folio AS folio,
+                        DATE(almacen_e.fecha) AS fecha,
+                        almacen_d.cve_concepto AS clave,
+                        productos.concepto AS concepto,
+                        IF(almacen_e.id_trabajador = 0, proveedores.nombre, CONCAT_WS(' ' , TRIM(trabajadores.nombre), TRIM(trabajadores.apellido_p), TRIM(trabajadores.apellido_m))) AS ref_movimiento,
+                        almacen_e.referencia AS referencia,
+                        almacen_d.precio AS precio,
+                        tallas.talla,
+                        tallas.cantidad,
+                        almacen_e.cve_concepto
+                    FROM productos
+                    LEFT JOIN almacen_d ON productos.id = almacen_d.id_producto
+                    left join tallas ON tallas.id_detalle= almacen_d.id
+                    LEFT JOIN almacen_e ON almacen_d.id_almacen_e = almacen_e.id
+                    LEFT JOIN proveedores ON almacen_e.id_proveedor = proveedores.id
+                    LEFT JOIN trabajadores ON almacen_e.id_trabajador =  trabajadores.id_trabajador
+                    WHERE almacen_e.id_sucursal = $idSucursal and almacen_e.estatus != 'C'
+                    AND productos.id = $idProducto
+                    $and";
+
+                    // echo $query;
+                    // exit();
 
             $resultado = mysqli_query($this->link, $query)or die(mysqli_error());
 
@@ -928,7 +969,8 @@ class Excel
           existencias_finales.existencia_f AS existencia_final,
 
           IFNULL(productos_unidades.ultimo_precio_compra, 0) AS ultimo_precio,
-          IFNULL(productos_unidades.ultima_fecha_compra, '0000-00-00') AS ultima_fecha
+          IFNULL(productos_unidades.ultima_fecha_compra, '0000-00-00') AS ultima_fecha,
+          IFNULL((existencias_finales.existencia_f*productos_unidades.ultimo_precio_compra),0) AS valor_inventario
 
           FROM productos
           INNER JOIN almacen_d ON productos.id = almacen_d.id_producto
@@ -1305,38 +1347,39 @@ class Excel
             fecha inicio seleccionada, así como un campo para visualizar el saldo de la fecha fin 
             seleccionada. */
 
-            $query = "SELECT a.id,
-                        IFNULL(sucursales.descr,'') AS sucursal,
-                        a.id_cuenta_banco,
+            $query = "SELECT 
+                        IFNULL(sucursales.descr,IFNULL(s2.descr,IFNULL(s3.descr,IFNULL(s4.descr,'')))) AS sucursal,
                         IFNULL(a.observaciones,'') as observaciones,
-                        b.id_banco,
                         b.cuenta as cuenta,
                         c.descripcion AS banco,
                         b.descripcion,
                         CASE
-                            WHEN a.tipo = 'T' THEN 'Transferencia'
-                            WHEN a.tipo = 'I' THEN 'Monto Inicial'
-                            WHEN a.tipo = 'C' THEN 'Cargo'
-                            ELSE 'Abono'
-                        END AS tipo,
-                        CASE
-                            WHEN a.tipo = 'I' THEN 'Ingreso'
                             WHEN a.tipo = 'A' THEN 'Ingreso'
+                            WHEN a.tipo = 'I' THEN 'Ingreso'
+                            WHEN a.tipo = 'T' AND a.transferencia <> 0 THEN 'Ingreso'
                             WHEN a.tipo = 'C' THEN 'Egreso'
                             WHEN a.tipo = 'T' AND a.transferencia = 0 THEN 'Egreso'
-                            ELSE 'Ingreso'
+                            ELSE ''
                         END AS movimiento,
-                        a.monto,
+                        CASE
+                            WHEN a.tipo = 'A' THEN a.monto
+                            WHEN a.tipo = 'I' THEN a.monto
+                            WHEN a.tipo = 'T' AND a.transferencia <> 0 THEN a.monto
+                            ELSE ''
+                        END AS montoIngreso,
+                        CASE
+                            WHEN a.tipo = 'C' THEN a.monto
+                            WHEN a.tipo = 'T' AND a.transferencia = 0 THEN a.monto
+                            ELSE ''
+                        END AS montoEgreso,
                         a.fecha_aplicacion,
                         a.monto AS saldo,
-                        a.id_cxc,
-                        d.id_pago_d,
-                        e.id_factura,
-                        e.id_pago_e,
                         IFNULL(d.folio_pago,'') AS folio_pago,
                         IFNULL(e.folio_factura,'') AS folio_factura,
                         IFNULL(orden_compra.folio,'No aplica') AS folio_oc,
-                        IFNULL(IF(cxp.id_requisicion > 0,requisiciones.folio,orden_compra.requisiciones),'No aplica') AS folio_requi
+                        IFNULL(IF(cxp.id_requisicion > 0,requisiciones.folio,orden_compra.requisiciones),'No aplica') AS folio_requi,
+                        IFNULL(gas.folio_requisicion,'') AS folio_gasto,
+                        IFNULL(vi.folio,'') AS folio_viatico
                     FROM movimientos_bancos a
                     LEFT JOIN cuentas_bancos b ON a.id_cuenta_banco=b.id
                     LEFT JOIN bancos c ON b.id_banco=c.id
@@ -1347,10 +1390,101 @@ class Excel
                     LEFT JOIN orden_compra ON almacen_e.id_oc=orden_compra.id
                     LEFT JOIN sucursales ON cxp.id_sucursal=sucursales.id_sucursal
                     LEFT JOIN requisiciones ON cxp.id_requisicion=requisiciones.id
+                    LEFT JOIN gastos gas ON gas.id = a.id_gasto
+                    LEFT JOIN sucursales s2 ON gas.id_sucursal=s2.id_sucursal
+                    LEFT JOIN sucursales s3 ON d.id_sucursal=s3.id_sucursal
+                    LEFT JOIN viaticos vi ON vi.id= a.id_viatico
+                    LEFT JOIN sucursales s4 ON vi.id_sucursal=s4.id_sucursal
                     WHERE 1 
                     $condicionFecha 
                     ORDER BY a.fecha_aplicacion DESC,a.id DESC";
             
+
+            $resultado = mysqli_query($this->link, $query)or die(mysqli_error()); 
+        }
+
+        if($modulo == 'REPORTES_BANCOS_TODOS2')
+        {
+            $arreglo = json_decode($datos, true);
+           
+            $fechaInicio = $arreglo['fechaI'];
+            $fechaFin = $arreglo['fechaF'];
+            $idCuenta = $arreglo['idCuenta'];
+            
+            $condicionCuenta = "";
+
+            if($idCuenta != 0 && $idCuenta != ""){
+                $condicionCuenta = " AND a.id_cuenta_banco =$idCuenta ";
+            }else{
+                $idUsuario = $_SESSION["id_usuario"];
+
+                $condicionCuenta = " AND b.id_unidad_negocio IN (
+                                            SELECT DISTINCT(id_unidad_negocio)
+                                            FROM permisos
+                                            WHERE id_usuario = $idUsuario)";
+            }
+
+            $condicionFecha = " AND MONTH(a.fecha) = MONTH(NOW()) AND YEAR(a.fecha) = YEAR(NOW()) ";
+
+            if($fechaInicio != "" && $fechaFin != ""){
+                $condicionFecha = " AND DATE(a.fecha) BETWEEN DATE('$fechaInicio') AND DATE('$fechaFin') ";
+            }
+
+            $query = "SELECT 
+                            IFNULL(sucursales.descr,IFNULL(s2.descr,IFNULL(s3.descr,IFNULL(s4.descr,'')))) AS sucursal,
+                            IFNULL(a.observaciones,'') as observaciones,
+                            b.cuenta as cuenta,
+                            c.descripcion AS banco,
+                            b.descripcion,
+                            CASE
+                                WHEN a.tipo = 'A' THEN 'Ingreso'
+                                WHEN a.tipo = 'I' THEN 'Ingreso'
+                                WHEN a.tipo = 'T' AND a.transferencia <> 0 THEN 'Ingreso'
+                                WHEN a.tipo = 'C' THEN 'Egreso'
+                                WHEN a.tipo = 'T' AND a.transferencia = 0 THEN 'Egreso'
+                                ELSE ''
+                            END AS movimiento,
+                            CASE
+                                WHEN a.tipo = 'A' THEN a.monto
+                                WHEN a.tipo = 'I' THEN a.monto
+                                WHEN a.tipo = 'T' AND a.transferencia <> 0 THEN a.monto
+                                ELSE ''
+                            END AS montoIngreso,
+                            CASE
+                                WHEN a.tipo = 'C' THEN a.monto
+                                WHEN a.tipo = 'T' AND a.transferencia = 0 THEN a.monto
+                                ELSE ''
+                            END AS montoEgreso,
+                            a.fecha_aplicacion,
+                            a.monto AS saldo,
+                            IFNULL(d.folio_pago,'') AS folio_pago,
+                            IFNULL(e.folio_factura,'') AS folio_factura,
+                            IFNULL(orden_compra.folio,'No aplica') AS folio_oc,
+                            IFNULL(IF(cxp.id_requisicion > 0,requisiciones.folio,orden_compra.requisiciones),'No aplica') AS folio_requi,
+                            IFNULL(gas.folio_requisicion,'') AS folio_gasto,
+                            IFNULL(vi.folio,'') AS folio_viatico
+                        FROM movimientos_bancos a
+                        LEFT JOIN cuentas_bancos b ON a.id_cuenta_banco=b.id
+                        LEFT JOIN bancos c ON b.id_banco=c.id
+                        LEFT JOIN cxc d ON a.id_cxc=d.id
+                        LEFT JOIN pagos_d e ON d.id_pago_d=e.id
+                        LEFT JOIN cxp ON a.id_cxp=cxp.id
+                        LEFT JOIN almacen_e ON cxp.id_entrada_compra=almacen_e.id
+                        LEFT JOIN orden_compra ON almacen_e.id_oc=orden_compra.id
+                        LEFT JOIN sucursales ON cxp.id_sucursal=sucursales.id_sucursal
+                        LEFT JOIN requisiciones ON cxp.id_requisicion=requisiciones.id
+                        LEFT JOIN gastos gas ON gas.id = a.id_gasto
+                        LEFT JOIN sucursales s2 ON gas.id_sucursal=s2.id_sucursal
+                        LEFT JOIN sucursales s3 ON d.id_sucursal=s3.id_sucursal
+                        LEFT JOIN viaticos vi ON vi.id= a.id_viatico
+                        LEFT JOIN sucursales s4 ON vi.id_sucursal=s4.id_sucursal
+                        WHERE 1 
+                        $condicionFecha 
+                        $condicionCuenta 
+                        ORDER BY a.id_cuenta_banco, a.fecha_aplicacion DESC,a.id DESC;";
+                        
+                        // echo $query;
+                        // exit();
 
             $resultado = mysqli_query($this->link, $query)or die(mysqli_error()); 
         }
@@ -2735,45 +2869,56 @@ class Excel
             //$idsUnidades = $arreglo['idsUnidades'];
             //$idUsuario = $arreglo['idUsuario'];
 
-            $query = "SELECT 
-            servicios.cuenta AS CUENTA, 
-            servicios.rfc AS RFC, 
-            servicios.nombre_corto AS NOMBRE_CORTO, 
-            IFNULL(IF(servicios.razon_social!='',servicios.razon_social,servicios.nombre_corto),servicios.nombre_corto) AS RAZÓN_SOCIAL,
-            servicios.r_legal AS REPRESENTANTE_LEGAL,
-            IF(servicios.activo=1,'ACTIVO','INACTIVO') AS ESTATUS,
-        
-            servicios.domicilio AS DOMICILIO,
-            servicios.no_exterior AS NO_EXT,
-            servicios.no_interior AS NO_INT,
-            servicios.colonia AS COLONIA,
-            municipios.municipio AS MUNICIPIO,
-            estados.estado AS ESTADO,
-            paises.pais AS PAIS,
-            servicios.codigo_postal AS CODIGO_POSTAL,
-        
-            servicios.telefonos AS TELEFONOS,
-            servicios.ext AS EXTENSION,
-            servicios.celular,
-            servicios.otros_contactos AS OTROS_CONTACTOS,
-            servicios.contacto AS CONTACTO,
-            servicios.correos AS CORREOS,
-        
-            servicios_cat_planes.descripcion AS PLAN,
-            servicios_cat_planes.cantidad AS IMPORTE_PLAN,
-            IF(servicios.entrega=0,'FISICA',IF(servicios.entrega=1,'CORREO ELECTRNICO','FISICA Y CORREO ELECTRONICO')) AS TIPO_ENTREGA,
-            servicios.dia_corte AS FECHA_CORTE,
-            IF(servicios.tipo_recibo_facura='R','RECIBO','FACTURA') AS TIPO_RECIBO_FACTURA,
-            IF(servicios.pago='E','EFECTIVO','TRANSFERENCIA')AS TIPO_PAGO,
-            (SELECT IFNULL(especificaciones_cobranza,'') FROM servicios_bitacora_planes WHERE id_servicio=servicios.id ORDER BY id DESC LIMIT 1) AS ESPECIFICACIONES_COBRANZA
-            
-
+            $query = "SELECT
+                        sucursales.descr AS SUCURSAL,
+                        servicios.cuenta AS CUENTA, 
+                        servicios.rfc AS RFC, 
+                        servicios.nombre_corto AS NOMBRE_CORTO, 
+                        IFNULL(IF(servicios.razon_social!='',servicios.razon_social,servicios.nombre_corto),servicios.nombre_corto) AS RAZÓN_SOCIAL,
+                        servicios.r_legal AS REPRESENTANTE_LEGAL,
+                        IF(servicios.activo=1,'ACTIVO','INACTIVO') AS ESTATUS,
+                    
+                        servicios.domicilio AS DOMICILIO,
+                        servicios.no_exterior AS NO_EXT,
+                        servicios.no_interior AS NO_INT,
+                        servicios.colonia AS COLONIA,
+                        municipios.municipio AS MUNICIPIO,
+                        estados.estado AS ESTADO,
+                        paises.pais AS PAIS,
+                        servicios.codigo_postal AS CODIGO_POSTAL,
+                    
+                        servicios.telefonos AS TELEFONOS,
+                        servicios.ext AS EXTENSION,
+                        servicios.celular,
+                        servicios.otros_contactos AS OTROS_CONTACTOS,
+                        servicios.contacto AS CONTACTO,
+                        servicios.correos AS CORREOS,
+                    
+                        servicios_cat_planes.descripcion AS PLAN,
+                        servicios_cat_planes.cantidad AS IMPORTE_PLAN,
+                        IF(servicios.entrega=0,'FISICA',IF(servicios.entrega=1,'CORREO ELECTRNICO','FISICA Y CORREO ELECTRONICO')) AS TIPO_ENTREGA,
+                        servicios.dia_corte AS FECHA_CORTE,
+                        IF(servicios.tipo_recibo_facura='R','RECIBO','FACTURA') AS TIPO_RECIBO_FACTURA,
+                        IF(servicios.pago='E','EFECTIVO','TRANSFERENCIA')AS TIPO_PAGO,
+                        (SELECT IFNULL(especificaciones_cobranza,'') FROM servicios_bitacora_planes WHERE id_servicio=servicios.id ORDER BY id DESC LIMIT 1) AS ESPECIFICACIONES_COBRANZA,
+                        servicios.fecha_captura AS FECHA_CAPTURA,
+                        tabla.fecha,
+                        tabla.vencimiento
                     FROM servicios 
-            LEFT JOIN municipios  ON servicios.id_municipio=municipios.id
-            LEFT JOIN estados  ON servicios.id_estado=estados.id
-            LEFT JOIN paises  ON servicios.id_pais=paises.id
-            LEFT JOIN servicios_cat_planes  ON servicios.id_plan=servicios_cat_planes.id
-            ORDER BY servicios.id";
+                    LEFT JOIN municipios  ON servicios.id_municipio=municipios.id
+                    LEFT JOIN estados  ON servicios.id_estado=estados.id
+                    LEFT JOIN paises  ON servicios.id_pais=paises.id
+                    LEFT JOIN servicios_cat_planes  ON servicios.id_plan=servicios_cat_planes.id
+                    LEFT JOIN sucursales ON servicios.id_sucursal = sucursales.id_sucursal
+                    LEFT JOIN (SELECT MAX(cxc.fecha) AS fecha, MAX(cxc.vencimiento) as vencimiento, cxc.id_sucursal, sbp.id_servicio
+                                FROM cxc
+                                INNER JOIN servicios_bitacora_planes sbp ON sbp.id = cxc.id_plan
+                                GROUP BY sbp.id_servicio
+                                ORDER BY cxc.id DESC) as tabla ON tabla.id_sucursal = servicios.id_sucursal AND tabla.id_servicio = servicios.id
+                    ORDER BY servicios.id";
+
+                    // echo $query;
+                    // exit();
 
             $resultado = mysqli_query($this->link, $query)or die(mysqli_error());
 
@@ -4726,12 +4871,15 @@ class Excel
                         SUM(cxc.total) total,
                         pd.importe_pagado totalPagado,
                         COUNT(cxc.id) registrosCXC,
-                        SUM(cxc.total) - pd.importe_pagado saldo
+                        SUM(cxc.total) - pd.importe_pagado saldo,
+                    IFNULL(ne.vendedor, IFNULL(ne2.vendedor, '')) vendedor
                     FROM cxc as cxc
                     INNER JOIN sucursales suc ON suc.id_sucursal = cxc.id_sucursal
                     INNER JOIN pagos_d pd ON pd.id = cxc.id_pago_d
                     INNER JOIN pagos_e pe ON pe.id = pd.id_pago_e
                     LEFT JOIN servicios ser ON ser.id = pe.id_razon_social
+                LEFT JOIN notas_e ne ON ne.id=cxc.id_venta
+                LEFT JOIN notas_e ne2 ON ne.id=cxc.id_plan
                     WHERE cxc.id_factura = 0
                         AND cxc.id_cxc_pago <> 0
                         AND cxc.id_unidad_negocio = 2
@@ -4755,13 +4903,16 @@ class Excel
                         fac.total total,
                         pd.importe_pagado totalPagado,
                         COUNT(cxc.id) registrosCXC,
-                        fac.total - pd.importe_pagado saldo
+                        fac.total - pd.importe_pagado saldo,
+                    IFNULL(ne.vendedor, IFNULL(ne2.vendedor, '')) vendedor
                     FROM cxc as cxc
                     INNER JOIN facturas fac ON fac.id = cxc.id_factura
                     INNER JOIN sucursales suc ON suc.id_sucursal = cxc.id_sucursal
                     INNER JOIN pagos_d pd ON pd.id_factura = fac.id
                     INNER JOIN pagos_e pe ON pe.id = pd.id_pago_e
                     LEFT JOIN servicios ser ON ser.id = pe.id_razon_social
+                LEFT JOIN notas_e ne ON ne.id=cxc.id_venta
+                LEFT JOIN notas_e ne2 ON ne.id=cxc.id_plan
                     WHERE cxc.id_unidad_negocio = 2
                         $condSucursales
                         AND cxc.fecha BETWEEN '$fechaInicio' AND '$fechaFin'
@@ -4893,6 +5044,89 @@ class Excel
 
         }
 
+        if($modulo == 'REPORTE_COBRANZA_DIA')
+        {
+
+            $arreglo = json_decode($datos, true);
+            $fechaInicio = $arreglo['fechaInicio'];
+            $fechaFin = $arreglo['fechaFin'];            
+            
+            $query = "SELECT
+                        ser.nombre_corto AS Cliente,
+                        ser.cuenta AS NumCuenta,
+                        ser.telefonos AS Telefonos,
+                        CASE
+                            WHEN cxc.id_orden_servicio > 0 THEN cxc.id_orden_servicio
+                            WHEN cxc.id_venta > 0 THEN cxc.folio_venta
+                            WHEN cxc.folio_recibo > 0 THEN cxc.folio_recibo
+                            ELSE cxc.folio_cxc
+                        END AS Folio,
+                            CASE
+                            WHEN cxc.id_orden_servicio > 0 THEN 'Servicio'
+                            WHEN cxc.id_venta > 0 THEN 'Instalacion'
+                            WHEN cxc.folio_recibo > 0 THEN 'Monitoreo'
+                            ELSE ''
+                        END AS Tipo,
+                        cxc.total AS Importe,
+                        cb.monto_ingresado,
+                        cxc.fecha as Fecha,
+                        IFNULL(tablaComents.coments, '') Comentarios,
+                        cb.fecha AS FechaPago,
+                        cb.forma_pago AS Tipo,
+                        ccp.descripcion AS FormaPago,
+                        cub.descripcion AS CuentaBanco,
+                        cb.referencias AS Referencias,
+                        us.usuario
+                    FROM cxc_bitacora cb
+                    INNER JOIN cxc ON cb.folio_cxc = cxc.id
+                    INNER JOIN servicios ser ON cxc.id_razon_social_servicio = ser.id
+                    INNER JOIN conceptos_cxp ccp ON ccp.id = cb.id_concepto
+                    INNER JOIN cuentas_bancos cub ON cub.id = cb.id_cuenta_banco
+                    INNER JOIN usuarios us ON us.id_usuario = cb.id_usuario_captura
+                    LEFT JOIN (
+                        SELECT fk_id_cxc AS id_cxc, GROUP_CONCAT(comentario SEPARATOR '\n') AS coments FROM bitacora_cobranza GROUP BY fk_id_cxc
+                    ) AS tablaComents ON tablaComents.id_cxc = cxc.id
+                    WHERE DATE(cb.fecha) BETWEEN '$fechaInicio' AND '$fechaFin'
+                    ORDER BY cb.fecha DESC";
+            
+            $resultado = mysqli_query($this->link, $query)or die(mysqli_error());
+
+        }
+
+        if($modulo == 'REPORTE_COBRANZA_DIA_COMPLETO')
+        {
+
+            $arreglo = json_decode($datos, true);
+            $fechaInicio = $arreglo['fechaInicio'];
+            $fechaFin = $arreglo['fechaFin'];            
+            
+            $query = "SELECT
+                  cxc.id,
+                  cxc.id_orden_servicio,
+                  cxc.folio_venta,
+                  cxc.id_venta,
+                  cxc.folio_recibo,
+                  (cxc.total - IFNULL(tabla.abonado, 0)) as total,
+                  se.nombre_corto,
+                  se.cuenta,
+                  se.telefonos,
+                  cxc.fecha
+                FROM cxc
+                LEFT JOIN servicios se ON cxc.id_razon_social_servicio = se.id
+                LEFT JOIN (
+                  SELECT SUM(monto_ingresado) AS abonado, folio_cxc
+                  FROM cxc_bitacora
+                  GROUP BY folio_cxc
+                ) AS tabla ON tabla.folio_cxc = cxc.folio_cxc 
+                WHERE cxc.id_sucursal IN (23, 57, 72)
+                AND cxc.fecha_captura BETWEEN '$fechaInicio' AND '$fechaFin'
+                AND (cxc.folio_venta <> 0 OR cxc.folio_recibo <> 0 OR cxc.id_orden_servicio <> 0)
+                AND cxc.estatus IN ('T', 'A')";
+            
+            $resultado = mysqli_query($this->link, $query)or die(mysqli_error());
+
+        }
+
         if($modulo=='REPORTES_RECIBO'){
             $arreglo = json_decode($datos, true); //estoy recibiendo un json string, entonces lo tengo que decodificar
 
@@ -4935,6 +5169,19 @@ class Excel
                 COUNT(cxc.id) num_mult_cxc,
                 SUM(cxc.total) importeCxc,
                 fac.observaciones,
+                CASE
+                    WHEN cxc.id_venta > 0 THEN ne.vendedor
+                    ELSE ''
+                END vendedor,
+                CASE
+                    WHEN cxc.id_venta > 0 THEN ne.tecnico
+                    WHEN cxc.id_orden_servicio > 0 THEN so.tecnico
+                    ELSE ''
+                END tecnico,
+                CASE
+                    WHEN cxc.id_orden_servicio > 0 THEN us.usuario
+                    ELSE ''
+                END usuarioCreacion,
                 fac.total importeFac,
                 fac.subtotal importeSinIvaFac,
                 IFNULL(pagos.abono, 0) abono,
@@ -4962,6 +5209,7 @@ class Excel
               LEFT JOIN servicios_cat_planes scp ON sbp.id_plan = scp.id
               LEFT JOIN notas_e ne ON ne.id = cxc.id_venta
               LEFT JOIN servicios_ordenes so ON cxc.id_orden_servicio = so.id
+              LEFT JOIN usuarios us ON us.id_usuario = so.id_usuario_captura
               LEFT JOIN (
                 SELECT SUM(importe_pagado) abono, id_factura
                   FROM pagos_d

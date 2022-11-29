@@ -3,10 +3,11 @@ require_once('php/conectar.php');
 
 $link = Conectarse();
 
-$query="SELECT CONCAT(nombre, ' ', apellido_p, ' ', apellido_m) nombreCompleto, dia_n, cve_nom
-        FROM trabajadores
-        WHERE mes_n = MONTH(NOW()) AND fecha_baja = '0000-00-00' AND administrativo = 2
-        ORDER BY dia_n ASC";
+$query="SELECT CONCAT(tr.nombre, ' ', tr.apellido_p, ' ', tr.apellido_m) nombreCompleto, tr.dia_n, tr.cve_nom, de.des_dep as depto, IF(tr.id_trabajador IN (14374), 'NO TIENE', IF(tr.telefono1 = '', IF(tr.telefono2 = '', 'NO TIENE', tr.telefono2), tr.telefono1)) telefono
+        FROM trabajadores tr
+        INNER JOIN deptos de ON tr.id_depto = de.id_depto
+        WHERE tr.mes_n = MONTH(NOW()) AND tr.fecha_baja = '0000-00-00' AND tr.administrativo = 2
+        ORDER BY tr.dia_n ASC";
 
 $result = mysqli_query($link,$query);
 $numRows = mysqli_num_rows($result);
@@ -263,7 +264,7 @@ $numRows = mysqli_num_rows($result);
   </div>
 
   <div class="modal fade" id="dialog_bdays" tabindex="-1" role="dialog">
-    <div class="modal-dialog modal-lg">
+    <div class="modal-dialog" style="max-width: 1200px;">
       <div class="modal-content">
         <div class="modal-header">
               <h4 class="modal-title">Cumpleaños del Mes</h4>
@@ -279,6 +280,8 @@ $numRows = mysqli_num_rows($result);
                 <th scope="col">#</th>
                 <th scope="col">Nombre</th>
                 <th scope="col">Fecha</th>
+                <th scope="col">Telefono</th>
+                <th scope="col">Depto</th>
               </tr>
             </thead>
             <tbody>
@@ -288,11 +291,15 @@ $numRows = mysqli_num_rows($result);
               $nombre=$row["nombreCompleto"];
               $dia = $row["dia_n"];
               $cve = $row["cve_nom"];
+              $telef = $row["telefono"];
+              $depto = $row["depto"];
 
               echo "<tr>
                         <td scope='col'>$cve</td>
-                        <td scope='col'>$nombre</td>
+                        <th scope='col'>$nombre</th>
                         <td scope='col'>$dia</td>
+                        <td scope='col'>$telef</td>
+                        <td scope='col'>$depto</td>
                       </tr>";
 
               // print_r($row);
